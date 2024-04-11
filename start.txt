@@ -1,0 +1,12 @@
+start.txt
+
+yarn create-dev-db
+
+cd /home/dev/www/game/poker.c4ex.net/front
+yarn build
+
+rm -Rf /home/dev/www/game/poker.c4ex.net/backend/dist
+cp -r /home/dev/www/game/poker.c4ex.net/front/dist /home/dev/www/game/poker.c4ex.net/backend
+
+cd /home/dev/www/game/poker.c4ex.net/backend
+yarn start
