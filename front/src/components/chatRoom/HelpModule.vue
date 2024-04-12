@@ -287,8 +287,8 @@
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">如果您拥有Github账号，您也可以在上面向作者提出issue。</p>
             <span :style="{ 'font-size': fontSize }">前端项目：</span><el-link type="success"
-                href="https://github.com/c4ei.net/journey-to-the-west"
-                target="_blank">https://github.com/c4ei.net/journey-to-the-west</el-link>
+                href="https://github.com/c4ei.net/one_c4ei_net"
+                target="_blank">https://github.com/c4ei.net/one_c4ei_net</el-link>
             <br>
             <span :style="{ 'font-size': fontSize }">后端项目：</span><el-link type="warning"
                 href="https://github.com/c4ei.net/server-of-poker"

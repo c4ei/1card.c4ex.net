@@ -56,28 +56,32 @@
 		</el-row>
 
 		<el-row type="flex" justify="center">
-		<el-image class="media-icon" :src="require('@/assets/images/wechat-icon-min.png')" :fit="fit"
+		<!-- <el-image class="media-icon" :src="require('@/assets/images/wechat-icon-min.png')" :fit="fit"
 			v-on:click="openDialog('wechat')"></el-image>
 		<el-image class="media-icon" :src="require('@/assets/images/line-icon-min.png')" :fit="fit"
 			v-on:click="openDialog('line')"></el-image>
 		<el-image class="media-icon" :src="require('@/assets/images/mail-icon-min.png')" :fit="fit"
 			v-on:click="mailDialogVisible = true"></el-image>
 		<el-image class="media-icon" :src="require('@/assets/images/github-icon-min.png')" :fit="fit"
-			v-on:click="directToGit"></el-image>
+			v-on:click="directToGit"></el-image> -->
+			<el-image class="media-icon" src="https://i.ibb.co/9ZgYSnP/c4ei.png" :fit="fit"
+				v-on:click="directToC4ei"></el-image>
+			<el-image class="media-icon" src="https://i.ibb.co/VLXwBY3/AAH-256.png" :fit="fit"
+			v-on:click="directToC4ex"></el-image>
 		</el-row>
 
 		<el-row type="flex" justify="center">
-		<el-dialog title="연락하기" :visible.sync="qrDialogVisible" center width="50%">
+		<!-- <el-dialog title="연락하기" :visible.sync="qrDialogVisible" center width="50%">
 			<span> 아래 QR코드를 스캔하세요</span>
 			<el-divider></el-divider>
 			<el-image class="qr-code-icon" :src="qrCodeUrl" :fit="fit"></el-image>
 		</el-dialog>
-		</el-row>
+		</el-row> -->
 
 		<el-row type="flex" justify="center">
 		<el-dialog title="연락하기" :visible.sync="mailDialogVisible" center width="50%">
 			<span>email</span><i class="el-icon-s-promotion"></i>
-			<el-link type="info" href="mailto:c4ei.net@gmail.com?subject = Hello">c4ei.net@gmail.com</el-link>
+			<el-link type="info" href="mailto:c4ei.net@gmail.com?subject = one.c4ei.net">c4ei.net@gmail.com</el-link>
 			<el-divider></el-divider>
 			<el-image :src="require('@/assets/images/mail-background.png')" :fit="fit"></el-image>
 		</el-dialog>
@@ -255,7 +259,13 @@ export default verificationLogic.extend({
 		},
 
 		directToGit: function () {
-			window.open('https://github.com/c4ei.net/journey-to-the-west')
+			window.open('https://github.com/c4ei.net/one.c4ei.net')
+		},
+		directToC4ei: function () {
+			window.open('https://c4ei.net')
+		},
+		directToC4ex: function () {
+			window.open('https://c4ex.net')
 		},
 
 		openDialog: function (which: 'wechat' | 'line') {

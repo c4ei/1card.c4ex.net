@@ -1,4 +1,4 @@
-# journey-to-the-west 西游记
+# one_c4ei_net 西游记
 
 [![](https://img.shields.io/badge/Express-4.17-blue)](https://expressjs.com/zh-cn/)
 [![](https://img.shields.io/badge/Sequelize-6.5-ff99b4)](https://github.com/sequelize/sequelize)
@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/ws-7.4-orange)](https://github.com/websockets/ws)
 
 
-西游记是一款网页联机式的纸牌类游戏，该项目是西游记的后端部分。前端部分请参考 [https://github.com/c4ei.net/journey-to-the-west](https://github.com/c4ei.net/journey-to-the-west)。
+西游记是一款网页联机式的纸牌类游戏，该项目是西游记的后端部分。前端部分请参考 [https://github.com/c4ei.net/one_c4ei_net](https://github.com/c4ei.net/one_c4ei_net)。
 
 该指南假设你已完成前端项目的启动。
 

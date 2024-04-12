@@ -12,7 +12,7 @@ const path = require('path')
 var cors = require('cors');
 app.use(cors());
 var corsOptions = {
-	origin: 'https://poker.c4ex.net',
+	origin: 'https://one.c4ei.net',
 	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
@@ -57,10 +57,16 @@ server.on('upgrade', function (request, socket, head) {
 /************/
 
 /* API*(라우팅) */
-Object.keys(routers).forEach(key => {
-  console.log("/backend/app.js [61] key:"+key);
-  app.use(conf.APIRoot, routers[key])//경로에 루트 경로 추가
-})
+// Object.keys(routers).forEach(key => {
+//   console.log("/backend/app.js [61] key:"+key);
+// // /backend/app.js [61] key:authorization
+// // /backend/app.js [61] key:inforSearch
+// // /backend/app.js [61] key:login
+// // /backend/app.js [61] key:modify
+// // /backend/app.js [61] key:rank
+// // /backend/app.js [61] key:register
+//   app.use(conf.APIRoot, routers[key])//경로에 루트 경로 추가
+// })
 /*******/
 
 const loginService = require('./services/loginService');
@@ -244,7 +250,7 @@ app.use(function (err, req, res, next) {
 /* 启动服务器 */
 // app.listen( conf.port, () => {} )
 server.listen(conf.port, () => { 
-  console.log("Server port :" + conf.port +" start ");
+  console.log(" one.c4ei.net statrt port :" + conf.port +" !!!! ");
 })
 /*************/
 

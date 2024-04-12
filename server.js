@@ -9,7 +9,7 @@ app.use(express.json());
 var cors = require('cors');
 app.use(cors());
 var corsOptions = {
-	origin: 'https://poker.c4ex.net',
+	origin: 'https://one.c4ei.net',
 	credentials: true
 }
 app.use(cors(corsOptions));
@@ -25,6 +25,6 @@ app.get('*', function (req, resp) {
 });
 
 
-app.listen(3111, function () {
-  console.log('poker.c4ex.net listening on 3111')
+app.listen(3131, function () {
+  console.log('one.c4ei.net listening on 3131')
 }); 

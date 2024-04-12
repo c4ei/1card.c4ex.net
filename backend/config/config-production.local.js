@@ -42,11 +42,11 @@ module.exports = {
 		}
 	},
 	port: process.env.API_PORT,
-	frontOrigin: 'https://poker.c4ex.net',
+	frontOrigin: 'https://one.c4ei.net',
 	APIRoot: '/rest/v1',
 	session: {
-		name: 'journey_to_the_west',
-		secret: 'journey to the west !',
+		name: 'one_c4ei_net',
+		secret: 'journey_one_c4ei.net!',
 		cookie: {
 			maxAge: 3600000,// 1 hour
 			secure: false,

@@ -6,7 +6,7 @@ const dbConf = conf.mysql
 const logger = require('../common/log')
 
 //使用sequelize持久层框架
-console.log("/backend/database/mysql.js -> dbConf.username : "+dbConf.username);
+// console.log("/backend/database/mysql.js -> dbConf.username : "+dbConf.username);
 const sequelize = new Sequelize(dbConf.database, dbConf.username, dbConf.password, {
     host: dbConf.host,
     dialect: 'mysql',
