@@ -6,12 +6,12 @@
 		}
 			">
 			<el-alert style="margin-top: 3vh; padding: 0px" :style="{ 'font-size': fontSize }" class="clickable" :title="playerLocRoom.name +
-			(playerLocRoom.owner === player.id ? ' [修改]' : '[查看]')
+			(playerLocRoom.owner === player.id ? ' [변경]' : '[확인]')
 			" :description="playerLocRoom.needPassword ? ' 비밀번호： ' + playerLocRoom.password : ''
 		" type="info" center :closable="false"></el-alert>
 		</div>
 		<el-tooltip v-for="n in playerLocRoom.cardNum" :key="n" effect="light"
-			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '副'" placement="right-start">
+			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '덱'" placement="right-start">
 			<el-image class="game-room-table-horizontal-poker-pool" :style="{
 			'margin-left': n === 1 ? 50 - 5 * playerLocRoom.cardNum + '' + '%' : '0%',
 			}" :src="require('@/assets/images/poker/poker-pool.png')"></el-image>
@@ -25,13 +25,13 @@
 			<div id="game-room-table-horizontal-bottom"
 			:style="{ 'margin-top': playerLocRoom.needPassword ? '14vh' : '20vh' }">
 			<el-tag class="game-room-table-horizontal-record-item" type="info" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "收牌数： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 张" }}
+				:style="{ 'font-size': fontSize }">{{ "수집된 카드 수： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 张" }}
 			</el-tag>
 			<el-tag class="game-room-table-horizontal-record-item" type="success" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "吃鸡： " }} <CardsNum :value="player.win"></CardsNum> {{ " 局" }}
+				:style="{ 'font-size': fontSize }">{{ "吃鸡： " }} <CardsNum :value="player.win"></CardsNum> {{ " 국" }}
 			</el-tag>
 			<el-tag class="game-room-table-horizontal-record-item" type="danger" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "拉跨： " }} <CardsNum :value="player.loss"></CardsNum> {{ " 局" }}
+				:style="{ 'font-size': fontSize }">{{ "당기기： " }} <CardsNum :value="player.loss"></CardsNum> {{ " 국" }}
 			</el-tag>
 			</div>
 		</el-tooltip>
@@ -146,13 +146,13 @@
 		}
 			" id="game-room-table-vertical-room-info-top">
 			<el-alert :style="{ 'font-size': fontSize }" class="clickable" :title="playerLocRoom.name +
-			(playerLocRoom.owner === player.id ? ' [修改]' : '[查看]')
+			(playerLocRoom.owner === player.id ? ' [변경]' : '[확인]')
 			" :description="playerLocRoom.needPassword ? ' 비밀번호： ' + playerLocRoom.password : ''
 		" type="info" center :closable="false"></el-alert>
 		</div>
 		<div id="game-room-table-vertical-room-info-middle">
 			<el-tooltip v-for="n in playerLocRoom.cardNum" :key="n" effect="light"
-			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '副'" placement="right-start">
+			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '덱'" placement="right-start">
 			<el-image :fit="'contain'" class="game-room-table-horizontal-poker-pool" :style="{
 				'margin-left': n === 1 ? 50 - 5 * playerLocRoom.cardNum + '' + '%' : '0%',
 			}" :src="require('@/assets/images/poker/poker-pool.png')"></el-image>
@@ -164,14 +164,14 @@
 				<p v-for="item in gameTextFromPlayer" :key="item">{{ item }}</p>
 			</div>
 			<el-tag class="game-room-table-horizontal-record-item" type="info" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "收牌数： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 张" }}
+				:style="{ 'font-size': fontSize }">{{ "수집된 카드 수： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 张" }}
 			</el-tag>
 			</el-tooltip>
 			<el-tag class="game-room-table-horizontal-record-item" type="success" effect="dark" :size="tagSize"
-			:style="{ 'font-size': fontSize }">{{ "吃鸡： " }} <CardsNum :value="player.win"></CardsNum> {{ " 局" }}
+			:style="{ 'font-size': fontSize }">{{ "吃鸡： " }} <CardsNum :value="player.win"></CardsNum> {{ " 국" }}
 			</el-tag>
 			<el-tag class="game-room-table-horizontal-record-item" type="danger" effect="dark" :size="tagSize"
-			:style="{ 'font-size': fontSize }">{{ "拉跨： " }} <CardsNum :value="player.loss"></CardsNum> {{ " 局" }}
+			:style="{ 'font-size': fontSize }">{{ "당기기： " }} <CardsNum :value="player.loss"></CardsNum> {{ " 국" }}
 			</el-tag>
 		</div>
 		</div>
@@ -422,7 +422,7 @@ export default cardList.extend({
 			this.$emit("gameTextToPlayerSent", this.seatIndex)
 			if (newVal.sourceId === this.$stock.state.id) {
 				if (newVal.target === -1) {
-					this.gameTextFromPlayer.push("你说: " + newVal.text)
+					this.gameTextFromPlayer.push("내말: " + newVal.text)
 				} else {
 				this.gameTextFromPlayer.push("你对 "+ this.gameInfo.gamePlayer[newVal.target].nickname + " 说: " + newVal.text)}
 				playSound("quickChat/" + newVal.soundSrc)
@@ -450,7 +450,7 @@ export default cardList.extend({
 				newVal.text === ""
 			)return
 			this.$emit("typeChatMessageSent", this.seatIndex)
-			this.gameTextFromPlayer.push("你说: " + newVal.text)
+			this.gameTextFromPlayer.push("내말: " + newVal.text)
 			this.$nextTick(function () {
 				if (this.gameTextFromPlayer.length > 0) {
 					this.isTooltipShow = true

@@ -1,9 +1,9 @@
 <template>
 	<div id="login_root">
 		<MusicButton></MusicButton>
-		<el-row type="flex" justify="center">
+		<!-- <el-row type="flex" justify="center">
 		<el-image :src="require('@/assets/images/head_icon.png')" :fit="fit"></el-image>
-		</el-row>
+		</el-row> -->
 
 		<el-row type="flex" justify="center">
 		<el-card shadow="always">

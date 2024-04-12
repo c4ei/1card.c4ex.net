@@ -1,7 +1,7 @@
 <template>
 	<el-aside class="hide-scroll-bar" :width="subAsideWidth"
 		:style="{ backgroundImage: 'url(' + verticalBackground + ')' }">
-		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以修改화신" placement="left">
+		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以변경아바타" placement="left">
 		<div class="player-icon-box" @click="openEditAvatarDialog">
 			<el-image v-if="gameInfo === null || gameInfo.currentPlayer === -1" class="aside-icon"
 			:src="getAvatarUrl($store.state.avatar_id)"></el-image>
@@ -11,19 +11,19 @@
 			:currentGameCombo="gameInfo.currentCombo"></AnimatedAvatar>
 		</div>
 		</el-tooltip>
-		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以修改昵称" placement="left">
+		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以변경昵称" placement="left">
 		<div class="player-nickname-box" :style="{ 'font-size': fontSize }" @click="openEditNicknameDialog">
 			<span>{{ $store.state.nickname }}</span>
 		</div>
 		</el-tooltip>
 		<div class="player-setting-box">
 		<el-button class="setting-button" :style="{ 'font-size': fontSize }" type="info" icon="el-icon-view"
-			@click="openViewModule">查看</el-button>
+			@click="openViewModule">확인</el-button>
 		<el-button class="help-button" :style="{ 'font-size': fontSize }" type="warning" icon="el-icon-s-opportunity"
 			@click="openHelpModule">돕다</el-button>
 		</div>
 
-		<el-dialog title="修改화신" :visible.sync="avatarDialogVisible" center :width="dialogWidth" :modal="false">
+		<el-dialog title="변경아바타" :visible.sync="avatarDialogVisible" center :width="dialogWidth" :modal="false">
 		<el-divider></el-divider>
 		<div class="icon-select-box">
 			<div class="icon-block" :class="{ 'icon-is-selected': temAvatarId === n }" v-for="n in iconNum" :key="n"
@@ -33,11 +33,11 @@
 		</div>
 		<span slot="footer">
 			<el-button @click="avatarDialogVisible = false" style="margin-right:10%">취소</el-button>
-			<el-button type="primary" @click="submitNewAvatar">修改</el-button>
+			<el-button type="primary" @click="submitNewAvatar">변경</el-button>
 		</span>
 		</el-dialog>
 
-		<el-dialog title="修改昵称" :visible.sync="nicknameDialogVisible" center :width="dialogWidth"
+		<el-dialog title="변경昵称" :visible.sync="nicknameDialogVisible" center :width="dialogWidth"
 		:close-on-click-modal="false" :modal="false">
 		<el-form :model="nicknameForm" ref="nicknameForm" @submit.native.prevent="submitNewNickname">
 			<el-form-item label="新昵称" prop="name" :rules="[{ required: true, validator: checkNickname, trigger: 'blur' }]">
@@ -48,11 +48,11 @@
 		</el-form>
 		<div slot="footer">
 			<el-button @click="cancelNicknameEdit" style="margin-right:10%">취소</el-button>
-			<el-button type="primary" @click.stop.prevent="submitNewNickname">修改</el-button>
+			<el-button type="primary" @click.stop.prevent="submitNewNickname">변경</el-button>
 		</div>
 		</el-dialog>
 
-		<el-dialog title="查看" :visible.sync="viewModuleDialogVisible" center :width="playerInfoDialogWidth" :modal="false">
+		<el-dialog title="확인" :visible.sync="viewModuleDialogVisible" center :width="playerInfoDialogWidth" :modal="false">
 		<PlayerInfoTabModule :playerProfile="playerProfile" :fontSize="fontSize" :isShowing="viewModuleDialogVisible"
 			@sendGameResultToPlayerInfo="function (value) { $emit('sendGameResultToChatRoom', value) }"></PlayerInfoTabModule>
 		<span slot="footer" class="dialog-footer">
@@ -96,9 +96,9 @@ export default Vue.extend({
 			duplicateSubmitNicknameFlag: false,
 			duplicateGetInfoFlag: false,
 			activeViewModuleTabName: 'record',
-			/* 화신数量 */
+			/* 아바타数量 */
 			iconNum: 35,
-			/* 暂时选择的화신Id */
+			/* 暂时选择的아바타Id */
 			temAvatarId: 0,
 			nicknameForm: { name: '' },
 			playerProfile: {
@@ -124,7 +124,7 @@ export default Vue.extend({
 					callback(new Error('请输入昵称'));
 				}
 				else if (value === this.$stock.state.nickname) {
-					callback(new Error('修改前后昵称一致'));
+					callback(new Error('변경前后昵称一致'));
 				}
 				callback()
 			}
@@ -164,14 +164,14 @@ export default Vue.extend({
 
 		submitNewAvatar: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('游戏中，请勿修改화신')
+				this.$message.warning('游戏中，请勿변경아바타')
 				this.avatarDialogVisible = false
 				return
 			}
 			if (this.duplicateSubmitAvatarFlag) return;
 			this.duplicateSubmitAvatarFlag = true
 			if (this.temAvatarId === this.$stock.state.avatar_id) {
-				this.$message.error('修改前后화신一致，请重新选择')
+				this.$message.error('변경前后아바타一致，请重新选择')
 				this.duplicateSubmitAvatarFlag = false
 			}
 			else {
@@ -182,14 +182,14 @@ export default Vue.extend({
 							.then(() => {
 								this.ws?.send(JSON.stringify({ type: 'playerList', nickname: this.$stock.state.nickname, avatar_id: this.$stock.state.avatar_id, player_loc: this.$stock.state.player_loc, player_status: this.$stock.state.player_status }))
 							})
-						this.$message.success('成功修改화신')
+						this.$message.success('成功변경아바타')
 					}
 					else {
-						this.$message.error('修改失败，请稍后重试')
+						this.$message.error('변경失败，请稍后重试')
 					}
 				})
 				.catch(() => {
-					this.$message.error('修改失败，请稍后重试')
+					this.$message.error('변경失败，请稍后重试')
 				})
 				.finally(() => {
 					this.avatarDialogVisible = false
@@ -206,7 +206,7 @@ export default Vue.extend({
 
 		submitNewNickname: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('游戏中，请勿修改昵称')
+				this.$message.warning('游戏中，请勿변경昵称')
 				this.nicknameDialogVisible = false
 				return
 			}
@@ -222,14 +222,14 @@ export default Vue.extend({
 						this.ws?.send(JSON.stringify({ type: 'playerList', nickname: this.$stock.state.nickname, avatar_id: this.$stock.state.avatar_id, player_loc: this.$stock.state.player_loc, player_status: this.$stock.state.player_status }))
 						this.nicknameForm.name = this.$stock.state.nickname
 						})
-						this.$message.success('成功修改昵称')
+						this.$message.success('成功변경昵称')
 					}
 					else {
-						this.$message.error('修改失败，请稍后重试')
+						this.$message.error('변경失败，请稍后重试')
 					}
 					})
 					.catch(() => {
-						this.$message.error('修改失败，请稍后重试')
+						this.$message.error('변경失败，请稍后重试')
 					})
 					.finally(() => {
 						this.nicknameDialogVisible = false
@@ -269,7 +269,7 @@ export default Vue.extend({
 
 		openEditAvatarDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('游戏中，请勿修改화신')
+				this.$message.error('游戏中，请勿변경아바타')
 				return
 			}
 			this.avatarDialogVisible = true
@@ -278,7 +278,7 @@ export default Vue.extend({
 
 		openEditNicknameDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('游戏中，请勿修改昵称')
+				this.$message.error('游戏中，请勿변경昵称')
 				return
 			}
 			this.nicknameDialogVisible = true

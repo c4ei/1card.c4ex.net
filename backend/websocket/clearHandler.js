@@ -70,7 +70,7 @@ async function clearHandler(wss) {
                 const gameRoom = JSON.parse(item)
                 if (gameRoom.status === 1) { return } //房间正在游戏中，不清理
                 let stillHasPlayer = false
-                /* 对房间每个位置进行检查 */
+                /* 对房间每개位置进行检查 */
                 for (let i = 0; i < Object.keys(gameRoom.playerList).length; i++) {
                     if (gameRoom.playerList[i].id !== 0) {
                         /* 该位置플레이어还有session则还存在플레이어 */

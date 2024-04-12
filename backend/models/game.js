@@ -34,7 +34,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.INTEGER(2),
             defaultValue: 0
         },
-        /* 使用牌副数 */
+        /* 使用牌덱数 */
         cardNum:
         {
             type: db.dataTypes.INTEGER(2),

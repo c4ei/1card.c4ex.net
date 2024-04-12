@@ -6,7 +6,7 @@ const logger = require('../common/log')
 const { clearGameRoom } = require('../websocket/clearHandler')
 const { chatIntervalHandler } = require('../ai/chat.js')
 
-/** @todo 返回给前端的房间列表中带有password信息未删除。 */
+/** @todo 返回给前端의 방列表中带有password信息未删除。 */
 
 /**
  * @typedef {import('../types/room.js').RedisCacheRoomInfo}
@@ -35,7 +35,7 @@ module.exports = async function (data, wss, ws) {
             const gameRoomList = await asyncMget(gameRoomKeys)
             ws.send(JSON.stringify({ type: 'gameRoomList', data: gameRoomList }))
         }
-        /* id为NaN是新建的房间，需要分配一个id */
+        /* id为NaN是新建의 방，需要分配一개id */
         else if (data.id === null || data.id === NaN) {
             const gameRoomKeys = await asyncKeys(gameRoomKey)
             let freeIndex = 0
@@ -46,7 +46,7 @@ module.exports = async function (data, wss, ws) {
             else {
                 gameRoomKeys.forEach(item => { idOfList.push(parseInt(item.split(conf.redisCache.gameRoomPrefix)[1])) })
                 idOfList.sort()
-                /* 分配的房间号 */
+                /* 分配의 방号 */
                 for (let i = 0; i < idOfList.length; i++) {
                     if (idOfList[i] !== i + 1) {
                         freeIndex = i + 1
@@ -188,7 +188,7 @@ module.exports = async function (data, wss, ws) {
                 })
             }
         }
-        /* 大于0，属于对某个房间的操作 */
+        /* 大于0，属于对某개房间的操作 */
         else {
             const roomId = conf.redisCache.gameRoomPrefix + data.id
             /* 加入房间 */
@@ -296,7 +296,7 @@ module.exports = async function (data, wss, ws) {
                     }
                 })
             }
-            /* 修改房间设置 */
+            /* 변경房间设置 */
             else if (data.action === 'edit') {
                 const roomRes = await asyncGet(roomId)
                 if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }

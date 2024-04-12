@@ -62,7 +62,7 @@ export default new Vuex.Store({
 		nickname: '',
 		isMobile: isMobile,
 		player_loc: 0,  //0为游戏大厅，其余为游戏房间号
-		player_status: 0, //0게으른1等待2忙碌
+		player_status: 0, //0게으른1기다리다2忙碌
 		setting: localSetting,
 	},
 	mutations: {
@@ -115,7 +115,7 @@ export default new Vuex.Store({
 
 /** 
  * @see https://github.com/vuejs/vuex/issues/994#issuecomment-604897329
- * 因为直接通过this.$store获取不到类型提示，所以使用这个workaround：以$stock代替$store
+ * 因为直接通过this.$store获取不到类型提示，所以使用这개workaround：以$stock代替$store
  *  */
 Object.defineProperty(Vue.prototype, "$stock", {
 	get(): Store<State> {

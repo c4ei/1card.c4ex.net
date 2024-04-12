@@ -24,7 +24,7 @@ export interface RankPlayerInfo {
  * @property {number} record - 分数。
  * @property {number} rank - 排名。 
  * @property {string} nickname - 昵称。
- * @property {number} avatarId - 플레이어화신id。
+ * @property {number} avatarId - 플레이어아바타id。
  */
 export interface RankTopPlayerInfo {
     id: number,

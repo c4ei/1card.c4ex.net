@@ -9,17 +9,17 @@
                         <el-tag :size="tagSize" type="success" effect="dark" :style="{ 'font-size': largeFontSize }">吃鸡플레이어:
                             {{ gameResult.winnerNickname }}</el-tag>
                         <el-tag :size="tagSize" type="success" effect="light" :style="{ 'font-size': largeFontSize }"
-                            style="margin-right: 2vw">收牌数: {{ gameResult.winnerCards }}</el-tag>
-                        <el-tag :size="tagSize" type="danger" effect="dark" :style="{ 'font-size': largeFontSize }">拉跨플레이어:
+                            style="margin-right: 2vw">수집된 카드 수: {{ gameResult.winnerCards }}</el-tag>
+                        <el-tag :size="tagSize" type="danger" effect="dark" :style="{ 'font-size': largeFontSize }">당기기플레이어:
                             {{ gameResult.loserNickname }}</el-tag>
                         <el-tag :size="tagSize" type="danger" effect="light" :style="{ 'font-size': largeFontSize }"
-                            style="margin-right: 2vw">收牌数: {{ gameResult.loserCards }}</el-tag>
+                            style="margin-right: 2vw">수집된 카드 수: {{ gameResult.loserCards }}</el-tag>
                         <el-tag :size="tagSize" type="warning" effect="dark" :style="{ 'font-size': largeFontSize }">最大连击플레이어:
                             {{ gameResult.maxComboPlayer }}</el-tag>
                         <el-tag :size="tagSize" type="warning" effect="light" :style="{ 'font-size': largeFontSize }"
                             style="margin-right: 2vw">连击数: {{ gameResult.maxCombo }}</el-tag>
                         <el-tag :size="tagSize" type="info" effect="dark" :style="{ 'font-size': largeFontSize }">사용된 카드 수:
-                            {{ gameResult.cardsNum }}副</el-tag>
+                            {{ gameResult.cardsNum }}덱</el-tag>
                         <el-tag :size="tagSize" type="info" effect="light" :style="{ 'font-size': largeFontSize }">플레이어数:
                             {{ gameResult.playersNum }}</el-tag>
                     </div>
@@ -27,7 +27,7 @@
                     <el-table v-loading="loading" :default-sort="{ prop: 'seatIndex', order: 'ascending' }"
                         :data="gameResult.gameResultList" style="width: 100%" :row-style="{ 'font-size': largeFontSize }"
                         :header-row-style="{ 'font-size': fontSize }">
-                        <el-table-column align="center" fixed prop="avatar_id" label="화신" min-width="60" v-slot="scope">
+                        <el-table-column align="center" fixed prop="avatar_id" label="아바타" min-width="60" v-slot="scope">
                             <el-avatar shape="square" :size="avatarSize"
                                 :src="getAvatarUrl(scope.row.avatar_id)"></el-avatar>
                         </el-table-column>

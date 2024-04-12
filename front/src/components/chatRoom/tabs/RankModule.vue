@@ -23,32 +23,32 @@
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
                 <RankItem v-for="item in rankInfo.rankList" :key="item.id" :rank="item.rank" :avatarId="item.avatarId"
-                    :nickname="item.nickname" :record="item.record + '局'" :fontSize="fontSize"></RankItem>
+                    :nickname="item.nickname" :record="item.record + '국'" :fontSize="fontSize"></RankItem>
                 <p>{{ showPlayerName }}</p>
                 <RankItem v-if="rankInfo.playerInfo !== null" :rank="rankInfo.playerInfo.rank"
                     :avatarId="playerProfile.avatar_id" :nickname="playerProfile.nickname"
-                    :record="rankInfo.playerInfo.record + '局'" :fontSize="fontSize"></RankItem>
+                    :record="rankInfo.playerInfo.record + '국'" :fontSize="fontSize"></RankItem>
             </template>
         </el-collapse-item>
 
         <el-collapse-item name="loser">
             <template slot="title">
-                <i class="el-icon-delete"></i>拉跨
+                <i class="el-icon-delete"></i>당기기
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
                 <RankItem v-for="item in rankInfo.rankList" :key="item.id" :rank="item.rank" :avatarId="item.avatarId"
-                    :nickname="item.nickname" :record="item.record + '局'" :fontSize="fontSize"></RankItem>
+                    :nickname="item.nickname" :record="item.record + '국'" :fontSize="fontSize"></RankItem>
                 <p>{{ showPlayerName }}</p>
                 <RankItem v-if="rankInfo.playerInfo !== null" :rank="rankInfo.playerInfo.rank"
                     :avatarId="playerProfile.avatar_id" :nickname="playerProfile.nickname"
-                    :record="rankInfo.playerInfo.record + '局'" :fontSize="fontSize"></RankItem>
+                    :record="rankInfo.playerInfo.record + '국'" :fontSize="fontSize"></RankItem>
             </template>
         </el-collapse-item>
 
         <el-collapse-item name="sum">
             <template slot="title">
-                <i class="el-icon-files"></i>总收牌数
+                <i class="el-icon-files"></i>总수집된 카드 수
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
@@ -63,7 +63,7 @@
 
         <el-collapse-item name="combo">
             <template slot="title">
-                <i class="el-icon-tickets"></i>最大连击收牌数
+                <i class="el-icon-tickets"></i>最大连击수집된 카드 수
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
@@ -78,7 +78,7 @@
 
         <el-collapse-item name="least_cards">
             <template slot="title">
-                <i class="el-icon-medal"></i>单局最少收牌数
+                <i class="el-icon-medal"></i>单국最少수집된 카드 수
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
@@ -93,7 +93,7 @@
 
         <el-collapse-item name="lowest_rate">
             <template slot="title">
-                <i class="el-icon-trophy"></i>单局最低收牌比
+                <i class="el-icon-trophy"></i>单국最低收牌比
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
@@ -108,7 +108,7 @@
 
         <el-collapse-item name="most_cards">
             <template slot="title">
-                <i class="el-icon-s-data"></i>单局最多收牌数
+                <i class="el-icon-s-data"></i>单국最多수집된 카드 수
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
@@ -123,7 +123,7 @@
 
         <el-collapse-item name="highest_rate">
             <template slot="title">
-                <i class="el-icon-trophy-1"></i>单局最高收牌比
+                <i class="el-icon-trophy-1"></i>单국最高收牌比
             </template>
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>

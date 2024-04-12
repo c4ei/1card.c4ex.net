@@ -8,11 +8,11 @@ import { PlayerStatus } from '@/type/index'
  * @type {object}
  * @property {number} id - 账号id。
  * @property {string} username -  用户名
- * @property {number} avatar_id - 플레이어화신id
+ * @property {number} avatar_id - 플레이어아바타id
  * @property {string} nickname - 昵称
  * @property {boolean} isMobile - 是否是移动端
  * @property {number} player_loc - //0为游戏大厅，其余为游戏房间号
- * @property {PlayerStatus} player_status - //0: 게으른，1: 房间中等待，2: 游戏中
+ * @property {PlayerStatus} player_status - //0: 게으른，1: 房间中기다리다，2: 游戏中
  * @property {SystemSetting} setting - 系统设置
  */
 type State = {

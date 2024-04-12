@@ -17,7 +17,7 @@ const AiPlayer = db.defineModel('aiPlayer',
             type: db.dataTypes.INTEGER(1),
             defaultValue: 0
         },
-        /* 总收牌数 수집된 총 카드 수 */
+        /* 总수집된 카드 수 수집된 총 카드 수 */
         cards:
         {
             type: db.dataTypes.INTEGER(4),

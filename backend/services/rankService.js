@@ -196,7 +196,7 @@ async function getTopPlayer(id) {
 
 /** 
  * @param {string} keyId - 需要缓存的TOP排序的플레이어id。
- * @param {number} avatarId - 需要缓存的TOP排序的플레이어的화신id。
+ * @param {number} avatarId - 需要缓存的TOP排序的플레이어的아바타id。
  * @param {number} nickname - 需要缓存的TOP排序的플레이어昵称。
  * @returns {Promise<void>}
  */

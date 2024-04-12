@@ -106,7 +106,7 @@ async function chatIntervalHandler(id, wss) {
             const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:电脑플레이어id
             const aiPlayerIndex = -1 * (aiPlayerId + 1)
             const aiPlayerChatContent = aiPlayerChatContents[aiPlayerIndex]
-            if (game.gamePlayer[seatIndex].remainCards.length <= aiPlayerChatContent.talkative && getRandom(0, 50) <= aiPlayerChatContent.talkative) { // 电脑플레이어牌越少越倾向于再来一局
+            if (game.gamePlayer[seatIndex].remainCards.length <= aiPlayerChatContent.talkative && getRandom(0, 50) <= aiPlayerChatContent.talkative) { // 电脑플레이어牌越少越倾向于再来一국
                 textToPlayerInGame(game, aiPlayerChatContent, aiPlayerGameMessages[3], seatIndex, -1, aiPlayerChatKey, wss)
             }
         })
@@ -174,7 +174,7 @@ const commonChatContent = [
     '有时间多来玩玩。',
     '下次也一起玩吧。',
     '准备好去西天取经了吗？',
-    '来一局愉快的游戏吧！',
+    '来一국愉快的游戏吧！',
     '我准备好了，你呢？',
     '放松心情，享受游戏的乐趣。',
     '准备好被我打败了吗？',
@@ -182,8 +182,8 @@ const commonChatContent = [
 
 const winnerChatContent = [
     '大吉大利，今晚吃鸡。',
-    '下一局再来挑战我吧！',
-    '下一局祝你们好运！',
+    '下一국再来挑战我吧！',
+    '下一국祝你们好运！',
     '各位不要灰心，再接再厉。',
     '每一步都重要，谨慎选择。',
     '想要战胜我？还早得很呢！',
@@ -198,8 +198,8 @@ const winnerChatContent = [
 
 const loserChatContent = [
     '但愿下把运气能好点。',
-    '下一局一定要赢回来。',
-    '下一局祝我好运吧！',
+    '下一국一定要赢回来。',
+    '下一국祝我好运吧！',
     '胜败乃兵家常事。',
     '输赢都是游戏的一部分，享受过程才是最重要的。',
     '今天真背。',
@@ -222,7 +222,7 @@ const aiPlayerChatContents = [
     { id: -2, talkative: 3, content: ['大师兄，师傅被妖怪抓走了！', '二师兄，师傅被妖怪抓走了！'], },
     { id: -3, talkative: 1, content: ['我其实是一条龙。', '行李很沉。'], },
     { id: -4, talkative: 3, content: ['大师兄，师傅被妖怪抓走了！', '此恨绵绵无绝期...'], },
-    { id: -5, talkative: 4, content: ['看马匹真无聊。', '一会去偷两个蟠桃吃。'], },
+    { id: -5, talkative: 4, content: ['看马匹真无聊。', '一会去偷两개蟠桃吃。'], },
     { id: -6, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },
     { id: -7, talkative: 3, content: ['我能看透一切。', '万物皆逃不过我的法眼。'], },
     { id: -8, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },

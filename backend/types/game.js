@@ -14,8 +14,8 @@
  * @property {GamePlayerSeatIndex | -1} currentCardPlayer - 打出现在牌池中的牌的플레이어的座位号：0~7，初始为-1。
  * @property {number} jokerCard - 现在牌池中的反弹牌。
  * @property {GamePlayerSeatIndex | -1} jokerCardPlayer - 打出现在牌池中的反弹牌的플레이어的座位号：0~7，初始为-1。
- * @property {number} cardNum - 使用牌副数。
- * @property {number} metamorphoseNum - 每副牌中변신 카드 수量。
+ * @property {number} cardNum - 使用牌덱数。
+ * @property {number} metamorphoseNum - 每덱牌中변신 카드 수量。
  * @property {number} currentCombo - 现在的连击数。
  * @property {number} version - 数据的版本，用于确认플레이어有没有收到过期数据。
  * @property {number} timesCombo -连击数。
@@ -33,11 +33,11 @@
  * @type {object}
  * @property {number} id - 游戏id。主key。
  * @property {string} winner -  吃鸡플레이어昵称。
- * @property {string} min_cards -  吃鸡플레이어收牌数。
- * @property {string} loser - 拉跨플레이어昵称。
- * @property {string} max_cards - 拉跨플레이어收牌数。
+ * @property {string} min_cards -  吃鸡플레이어수집된 카드 수。
+ * @property {string} loser - 당기기플레이어昵称。
+ * @property {string} max_cards - 당기기플레이어수집된 카드 수。
  * @property {string} player_num - 플레이어数量。
- * @property {string} cardNum - 使用牌副数。
+ * @property {string} cardNum - 使用牌덱数。
  * @property {string} max_combo - 一次얻다最多的牌数。
  * @property {string} max_combo_player - 一次얻다最多的牌数的플레이어昵称。
  * @typedef {ModelGame & SequelizeCommon} SequelizedModelGame
@@ -83,8 +83,8 @@
  * @type {object}
  * @property {number} id - 游戏中플레이어id。
  * @property {string} nickname - 昵称。
- * @property {number} avatar_id - 플레이어화신id。
- * @property {number} cards - 收牌数。
+ * @property {number} avatar_id - 플레이어아바타id。
+ * @property {number} cards - 수집된 카드 수。
  * @property {GamePlayerSeatIndex} seatIndex - 座位id，下标0-7。
  * @property {number} maxCombo - 一次얻다最多的牌数。
  * @property {number} wukong - 使用悟空数。
@@ -107,11 +107,11 @@
  * @type {object}
  * @property {number} id - 游戏id。
  * @property {string} winnerNickname -  吃鸡플레이어昵称。
- * @property {number} winnerCards -  吃鸡플레이어收牌数。
- * @property {string} loserNickname - 拉跨플레이어昵称。
- * @property {number} loserCards - 拉跨플레이어收牌数。
+ * @property {number} winnerCards -  吃鸡플레이어수집된 카드 수。
+ * @property {string} loserNickname - 당기기플레이어昵称。
+ * @property {number} loserCards - 당기기플레이어수집된 카드 수。
  * @property {number} playersNum - 플레이어数量。
- * @property {number} cardsNum - 使用牌副数。
+ * @property {number} cardsNum - 使用牌덱数。
  * @property {number} maxCombo - 一次얻다最多的牌数。
  * @property {string} maxComboPlayer - 一次얻다最多的牌数的플레이어昵称。
  * @property {PlayerRecordInGameResult[]} gameResultList - 플레이어各项数据列表。

@@ -1,10 +1,10 @@
 <template>
     <el-tabs v-if="playerProfile !== null" type="border-card" v-model="activeViewModuleTabName"
         @tab-click="handleViewModuleTabClick">
-        <el-tab-pane label="个人战绩" name="record">
+        <el-tab-pane label="개人战绩" name="record">
             <PlayerProfileModule :playerProfile="playerProfile"></PlayerProfileModule>
         </el-tab-pane>
-        <el-tab-pane label="过去对局" name="game">
+        <el-tab-pane label="过去对국" name="game">
             <GameResultsListModule :gameResultsList="gameResultsList" :gameResultsPageNum="gameResultsPageNum"
                 :fontSize="fontSize" :isHorizontal="isHorizontal" :currentPage="gameResultListCurrentPage"
                 @pageChanged="getGameRecordsList"

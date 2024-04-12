@@ -70,11 +70,11 @@ export default Vue.extend({
         }
     },
     methods: {
-        // 生成一个随机数
+        // 生成一개随机数
         randomNum(min: number, max: number) {
             return Math.floor(Math.random() * (max - min) + min)
         },
-        // 生成一个随机的颜色
+        // 生成一개随机的颜色
         randomColor(min: number, max: number) {
             const r = this.randomNum(min, max)
             const g = this.randomNum(min, max)
@@ -109,7 +109,7 @@ export default Vue.extend({
             //   const y = this.randomNum(this.fontSizeMax, this.contentHeight - 5)
             const y = this.contentHeight
             const deg = this.randomNum(-30, 30)
-            // 修改坐标原点和旋转角度
+            // 변경坐标原点和旋转角度
             ctx.translate(x, y)
             ctx.rotate(deg * Math.PI / 180)
             ctx.fillText(txt, 0, 0)

@@ -12,7 +12,7 @@
             </el-form-item>
         </el-form>
         <div>
-            <span>사용된 카드 수：{{ gameRoomValidateForm.cardNum }}副</span>
+            <span>사용된 카드 수：{{ gameRoomValidateForm.cardNum }}덱</span>
             <el-slider v-model="gameRoomValidateForm.cardNum" :min="2" :max="10" :step="1"
                 :show-tooltip="false"></el-slider>
         </div>
@@ -22,7 +22,7 @@
                 :show-tooltip="false"></el-slider>
         </div>
         <div>
-            <span>로봇 수：{{ gameRoomValidateForm.aiNum }}个</span>
+            <span>로봇 수：{{ gameRoomValidateForm.aiNum }}개</span>
             <el-slider v-model="gameRoomValidateForm.aiNum" :min="0" :max="7" :step="1"
                 :show-tooltip="false"></el-slider>
         </div>
@@ -79,7 +79,7 @@ export default Vue.extend({
     watch: {
         createGameRoomDialogVisible: function (newVal: boolean) {
             if (newVal === true) {
-                this.gameRoomValidateForm.roomName = this.$stock.state.nickname + ' 的房间'
+                this.gameRoomValidateForm.roomName = this.$stock.state.nickname + ' 의 방'
             }
         }
     },
@@ -87,7 +87,7 @@ export default Vue.extend({
     methods: {
         createGameRoom: function () {
             if (this.$stock.state.avatar_id === 0) {
-                this.$message.warning('请先设置화신和昵称')
+                this.$message.warning('아바타와 닉네임을 먼저 설정해주세요')
                 return
             }
             const gameRoomValidateFormRef = this.$refs.gameRoomValidateForm as Element & ExecuteValidate
@@ -142,7 +142,7 @@ export default Vue.extend({
             this.$emit('createGameRoomDialogVisible', false)
             const gameRoomValidateFormRef = this.$refs.gameRoomValidateForm as Element & ExecuteValidate
             gameRoomValidateFormRef.clearValidate()
-            this.gameRoomValidateForm.roomName = this.$stock.state.nickname + ' 的房间'
+            this.gameRoomValidateForm.roomName = this.$stock.state.nickname + ' 의 방'
             this.gameRoomValidateForm.password = ''
             this.gameRoomValidateForm.cardNum = 2
             this.gameRoomValidateForm.metamorphoseNum = 4

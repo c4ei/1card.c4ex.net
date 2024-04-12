@@ -137,7 +137,7 @@ export const chatRoomWebSocket = Vue.extend({
                     for (let i = 0; i < jsonData.data.length; i++) {
                         const room: WebSocketGameRoom = JSON.parse(jsonData.data[i])
                         newGameRoomList.push(room)
-                        /* 获取플레이어自身在哪个房间 */
+                        /* 获取플레이어自身在哪개房间 */
                         for (let j = 0; j < Object.keys(room.playerList).length; j++) {
                             if (self.$stock.state.id === room.playerList[j as GamePlayerSeatIndex].id) {
                                 playerLoc = room.id
@@ -146,7 +146,7 @@ export const chatRoomWebSocket = Vue.extend({
                             }
                         }
                     }
-                    /* 플레이어在某个房间 */
+                    /* 플레이어在某개房间 */
                     if (playerLocRoom !== null) {
                         self.playerLocRoom = playerLocRoom
                         /* 如果플레이어现在位置和上面获取到的不一样则通过playerList设置为一样，并相应设置플레이어状态 */

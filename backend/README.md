@@ -17,7 +17,7 @@
 
 该项目默认使用的是MySQL(建议版本>5.7)，[下载地址](https://dev.mysql.com/downloads/)
 
-将MySQL安装好后请修改  내 SQL을 설치한 후 수정하세요.`config-development.js`中`mysql`的相应配置，并启动MySQL。
+将MySQL安装好后请변경  내 SQL을 설치한 후 수정하세요.`config-development.js`中`mysql`的相应配置，并启动MySQL。
 
 如果需要注册的邀请码，可在该项目成功启动后，在通过
 등록을 위해 초대 코드가 필요한 경우, `Sequelize`框架自动生成的数据库表 => 프레임워크에 의해 자동으로 생성된 데이터베이스 테이블
@@ -30,7 +30,7 @@
 
 该项目使用的版本是`Redis 5.0.10`, [下载地址](https://redis.io/download/)
 
-将MySQL安装好后请修改`config-development.js`中`redis`的相应配置，并启动Redis。
+将MySQL安装好后请변경`config-development.js`中`redis`的相应配置，并启动Redis。
 
 
 ### 安装依赖

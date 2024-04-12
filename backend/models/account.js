@@ -16,7 +16,7 @@ module.exports = db.defineModel('account',
         nickname:
         {
             type: db.dataTypes.STRING(20),
-            defaultValue: '관광객'
+            defaultValue: 'beginer'
         },
         avatar_id:
         {

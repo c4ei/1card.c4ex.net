@@ -3,14 +3,14 @@
         <el-tab-pane label="游戏规则" name="rule" lazy>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>游戏简介</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌游戏，进行该游戏至少需要2名플레이어，可使用2~10副扑克牌，扑克牌数可依플레이어人数酌情增减。</p>
-            <p :style="{ 'font-size': fontSize }">另外，西游记的游戏规则各个地方不尽相同，以下游戏说明仅代表作者本人观点。</p>
+            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌游戏，进行该游戏至少需要2名플레이어，可使用2~10덱扑克牌，扑克牌数可依플레이어人数酌情增减。</p>
+            <p :style="{ 'font-size': fontSize }">另外，西游记的游戏规则各개地方不尽相同，以下游戏说明仅代表作者本人观点。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>游戏流程</h1>
             <hr class="divider-line">
-            <h2 :style="{ 'font-size': fontSize }">开局：</h2>
-            <p :style="{ 'font-size': fontSize }">开局每名플레이어起5张牌作为手牌，然后由随机一名(或上局收牌数最多的)플레이어开始出牌。</p>
+            <h2 :style="{ 'font-size': fontSize }">开국：</h2>
+            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5张牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어开始出牌。</p>
             <h2 :style="{ 'font-size': fontSize }">顺序：</h2>
-            <p :style="{ 'font-size': fontSize }">一般由开局出牌플레이어开始按逆时针顺序出牌，当有플레이어打出观音或如来时，反转出牌方向。</p>
+            <p :style="{ 'font-size': fontSize }">一般由开국出牌플레이어开始按逆时针顺序出牌，当有플레이어打出观音或如来时，反转出牌方向。</p>
             <h2 :style="{ 'font-size': fontSize }">出牌：</h2>
             <p :style="{ 'font-size': fontSize }">若台面上无牌，플레이어可打出同一牌点(如♠A和<span
                     style="color: red">♥A</span>)的任意张牌；若台面上有上家打出的牌，则下家须根据大小顺序打出 <u>张数相同且牌型“大于”上家牌的牌</u>，依次类推。</p>
@@ -21,16 +21,16 @@
             </p>
             <p :style="{ 'font-size': fontSize }">如连续5人打出3张牌，则倍乘效果的连击数计为： 6(3+3*1), 9(3+3*2), 12(3+3*3), 15(3+4*3),
                 57(39+6*3)。 </p>
-            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的收牌数中扣除。如连击数为6(2+2*2)时，从플레이어收牌数中扣除2*2=4张。</p>
+            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如连击数为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4张。</p>
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
-            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5张。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把플레이어的收牌数扣除1。</p>
+            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5张。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
             <h2 :style="{ 'font-size': fontSize }">收牌：</h2>
-            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃出牌并收下所有连击牌池中的牌，计入自己的收牌数，然后重新开始出牌。</p>
+            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃出牌并收下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新开始出牌。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
-            <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的收牌数，结束游戏。</p>
+            <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束游戏。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小顺序</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">西游记使用全副扑克牌，牌点大小的比较类似于斗兽棋。</p>
+            <p :style="{ 'font-size': fontSize }">西游记使用全덱扑克牌，牌点大小的比较类似于斗兽棋。</p>
             <p :style="{ 'font-size': fontSize }">其中</p>
             <h2 :style="{ 'font-size': fontSize }">特殊牌：</h2>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/3A.png')"></el-avatar>
@@ -127,7 +127,7 @@
             <p :style="{ 'font-size': fontSize }">尽量保证自己手上有各种牌型：妖怪、徒弟、师傅，缺一不可。观音和如来则不到万不得已尽量不用，留作杀手锏。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>小牌先出</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">大多数时候，先把小牌打出去都是正确的选择，当然也有特殊情况，具体可参考下方“控制局势”。</p>
+            <p :style="{ 'font-size': fontSize }">大多数时候，先把小牌打出去都是正确的选择，当然也有特殊情况，具体可参考下方“控制국势”。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>战略性收牌</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">当连击牌池中的牌数不多，且手上的牌如以下所示时</p>
@@ -136,22 +136,22 @@
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/11A.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/3D.png')"></el-avatar>
-            <p :style="{ 'font-size': fontSize }">虽然收牌并不是我们想要的，但从长远的战略眼光来看，可以忍痛收下牌，然后把3个2一次性打出以调整自己的手牌组合。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>控制局势</h1>
+            <p :style="{ 'font-size': fontSize }">虽然收牌并不是我们想要的，但从长远的战略眼光来看，可以忍痛收下牌，然后把3개2一次性打出以调整自己的手牌组合。</p>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>控制국势</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">大部分情况下，牌局的走势是不受我们控制的，但我们仍然可以在一定范围内左右它。</p>
-            <p :style="{ 'font-size': fontSize }">比如一场5人局游戏，我们手上有以下牌型</p>
+            <p :style="{ 'font-size': fontSize }">大部分情况下，牌국的走势是不受我们控制的，但我们仍然可以在一定范围内左右它。</p>
+            <p :style="{ 'font-size': fontSize }">比如一场5人국游戏，我们手上有以下牌型</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/4C.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/6B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/13B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/1D.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/8B.png')"></el-avatar>
-            <p :style="{ 'font-size': fontSize }">此时上家打出了一个♠2，</p>
+            <p :style="{ 'font-size': fontSize }">此时上家打出了一개♠2，</p>
             <p :style="{ 'font-size': fontSize }">
-                虽然大多数时候我们都从小牌出起，但考虑到局势的发展，如果我们接着打出♣4，等再次轮到我们时，上家牌极有可能是徒弟牌，而此时我们手上徒弟师傅牌不足，无法应付可能到来的情况。</p>
-            <p :style="{ 'font-size': fontSize }">所以一个较为大胆的做法是：打出K或者A。这样大概率等再次轮到我们时，上家牌会是师傅或者一个点数较小的妖怪。</p>
-            <p :style="{ 'font-size': fontSize }">当然，以上只是举例，实际情况可能更加复杂，须根据自己的手牌情况和场上局势来判断。</p>
-            <p :style="{ 'font-size': fontSize }">如开头所说，牌局的走势大多数时候是不可控的，况且还有观音如来这些逆天因素的存在，以上方法并不总是有效。</p>
+                虽然大多数时候我们都从小牌出起，但考虑到국势的发展，如果我们接着打出♣4，等再次轮到我们时，上家牌极有可能是徒弟牌，而此时我们手上徒弟师傅牌不足，无法应付可能到来的情况。</p>
+            <p :style="{ 'font-size': fontSize }">所以一개较为大胆的做法是：打出K或者A。这样大概率等再次轮到我们时，上家牌会是师傅或者一개点数较小的妖怪。</p>
+            <p :style="{ 'font-size': fontSize }">当然，以上只是举例，实际情况可能更加复杂，须根据自己的手牌情况和场上국势来判断。</p>
+            <p :style="{ 'font-size': fontSize }">如开头所说，牌국的走势大多数时候是不可控的，况且还有观音如来这些逆天因素的存在，以上方法并不总是有效。</p>
         </el-tab-pane>
 
         <el-tab-pane label="常见问题" name="questions" lazy>
@@ -173,7 +173,7 @@
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">
-                            尽管作者已针对各种主流浏览器和移动端做出了响应式布局的设计，但仍然有部分移动端的尺寸会使得画面无法被正确渲染，解决的办法是尝试切换横竖屏后刷新网页。</p>
+                            尽管作者已针对各种主流浏览器和移动端做出了响应式布국的设计，但仍然有部分移动端的尺寸会使得画面无法被正确渲染，解决的办法是尝试切换横竖屏后刷新网页。</p>
                         <p :style="{ 'font-size': fontSize }">注意：切换横竖屏后不刷新网页可能会导致一些画面元素渲染位置不正确的问题。</p>
                         <p :style="{ 'font-size': fontSize }">
                             如果切换横竖屏刷新后仍不能解决您的问题，请将您所使用的移动端机型以及出现问题的画面截屏전송给作者以使我们作出针对该机型的调整，谢谢。</p>
@@ -239,10 +239,10 @@
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">作者家乡的桂林话及一些自创的术语。其中</p>
-                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫플레이어收牌的“收”一个意思，但表达语气更强烈。</p>
+                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫플레이어收牌的“收”一개意思，但表达语气更强烈。</p>
                         <p :style="{ 'font-size': fontSize }">所所所：所，通日语师匠的匠「しょう」(syo)，意为“求师傅”。</p>
                         <p :style="{ 'font-size': fontSize }">卷卷卷：桂林话的“转”，意味“求转向”。</p>
-                        <p :style="{ 'font-size': fontSize }">我霉了：霉，桂林话，一般指物理状态的软烂，此处大意为“我人没了”、“我烂掉了”、“我拉跨了”。</p>
+                        <p :style="{ 'font-size': fontSize }">我霉了：霉，桂林话，一般指物理状态的软烂，此处大意为“我人没了”、“我烂掉了”、“我당기기了”。</p>
                         <p :style="{ 'font-size': fontSize }">瘾：桂林话，大意为“过瘾”、“痛快”。</p>
                         <p :style="{ 'font-size': fontSize }">我好方啊：方，桂林话，意思同“慌”。</p>
                     </div>

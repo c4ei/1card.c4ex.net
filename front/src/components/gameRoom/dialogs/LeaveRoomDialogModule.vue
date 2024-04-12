@@ -2,7 +2,7 @@
     <el-dialog title="힌트" :visible.sync="leaveRoomDialogVisible" :width="dialogWidth" center
         :before-close="closeLeaveDialog">
         <i class="el-icon-question"></i>
-        <span style="text-align:center">확인要离开房间吗？</span>
+        <span style="text-align:center">확인要방을 나가다吗？</span>
         <span slot="footer">
             <el-button @click="closeLeaveDialog" style="margin-right:10%">취소</el-button>
             <el-button type="danger" @click="leaveRoom">확인</el-button>

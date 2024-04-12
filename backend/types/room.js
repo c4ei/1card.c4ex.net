@@ -11,18 +11,18 @@
  */
 
 /**
- * @typedef RedisCacheRoomInfo Redis中的房间信息。对应key:room
+ * @typedef RedisCacheRoomInfo Redis中의 방信息。对应key:room
  * @type {object}
  * @property {number} id - 房间id
  * @property {string} name -  방이름 
- * @property {0|1} status - 房间状态 0:等待开始, 1:游戏中
+ * @property {0|1} status - 房间状态 0:기다리다开始, 1:游戏中
  * @property {boolean} needPassword - 是否需要비밀번호
  * @property {string} password - 비밀번호
- * @property {number} cardNum - 使用牌的副数
- * @property {number} metamorphoseNum - 每副牌변신 카드 수量
+ * @property {number} cardNum - 使用牌的덱数
+ * @property {number} metamorphoseNum - 每덱牌변신 카드 수量
  * @property {number} owner - 房主的플레이어id
- * @property {number} lastLoser - 上局拉跨的플레이어id
- * @property {number} lastWinner - 上局吃鸡的플레이어id
+ * @property {number} lastLoser - 上국당기기的플레이어id
+ * @property {number} lastWinner - 上국吃鸡的플레이어id
  * @property {number} chatInterval - 控制电脑플레이어聊天的定时器
  * @property {RoomPlayers} playerList - 플레이어信息列表，下标0~7
  */
@@ -32,17 +32,17 @@
  * @type {object} 
  * @property {number} id - 目标房间id 0为获取所有房间，NaN为만들다新房间，小于0为离开目标房间，大于0是对目标房间的操作。
  * @property {string?} name -  방이름。방 만들기,edit时不为空。
- * @property {(0|1)?} status - 房间状态 0:等待开始, 1:游戏中。방 만들기时不为空。
+ * @property {(0|1)?} status - 房间状态 0:기다리다开始, 1:游戏中。방 만들기时不为空。
  * @property {boolean?} needPassword - 是否需要비밀번호。방 만들기,edit时不为空。
  * @property {string?} password - 비밀번호。방 만들기，须비밀번호enter，edit时不为空。
  * @property {number?} aiPlayerId - 电脑플레이어id。enter时一般플레이어为0，加入电脑플레이어为负数。
- * @property {number?} cardNum - 使用牌的副数。방 만들기,edit时不为空。
- * @property {number?} metamorphoseNum - 每副牌변신 카드 수量。방 만들기,edit时不为空。
+ * @property {number?} cardNum - 使用牌的덱数。방 만들기,edit时不为空。
+ * @property {number?} metamorphoseNum - 每덱牌변신 카드 수量。방 만들기,edit时不为空。
  * @property {number?} owner - 房主的플레이어id。방 만들기时不为空。
- * @property {number?} lastLoser - 上局拉跨的플레이어id。방 만들기时不为空。
- * @property {number?} lastWinner - 上局吃鸡的플레이어id。방 만들기时不为空。
+ * @property {number?} lastLoser - 上국당기기的플레이어id。방 만들기时不为空。
+ * @property {number?} lastWinner - 上국吃鸡的플레이어id。방 만들기时不为空。
  * @property {RoomPlayers?} playerList - 플레이어信息列表，下标0~7。방 만들기时不为空。
- * @property {GamePlayerSeatIndex?} seatIndex - 目标座位号，下标0~7。为-1时则不指定位置。enter,离开房间时不为空。
+ * @property {GamePlayerSeatIndex?} seatIndex - 目标座位号，下标0~7。为-1时则不指定位置。enter,방을 나가다时不为空。
  * @property {'enter'|'ready'|'edit'|'changeSeat'|'disagreeChangeSeat'} action - 对目标房间操作的动作。id>0时不为空。
  * @property {number?} targetSeatIndex - 更换座位请求플레이어的更换目标座位号。changeSeat时不为空。
  * @property {number?} targetId - 更换座位请求目标플레이어的的플레이어id。changeSeat时不为空。
@@ -51,7 +51,7 @@
  * @property {boolean?} confirm - 更换座位是否需전송确认请求。changeSeat时不为空。
  * @property {number?} playerId - 被拒绝更换座位的플레이어id。disagreeChangeSeat时不为空。
  * @property {string?} refusePlayerNickname - 拒绝更换座位的플레이어昵称。disagreeChangeSeat时不为空。
- * @property {string?} nickname - 离开房间的플레이어昵称。离开房间时不为空。
+ * @property {string?} nickname - 방을 나가다的플레이어昵称。방을 나가다时不为空。
  */
 
 /** 
@@ -70,6 +70,6 @@
  * @property {string} invitation_code - 邀请码
  * @property {string} is_used -  是否已使用
  * @property {string} player_id - 플레이어id
- * @property {number} avatar_id - 플레이어화신id
+ * @property {number} avatar_id - 플레이어아바타id
  * @typedef {ModelInvitationCode & SequelizeCommon} SequelizedModelInvitationCode
  */

@@ -20,7 +20,7 @@
                         :src="require('@/assets/images/poker/game-result-max-combo.png')"></el-avatar>
                 </div>
                 <div class="game-result-sub-item" @click="getGameResultInfo(gameResult.gameId)">
-                    <div><span :style="{ 'font-size': fontSize }">查看详情</span></div>
+                    <div><span :style="{ 'font-size': fontSize }">확인详情</span></div>
                     <el-avatar class="view-game-result-button" shape="square" :fit="'cover'"
                         :src="require('@/assets/images/view-game-result-button.png')"></el-avatar>
                 </div>

@@ -44,7 +44,7 @@ export default Vue.extend({
                     }
                 }
             }
-            return '空位'
+            return '공석'
         },
 
         agreeChangeSeat: function () {

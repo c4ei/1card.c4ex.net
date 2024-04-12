@@ -59,18 +59,18 @@ export interface EnterRoomDto {
 export type RoomPlayers = { [key in GamePlayerSeatIndex]: WebSocketPlayerInRoom }
 
 /**
- * @summary WebSocket传来的的房间信息。对应key:room
+ * @summary WebSocket传来的의 방信息。对应key:room
  * @type {object}
  * @property {number} id - 房间id
  * @property {string} name -  방이름 
- * @property {0|1} status - 房间状态 0:等待开始, 1:游戏中
+ * @property {0|1} status - 房间状态 0:기다리다开始, 1:游戏中
  * @property {boolean} needPassword - 是否需要비밀번호
  * @property {string} password - 비밀번호
- * @property {number} cardNum - 使用牌的副数
- * @property {number} metamorphoseNum - 每副牌변신 카드 수量
+ * @property {number} cardNum - 使用牌的덱数
+ * @property {number} metamorphoseNum - 每덱牌변신 카드 수量
  * @property {number} owner - 房主的플레이어id
- * @property {number} lastLoser - 上局拉跨的플레이어id
- * @property {number} lastWinner - 上局吃鸡的플레이어id
+ * @property {number} lastLoser - 上국당기기的플레이어id
+ * @property {number} lastWinner - 上국吃鸡的플레이어id
  * @property {number?} chatInterval - 控制电脑플레이어聊天的定时器, 방 만들기请求时并不需要传递该属性，所以该属性没有写在类型中。
  * @property {RoomPlayers} playerList - 플레이어信息列表，下标0~7
  */
@@ -92,9 +92,9 @@ export interface WebSocketGameRoom {
  * @summary WebSocket传来的在房间中的플레이어信息。对应key:room
  * @type {object}
  * @property {number} id - 플레이어id
- * @property {number} cards -  总收牌数
- * @property {number} win - 吃鸡局数
- * @property {number} loss - 拉跨局数
+ * @property {number} cards -  总수집된 카드 수
+ * @property {number} win - 吃鸡국数
+ * @property {number} loss - 당기기국数
  * @property {boolean} ready - 是否已准备
  */
 export interface WebSocketPlayerInRoom {

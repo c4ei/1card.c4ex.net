@@ -30,7 +30,7 @@ export const aiPlayerMetaData : WebSocketPlayer[] = [
     { id: -26, username: '', nickname: '哪吒(AI)', player_loc: 0, player_status: 1, avatar_id: 26 },
     { id: -27, username: '', nickname: '猪妖(AI)', player_loc: 0, player_status: 1, avatar_id: 27 },
     { id: -28, username: '', nickname: '托塔天王(AI)', player_loc: 0, player_status: 1, avatar_id: 28 },
-    { id: -29, username: '', nickname: '齐天大圣(AI)', player_loc: 0, player_status: 1, avatar_id: 29 },
+    { id: -29, username: '', nickname: '원숭이 왕(AI)', player_loc: 0, player_status: 1, avatar_id: 29 },
     { id: -30, username: '', nickname: '唐三藏(AI)', player_loc: 0, player_status: 1, avatar_id: 30 },
     { id: -31, username: '', nickname: '铁扇公主(AI)', player_loc: 0, player_status: 1, avatar_id: 31 },
     { id: -32, username: '', nickname: '牛魔王(AI)', player_loc: 0, player_status: 1, avatar_id: 32 },

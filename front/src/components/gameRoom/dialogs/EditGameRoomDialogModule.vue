@@ -1,8 +1,8 @@
 <template>
-    <el-dialog :title="(!notEditableFlag ? '修改' : '查看') + '设置'" :visible.sync="editGameRoomDialogVisible"
+    <el-dialog :title="(!notEditableFlag ? '변경' : '확인') + '设置'" :visible.sync="editGameRoomDialogVisible"
         :width="dialogWidth" center :modal="false" :close-on-click-modal="notEditableFlag"
         :before-close="closeEditGameRoomDialog">
-        <el-alert v-if="notEditableFlag" :closable="false" center title="只有房主才能修改设置" :style="{ 'font-size': fontSize }"
+        <el-alert v-if="notEditableFlag" :closable="false" center title="只有房主才能변경设置" :style="{ 'font-size': fontSize }"
             type="info"></el-alert>
         <el-form :model="gameRoomValidateForm" ref="gameRoomValidateForm">
             <el-form-item label="방이름" prop="roomName" :rules="[{ required: true, message: '방이름을 입력해주세요', trigger: 'blur' }]">
@@ -15,7 +15,7 @@
             </el-form-item>
         </el-form>
         <div>
-            <span>사용된 카드 수：{{ gameRoomValidateForm.cardNum }}副</span>
+            <span>사용된 카드 수：{{ gameRoomValidateForm.cardNum }}덱</span>
             <el-slider v-model="gameRoomValidateForm.cardNum" :min="2" :max="10" :step="1" :show-tooltip="false"
                 :disabled="notEditableFlag"></el-slider>
         </div>
@@ -27,7 +27,7 @@
         <div slot="footer">
             <template v-if="!notEditableFlag">
                 <el-button @click="closeEditGameRoomDialog" style="margin-right:10%">취소</el-button>
-                <el-button type="success" @click="editGameRoom">修改</el-button>
+                <el-button type="success" @click="editGameRoom">변경</el-button>
             </template>
             <template v-else>
                 <el-button type="primary" @click="closeEditGameRoomDialog">关闭</el-button>

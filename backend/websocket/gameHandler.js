@@ -183,7 +183,7 @@ module.exports = async function (data, wss, ws) {
             /** @type {string[]} */
             const messageList = ['游戏开始']
             messageList.forEach(text => game.messages.push(text))
-            game.messages.push('等待 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
+            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
             const gameStr = JSON.stringify(game)
             const initializeGameStr = JSON.stringify({ type: 'game', action: 'initialize', data: gameStr })
             wss.clients.forEach(client => {
@@ -199,7 +199,7 @@ module.exports = async function (data, wss, ws) {
             game.remainCards = game.remainCards.length
             game.messages = []
             game.messages.push('重新连接...')
-            game.messages.push('等待 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
+            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
             ws.send(JSON.stringify({ type: 'game', action: 'get', data: JSON.stringify(game) }))
 
         }
@@ -509,7 +509,7 @@ async function sendGameInfo(gameKey, game, wss, action, messageList) {
         game.remainCards = game.remainCards.length
         game.messages = []
         messageList.forEach(text => game.messages.push(text))
-        game.messages.push('等待 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
+        game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
         const gameStr = JSON.stringify(game)
         const gameInfoStr = JSON.stringify({ type: 'game', action: action, data: gameStr })
         wss.clients.forEach(client => {
@@ -524,7 +524,7 @@ async function sendGameInfo(gameKey, game, wss, action, messageList) {
 
 /**
  * @param {RedisCacheGame} game Redis中的游戏信息。
- * @returns {number} 计时器等待时间。
+ * @returns {number} 计时器기다리다时间。
  */
 function getWaitTime(game) {
     if (game.gamePlayer[game.currentPlayer].online === false) {
@@ -607,7 +607,7 @@ async function gameover(gameKey, game, wss) {
 /**
  * @param {RedisCacheGame} game Redis中的游戏信息。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
- * @param {number} losePlayer 拉跨플레이어id
+ * @param {number} losePlayer 당기기플레이어id
  * @param {number} winPlayer 吃鸡플레이어id
  * @returns {Promise<void>}
  */
@@ -685,10 +685,10 @@ async function deleteGame(game, wss, losePlayer, winPlayer) {
 /**
  * @param {RedisCacheGame} game Redis中的游戏信息。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
- * @param {number} losePlayer 拉跨플레이어id
+ * @param {number} losePlayer 당기기플레이어id
  * @param {number} winPlayer 吃鸡플레이어id
- * @param {number} minCards 吃鸡플레이어收牌数
- * @param {number} maxCards 拉跨플레이어收牌数
+ * @param {number} minCards 吃鸡플레이어수집된 카드 수
+ * @param {number} maxCards 당기기플레이어수집된 카드 수
  * @param {number} maxCombo 最大连接数
  * @returns {void}
  */
@@ -845,8 +845,8 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
 /**
  * @param {RedisCachePlayerInGame} player Redis中的在游戏中的플레이어信息。对应key:game。
  * @param {SequelizedModelAccount} playerInstance Player的Model。
- * @param {number} averageCard 平均收牌数。
- * @param {number} losePlayer 拉跨플레이어id。
+ * @param {number} averageCard 平均수집된 카드 수。
+ * @param {number} losePlayer 당기기플레이어id。
  * @param {number} winPlayer 吃鸡플레이어id。
  * @param {number} playerNum 플레이어数。
  * @returns {Promise<number>} 经验值。
@@ -858,7 +858,7 @@ async function calRecord(player, playerInstance, averageCard, losePlayer, winPla
         let exp = 50
         playerRecord.num_of_game = playerRecord.num_of_game + 1
         playerRecord.experienced_cards = playerRecord.experienced_cards + player.cards
-        /* 吃鸡拉跨 */
+        /* 吃鸡당기기 */
         if (losePlayer === playerInstance.id) {
             playerRecord.most_game = playerRecord.most_game + 1
             exp = 0
@@ -871,7 +871,7 @@ async function calRecord(player, playerInstance, averageCard, losePlayer, winPla
         if (player.maxCombo > playerRecord.max_combo) {
             playerRecord.max_combo = player.maxCombo
         }
-        /* 最多最少收牌数 */
+        /* 最多最少수집된 카드 수 */
         if (playerRecord.least_cards === -1 || playerRecord.least_cards > player.cards) {
             playerRecord.least_cards = player.cards
         }
@@ -923,7 +923,7 @@ function getPlayCardTimer(game, currentPlayer, wss, delay) {
         return setTimeout(async function () { await intervalCheckCard(wss, this, game.id) }, delay)
     }
     else if (currentPlayerId < 0) {
-        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, 99999]])() // 电脑플레이어不必催促所以仅设定一个较长时间
+        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, 99999]])() // 电脑플레이어不必催促所以仅设定一개较长时间
         return setTimeout(function () {
             const playCardWebSocketRequestData = aiPlay(game)
             /** 

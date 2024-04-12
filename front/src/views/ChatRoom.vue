@@ -147,7 +147,7 @@ export default (Vue as VueConstructor<
 			gameResultDialogVisible: false,
 			announceDialogVisible: false,
 			addAiPlayerSeatIndex: -1,
-			announceVersionId: 1, //每次更新公告须修改此处, +1
+			announceVersionId: 1, //每次更新公告须변경此处, +1
 			playerList: [] as WebSocketPlayer[],
 			gameRoomList: [] as WebSocketGameRoom[],
 			playerLocRoom: null as WebSocketGameRoom | null,

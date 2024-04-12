@@ -93,7 +93,7 @@ export default cardList.extend({
                         }
                         this.timer = window.setInterval(() => {
                             this.time = this.time - 1
-                        }, 150)//出牌时间修改这里，100是10秒，150是15秒，还要修改GameRoomPlayerItemModule里的动画时间
+                        }, 150)//出牌时间변경这里，100是10秒，150是15秒，还要변경GameRoomPlayerItemModule里的动画时间
                     })
                 }
             }

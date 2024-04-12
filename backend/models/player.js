@@ -22,7 +22,7 @@ const Player = db.defineModel('player',
             type: db.dataTypes.INTEGER(1),
             defaultValue: 0
         },
-        /* 总收牌数 */
+        /* 总수집된 카드 수 */
         cards:
         {
             type: db.dataTypes.INTEGER(4),

@@ -8,9 +8,9 @@ const { strategy } = require('./strategy')
 */
 
 /** 
- * @summary 排列或组合多个元素
+ * @summary 排列或组合多개元素
  * @param {number[]} allElements 所有元素
- * @param {number} count 需要选取的元素个数
+ * @param {number} count 需要选取的元素개数
  * @param {boolean} [isPermutation = true] 默认TRUE:排列,FALSE:组合
  * @returns {number[][]} 所有排列或组合的结果
  */
@@ -126,7 +126,7 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
 
 /** 
  * @summary 获取플레이어手中牌能打出的所有排列组合(去重统一且可管上现在牌池中的牌型,现在牌池中无牌时则获取所有可能张数牌能打出的所有排列组合)。
- * @description 与getPlayCardsListBySpecifiedCount的区别是不指定出牌数，而是根据游戏局势来指定。
+ * @description 与getPlayCardsListBySpecifiedCount的区别是不指定出牌数，而是根据游戏국势来指定。
  * @param {number[]} currentCard 现在牌池中的牌(>=0)。
  * @param {number[]} remainCards 플레이어手中所有牌(>0)。
  * @returns {number[][]} 各种能出的牌的组合。
@@ -264,7 +264,7 @@ const aiPlayerMetaData = [
     { id: -26, username: '', nickname: '哪吒(AI)', player_loc: 0, player_status: 1, avatar_id: 26 },
     { id: -27, username: '', nickname: '猪妖(AI)', player_loc: 0, player_status: 1, avatar_id: 27 },
     { id: -28, username: '', nickname: '托塔天王(AI)', player_loc: 0, player_status: 1, avatar_id: 28 },
-    { id: -29, username: '', nickname: '齐天大圣(AI)', player_loc: 0, player_status: 1, avatar_id: 29 },
+    { id: -29, username: '', nickname: '원숭이 왕(AI)', player_loc: 0, player_status: 1, avatar_id: 29 },
     { id: -30, username: '', nickname: '唐三藏(AI)', player_loc: 0, player_status: 1, avatar_id: 30 },
     { id: -31, username: '', nickname: '铁扇公主(AI)', player_loc: 0, player_status: 1, avatar_id: 31 },
     { id: -32, username: '', nickname: '牛魔王(AI)', player_loc: 0, player_status: 1, avatar_id: 32 },

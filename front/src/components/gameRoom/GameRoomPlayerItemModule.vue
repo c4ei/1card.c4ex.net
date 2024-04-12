@@ -40,16 +40,16 @@
                         <div :class="{ 'game-room-player-info-item-vertical': !isItemHorizontal, 'game-room-player-info-item-horitonzal': isItemHorizontal }"
                             v-if="getPlayer().avatar_id !== 0">
                             <el-tag type="info" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
-                                {{ '收牌数： ' }}
+                                {{ '수집된 카드 수： ' }}
                                 <CardsNum :value="player.cards" /> {{ ' 张' }}
                             </el-tag>
                             <el-tag type="success" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
                                 {{ '吃鸡： ' }}
-                                <CardsNum :value="player.win" /> {{ ' 局' }}
+                                <CardsNum :value="player.win" /> {{ ' 국' }}
                             </el-tag>
                             <el-tag type="danger" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
-                                {{ '拉跨： ' }}
-                                <CardsNum :value="player.loss" /> {{ ' 局' }}
+                                {{ '당기기： ' }}
+                                <CardsNum :value="player.loss" /> {{ ' 국' }}
                             </el-tag>
                         </div>
                     </template>
@@ -142,7 +142,7 @@ export default Vue.extend({
                 this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 说: ' + newVal.text)
             }
             else if (newVal.targetId === this.$stock.state.id) {
-                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 对你说: ' + newVal.text)
+                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 对내말: ' + newVal.text)
             }
             else {
                 this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 对' + this.gameInfo.gamePlayer[newVal.target as GamePlayerSeatIndex].nickname + ' 说: ' + newVal.text)
@@ -241,7 +241,7 @@ export default Vue.extend({
                     return this.playerList[i]
                 }
             }
-            return { nickname: '空位' + (this.seatIndex + 1), avatar_id: 0 }
+            return { nickname: '공석' + (this.seatIndex + 1), avatar_id: 0 }
         },
 
         getAvatarUrl: function (avatarId: number) {
