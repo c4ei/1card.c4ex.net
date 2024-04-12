@@ -76,10 +76,11 @@ async function getSession(req, account) {
                 break
             }
         }
-        console.log("/backend/services/loginService.js 78");
+        console.log("/backend/services/loginService.js 79 hasLogin :"+hasLogin);
         if (hasLogin) {
             /* 중복된 로그인이 있는 경우 이미 로그인 세션의 ttl을 가져옵니다. */
-            const ttlRes = await asyncTtl(sessionId)
+            const ttlRes = await asyncTtl(sessionId);
+            console.log("/backend/services/loginService.js 83 sessionId :"+sessionId);
             /* 이미 로그인 세션의 ttl이 숫자압착 판단 시간보다 작을 경우 해당 세션을 삭제하고 상대방 로그인을 허용합니다. */
             if (ttlRes < conf.ws.forceLogoutTtl || req.ip === sessionIp) {
                 await asyncDel(sessionId)

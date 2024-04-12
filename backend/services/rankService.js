@@ -32,11 +32,11 @@ module.exports = {
             let getRankResult = await getRank(redisKey, order, query.id) //判断缓存存在并取得排序结果: 0增序，1减序
             if (!getRankResult.result) {
                 /** @type {SequelizedModelRecord[]} */
-                const records = await Record.findAll({ where: { num_of_game: { [Op.gte]: 5 } } }) // 寻找游戏场数大于5的玩家
+                const records = await Record.findAll({ where: { num_of_game: { [Op.gte]: 5 } } }) // 寻找游戏场数大于5的플레이어
                 if (records.length < 1) {//样本数量不足时
                     return { code: 200, message: '', type: query.type, result: { rankList: [], playerInfo: null } }
                 }
-                /** @type {string[]} 形式是["100","1","105","2"...],即玩家分数,玩家id...交替的形式。 */
+                /** @type {string[]} 形式是["100","1","105","2"...],即플레이어分数,플레이어id...交替的形式。 */
                 const zaddList = []
                 records.forEach(record => {
                     if (query.type === 'level') {
@@ -76,14 +76,14 @@ module.exports = {
             const topThreeList = getRankResult.topThreeList
             /** @type {ResponseRank} */
             const resultDto = { rankList: [], playerInfo: {} }
-            /** @type {number[]} 玩家id列表。*/
+            /** @type {number[]} 플레이어id列表。*/
             const idList = [] = topThreeList.filter((item, index) => index % 2 === 0)
             /** @type {number[]} 分数列表。*/
             const scoreList = topThreeList.filter((item, index) => index % 2 === 1)
             // let accounts = await Account.findAll({where:{ id: {[Op.in]: idList}}}) in条件查找是无序的，故弃用
             for (let i = 0; i < idList.length; i++) {
                 const topPlayers = await getTopPlayer(idList[i])
-                /* 缓存中是否有前三名玩家的信息 */
+                /* 缓存中是否有前三名플레이어的信息 */
                 if (topPlayers.result) {
                     resultDto.rankList.push({ id: idList[i], rank: i + 1, avatarId: topPlayers.player.avatar_id, nickname: topPlayers.player.nickname, record: scoreList[i] })
                 }
@@ -114,8 +114,8 @@ module.exports = {
 /** 
  * @param {RankType} redisKey - 获取排行的类型。
  * @param {0|1} order - 0增序1降序
- * @param {number} id - 获取排序的玩家id。
- * @returns {Promise<{result:boolean, topThreeList:string[], resList:string[]|null, resRank:number}>} topThreeList和resList的形式是["1","100","2","105"...],即玩家id,玩家分数...交替的形式。
+ * @param {number} id - 获取排序的플레이어id。
+ * @returns {Promise<{result:boolean, topThreeList:string[], resList:string[]|null, resRank:number}>} topThreeList和resList的形式是["1","100","2","105"...],即플레이어id,플레이어分数...交替的形式。
  */
 async function getRank(redisKey, order, id) {
     try {
@@ -126,13 +126,13 @@ async function getRank(redisKey, order, id) {
             if (order === 0) {
                 /* 前三名，即对应参数中的0~2 */
                 const topThreeList = await asyncZrange(redisKey, 0, 2, "WITHSCORES")
-                /* 获得指定玩家的排名 */
+                /* 얻다指定플레이어的排名 */
                 const rankRes = await asyncZrank(redisKey, id)
-                /* 若指定玩家不拥有排名则提前返回结果 */
+                /* 若指定플레이어不拥有排名则提前返回结果 */
                 if (rankRes === null) {
                     return { result: true, topThreeList: topThreeList, resList: null, resRank: -1 }
                 }
-                /* 获得该排行榜指定玩家排名的信息并返回结果，即对应参数中的res~res */
+                /* 얻다该排行榜指定플레이어排名的信息并返回结果，即对应参数中的res~res */
                 const resList = await asyncZrange(redisKey, rankRes, rankRes, "WITHSCORES")
                 return { result: true, topThreeList: topThreeList, resList: resList, resRank: rankRes }
             }
@@ -154,10 +154,10 @@ async function getRank(redisKey, order, id) {
 
 /** 
  * @param {string} redisKey - 插入排行的类型。
- * @param {string[]} zaddList - 插入排行数据，形式是["100","1","105","2"...],即玩家分数,玩家id...交替的形式。。
+ * @param {string[]} zaddList - 插入排行数据，形式是["100","1","105","2"...],即플레이어分数,플레이어id...交替的形式。。
  * @param {0|1} order - 0增序1降序
- * @param {number} id - 获取排序的玩家id。
- * @returns {Promise<{result:boolean, topThreeList:string[], resList:string[]|null, resRank:number}>} topThreeList和resList的形式是["1","100","2","105"...],即玩家id,玩家分数...交替的形式。
+ * @param {number} id - 获取排序的플레이어id。
+ * @returns {Promise<{result:boolean, topThreeList:string[], resList:string[]|null, resRank:number}>} topThreeList和resList的形式是["1","100","2","105"...],即플레이어id,플레이어分数...交替的形式。
  */
 async function setRank(redisKey, zaddList, id, order) {
     try {
@@ -174,7 +174,7 @@ async function setRank(redisKey, zaddList, id, order) {
 }
 
 /** 
- * @param {number} id - 获取缓存的TOP排序的玩家id。
+ * @param {number} id - 获取缓存的TOP排序的플레이어id。
  * @returns {Promise<{result:boolean, player:RedisCacheRankPlayer}>}
  */
 async function getTopPlayer(id) {
@@ -195,9 +195,9 @@ async function getTopPlayer(id) {
 }
 
 /** 
- * @param {string} keyId - 需要缓存的TOP排序的玩家id。
- * @param {number} avatarId - 需要缓存的TOP排序的玩家的头像id。
- * @param {number} nickname - 需要缓存的TOP排序的玩家昵称。
+ * @param {string} keyId - 需要缓存的TOP排序的플레이어id。
+ * @param {number} avatarId - 需要缓存的TOP排序的플레이어的화신id。
+ * @param {number} nickname - 需要缓存的TOP排序的플레이어昵称。
  * @returns {Promise<void>}
  */
 async function setTopPlayer(keyId, avatarId, nickname) {

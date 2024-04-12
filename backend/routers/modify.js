@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const modifyService = require('../services/modifyService')
-const baseUrl = '/rest/v1/modify'
+// const baseUrl = '/rest/v1/modify'
+const baseUrl = '/v1/modify'
 const logger = require('../common/log')
 /** 
  * @typedef {import('../types/http').ClientRequest}

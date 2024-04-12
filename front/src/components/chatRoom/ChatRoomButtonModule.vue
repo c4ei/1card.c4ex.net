@@ -1,17 +1,17 @@
 <template>
     <div class="button-box" v-if="whichPattern === 'vertical'">
         <el-button type="success" class="chat-room-aside-button" icon="el-icon-circle-plus"
-            :style="{ 'font-size': largeFontSize }" @click="emitCreateGameRoomDialog" :size="buttonSize">创建房间</el-button>
+            :style="{ 'font-size': largeFontSize }" @click="emitCreateGameRoomDialog" :size="buttonSize">방 만들기</el-button>
         <el-button type="danger" class="chat-room-aside-button" icon="el-icon-d-arrow-left"
-            :style="{ 'font-size': largeFontSize }" @click="emitCancelLeaveDialog" :size="buttonSize">登出离开</el-button>
+            :style="{ 'font-size': largeFontSize }" @click="emitCancelLeaveDialog" :size="buttonSize">로그아웃</el-button>
     </div>
     <div style="height: 100%" v-else>
         <el-button type="danger" class="chat-room-header-button" icon="el-icon-d-arrow-left"
             :style="{ 'font-size': largeFontSize, 'padding': '0px 0px' }" @click="emitCancelLeaveDialog" :size="buttonSize"
-            round>登出离开</el-button>
+            round>로그아웃</el-button>
         <el-button type="success" class="chat-room-header-button" icon="el-icon-circle-plus"
             :style="{ 'font-size': largeFontSize, 'padding': '0px 0px' }" @click="emitCreateGameRoomDialog"
-            :size="buttonSize" round>创建房间</el-button>
+            :size="buttonSize" round>방 만들기</el-button>
     </div>
 </template>
 

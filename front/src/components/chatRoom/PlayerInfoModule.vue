@@ -1,7 +1,7 @@
 <template>
 	<el-aside class="hide-scroll-bar" :width="subAsideWidth"
 		:style="{ backgroundImage: 'url(' + verticalBackground + ')' }">
-		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以修改头像" placement="left">
+		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以修改화신" placement="left">
 		<div class="player-icon-box" @click="openEditAvatarDialog">
 			<el-image v-if="gameInfo === null || gameInfo.currentPlayer === -1" class="aside-icon"
 			:src="getAvatarUrl($store.state.avatar_id)"></el-image>
@@ -20,10 +20,10 @@
 		<el-button class="setting-button" :style="{ 'font-size': fontSize }" type="info" icon="el-icon-view"
 			@click="openViewModule">查看</el-button>
 		<el-button class="help-button" :style="{ 'font-size': fontSize }" type="warning" icon="el-icon-s-opportunity"
-			@click="openHelpModule">帮助</el-button>
+			@click="openHelpModule">돕다</el-button>
 		</div>
 
-		<el-dialog title="修改头像" :visible.sync="avatarDialogVisible" center :width="dialogWidth" :modal="false">
+		<el-dialog title="修改화신" :visible.sync="avatarDialogVisible" center :width="dialogWidth" :modal="false">
 		<el-divider></el-divider>
 		<div class="icon-select-box">
 			<div class="icon-block" :class="{ 'icon-is-selected': temAvatarId === n }" v-for="n in iconNum" :key="n"
@@ -61,7 +61,7 @@
 		</span>
 		</el-dialog>
 
-		<el-dialog title="帮助" :visible.sync="helpModuleDialogVisible" center :width="playerInfoDialogWidth" :modal="false">
+		<el-dialog title="돕다" :visible.sync="helpModuleDialogVisible" center :width="playerInfoDialogWidth" :modal="false">
 		<HelpModule :isShowing="helpModuleDialogVisible" :fontSize="fontSize" :avatarSize="avatarSize"></HelpModule>
 		<span slot="footer" class="dialog-footer">
 			<el-button type="danger" @click="helpModuleDialogVisible = false" :style="{ 'font-size': fontSize }"
@@ -96,9 +96,9 @@ export default Vue.extend({
 			duplicateSubmitNicknameFlag: false,
 			duplicateGetInfoFlag: false,
 			activeViewModuleTabName: 'record',
-			/* 头像数量 */
+			/* 화신数量 */
 			iconNum: 35,
-			/* 暂时选择的头像Id */
+			/* 暂时选择的화신Id */
 			temAvatarId: 0,
 			nicknameForm: { name: '' },
 			playerProfile: {
@@ -164,14 +164,14 @@ export default Vue.extend({
 
 		submitNewAvatar: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('游戏中，请勿修改头像')
+				this.$message.warning('游戏中，请勿修改화신')
 				this.avatarDialogVisible = false
 				return
 			}
 			if (this.duplicateSubmitAvatarFlag) return;
 			this.duplicateSubmitAvatarFlag = true
 			if (this.temAvatarId === this.$stock.state.avatar_id) {
-				this.$message.error('修改前后头像一致，请重新选择')
+				this.$message.error('修改前后화신一致，请重新选择')
 				this.duplicateSubmitAvatarFlag = false
 			}
 			else {
@@ -182,7 +182,7 @@ export default Vue.extend({
 							.then(() => {
 								this.ws?.send(JSON.stringify({ type: 'playerList', nickname: this.$stock.state.nickname, avatar_id: this.$stock.state.avatar_id, player_loc: this.$stock.state.player_loc, player_status: this.$stock.state.player_status }))
 							})
-						this.$message.success('成功修改头像')
+						this.$message.success('成功修改화신')
 					}
 					else {
 						this.$message.error('修改失败，请稍后重试')
@@ -269,7 +269,7 @@ export default Vue.extend({
 
 		openEditAvatarDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('游戏中，请勿修改头像')
+				this.$message.error('游戏中，请勿修改화신')
 				return
 			}
 			this.avatarDialogVisible = true

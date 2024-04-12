@@ -53,7 +53,7 @@ export default Vue.extend({
 
     methods: {
         getPlayer: function (n: number): WebSocketPlayer | { nickname: '空位', avatar_id: 0 } {
-            if (n < 0) { // id小于0为电脑玩家
+            if (n < 0) { // id小于0为电脑플레이어
                 return aiPlayerMetaData[-1 * (n + 1)]
             }
             for (let i = 0; i < this.playerList.length; i++) {
@@ -81,7 +81,7 @@ export default Vue.extend({
 
         enterGameRoom: function (gameRoom: WebSocketGameRoom, seatIndex: GamePlayerSeatIndex | -1): void {
             if (this.$stock.state.avatar_id === 0) {
-                this.$message.warning('请先设置头像和昵称')
+                this.$message.warning('请先设置화신和昵称')
                 return
             }
             if (gameRoom.status === 1) {

@@ -31,8 +31,8 @@ const { aiPlay, aiPlayerMetaData } = require('../ai/playCard')
 
 /**
  * @param {GameWebsocketRequestData} data 游戏的前端请求信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
- * @param {WebSocketInfo} ws 单一玩家的WebSocket连接(附带玩家信息)。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
+ * @param {WebSocketInfo} ws 单一플레이어的WebSocket连接(附带플레이어信息)。
  * @returns {Promise<void>}
  */
 module.exports = async function (data, wss, ws) {
@@ -51,7 +51,7 @@ module.exports = async function (data, wss, ws) {
             /** @type {RedisCacheRoomInfo} */
             const gameRoom = JSON.parse(gameRoomRes) //游戏房间
             /** @type {string[]} */
-            const redisMSetStrList = [] //mSet批量改变玩家游戏状态的redis语句
+            const redisMSetStrList = [] //mSet批量改变플레이어游戏状态的redis语句
             /** @type {RedisCachePlayerInGame[]} */
             const gamePlayerList = []  //player:列表
             /** @type {number[]} */
@@ -108,7 +108,7 @@ module.exports = async function (data, wss, ws) {
                 /** @type {number[]} */
                 gamePlayerId: [],
                 /** @type {number[]} */
-                remainCards: pokers, //发送给玩家时只发送长度,
+                remainCards: pokers, //전송给플레이어时只전송长度,
                 /** @type {string[]} */
                 messages: []
             }
@@ -126,11 +126,11 @@ module.exports = async function (data, wss, ws) {
                         game.currentPlayer = iSeatIndex
                     }
                     for (let j = 0; j < gamePlayerList.length; j++) {
-                        /** 是否该给改玩家发牌 */
+                        /** 是否该给改플레이어发牌 */
                         let shouldDeal = false
                         /** @type {GamePlayerSeatIndex} */
                         const jSeatIndex = j
-                        /* 某玩家在房间中，获取该玩家昵称，设置信息，并改变其在玩家列表中的状态 */
+                        /* 某플레이어在房间中，获取该플레이어昵称，设置信息，并改变其在플레이어列表中的状态 */
                         if (gameRoom.playerList[iSeatIndex].id === gamePlayerList[jSeatIndex].id) {
                             game.gamePlayer[iSeatIndex].id = gamePlayerList[jSeatIndex].id
                             game.gamePlayer[iSeatIndex].nickname = gamePlayerList[jSeatIndex].nickname
@@ -141,7 +141,7 @@ module.exports = async function (data, wss, ws) {
                             redisMSetStrList.push(JSON.stringify(gamePlayerList[jSeatIndex]))
                             shouldDeal = true
                         }
-                        else if (gameRoom.playerList[iSeatIndex].id < 0) { // 电脑玩家
+                        else if (gameRoom.playerList[iSeatIndex].id < 0) { // 电脑플레이어
                             const aiPlayer = aiPlayerMetaData[-1 * (gameRoom.playerList[iSeatIndex].id + 1)]
                             game.gamePlayer[iSeatIndex].id = aiPlayer.id
                             game.gamePlayer[iSeatIndex].nickname = aiPlayer.nickname
@@ -217,7 +217,7 @@ module.exports = async function (data, wss, ws) {
                 if (data.playCard.length > 1) {//多牌连击
                     game.timesCombo = game.timesCombo + 1
                     const timesComboFromPlayer = Math.min(game.timesCombo * data.playCard.length, game.gamePlayer[game.currentPlayer].cards)
-                    const timesAddCard = data.playCard.length + timesComboFromPlayer //连击所附加的牌出自玩家的收牌
+                    const timesAddCard = data.playCard.length + timesComboFromPlayer //连击所附加的牌出自플레이어的收牌
                     game.gamePlayer[game.currentPlayer].cards -= timesComboFromPlayer
                     game.timesCard = game.timesCard + timesAddCard
                     game.currentCombo = game.currentCombo + timesAddCard
@@ -376,7 +376,7 @@ module.exports = async function (data, wss, ws) {
 }
 
 /**
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @param {NodeJS.Timeout} thisTimer 计时器。
  * @param {number} id 游戏id。
  * @returns {Promise<void>}
@@ -396,8 +396,8 @@ async function intervalCheckCard(wss, thisTimer, id) {
                 }
             })
         }
-        game.gamePlayer[game.currentPlayer].offLineTime = game.gamePlayer[game.currentPlayer].offLineTime + 1 //玩家超时次数
-        game.gamePlayer[game.currentPlayer].offLinePlayCard = game.gamePlayer[game.currentPlayer].offLinePlayCard + 1 //玩家托管打出的牌数
+        game.gamePlayer[game.currentPlayer].offLineTime = game.gamePlayer[game.currentPlayer].offLineTime + 1 //플레이어超时次数
+        game.gamePlayer[game.currentPlayer].offLinePlayCard = game.gamePlayer[game.currentPlayer].offLinePlayCard + 1 //플레이어托管打出的牌数
         if (game.gamePlayer[game.currentPlayer].offLineTime > 1 && game.gamePlayer[game.currentPlayer].online) {
             game.gamePlayer[game.currentPlayer].online = false //托管
             const messageStr = JSON.stringify({ type: 'message', subType: 'warning', player_loc: id, text: '无操作响应，进入托管状态' })
@@ -498,7 +498,7 @@ async function intervalCheckCard(wss, thisTimer, id) {
 /**
  * @param {string} gamekey Redis中的游戏key。
  * @param {RedisCacheGame} game Redis中的游戏信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @param {string} action 具体操作。
  * @param {string[]} messageList 游戏信息。
  * @returns {Promise<void>}
@@ -536,7 +536,7 @@ function getWaitTime(game) {
 /**
  * @param {string} gameKey Redis中游戏key。
  * @param {RedisCacheGame} game Redis中的游戏信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @returns {Promise<void>}
  */
 async function gameover(gameKey, game, wss) {
@@ -606,9 +606,9 @@ async function gameover(gameKey, game, wss) {
 
 /**
  * @param {RedisCacheGame} game Redis中的游戏信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
- * @param {number} losePlayer 拉跨玩家id
- * @param {number} winPlayer 吃鸡玩家id
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
+ * @param {number} losePlayer 拉跨플레이어id
+ * @param {number} winPlayer 吃鸡플레이어id
  * @returns {Promise<void>}
  */
 async function deleteGame(game, wss, losePlayer, winPlayer) {
@@ -652,13 +652,13 @@ async function deleteGame(game, wss, losePlayer, winPlayer) {
                 client.send(gameRoomListStr)//更新游戏列表
             }
         })
-        /** @type {string[]} 玩家key的列表字符串，用于mGet */
+        /** @type {string[]} 플레이어key的列表字符串，用于mGet */
         const changePlayerList = []
         game.gamePlayerId.forEach(id => { if (id > 0) changePlayerList.push(conf.redisCache.playerPrefix + id) })
         if (changePlayerList.length === 0) return
         const changePlayerListRes = await asyncMget(changePlayerList)
         if (changePlayerListRes.length === 0) return
-        /** @type {string[]} 玩家信息字符串，用于mSet */
+        /** @type {string[]} 플레이어信息字符串，用于mSet */
         const redisMSetStrList = []
         changePlayerListRes.forEach(playerItem => {
             /** @type {RedisCachePlayer} */
@@ -674,7 +674,7 @@ async function deleteGame(game, wss, losePlayer, winPlayer) {
         const playerListStr = JSON.stringify({ type: 'playerList', data: playerList })
         wss.clients.forEach(client => {
             if (client.readyState === WebSocket.OPEN) {
-                client.send(playerListStr)//更新玩家列表
+                client.send(playerListStr)//更新플레이어列表
             }
         })
     } catch (e) {
@@ -684,11 +684,11 @@ async function deleteGame(game, wss, losePlayer, winPlayer) {
 
 /**
  * @param {RedisCacheGame} game Redis中的游戏信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
- * @param {number} losePlayer 拉跨玩家id
- * @param {number} winPlayer 吃鸡玩家id
- * @param {number} minCards 吃鸡玩家收牌数
- * @param {number} maxCards 拉跨玩家收牌数
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
+ * @param {number} losePlayer 拉跨플레이어id
+ * @param {number} winPlayer 吃鸡플레이어id
+ * @param {number} minCards 吃鸡플레이어收牌数
+ * @param {number} maxCards 拉跨플레이어收牌数
  * @param {number} maxCombo 最大连接数
  * @returns {void}
  */
@@ -701,7 +701,7 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
         const insertAiPlayersInfo = []
         /** @type {PlayerExp[]} */
         const playerExpList = []
-        /** 人类玩家的玩家id数组 */
+        /** 人类플레이어的플레이어id数组 */
         const humanPlayerIdList = game.gamePlayerId.filter(id => id > 0)
         /** @type {SequelizedModelAccount[]} */
         const accounts = await Account.findAll({ where: { id: { [Op.in]: humanPlayerIdList } } })
@@ -710,7 +710,7 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
             const seatKey = i
             /** @type {RedisCachePlayerInGame} */
             const player = game.gamePlayer[seatKey]
-            if (player.id < 0) { // 电脑玩家不需增加经验
+            if (player.id < 0) { // 电脑플레이어不需增加经验
                 insertAiPlayersInfo.push({
                     ai_player_id: player.id,
                     cards: player.cards,
@@ -824,7 +824,7 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
             })
         })
         const gameResultStr = JSON.stringify(gameResultDto)
-        //各玩家获得的经验值数组
+        //各플레이어얻다的经验值数组
         gameResultDto.playerExpList = playerExpList
         const gameResultWithExpStr = JSON.stringify(gameResultDto)
         const resultStr = JSON.stringify({ type: 'game', action: 'result', data: gameResultWithExpStr })
@@ -843,12 +843,12 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
 }
 
 /**
- * @param {RedisCachePlayerInGame} player Redis中的在游戏中的玩家信息。对应key:game。
+ * @param {RedisCachePlayerInGame} player Redis中的在游戏中的플레이어信息。对应key:game。
  * @param {SequelizedModelAccount} playerInstance Player的Model。
  * @param {number} averageCard 平均收牌数。
- * @param {number} losePlayer 拉跨玩家id。
- * @param {number} winPlayer 吃鸡玩家id。
- * @param {number} playerNum 玩家数。
+ * @param {number} losePlayer 拉跨플레이어id。
+ * @param {number} winPlayer 吃鸡플레이어id。
+ * @param {number} playerNum 플레이어数。
  * @returns {Promise<number>} 经验值。
  */
 async function calRecord(player, playerInstance, averageCard, losePlayer, winPlayer, playerNum) {
@@ -898,7 +898,7 @@ async function calRecord(player, playerInstance, averageCard, losePlayer, winPla
             }
         }
         const res = await asyncExists(conf.redisCache.playerRecordPrefix + playerInstance.id)
-        /* 如果redis中有缓存则刷新该缓存中数据；如果没有则不必做任何处理，因为查询没缓存玩家的战绩时会自动从数据库中读取最新数据 */
+        /* 如果redis中有缓存则刷新该缓存中数据；如果没有则不必做任何处理，因为查询没缓存플레이어的战绩时会自动从数据库中读取最新数据 */
         if (res === 1) { await asyncMultiExec([['set', conf.redisCache.playerRecordPrefix + playerInstance.id, JSON.stringify(playerRecord, null, 4)], ['expire', conf.redisCache.playerRecordPrefix + playerInstance.id, conf.redisCache.expire]]) }
         await playerRecord.save()
         return exp
@@ -910,8 +910,8 @@ async function calRecord(player, playerInstance, averageCard, losePlayer, winPla
 
 /**
  * @param {RedisCacheGame} game Redis中的游戏信息。
- * @param {GamePlayerSeatIndex} currentPlayer 出牌玩家的ID。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
+ * @param {GamePlayerSeatIndex} currentPlayer 出牌플레이어的ID。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @param {number} delay 计时器时间(ms)
  * @returns {NodeJS.Timeout}
  */
@@ -919,11 +919,11 @@ function getPlayCardTimer(game, currentPlayer, wss, delay) {
     const currentPlayerId = game.gamePlayer[currentPlayer].id
     const playCardTimerKey = conf.redisCache.aiChatPrefix + game.id + ':' + conf.redisCache.playCardTimerKeyStr
     if (currentPlayerId > 0) {
-        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, game.gamePlayer[currentPlayer].online ? delay : 99999]])() // 此处不必等回调，所以没有加await, 玩家在线时才催促，托管时无须催促
+        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, game.gamePlayer[currentPlayer].online ? delay : 99999]])() // 此处不必等回调，所以没有加await, 플레이어在线时才催促，托管时无须催促
         return setTimeout(async function () { await intervalCheckCard(wss, this, game.id) }, delay)
     }
     else if (currentPlayerId < 0) {
-        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, 99999]])() // 电脑玩家不必催促所以仅设定一个较长时间
+        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, 99999]])() // 电脑플레이어不必催促所以仅设定一个较长时间
         return setTimeout(function () {
             const playCardWebSocketRequestData = aiPlay(game)
             /** 

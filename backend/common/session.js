@@ -1,4 +1,4 @@
-/* session配置，通过redis来管理玩家session */
+/* session配置，通过redis来管理플레이어session */
 
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
@@ -16,7 +16,7 @@ module.exports = {
     session: session(sess),
     store: redisStore,
     /** 
-     * @description 将玩家信息绑定到request会话中。
+     * @description 将플레이어信息绑定到request会话中。
      * @param {ClientRequest} req
      * @param {SequelizedModelAccount} account
      */

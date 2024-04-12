@@ -49,7 +49,7 @@ function deDuplicatedCombination(allCombination) {
     const tempResult = []
 
     const combinationsStrList = allCombination.map(combination => combination.toString())
-    // 此阶段去掉的是玩家手中有相同牌时造成的重复组合。如[1,2,2]取两张的情况下，组合[1,2],[2,1],[2,2]均会出现两次。
+    // 此阶段去掉的是플레이어手中有相同牌时造成的重复组合。如[1,2,2]取两张的情况下，组合[1,2],[2,1],[2,2]均会出现两次。
     const deDuplicatedCombinationsStrList = Array.from(new Set(combinationsStrList))
     deDuplicatedCombinationsStrList.forEach(combinationStr => { tempResult.push(combinationStr.split(",").map(str => parseInt(str))) })
 
@@ -80,17 +80,17 @@ function playCardFilter(combination) {
 }
 
 /** 
- * @summary 获取指定张数时玩家手中牌能打出的所有排列组合(仅去重和统一牌型，但不考虑牌型是否可管上现在牌池中的牌型)。
+ * @summary 获取指定张数时플레이어手中牌能打出的所有排列组合(仅去重和统一牌型，但不考虑牌型是否可管上现在牌池中的牌型)。
  * @description 只要定下了第一张基本牌，后面的牌均为附属牌，
  * 所以对于手中5张牌来说，取下标0,1,2,3,4分别作为基本牌，剩下的4张则作为附属牌来进行组合即可。
- * 所以若现有牌池为2张，玩家手中牌为5张，则所有可打出的组合数为5*C4/2 = 30
- * @param {number[]} allCards 玩家手中所有牌
- * @param {number} [count = 1] 需要打出的指定张数(小于等于玩家玩家手中所有牌张数，默认为1)
+ * 所以若现有牌池为2张，플레이어手中牌为5张，则所有可打出的组合数为5*C4/2 = 30
+ * @param {number[]} allCards 플레이어手中所有牌
+ * @param {number} [count = 1] 需要打出的指定张数(小于等于플레이어플레이어手中所有牌张数，默认为1)
  * @returns {number[][]} 所有可打出的牌组合的结果(仅去重和统一牌型，但不考虑牌型是否可管上现在牌池中的牌型)
  */
 function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
 
-    /** @type {number[][]} 玩家手中牌能打出的所有排列组合(未去重) */
+    /** @type {number[][]} 플레이어手中牌能打出的所有排列组合(未去重) */
     const result = []
     if (allCards.length === 0) {
         return result
@@ -114,7 +114,7 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
         })
     })
 
-    /** @type {number[][]} 玩家手中牌能打出的所有排列组合(去重) */
+    /** @type {number[][]} 플레이어手中牌能打出的所有排列组合(去重) */
     const deDuplicatedResult = [] = deDuplicatedCombination(result)
 
     const playCardSListResult = deDuplicatedResult.filter(playCardFilter)
@@ -125,16 +125,16 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
 
 
 /** 
- * @summary 获取玩家手中牌能打出的所有排列组合(去重统一且可管上现在牌池中的牌型,现在牌池中无牌时则获取所有可能张数牌能打出的所有排列组合)。
+ * @summary 获取플레이어手中牌能打出的所有排列组合(去重统一且可管上现在牌池中的牌型,现在牌池中无牌时则获取所有可能张数牌能打出的所有排列组合)。
  * @description 与getPlayCardsListBySpecifiedCount的区别是不指定出牌数，而是根据游戏局势来指定。
  * @param {number[]} currentCard 现在牌池中的牌(>=0)。
- * @param {number[]} remainCards 玩家手中所有牌(>0)。
+ * @param {number[]} remainCards 플레이어手中所有牌(>0)。
  * @returns {number[][]} 各种能出的牌的组合。
  */
 function getHigherPlayCardsList(currentCard, remainCards) {
-    /** @type {number[][]} 各种能出的牌的组合，值为玩家手中的该牌的序号 */
+    /** @type {number[][]} 各种能出的牌的组合，值为플레이어手中的该牌的序号 */
     let result = []
-    if (currentCard.length === 0) { // 现在牌池中无牌时，不用考虑是否能管上，直接获取玩家手中牌能打出的所有排列组合
+    if (currentCard.length === 0) { // 现在牌池中无牌时，不用考虑是否能管上，直接获取플레이어手中牌能打出的所有排列组合
         for (let i = 1; i <= remainCards.length; i++) {
             const playCards = getPlayCardsListBySpecifiedCount(remainCards, i)
             playCards.forEach(playCard => result.push(playCard))
@@ -142,7 +142,7 @@ function getHigherPlayCardsList(currentCard, remainCards) {
         return result
     }
 
-    if (currentCard.length > remainCards.length) { // 现在牌池中的牌张数大于玩家手中所有牌的张数。
+    if (currentCard.length > remainCards.length) { // 现在牌池中的牌张数大于플레이어手中所有牌的张数。
         return result
     }
 
@@ -195,7 +195,7 @@ function aiPlay(game) {
         for (let i = 0; i < playCard.length; i++) {
             for (let j = 0; j < remainCards.length; j++) {
                 if (remainCards[j] === playCard[i]) {
-                    remainCards.splice(j, 1) // 把将要打出的牌从玩家手中的牌移除
+                    remainCards.splice(j, 1) // 把将要打出的牌从플레이어手中的牌移除
                     break
                 }
             }

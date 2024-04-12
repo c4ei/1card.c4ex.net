@@ -3,10 +3,10 @@
         <el-table v-loading="loading" :height="isHorizontal ? '70vh' : null" :data="playerList" style="width: 100%"
             :row-class-name="tableRowClassName" :row-style="rowStyle" :header-row-style="rowStyle"
             @row-click="getRowPlayerInfo">
-            <el-table-column prop="avatar_id" label="头像" min-width="30" v-slot="scope">
+            <el-table-column prop="avatar_id" label="화신" min-width="30" v-slot="scope">
                 <el-avatar shape="square" :size="avatarSize" :src="getAvatarUrl(scope.row.avatar_id)"></el-avatar>
             </el-table-column>
-            <el-table-column prop="nickname" label="玩家" min-width="80" v-slot="scope">
+            <el-table-column prop="nickname" label="플레이어" min-width="80" v-slot="scope">
                 <div slot="reference" class="name-wrapper">
                     <el-tag :type="getType(scope.row.player_status)" effect="dark" :style="rowStyle" :size="tagSize">
                         {{ getStatus(scope.row.player_status) }}
@@ -114,7 +114,7 @@ export default Vue.extend({
                 return '等待'
             }
             else if (player_status === 0) {
-                return '空闲'
+                return '게으른'
             }
         },
 

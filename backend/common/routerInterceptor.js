@@ -32,11 +32,11 @@ module.exports =
             //요청이 다른 경로에 대한 것이고 요청에 session.username이 포함된 경우 전달합니다.
             if (req.session.username) {
                 next();
-                console.log("요청이 다른 경로에 대한 것이고 요청에 session.username이 포함된 경우 전달합니다.");
+                console.log("요청이 다른 경로에 대한 것이고 요청에 session.username이 포함된 경우 전달합니다. : "+req.session.username);
             }
             //그렇지 않으면 세션 만료 오류가 보고됩니다.
             else {
-                console.log("그렇지 않으면 세션 만료 오류가 보고됩니다.");
+                console.log("그렇지 않으면 세션 만료 오류가 보고됩니다. errors.SESSION_TIMEOUT ");
                 res.status(200).json(errors.SESSION_TIMEOUT);
             }
         }

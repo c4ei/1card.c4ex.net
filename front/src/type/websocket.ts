@@ -5,7 +5,7 @@ import { GamePlayerSeatIndex } from '@/type/index'
 /** 
  * @summary WebSocket共通响应的信息。
  * @type {object}
- * @property {number} userId - 发送请求的玩家id。
+ * @property {number} userId - 전송请求的플레이어id。
  */
 interface WebSocketResponseRawData { userId: number }
 
@@ -30,7 +30,7 @@ export interface WebSocketGameRoomListResponseJsonData extends WebSocketResponse
 /** 
  * @type {object} 
  * @property {'message'} type - 操作类型。
- * @property {number} player_loc - 玩家所在房间id
+ * @property {number} player_loc - 플레이어所在房间id
  * @property {'success' | 'info' | 'warning' | 'error'} subType - 文本类型。
  * @property {string} text - message文本。
  */
@@ -44,7 +44,7 @@ export interface WebSocketMessageResponseJsonData extends WebSocketResponseRawDa
 /** 
  * @type {object} 
  * @property {'error' | 'system'} type - 操作类型。
- * @property {number} player_loc - 玩家所在房间id
+ * @property {number} player_loc - 플레이어所在房间id
  * @property {string} text - message文本。
  */
 export interface WebSocketExceptionMessageResponseJsonData extends WebSocketResponseRawData {
@@ -92,8 +92,8 @@ interface InitializeGameResponseJsonData extends WebSocketResponseRawData {
  * @type {object} 
  * @property {'game'} type - 操作类型。
  * @property {'shiftOnline'} action - 对目标游戏操作的动作。
- * @property {GamePlayerSeatIndex} seatIndex - 玩家的座位号。
- * @property {boolean} online - 玩家是否在线。
+ * @property {GamePlayerSeatIndex} seatIndex - 플레이어的座位号。
+ * @property {boolean} online - 플레이어是否在线。
  */
 interface ShiftOnlineGameResponseJsonData extends WebSocketResponseRawData {
     type: 'game',
@@ -116,12 +116,12 @@ interface TextToPlayerGameResponseJsonData extends WebSocketResponseRawData {
 
 /** 
  * @type {object} 
- * @property {GamePlayerSeatIndex|-1} target - 发送游戏内信息玩家的目标玩家座位号，-1时向所有玩家发送。textToPlayer时不为空。
- * @property {number} targetId - 发送游戏内信息目标玩家的的玩家id，0时向所有玩家发送。textToPlayer时不为空。
- * @property {GamePlayerSeatIndex} source - 发送游戏内信息玩家的座位号。textToPlayer时不为空。
- * @property {number} sourceId - 发送游戏内信息玩家的的玩家id。textToPlayer时不为空。
- * @property {string} soundSrc - 发送游戏内信息对应的语音文件路径。textToPlayer时不为空。
- * @property {string} text - 发送游戏内信息对应的信息。textToPlayer时不为空。
+ * @property {GamePlayerSeatIndex|-1} target - 전송游戏内信息플레이어的目标플레이어座位号，-1时向所有플레이어전송。textToPlayer时不为空。
+ * @property {number} targetId - 전송游戏内信息目标플레이어的的플레이어id，0时向所有플레이어전송。textToPlayer时不为空。
+ * @property {GamePlayerSeatIndex} source - 전송游戏内信息플레이어的座位号。textToPlayer时不为空。
+ * @property {number} sourceId - 전송游戏内信息플레이어的的플레이어id。textToPlayer时不为空。
+ * @property {string} soundSrc - 전송游戏内信息对应的语音文件路径。textToPlayer时不为空。
+ * @property {string} text - 전송游戏内信息对应的信息。textToPlayer时不为空。
  */
 export interface TextToPlayerGameData {
     target: GamePlayerSeatIndex | -1,

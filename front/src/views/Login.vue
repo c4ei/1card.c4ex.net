@@ -46,9 +46,9 @@
 		</el-card>
 		</el-row>
 
-		<el-row type="flex" justify="center">
+		<!-- <el-row type="flex" justify="center">
 		<el-image :src="require('@/assets/images/master_and_disciples.gif')" :fit="fit"></el-image>
-		</el-row>
+		</el-row> -->
 
 		<el-row type="flex" justify="center">
 		<el-link type="info" @click="left_drawer = true">이 사이트 정보</el-link>

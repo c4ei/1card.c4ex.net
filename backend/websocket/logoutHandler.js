@@ -13,7 +13,7 @@ const logger = require('../common/log')
 
 /**
  * @summary 登出处理器。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @param {(ClientRequest & WebSocketInfo)} data 游戏房间的前端请求信息。
  * @returns {Promise<void>}
  */
@@ -34,8 +34,8 @@ module.exports = async function (wss, data) {
         if (keyList.length > 0) {
             const playerList = await asyncMget(keyList)
             const playerListStr = JSON.stringify({ type: 'playerList', data: playerList })
-            const offLineStr = JSON.stringify({ type: 'system', player_loc: 0, text: '玩家 ' + player.nickname + ' 下线了' })
-            const exitStr = JSON.stringify({ type: 'system', player_loc: player.player_loc, text: '玩家 ' + player.nickname + ' 退出了房间' })
+            const offLineStr = JSON.stringify({ type: 'system', player_loc: 0, text: '플레이어 ' + player.nickname + ' 下线了' })
+            const exitStr = JSON.stringify({ type: 'system', player_loc: player.player_loc, text: '플레이어 ' + player.nickname + ' 退出了房间' })
             wss.clients.forEach(client => {
                 if (client.readyState === WebSocket.OPEN) {
                     client.send(playerListStr)

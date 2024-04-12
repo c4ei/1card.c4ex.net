@@ -67,7 +67,7 @@ export default Vue.extend({
     methods: {
         enterGameRoom: function () {
             if (this.$stock.state.avatar_id === 0) {
-                this.$message.warning('请先设置头像和昵称')
+                this.$message.warning('请先设置화신和昵称')
                 return
             }
             const gameRoomValidateFormRef = this.$refs.gameRoomValidateForm as Element & ExecuteValidate

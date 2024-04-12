@@ -4,11 +4,11 @@
             <el-alert class="chat-text" v-for="item in chatText" :key="item.id" :title="item.name + '：' + item.text"
                 :type="item.type" :closable="false" show-icon></el-alert>
         </div>
-        <el-input class="fill-width input-box" placeholder="请输入聊天内容" v-model="inputText"
+        <el-input class="fill-width input-box" placeholder="채팅 내용을 입력해주세요" v-model="inputText"
             @keypress.native="enterSendText($event)" :size="buttonSize">
             <i slot="prefix" class="el-input__icon el-icon-edit"></i>
             <el-button id="input-button" slot="append" icon="el-icon-check" type="primary" @click="sendTextToServe()"
-                :size="buttonSize" :disabled="inputText.length === 0">发送</el-button>
+                :size="buttonSize" :disabled="inputText.length === 0">전송</el-button>
         </el-input>
     </el-main>
 </template>

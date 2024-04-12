@@ -6,15 +6,15 @@ const { getRandom } = poker
  * @summary 出牌策略处理，选出最佳的出牌组合。
  * @description 
  * 牌池中无牌时，按妖怪，徒弟，师傅&反弹的顺序选出出牌的组合。即有可打出的妖怪牌组合时优先打妖怪牌中的随机组合，没有则打徒弟，依次类推。且，
- *   1.当考虑妖怪牌的出牌策略时，玩家手中的妖怪牌越多，越倾向于出多牌组合。
+ *   1.当考虑妖怪牌的出牌策略时，플레이어手中的妖怪牌越多，越倾向于出多牌组合。
  *   2.当考虑非妖怪牌的出牌策略时，不打反弹牌或带变身牌的多牌,及尽量少打多牌。
  * 牌池中为单牌，连击数低，且满足以下条件之一时，弃牌不出。
- *   1.玩家手中不能打出的妖怪牌多
- *   2.玩家只能打出徒弟牌管上现在牌池牌面，且玩家手中妖怪牌多
+ *   1.플레이어手中不能打出的妖怪牌多
+ *   2.플레이어只能打出徒弟牌管上现在牌池牌面，且플레이어手中妖怪牌多
  * 其余情况则按所有出牌组合中牌面最小，牌序数和最小的组合打出。
  * @param {RedisCacheGame} game
  * @param {number[][]} playCards 各种能出的牌的组合。
- * @param {number[]} remainCards 玩家现在手中的牌。
+ * @param {number[]} remainCards 플레이어现在手中的牌。
  * @returns {number[]} 经过策略推算后打出的牌组合。
  */
 function strategy(game, playCards, remainCards) {
@@ -48,9 +48,9 @@ function strategy(game, playCards, remainCards) {
                     const morphoseAndJokerExcludedPlayCards = excludedPlayCards.filter(playCard => playCard.length === 1 ? poker.getIndexOfCardList(playCard[0]).num !== 100 : playCard.every(card => card < 100))
                     const multipleExcludedPlayCards = morphoseAndJokerExcludedPlayCards.filter(playCard => {
                         if (playCard.length === 1) { return true } // 出单张OK
-                        const cardNumCount = getSpecifiedCardNumCount(remainCards, poker.getIndexOfCardList(playCard[0]).num) // 获取玩家手中该牌面的张数
-                        const pureCount = cardNumCount - playCard.length // 玩家手中该牌面的张数减去当前出牌组合要打出的张数
-                        return getRandom(0, pureCount) > 0 // 期望值希望玩家至少保留1张该牌面的牌
+                        const cardNumCount = getSpecifiedCardNumCount(remainCards, poker.getIndexOfCardList(playCard[0]).num) // 获取플레이어手中该牌面的张数
+                        const pureCount = cardNumCount - playCard.length // 플레이어手中该牌面的张数减去当前出牌组合要打出的张数
+                        return getRandom(0, pureCount) > 0 // 期望值希望플레이어至少保留1张该牌面的牌
                     })
                     if (multipleExcludedPlayCards.length > 0) {
                         return multipleExcludedPlayCards[Math.floor(Math.random() * multipleExcludedPlayCards.length)]
@@ -64,11 +64,11 @@ function strategy(game, playCards, remainCards) {
     else if (currentCard.length === 1) { // 牌池是单牌时
         if (game.currentCombo < 5 && getRandom(0, game.currentCombo) === 0) { // 连击数越低越倾向执行后续处理
             const cardStatus = getCardStatus(remainCards)
-            if (getRandom(0, cardStatus.yaoguaiNum - playCards.length) > 0) { // 玩家手中不能打出的妖怪牌越多时越倾向于弃牌
+            if (getRandom(0, cardStatus.yaoguaiNum - playCards.length) > 0) { // 플레이어手中不能打出的妖怪牌越多时越倾向于弃牌
                 return []
             }
             const yaoguaiPlayCards = playCards.filter(playCard => playCard.every(card => poker.getIndexOfCardList(card).num < 20))
-            if (yaoguaiPlayCards.length === 0 && getRandom(0, cardStatus.yaoguaiNum) > 0) { // 玩家只能打出徒弟牌管上现在牌面时，玩家手中妖怪牌越多时越倾向于弃牌
+            if (yaoguaiPlayCards.length === 0 && getRandom(0, cardStatus.yaoguaiNum) > 0) { // 플레이어只能打出徒弟牌管上现在牌面时，플레이어手中妖怪牌越多时越倾向于弃牌
                 return []
             }
         }
@@ -95,9 +95,9 @@ function strategy(game, playCards, remainCards) {
  */
 
 /** 
- * @summary 获取玩家手中牌的状况。
- * @param {number[]} cards 玩家手中的牌。
- * @returns {CardStatus} 玩家手中牌的状况。
+ * @summary 获取플레이어手中牌的状况。
+ * @param {number[]} cards 플레이어手中的牌。
+ * @returns {CardStatus} 플레이어手中牌的状况。
  */
 function getCardStatus(cards) {
     /** @type {CardStatus} */
@@ -124,8 +124,8 @@ function getCardStatus(cards) {
 }
 
 /** 
- * @summary 获取玩家手中牌的指定牌面的数量。
- * @param {number[]} remainCards 玩家手中的牌。
+ * @summary 获取플레이어手中牌的指定牌面的数量。
+ * @param {number[]} remainCards 플레이어手中的牌。
  * @param {number} cardNum 牌面。
  * @returns {number} 指定牌面的数量。
  */

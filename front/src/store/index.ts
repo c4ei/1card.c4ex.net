@@ -62,7 +62,7 @@ export default new Vuex.Store({
 		nickname: '',
 		isMobile: isMobile,
 		player_loc: 0,  //0为游戏大厅，其余为游戏房间号
-		player_status: 0, //0空闲1等待2忙碌
+		player_status: 0, //0게으른1等待2忙碌
 		setting: localSetting,
 	},
 	mutations: {

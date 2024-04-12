@@ -168,12 +168,12 @@ export default Vue.extend({
                 if (this.playerProfile.id === this.$stock.state.id) {
                     return '你尚未拥有排名'
                 }
-                return '玩家尚未拥有排名'
+                return '플레이어尚未拥有排名'
             }
             if (this.playerProfile.id === this.$stock.state.id) {
                 return '你的排名'
             }
-            return '玩家排名'
+            return '플레이어排名'
         },
 
         showTopThreeLabel: function () {

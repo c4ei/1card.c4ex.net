@@ -3,25 +3,25 @@
  */
 
 /** 
- * @typedef {PlayerStatus} 玩家状态. 0:空闲，1: 游戏房间等待中, 2: 游戏中
+ * @typedef {PlayerStatus} 플레이어状态. 0:게으른，1: 游戏房间等待中, 2: 游戏中
  * @type {0 | 1 | 2}
 */
 
 /**
- * @typedef RedisCachePlayer Redis中的玩家信息。对应key:player。
+ * @typedef RedisCachePlayer Redis中的플레이어信息。对应key:player。
  * @type {object}
- * @property {number} id - 玩家id
- * @property {string} username -  玩家用户名
+ * @property {number} id - 플레이어id
+ * @property {string} username -  플레이어用户名
  * @property {string} nickname - 昵称
- * @property {number} player_loc - 玩家所在房间id
- * @property {PlayerStatus} player_status - 玩家状态. 0:空闲，1: 游戏房间等待中, 2: 游戏中
- * @property {number} avatar_id - 玩家头像id
+ * @property {number} player_loc - 플레이어所在房间id
+ * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 游戏房间等待中, 2: 游戏中
+ * @property {number} avatar_id - 플레이어화신id
  */
 
 /**
- * @typedef RedisCachePlayerInRoom Redis中的在房间中的玩家信息。对应key:room
+ * @typedef RedisCachePlayerInRoom Redis中的在房间中的플레이어信息。对应key:room
  * @type {object}
- * @property {number} id - 玩家id
+ * @property {number} id - 플레이어id
  * @property {number} cards -  总收牌数
  * @property {number} win - 吃鸡局数
  * @property {number} loss - 拉跨局数
@@ -29,23 +29,23 @@
  */
 
 /**
- * @typedef RedisCachePlayerInGame Redis中的在游戏中的玩家信息。对应key:game
+ * @typedef RedisCachePlayerInGame Redis中的在游戏中的플레이어信息。对应key:game
  * @type {object}
- * @property {number} id - 玩家id。
+ * @property {number} id - 플레이어id。
  * @property {string} nickname - 昵称。
- * @property {string} avatar_id - 玩家头像id。
+ * @property {string} avatar_id - 플레이어화신id。
  * @property {number} cards - 收牌数。
- * @property {number[]} remainCards - 玩家手中余留牌的序号。
- * @property {number} maxCombo - 一次获得最多的牌数。
- * @property {boolean} online - 玩家是否托管。
- * @property {number} offLineTime - 玩家断连次数(自己该出牌时没有出牌的次数)，达到一定次数则进入托管状态。
- * @property {number} offLinePlayCard - 玩家托管时出的牌。
+ * @property {number[]} remainCards - 플레이어手中余留牌的序号。
+ * @property {number} maxCombo - 一次얻다最多的牌数。
+ * @property {boolean} online - 플레이어是否托管。
+ * @property {number} offLineTime - 플레이어断连次数(自己该出牌时没有出牌的次数)，达到一定次数则进入托管状态。
+ * @property {number} offLinePlayCard - 플레이어托管时出的牌。
  * @property {number} wukong - 使用悟空数。
  * @property {number} bajie - 使用八戒数。
  * @property {number} shaseng - 使用沙僧数。
  * @property {number} tangseng - 使用师傅数。
  * @property {number} joker - 使用如来、观音牌数。
- * @property {number} bianshen - 使用变身牌数。
+ * @property {number} bianshen - 使用변신 카드 수。
  */
 
 /** 
@@ -53,62 +53,62 @@
  */
 
 /**
- * @typedef ModelAccount 数据库中的玩家账号信息。对应table:accounts。
+ * @typedef ModelAccount 数据库中的플레이어账号信息。对应table:accounts。
  * @type {object}
  * @property {number} id - 账号id。主key。
  * @property {string} username -  用户名
  * @property {string} password -  비밀번호
  * @property {string} nickname - 昵称
- * @property {number} avatar_id - 玩家头像id
+ * @property {number} avatar_id - 플레이어화신id
  * @typedef {ModelAccount & SequelizeCommon} SequelizedModelAccount
  */
 
 /**
- * @typedef ModelPlayer 数据库中的游戏中玩家信息。对应table:players。
+ * @typedef ModelPlayer 数据库中的游戏中플레이어信息。对应table:players。
  * @type {object}
  * @property {number} id - 主key，插入数据时不需要。
  * @property {string} nickname - 昵称。
- * @property {string} avatar_id - 玩家头像id。
+ * @property {string} avatar_id - 플레이어화신id。
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
  * @property {number} cards - 收牌数。
- * @property {number} max_combo - 一次获得最多的牌数。
+ * @property {number} max_combo - 一次얻다最多的牌数。
  * @property {number} wukong - 使用悟空数。
  * @property {number} bajie - 使用八戒数。
  * @property {number} shaseng - 使用沙僧数。
  * @property {number} tangseng - 使用师傅数。
- * @property {number} bianshen - 使用变身牌数。
+ * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
- * @property {number} accountId - 玩家账号id。外键，对应table:accounts。
+ * @property {number} accountId - 플레이어账号id。外键，对应table:accounts。
  * @property {number} gameId - 游戏id。外键，对应table:games。
  * @typedef {ModelPlayer & SequelizeCommon} SequelizedModelPlayer
  */
 
 /**
- * @typedef ModelAiPlayer 数据库中的游戏中玩家信息。对应table:aiplayers。
+ * @typedef ModelAiPlayer 数据库中的游戏中플레이어信息。对应table:aiplayers。
  * @type {object}
  * @property {number} id - 主key，插入数据时不需要。
- * @property {string} ai_player_id - 电脑玩家id，负数。
+ * @property {string} ai_player_id - 电脑플레이어id，负数。
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
  * @property {number} cards - 收牌数。
- * @property {number} max_combo - 一次获得最多的牌数。
+ * @property {number} max_combo - 一次얻다最多的牌数。
  * @property {number} wukong - 使用悟空数。
  * @property {number} bajie - 使用八戒数。
  * @property {number} shaseng - 使用沙僧数。
  * @property {number} tangseng - 使用师傅数。
- * @property {number} bianshen - 使用变身牌数。
+ * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
- * @property {number} accountId - 玩家账号id。外键，对应table:accounts。
+ * @property {number} accountId - 플레이어账号id。外键，对应table:accounts。
  * @property {number} gameId - 游戏id。外键，对应table:games。
  * @typedef {ModelAiPlayer & SequelizeCommon} SequelizedModelAiPlayer
  */
 
 /** 
- * @typedef PlayerListWebsocketRequestData 玩家列表的websocket请求信息。
+ * @typedef PlayerListWebsocketRequestData 플레이어列表的websocket请求信息。
  * @type {object} 
- * @property {string} nickname - 发送信息玩家昵称。
- * @property {number} player_loc - 玩家所在房间id
- * @property {PlayerStatus} player_status - 玩家状态. 0:空闲，1: 游戏房间等待中, 2: 游戏中
- * @property {number} avatar_id - 玩家头像id
+ * @property {string} nickname - 전송信息플레이어昵称。
+ * @property {number} player_loc - 플레이어所在房间id
+ * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 游戏房间等待中, 2: 游戏中
+ * @property {number} avatar_id - 플레이어화신id
  * @property {string?} action - 请求类型。若不为空，则其余属性应为空。
  */
 
@@ -117,6 +117,6 @@
  * @type {object}
  * @property {string} invitation_code -  邀请码。
  * @property {boolean} is_used - 是否已使用。
- * @property {number} player_id - 使用该邀请码的玩家id。
+ * @property {number} player_id - 使用该邀请码的플레이어id。
  * @typedef {ModelInvitationCode & SequelizeCommon} SequelizedModelInvitationCode
  */

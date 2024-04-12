@@ -63,7 +63,7 @@ export const chatRoomWebSocket = Vue.extend({
                 else {
                     self.ws?.send(JSON.stringify({ type: 'playerList', nickname: self.$stock.state.nickname, avatar_id: self.$stock.state.avatar_id, player_loc: self.$stock.state.player_loc, player_status: self.$stock.state.player_status }))
                 }
-                self.sendMessageToChatRoom({ 'id': 0, name: '【系统消息】', type: 'success', 'text': '进入游戏大厅，成功连接服务器' });
+                self.sendMessageToChatRoom({ 'id': 0, name: '【시스템 메시지】', type: 'success', 'text': '게임 로비에 입장하여 서버에 성공적으로 연결' });
             };
 
             this.ws.onmessage = function (data) {
@@ -73,8 +73,8 @@ export const chatRoomWebSocket = Vue.extend({
                     const { player_loc } = jsonData
                     if (player_loc === self.$stock.state.player_loc) {
                         const { userId, nickname, text } = jsonData
-                        if (userId > 0) { // 如果是玩家发言则推入聊天框数组
-                            self.sendMessageToChatRoom({ 'id': 0, name: userId === self.$stock.state.id ? '你' : nickname, type: 'info', 'text': text })
+                        if (userId > 0) { // 如果是플레이어发言则推入聊天框数组
+                            self.sendMessageToChatRoom({ 'id': 0, name: userId === self.$stock.state.id ? '나' : nickname, type: 'info', 'text': text })
                         }
                         if (player_loc > 0) {
                             self.playerLocRomTypeChatMessageObject = { id: userId, nickname: nickname, text: text }
@@ -83,7 +83,7 @@ export const chatRoomWebSocket = Vue.extend({
                 }
                 else if (jsonData.type === 'system') {//聊天框显示系统信息
                     if (jsonData.player_loc === self.$stock.state.player_loc) {
-                        self.sendMessageToChatRoom({ 'id': 0, name: '【系统消息】', type: 'warning', 'text': jsonData.text })
+                        self.sendMessageToChatRoom({ 'id': 0, name: '【시스템 메시지】', type: 'warning', 'text': jsonData.text })
                     }
                 }
                 else if (jsonData.type === 'message') {//上方弹窗显示系统信息
@@ -93,7 +93,7 @@ export const chatRoomWebSocket = Vue.extend({
                 }
                 else if (jsonData.type === 'error') {
                     if (jsonData.player_loc === self.$stock.state.player_loc) {
-                        self.sendMessageToChatRoom({ 'id': 0, name: '【系统消息】', type: 'error', 'text': jsonData.text })
+                        self.sendMessageToChatRoom({ 'id': 0, name: '【시스템 메시지】', type: 'error', 'text': jsonData.text })
                         self.$message.error(jsonData.text)
                     }
                 }
@@ -108,22 +108,22 @@ export const chatRoomWebSocket = Vue.extend({
                     for (let i = 0; i < jsonData.data.length; i++) {
                         const player: WebSocketPlayer = JSON.parse(jsonData.data[i])
                         newPlayerList.push(player)
-                        /* 获取玩家的位置和状态信息 */
+                        /* 获取플레이어的位置和状态信息 */
                         if (player.id === self.$stock.state.id) {
                             playerLoc = player.player_loc
                             playerStatus = player.player_status
                         }
                     }
                     if (playerLoc !== 0) {
-                        /* 此设定暂时摒弃：在大厅则获取所有玩家信息，不在大厅，但在同一房间，也获取该玩家信息。*/
+                        /* 此设定暂时摒弃：在大厅则获取所有플레이어信息，不在大厅，但在同一房间，也获取该플레이어信息。*/
                         // newPlayerList = newPlayerList.filter( player => player.player_loc === playerLoc )
                         if (self.$stock.state.player_loc === 0) {
-                            self.$message.success('成功进入房间')
+                            self.$message.success('방에 성공적으로 입장했습니다')
                         }
                     }
                     else {
                         if (self.$stock.state.player_loc !== 0) {
-                            self.$message.info('已离开房间，回到游戏大厅')
+                            self.$message.info('방에서 나와 게임 로비로 돌아왔습니다.')
                         }
                     }
                     self.$stock.dispatch('mutatePlayerLoc', playerLoc)
@@ -132,12 +132,12 @@ export const chatRoomWebSocket = Vue.extend({
                 }
                 else if (jsonData.type === 'gameRoomList') {
                     const newGameRoomList: WebSocketGameRoom[] = []
-                    let playerLoc = 0 //gameRoomList中玩家所在房间id
-                    let playerLocRoom: WebSocketGameRoom | null = null //gameRoomList中玩家所在房间
+                    let playerLoc = 0 //gameRoomList中플레이어所在房间id
+                    let playerLocRoom: WebSocketGameRoom | null = null //gameRoomList中플레이어所在房间
                     for (let i = 0; i < jsonData.data.length; i++) {
                         const room: WebSocketGameRoom = JSON.parse(jsonData.data[i])
                         newGameRoomList.push(room)
-                        /* 获取玩家自身在哪个房间 */
+                        /* 获取플레이어自身在哪个房间 */
                         for (let j = 0; j < Object.keys(room.playerList).length; j++) {
                             if (self.$stock.state.id === room.playerList[j as GamePlayerSeatIndex].id) {
                                 playerLoc = room.id
@@ -146,23 +146,23 @@ export const chatRoomWebSocket = Vue.extend({
                             }
                         }
                     }
-                    /* 玩家在某个房间 */
+                    /* 플레이어在某个房间 */
                     if (playerLocRoom !== null) {
                         self.playerLocRoom = playerLocRoom
-                        /* 如果玩家现在位置和上面获取到的不一样则通过playerList设置为一样，并相应设置玩家状态 */
+                        /* 如果플레이어现在位置和上面获取到的不一样则通过playerList设置为一样，并相应设置플레이어状态 */
                         if (self.$stock.state.player_loc !== playerLoc) {
                             self.ws?.send(JSON.stringify({ type: 'playerList', nickname: self.$stock.state.nickname, avatar_id: self.$stock.state.avatar_id, player_loc: playerLoc, player_status: playerLoc === 0 ? 0 : (playerLocRoom.status === 0 ? 1 : 2) }))
                         }
-                        /* 如果玩家所在房间正在游戏中且本地没有该游戏信息 */
+                        /* 如果플레이어所在房间正在游戏中且本地没有该游戏信息 */
                         if (playerLocRoom.status === 1 && self.gameInfo === null) {
                             self.ws?.send(JSON.stringify({ type: 'game', action: 'get', id: playerLocRoom.id }))
                         }
-                        /* 如果玩家所在房间游戏已结束且本地还存有游戏 */
+                        /* 如果플레이어所在房间游戏已结束且本地还存有游戏 */
                         if (playerLocRoom.status === 0 && self.gameInfo !== null) {
                             self.gameInfo = null
                         }
                     }
-                    /* 玩家不在任一房间 */
+                    /* 플레이어不在任一房间 */
                     else {
                         self.ws?.send(JSON.stringify({ type: 'playerList', nickname: self.$stock.state.nickname, avatar_id: self.$stock.state.avatar_id, player_loc: 0, player_status: 0 }))
                     }
@@ -198,7 +198,7 @@ export const chatRoomWebSocket = Vue.extend({
                         if (self.gameResult !== null) {
                             for (let i = 0; i < self.gameResult.playerExpList.length; i++) {
                                 if (self.gameResult.playerExpList[i].id === self.$stock.state.id) {
-                                    self.$message.success('获得 ' + self.gameResult.playerExpList[i].exp + ' 点经验值')
+                                    self.$message.success('얻다 ' + self.gameResult.playerExpList[i].exp + ' 경험 포인트')
                                     break
                                 }
                             }
@@ -220,14 +220,14 @@ export const chatRoomWebSocket = Vue.extend({
                     clearInterval(self.timeoutId);
                     clearTimeout(self.serverTimeoutId);
                     clearTimeout(self.reconnectTimeoutId);
-                    self.sendMessageToChatRoom({ 'id': 0, name: '【系统消息】', type: 'error', text: close.reason });
+                    self.sendMessageToChatRoom({ 'id': 0, name: '【시스템 메시지】', type: 'error', text: close.reason });
                 }
                 else {
                     if (self.isLeave === false) {
                         self.reconnect()
                         self.loading = self.$loading({
                             lock: true,
-                            text: '努力连接中',
+                            text: '연결 시도 중',
                             spinner: 'el-icon-loading',
                             background: 'rgba(255, 255, 255, 0.7)'
                         })
@@ -239,7 +239,7 @@ export const chatRoomWebSocket = Vue.extend({
                 if (self.isLeave === false) {
                     self.loading = self.$loading({
                         lock: true,
-                        text: '网络异常，尝试重连',
+                        text: '네트워크 이상, 다시 연결해 보세요',
                         spinner: 'el-icon-loading',
                         background: 'rgba(255, 255, 255, 0.7)'
                     })
@@ -267,17 +267,17 @@ export const chatRoomWebSocket = Vue.extend({
             const self = this
             if (this.lockReconnect) return;
             this.lockReconnect = true;
-            this.reconnectTimeoutId = setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
+            this.reconnectTimeoutId = setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多 => 연결되지 않은 경우 계속해서 다시 연결되므로 요청이 너무 많아지지 않도록 지연 시간을 설정하세요.
                 if (self.isLeave === false) {
                     if (self.reconnectTimes < self.maxReconnectTImes) {//离开页面后则不再刷新心跳
                         self.reconnectTimes = self.reconnectTimes + 1
-                        self.sendMessageToChatRoom({ 'id': 0, name: '【系统消息】', type: 'warning', text: '与服务器连接断开，尝试重连中...' });
+                        self.sendMessageToChatRoom({ 'id': 0, name: '【시스템 메시지】', type: 'warning', text: '서버 연결이 끊어졌습니다. 다시 연결을 시도 중입니다...' });
                         self.createWebSocket(self.wsUrl);
                         self.lockReconnect = false;
                     }
                     else {
-                        self.$message.error('已与游戏大厅断开连接');
-                        self.sendMessageToChatRoom({ 'id': 0, name: '【系统消息】', type: 'error', text: '已与游戏大厅断开连接' });
+                        self.$message.error('게임 로비에서 연결이 끊겼습니다.');
+                        self.sendMessageToChatRoom({ 'id': 0, name: '【시스템 메시지】', type: 'error', text: '게임 로비에서 연결이 끊겼습니다.' });
                         self.loading?.close()
                         clearInterval(self.timeoutId);
                         clearTimeout(self.serverTimeoutId);
@@ -301,7 +301,7 @@ export const chatRoomWebSocket = Vue.extend({
                 this.chatText.push(message);
                 if (this.chatText.length > 50) this.chatText.shift();
                 this.$nextTick(function () {
-                    /* 通过ref层层深入访问到子组件的聊天框，调节其滚动条高度 */
+                    /* 참조 레이어를 통해 하위 구성 요소의 채팅 상자에 액세스하고 스크롤 막대 높이를 조정합니다. */
                     if (!this.$refs.chatModule) return
                     const chatModuleRef = this.$refs.chatModule as Element & ChatModuleRef
                     chatModuleRef.modifyScrollHeight()

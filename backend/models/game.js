@@ -28,7 +28,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 玩家数量 */
+        /* 플레이어数量 */
         player_num:
         {
             type: db.dataTypes.INTEGER(2),
@@ -46,7 +46,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最大连击数玩家 */
+        /* 最大连击数플레이어 */
         max_combo_player:
         {
             type: db.dataTypes.STRING(50),

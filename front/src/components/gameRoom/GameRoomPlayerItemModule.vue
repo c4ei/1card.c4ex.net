@@ -20,7 +20,7 @@
                             @click="$emit('addAiPlayer', seatIndex)">加入电脑</el-button>
                     </template>
                     <template v-if="playerLocRoom.status === 1">
-                        <QuickChatSelector :labelMessage="'向该玩家发言'" @emitSelectedTextToPlayer="sentSelectedTextToPlayer">
+                        <QuickChatSelector :labelMessage="'向该플레이어发言'" @emitSelectedTextToPlayer="sentSelectedTextToPlayer">
                         </QuickChatSelector>
                     </template>
                 </div>
@@ -184,7 +184,7 @@ export default Vue.extend({
             if (newVal.currentPlayer === this.seatIndex) {
                 this.showColorChanging = false
                 const vm = this
-                //牌池有牌时不出牌，刷新玩家背景框颜色动画的逻辑
+                //牌池有牌时不出牌，刷新플레이어背景框颜色动画的逻辑
                 window.requestAnimationFrame(function () {
                     window.requestAnimationFrame(function () {
                         vm.showColorChanging = true
@@ -233,7 +233,7 @@ export default Vue.extend({
 
     methods: {
         getPlayer: function (): WebSocketPlayer | { nickname: string, avatar_id: number } {
-            if (this.player.id < 0) { // id小于0为电脑玩家
+            if (this.player.id < 0) { // id小于0为电脑플레이어
                 return aiPlayerMetaData[-1 * (this.player.id + 1)]
             }
             for (let i = 0; i < this.playerList.length; i++) {

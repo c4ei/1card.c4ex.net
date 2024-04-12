@@ -7,7 +7,7 @@ export type RankType = 'level' | 'winner' | 'loser' | 'sum' | 'combo' | 'highest
 /**
  * @summary Rank response中的的rank属性值中的playerInfo属性值类型。
  * @type {object}
- * @property {number} id - 玩家id。
+ * @property {number} id - 플레이어id。
  * @property {number} record - 分数。
  * @property {number} rank - 排名。
  */
@@ -20,11 +20,11 @@ export interface RankPlayerInfo {
 /**
  * @summary Rank response中的的rank属性值中的rankList属性值类型。
  * @type {object}
- * @property {number} id - 玩家id。
+ * @property {number} id - 플레이어id。
  * @property {number} record - 分数。
  * @property {number} rank - 排名。 
  * @property {string} nickname - 昵称。
- * @property {number} avatarId - 玩家头像id。
+ * @property {number} avatarId - 플레이어화신id。
  */
 export interface RankTopPlayerInfo {
     id: number,
@@ -37,8 +37,8 @@ export interface RankTopPlayerInfo {
 /**
  * @summary Rank response中的的rank属性值类型。
  * @type {object}
- * @property {RankPlayerInfo} playerInfo - 请求玩家的排名信息。
- * @property {RankTopPlayerInfo[]} rankList - 排行玩家信息列表。
+ * @property {RankPlayerInfo} playerInfo - 请求플레이어的排名信息。
+ * @property {RankTopPlayerInfo[]} rankList - 排行플레이어信息列表。
  */
 export interface RankInfo {
     playerInfo: RankPlayerInfo,

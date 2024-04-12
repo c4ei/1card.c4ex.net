@@ -11,7 +11,7 @@
 		" type="info" center :closable="false"></el-alert>
 		</div>
 		<el-tooltip v-for="n in playerLocRoom.cardNum" :key="n" effect="light"
-			:content="'游戏使用牌数： ' + playerLocRoom.cardNum + '副'" placement="right-start">
+			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '副'" placement="right-start">
 			<el-image class="game-room-table-horizontal-poker-pool" :style="{
 			'margin-left': n === 1 ? 50 - 5 * playerLocRoom.cardNum + '' + '%' : '0%',
 			}" :src="require('@/assets/images/poker/poker-pool.png')"></el-image>
@@ -152,7 +152,7 @@
 		</div>
 		<div id="game-room-table-vertical-room-info-middle">
 			<el-tooltip v-for="n in playerLocRoom.cardNum" :key="n" effect="light"
-			:content="'游戏使用牌数： ' + playerLocRoom.cardNum + '副'" placement="right-start">
+			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '副'" placement="right-start">
 			<el-image :fit="'contain'" class="game-room-table-horizontal-poker-pool" :style="{
 				'margin-left': n === 1 ? 50 - 5 * playerLocRoom.cardNum + '' + '%' : '0%',
 			}" :src="require('@/assets/images/poker/poker-pool.png')"></el-image>

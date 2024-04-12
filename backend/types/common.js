@@ -1,7 +1,7 @@
 /**
  * @typedef SequelizeCommon Sequelize的共通列名
  * @type {object}
- * @property {string} createdAt - 创建时间
+ * @property {string} createdAt - 만들다时间
  * @property {string} updatedAt - 更新时间
  */
 

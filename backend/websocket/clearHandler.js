@@ -12,7 +12,7 @@ const logger = require('../common/log')
 
 /**
  * @summary 定期清除失活的连接，session，player
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @returns {Promise<void>}
  */
 async function clearHandler(wss) {
@@ -73,11 +73,11 @@ async function clearHandler(wss) {
                 /* 对房间每个位置进行检查 */
                 for (let i = 0; i < Object.keys(gameRoom.playerList).length; i++) {
                     if (gameRoom.playerList[i].id !== 0) {
-                        /* 该位置玩家还有session则还存在玩家 */
+                        /* 该位置플레이어还有session则还存在플레이어 */
                         if (stillAlivePlayerIdList.indexOf(gameRoom.playerList[i].id) !== -1) {
                             stillHasPlayer = true
                         }
-                        /* 该位置玩家不是机器人且没有session则把该位置清空 */
+                        /* 该位置플레이어不是机器人且没有session则把该位置清空 */
                         else {
                             if (gameRoom.playerList[i].id > 0) {
                                 gameRoom.playerList[i] = { id: 0, cards: 0, win: 0, loss: 0, ready: false }
@@ -85,7 +85,7 @@ async function clearHandler(wss) {
                         }
                     }
                 }
-                /* 房间还有玩家，则不删除房间 */
+                /* 房间还有플레이어，则不删除房间 */
                 if (stillHasPlayer) {
                     /* 如果房主不在房间了则换房主 */
                     if (stillAlivePlayerIdList.indexOf(gameRoom.owner) === -1) {

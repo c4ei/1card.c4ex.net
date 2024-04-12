@@ -66,7 +66,7 @@ npm install
 ```
 
 ### 启动项目
-在`/config`目录下创建`config-production.local.js`,如无特别需求可直接复制粘贴`config-development.js`中的内容，但须将其中的`port`, `frontOrigin`和`APIRoot`的对应字段改为与你的前端配置对应的内容。
+在`/config`目录下만들다`config-production.local.js`,如无特别需求可直接复制粘贴`config-development.js`中的内容，但须将其中的`port`, `frontOrigin`和`APIRoot`的对应字段改为与你的前端配置对应的内容。
 改好后输入以下命令启动项目。
 ```
 npm run start

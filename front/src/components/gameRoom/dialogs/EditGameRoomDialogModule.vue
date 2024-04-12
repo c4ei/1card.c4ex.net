@@ -5,22 +5,22 @@
         <el-alert v-if="notEditableFlag" :closable="false" center title="只有房主才能修改设置" :style="{ 'font-size': fontSize }"
             type="info"></el-alert>
         <el-form :model="gameRoomValidateForm" ref="gameRoomValidateForm">
-            <el-form-item label="房间名" prop="roomName" :rules="[{ required: true, message: '请输入房间名', trigger: 'blur' }]">
-                <el-input placeholder="请输入房间名" type="text" v-model="gameRoomValidateForm.roomName" autocomplete="off"
+            <el-form-item label="방이름" prop="roomName" :rules="[{ required: true, message: '방이름을 입력해주세요', trigger: 'blur' }]">
+                <el-input placeholder="방이름을 입력해주세요" type="text" v-model="gameRoomValidateForm.roomName" autocomplete="off"
                     maxlength="15" show-word-limit :disabled="notEditableFlag"></el-input>
             </el-form-item>
             <el-form-item label="비밀번호" prop="password" :rules="[{ trigger: 'blur', validator: checkPassword }]">
-                <el-input placeholder="非必填，4到8位数字" v-model="gameRoomValidateForm.password" autocomplete="off" maxlength="8"
+                <el-input placeholder="선택사항, 4~8자리" v-model="gameRoomValidateForm.password" autocomplete="off" maxlength="8"
                     show-word-limit :disabled="notEditableFlag"></el-input>
             </el-form-item>
         </el-form>
         <div>
-            <span>使用牌数：{{ gameRoomValidateForm.cardNum }}副</span>
+            <span>사용된 카드 수：{{ gameRoomValidateForm.cardNum }}副</span>
             <el-slider v-model="gameRoomValidateForm.cardNum" :min="2" :max="10" :step="1" :show-tooltip="false"
                 :disabled="notEditableFlag"></el-slider>
         </div>
         <div>
-            <span>变身牌数：{{ gameRoomValidateForm.metamorphoseNum }}张/副</span>
+            <span>변신 카드 수：{{ gameRoomValidateForm.metamorphoseNum }}장/대리</span>
             <el-slider v-model="gameRoomValidateForm.metamorphoseNum" :min="0" :max="10" :step="2" :show-tooltip="false"
                 :disabled="notEditableFlag"></el-slider>
         </div>

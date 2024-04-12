@@ -1,4 +1,4 @@
-/* 玩家模型 */
+/* 플레이어模型 */
 
 const db = require('../database/mysql')
 const Account = require('./account')

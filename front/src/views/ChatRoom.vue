@@ -30,7 +30,7 @@
 				<el-button slot="reference" class="chat-room-header-button-player-list"
 				:type="playerListVisible ? 'info' : 'primary'" icon="el-icon-user-solid"
 				:style="{ 'font-size': largeFontSize, 'padding': '0px 0px' }" :size="buttonSize" round
-				@click="playerListVisible = !playerListVisible">{{ playerListVisible ? '收起' : '玩家列表' }}</el-button>
+				@click="playerListVisible = !playerListVisible">{{ playerListVisible ? '收起' : '플레이어列表' }}</el-button>
 			</el-popover>
 			<ChatRoomButtonModule v-if="$store.state.player_loc === 0" :whichPattern="'horizontal'" :buttonSize="buttonSize"
 				:largeFontSize="largeFontSize"
@@ -180,7 +180,7 @@ export default (Vue as VueConstructor<
 	created: function () {
 		this.loading = this.$loading({
 			lock: true,
-			text: '努力连接中',
+			text: '연결 시도 중',
 			spinner: 'el-icon-loading',
 			background: 'rgba(255, 255, 255, 0.7)'
 		})

@@ -10,9 +10,9 @@ const logger = require('../common/log')
  */
 
 /**
- * @param {PlayerListWebsocketRequestData} data 玩家列表的前端请求信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
- * @param {WebSocketInfo} ws 单一玩家的WebSocket连接(附带玩家信息)。
+ * @param {PlayerListWebsocketRequestData} data 플레이어列表的前端请求信息。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
+ * @param {WebSocketInfo} ws 单一플레이어的WebSocket连接(附带플레이어信息)。
  * @returns {Promise<void>}
  */
 module.exports = async function (data, wss, ws) {
@@ -25,7 +25,7 @@ module.exports = async function (data, wss, ws) {
             }
         }
         else {
-            /* 1，设置玩家最新信息，覆盖掉旧信息 */
+            /* 1，设置플레이어最新信息，覆盖掉旧信息 */
             const res = await asyncGetset(conf.redisCache.playerPrefix + ws.userId,
                 JSON.stringify({
                     id: ws.userId,
@@ -37,7 +37,7 @@ module.exports = async function (data, wss, ws) {
                 }))
             /* 2，检查该key是否存在，不存在则是新上线，否则是刷新信息 */
             if (res === null) {
-                const onlineStr = JSON.stringify({ type: 'system', player_loc: 0, text: '玩家 ' + data.nickname + ' 上线了' })
+                const onlineStr = JSON.stringify({ type: 'system', player_loc: 0, text: '플레이어 ' + data.nickname + ' 上线了' })
                 wss.clients.forEach(client => {
                     if (client.readyState === WebSocket.OPEN && client.username !== ws.username) {
                         client.send(onlineStr)
@@ -50,7 +50,7 @@ module.exports = async function (data, wss, ws) {
                 const oldPlayer = JSON.parse(res)
                 if (data.player_loc !== oldPlayer.player_loc) {
                     if (data.player_loc > 0) {
-                        const enterRoomStr = JSON.stringify({ type: 'system', player_loc: data.player_loc, text: '玩家 ' + data.nickname + ' 进入了房间' })
+                        const enterRoomStr = JSON.stringify({ type: 'system', player_loc: data.player_loc, text: '플레이어 ' + data.nickname + ' 进入了房间' })
                         wss.clients.forEach(client => {
                             if (client.readyState === WebSocket.OPEN && client.userId !== ws.userId) {
                                 client.send(enterRoomStr)
@@ -58,7 +58,7 @@ module.exports = async function (data, wss, ws) {
                         })
                     }
                     else {
-                        const exitRoomStr = JSON.stringify({ type: 'system', player_loc: oldPlayer.player_loc, text: '玩家 ' + data.nickname + ' 离开了房间' })
+                        const exitRoomStr = JSON.stringify({ type: 'system', player_loc: oldPlayer.player_loc, text: '플레이어 ' + data.nickname + ' 离开了房间' })
                         wss.clients.forEach(client => {
                             if (client.readyState === WebSocket.OPEN && client.userId !== ws.userId) {
                                 client.send(exitRoomStr)
@@ -67,7 +67,7 @@ module.exports = async function (data, wss, ws) {
                     }
                 }
             }
-            /* 3，获取所有player玩家，发送广播 */
+            /* 3，获取所有player플레이어，전송广播 */
             const playerKeys = await asyncKeys(conf.redisCache.playerPrefix + '*')
             if (playerKeys.length > 0) {
                 const playerList = await asyncMget(playerKeys)

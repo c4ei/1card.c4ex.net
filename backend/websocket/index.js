@@ -4,7 +4,7 @@ const chatHandler = require('./chatHandler')
 const { asyncPexpire, asyncGet } = require('../database/redis')
 const conf = require('../config/')
 const errors = require('../common/errors')
-/** @type {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。*/
+/** @type {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。*/
 const wss = new WebSocket.Server(conf.ws.config)
 const gameRoomListHandler = require('./gameRoomListHandler')
 const gameHandler = require('./gameHandler')
@@ -19,8 +19,8 @@ const logger = require('../common/log')
 
 wss.on('connection',
     /**
-     * @param {WebSocketInfo} ws 单一玩家的WebSocket连接(附带玩家信息)。
-     * @param {ClientRequest} req Request信息(附带玩家信息)。
+     * @param {WebSocketInfo} ws 单一플레이어的WebSocket连接(附带플레이어信息)。
+     * @param {ClientRequest} req Request信息(附带플레이어信息)。
      * @returns {void}
      */
     function connection(ws, req) {

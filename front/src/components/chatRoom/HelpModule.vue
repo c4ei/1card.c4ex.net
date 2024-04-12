@@ -3,16 +3,16 @@
         <el-tab-pane label="游戏规则" name="rule" lazy>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>游戏简介</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌游戏，进行该游戏至少需要2名玩家，可使用2~10副扑克牌，扑克牌数可依玩家人数酌情增减。</p>
+            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌游戏，进行该游戏至少需要2名플레이어，可使用2~10副扑克牌，扑克牌数可依플레이어人数酌情增减。</p>
             <p :style="{ 'font-size': fontSize }">另外，西游记的游戏规则各个地方不尽相同，以下游戏说明仅代表作者本人观点。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>游戏流程</h1>
             <hr class="divider-line">
             <h2 :style="{ 'font-size': fontSize }">开局：</h2>
-            <p :style="{ 'font-size': fontSize }">开局每名玩家起5张牌作为手牌，然后由随机一名(或上局收牌数最多的)玩家开始出牌。</p>
+            <p :style="{ 'font-size': fontSize }">开局每名플레이어起5张牌作为手牌，然后由随机一名(或上局收牌数最多的)플레이어开始出牌。</p>
             <h2 :style="{ 'font-size': fontSize }">顺序：</h2>
-            <p :style="{ 'font-size': fontSize }">一般由开局出牌玩家开始按逆时针顺序出牌，当有玩家打出观音或如来时，反转出牌方向。</p>
+            <p :style="{ 'font-size': fontSize }">一般由开局出牌플레이어开始按逆时针顺序出牌，当有플레이어打出观音或如来时，反转出牌方向。</p>
             <h2 :style="{ 'font-size': fontSize }">出牌：</h2>
-            <p :style="{ 'font-size': fontSize }">若台面上无牌，玩家可打出同一牌点(如♠A和<span
+            <p :style="{ 'font-size': fontSize }">若台面上无牌，플레이어可打出同一牌点(如♠A和<span
                     style="color: red">♥A</span>)的任意张牌；若台面上有上家打出的牌，则下家须根据大小顺序打出 <u>张数相同且牌型“大于”上家牌的牌</u>，依次类推。</p>
             <h2 :style="{ 'font-size': fontSize }">连击：</h2>
             <p :style="{ 'font-size': fontSize }">打出的牌计入连击牌池，计+1。当出牌数大于1时还会有倍乘效果。</p>
@@ -21,13 +21,13 @@
             </p>
             <p :style="{ 'font-size': fontSize }">如连续5人打出3张牌，则倍乘效果的连击数计为： 6(3+3*1), 9(3+3*2), 12(3+3*3), 15(3+4*3),
                 57(39+6*3)。 </p>
-            <p :style="{ 'font-size': fontSize }">倍乘的部分会从玩家的收牌数中扣除。如连击数为6(2+2*2)时，从玩家收牌数中扣除2*2=4张。</p>
+            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的收牌数中扣除。如连击数为6(2+2*2)时，从플레이어收牌数中扣除2*2=4张。</p>
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
-            <p :style="{ 'font-size': fontSize }">每次玩家出完牌后，若剩余牌堆里还有牌，则将手牌补到5张。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把玩家的收牌数扣除1。</p>
+            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5张。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把플레이어的收牌数扣除1。</p>
             <h2 :style="{ 'font-size': fontSize }">收牌：</h2>
-            <p :style="{ 'font-size': fontSize }">当玩家打不出“大于”牌时，则放弃出牌并收下所有连击牌池中的牌，计入自己的收牌数，然后重新开始出牌。</p>
+            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃出牌并收下所有连击牌池中的牌，计入自己的收牌数，然后重新开始出牌。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
-            <p :style="{ 'font-size': fontSize }">当所有玩家的手牌出完后，结算所有玩家的收牌数，结束游戏。</p>
+            <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的收牌数，结束游戏。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小顺序</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">西游记使用全副扑克牌，牌点大小的比较类似于斗兽棋。</p>
@@ -121,7 +121,7 @@
 
         <el-tab-pane label="游戏技巧" name="skill" lazy>
             <p :style="{ 'font-size': fontSize }"><i
-                    class="el-icon-warning-outline"></i>西游记游戏本身并没有什么太多技巧，玩家收牌多少，运气占很大部分，以下技巧仅供参考。</p>
+                    class="el-icon-warning-outline"></i>西游记游戏本身并没有什么太多技巧，플레이어收牌多少，运气占很大部分，以下技巧仅供参考。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>保持牌型</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">尽量保证自己手上有各种牌型：妖怪、徒弟、师傅，缺一不可。观音和如来则不到万不得已尽量不用，留作杀手锏。</p>
@@ -176,7 +176,7 @@
                             尽管作者已针对各种主流浏览器和移动端做出了响应式布局的设计，但仍然有部分移动端的尺寸会使得画面无法被正确渲染，解决的办法是尝试切换横竖屏后刷新网页。</p>
                         <p :style="{ 'font-size': fontSize }">注意：切换横竖屏后不刷新网页可能会导致一些画面元素渲染位置不正确的问题。</p>
                         <p :style="{ 'font-size': fontSize }">
-                            如果切换横竖屏刷新后仍不能解决您的问题，请将您所使用的移动端机型以及出现问题的画面截屏发送给作者以使我们作出针对该机型的调整，谢谢。</p>
+                            如果切换横竖屏刷新后仍不能解决您的问题，请将您所使用的移动端机型以及出现问题的画面截屏전송给作者以使我们作出针对该机型的调整，谢谢。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="2">
@@ -194,7 +194,7 @@
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">由于ios等移动端的限制，进入本网页时并不会自动播放音乐，而是需要点击屏幕一下以激活音乐播放器，才能成功播放音乐。</p>
-                        <p :style="{ 'font-size': fontSize }">如果您点击了屏幕后仍不会播放音乐，请将您所使用的浏览器和移动端机型发送给作者以使我们作出针对性的调整，谢谢。</p>
+                        <p :style="{ 'font-size': fontSize }">如果您点击了屏幕后仍不会播放音乐，请将您所使用的浏览器和移动端机型전송给作者以使我们作出针对性的调整，谢谢。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="4">
@@ -204,7 +204,7 @@
                     <div>
                         <p :style="{ 'font-size': fontSize }">如果您是ios用户，由于ios禁止通过网页调整系统音量，所以ios用户的设置面板上没有调整音量的选项。</p>
                         <p :style="{ 'font-size': fontSize }">
-                            如果您不是ios用户，那么可以认为您使用的移动端也采取了与上述ios相同的策略，请将您的移动端机型发送给作者以使我们作出针对该机型的调整，谢谢。</p>
+                            如果您不是ios用户，那么可以认为您使用的移动端也采取了与上述ios相同的策略，请将您的移动端机型전송给作者以使我们作出针对该机型的调整，谢谢。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="5">
@@ -226,11 +226,11 @@
                 </el-collapse-item>
                 <el-collapse-item name="7">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：游戏进行时如何与玩家交流？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：游戏进行时如何与플레이어交流？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">本网页效仿了各种棋牌游戏的防作弊机制，即游戏进行中时不能通过打字与其他玩家交流。</p>
-                        <p :style="{ 'font-size': fontSize }">但我们仍为您准备了一些快速发言的语句，可以通过点击玩家或自己的计分板来选择要说的话。</p>
+                        <p :style="{ 'font-size': fontSize }">本网页效仿了各种棋牌游戏的防作弊机制，即游戏进行中时不能通过打字与其他플레이어交流。</p>
+                        <p :style="{ 'font-size': fontSize }">但我们仍为您准备了一些快速发言的语句，可以通过点击플레이어或自己的计分板来选择要说的话。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="8">
@@ -239,7 +239,7 @@
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">作者家乡的桂林话及一些自创的术语。其中</p>
-                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫玩家收牌的“收”一个意思，但表达语气更强烈。</p>
+                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫플레이어收牌的“收”一个意思，但表达语气更强烈。</p>
                         <p :style="{ 'font-size': fontSize }">所所所：所，通日语师匠的匠「しょう」(syo)，意为“求师傅”。</p>
                         <p :style="{ 'font-size': fontSize }">卷卷卷：桂林话的“转”，意味“求转向”。</p>
                         <p :style="{ 'font-size': fontSize }">我霉了：霉，桂林话，一般指物理状态的软烂，此处大意为“我人没了”、“我烂掉了”、“我拉跨了”。</p>
@@ -278,7 +278,7 @@
                     <div></div>
                 </el-col>
             </el-row>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-chat-dot-round"></i>发送邮件</h1>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-chat-dot-round"></i>전송邮件</h1>
             <hr class="divider-line">
             <span :style="{ 'font-size': fontSize }">email
 </span><i class="el-icon-s-promotion"></i>

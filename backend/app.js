@@ -64,6 +64,7 @@ Object.keys(routers).forEach(key => {
 /*******/
 
 const loginService = require('./services/loginService');
+const sessionHandler = require('./common/session').sessionHandler;
 app.post('/v1/login',
     /** 
      * @param {ClientRequest} req
@@ -118,6 +119,121 @@ function (req, res) {
         })
 });
 
+const modifyService = require('./services/modifyService')
+app.put('/v1/modify/avatar',
+    /** 
+     * @param {ClientRequest} req
+     * @param {ClientResponse} res
+     */
+    function (req, res) {
+        modifyService.modifyAvatar(req)
+            .then(result => {
+                res.status(200).json({ code: result.code, message: result.message })
+            })
+            .catch(err => {
+                logger.error(err.message)
+                res.status(err.code ? err.code : 500).json({ message: err.message })
+            })
+    })
+
+app.put('/v1/modify/nickname',
+    /** 
+     * @param {ClientRequest} req
+     * @param {ClientResponse} res
+     */
+    function (req, res) {
+        modifyService.modifyNickname(req)
+            .then(result => {
+                res.status(200).json({ code: result.code, message: result.message })
+            })
+            .catch(err => {
+                logger.error(err.message)
+                res.status(err.code ? err.code : 500).json({ message: err.message })
+            })
+    })
+
+const authorizationService = require('./services/authorizationService');
+app.get('/v1/authorization',
+/** 
+ * @param {ClientRequest} req
+ * @param {ClientResponse} res
+ */
+function (req, res) {
+    authorizationService.authorization(req)
+        .then(result => {
+            sessionHandler(req, result.account)
+            res.status(200).json({ code: result.code, message: result.message, account: result.account })
+        })
+        .catch(err => {
+            logger.error(err.message)
+            res.status(err.code ? err.code : 500).json({ message: err.message })
+        })
+})
+
+const rankService = require('./services/rankService');
+app.get('/v1/rank/',
+    /** 
+     * @param {ClientRequest} req
+     * @param {ClientResponse} res
+     */
+    function (req, res) {
+        rankService.getRankInfo(req)
+            .then(result => {
+                res.status(200).json({ code: result.code, message: result.message, type: result.type, rank: result.result ? result.result : null })
+            })
+            .catch(err => {
+                logger.error(err.message)
+                res.status(err.code ? err.code : 500).json({ message: err.message })
+            })
+    })
+
+const infoSearchService = require('./services/infoSearchService');
+app.get('/v1/player/record/:id', function (req, res) {
+  /** 
+   * @param {ClientRequest} req
+   * @param {ClientResponse} res
+   */
+  infoSearchService.getPlayerRecord(req)
+      .then(result => {
+          res.status(200).json({ code: result.code, message: result.message, record: result.record ? result.record : null })
+      })
+      .catch(err => {
+          logger.error(err.message)
+          res.status(err.code ? err.code : 500).json({ message: err.message })
+      })
+})
+
+app.get('/v1/game/records/',
+  /** 
+   * @param {ClientRequest} req
+   * @param {ClientResponse} res
+   */
+  function (req, res) {
+      infoSearchService.getGameRecordsList(req)
+          .then(result => {
+              res.status(200).json({ code: result.code, message: result.message, pageNum: result.pageNum ? result.pageNum : 0, list: result.list ? result.list : [] })
+          })
+          .catch(err => {
+              logger.error(err.message)
+              res.status(err.code ? err.code : 500).json({ message: err.message })
+          })
+  })
+
+app.get('/v1/game/record/:id',
+  /** 
+   * @param {ClientRequest} req
+   * @param {ClientResponse} res
+   */
+  function (req, res) {
+      infoSearchService.getGameRecord(req)
+          .then(result => {
+              res.status(200).json({ code: result.code, message: result.message, gameResult: result.gameResult ? result.gameResult : null })
+          })
+          .catch(err => {
+              logger.error(err.message)
+              res.status(err.code ? err.code : 500).json({ message: err.message })
+          })
+  })
 
 
 /* 错误处理中间件 */

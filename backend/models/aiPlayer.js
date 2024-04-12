@@ -1,4 +1,4 @@
-/* 玩家模型 => 플레이어 모델 */
+/* 플레이어模型 => 플레이어 모델 */
 
 const db = require('../database/mysql')
 const Game = require('./game')

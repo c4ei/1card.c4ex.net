@@ -19,7 +19,7 @@ export default Vue.extend({
     },
 
     props: {
-        labelMessage: { type: String, default: '向该玩家发言' },
+        labelMessage: { type: String, default: '向该플레이어发言' },
     },
 
     methods: {

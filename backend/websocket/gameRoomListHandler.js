@@ -18,8 +18,8 @@ const { chatIntervalHandler } = require('../ai/chat.js')
 
 /**
  * @param {RoomWebsocketRequestData} data 游戏房间的前端请求信息。
- * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有玩家的WebSocket连接。
- * @param {WebSocketInfo} ws 单一玩家的WebSocket连接(附带玩家信息)。
+ * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
+ * @param {WebSocketInfo} ws 单一플레이어的WebSocket连接(附带플레이어信息)。
  * @returns {Promise<void>}
  */
 module.exports = async function (data, wss, ws) {
@@ -105,7 +105,7 @@ module.exports = async function (data, wss, ws) {
         }
         else if (data.id < 0) {
             const roomId = conf.redisCache.gameRoomPrefix + (-1 * data.id)
-            /* 小于0，某玩家离开了房间 */
+            /* 小于0，某플레이어离开了房间 */
             const roomRes = await asyncGet(roomId)
             if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }
             /** @type {GamePlayerSeatIndex} */
@@ -115,9 +115,9 @@ module.exports = async function (data, wss, ws) {
             const deleteId = room.playerList[seatIndex].id
             let remainId = 0
             if (ws.userId !== room.owner && ws.userId !== deleteId) {
-                return // 如果不是房主踢人或玩家自行离开，则本次请求无效，终止后续处理。
+                return // 如果不是房主踢人或플레이어自行离开，则本次请求无效，终止后续处理。
             }
-            /* 删掉离开的玩家 */
+            /* 删掉离开的플레이어 */
             room.playerList[seatIndex] = { id: 0, cards: 0, win: 0, loss: 0, ready: false }
             let stillHasPlayer = false
             for (let i = 0; i < Object.keys(room.playerList).length; i++) {
@@ -129,14 +129,14 @@ module.exports = async function (data, wss, ws) {
                     break
                 }
             }
-            /* 如果还有玩家在房间中则保留房间并广播 */
+            /* 如果还有플레이어在房间中则保留房间并广播 */
             if (stillHasPlayer) {
                 /* 如果退出的是房主则换房主 */
                 if (room.owner === deleteId) {
                     room.owner = remainId
                     const playerRes = await asyncGet(conf.redisCache.playerPrefix + remainId)
                     const becomeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '你 成为了房主' })
-                    const changeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '玩家 ' + JSON.parse(playerRes).nickname + ' 成为了房主' })
+                    const changeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '플레이어 ' + JSON.parse(playerRes).nickname + ' 成为了房主' })
                     wss.clients.forEach(client => {
                         if (client.readyState === WebSocket.OPEN && client !== ws) {
                             if (client.userId === remainId) {
@@ -236,7 +236,7 @@ module.exports = async function (data, wss, ws) {
                         return
                     }
                 }
-                if (enterPlayerId >= 0 && room.needPassword) { // 一般玩家才需要验证비밀번호
+                if (enterPlayerId >= 0 && room.needPassword) { // 一般플레이어才需要验证비밀번호
                     if (data.password !== room.password) {
                         ws.send(JSON.stringify({ type: 'error', player_loc: 0, text: errors.WRONG_PASSWORD.message }))
                         return
@@ -337,15 +337,15 @@ module.exports = async function (data, wss, ws) {
                 /** @type {GamePlayerSeatIndex} */
                 const targetSeatIndex = data.targetSeatIndex
                 if (room.status === 1) return
-                /* 确保玩家信息没有发生改变 */
+                /* 确保플레이어信息没有发生改变 */
                 if (room.playerList[targetSeatIndex].id !== data.targetId || room.playerList[sourceSeatIndex].id !== data.sourceId) {
                     return
                 }
-                /* 目标位置没有玩家或是电脑玩家则直接换 */
+                /* 目标位置没有플레이어或是电脑플레이어则直接换 */
                 if (room.playerList[targetSeatIndex].id <= 0) {
                     const temporaryPlayer = room.playerList[targetSeatIndex]
                     room.playerList[targetSeatIndex] = room.playerList[sourceSeatIndex]
-                    if (temporaryPlayer.id < 0) { // 目标位置是电脑玩家则将其设置到换位置请求的玩家座位上
+                    if (temporaryPlayer.id < 0) { // 目标位置是电脑플레이어则将其设置到换位置请求的플레이어座位上
                         room.playerList[sourceSeatIndex] = temporaryPlayer
                     }
                     else {
@@ -370,7 +370,7 @@ module.exports = async function (data, wss, ws) {
                         }
                     })
                 }
-                /* 有玩家则向该玩家发送请求 */
+                /* 有플레이어则向该플레이어전송请求 */
                 else {
                     if (data.confirm) {
                         const tempPlayerInfo = room.playerList[targetSeatIndex]
@@ -412,7 +412,7 @@ module.exports = async function (data, wss, ws) {
                 /** @type {RedisCacheRoomInfo} */
                 const room = JSON.parse(roomRes)
                 if (room.status === 1) return
-                const disagreeChangeSeatStr = JSON.stringify({ type: 'system', player_loc: data.id, text: '玩家 ' + data.refusePlayerNickname + ' 拒绝了你的请求' })
+                const disagreeChangeSeatStr = JSON.stringify({ type: 'system', player_loc: data.id, text: '플레이어 ' + data.refusePlayerNickname + ' 拒绝了你的请求' })
                 wss.clients.forEach(client => {
                     if (client.readyState === WebSocket.OPEN && client.userId === data.playerId) {
                         client.send(disagreeChangeSeatStr)
