@@ -42,7 +42,7 @@ module.exports = {
 		}
 	},
 	port: process.env.API_PORT,
-	frontOrigin: 'https://sns.c4ei.net',
+	frontOrigin: 'https://one.c4ei.net',
 	APIRoot: '/rest/v1',
 	session: {
 		name: 'one_c4ei_net',

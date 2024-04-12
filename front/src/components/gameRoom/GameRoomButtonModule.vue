@@ -77,7 +77,7 @@ export default Vue.extend({
                 if (playerNum < 2) {
                     return true
                 }
-                /* 除房主之外的人都已준비하다好 */
+                /* 除房主之外的人都준비완료好 */
                 for (let i = 0; i < Object.keys(this.playerLocRoom.playerList).length; i++) {
                     if (this.playerLocRoom.playerList[i as GamePlayerSeatIndex].id === 0) {
                         continue

@@ -9,7 +9,7 @@ app.use(express.json());
 var cors = require('cors');
 app.use(cors());
 var corsOptions = {
-	origin: 'https://sns.c4ei.net',
+	origin: 'https://one.c4ei.net',
 	credentials: true
 }
 app.use(cors(corsOptions));
@@ -26,5 +26,5 @@ app.get('*', function (req, resp) {
 
 
 app.listen(3131, function () {
-  console.log('sns.c4ei.net listening on 3131')
+  console.log('one.c4ei.net listening on 3131')
 }); 

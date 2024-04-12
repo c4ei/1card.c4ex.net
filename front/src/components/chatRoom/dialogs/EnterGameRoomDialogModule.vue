@@ -67,7 +67,7 @@ export default Vue.extend({
     methods: {
         enterGameRoom: function () {
             if (this.$stock.state.avatar_id === 0) {
-                this.$message.warning('请先설정아바타和昵称')
+                this.$message.warning('아바타를먼저 설정해 주세요')
                 return
             }
             const gameRoomValidateFormRef = this.$refs.gameRoomValidateForm as Element & ExecuteValidate

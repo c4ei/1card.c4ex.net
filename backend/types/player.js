@@ -25,7 +25,7 @@
  * @property {number} cards -  총 수집된 카드 수
  * @property {number} win - 우승게임수
  * @property {number} loss - 당기기게임수
- * @property {boolean} ready - 是否已준비하다
+ * @property {boolean} ready - 是否준비완료
  */
 
 /**

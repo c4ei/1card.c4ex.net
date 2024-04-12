@@ -12,7 +12,7 @@ const path = require('path')
 var cors = require('cors');
 app.use(cors());
 var corsOptions = {
-	origin: 'https://sns.c4ei.net',
+	origin: 'https://one.c4ei.net',
 	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
@@ -250,7 +250,7 @@ app.use(function (err, req, res, next) {
 /* 启动服务器 */
 // app.listen( conf.port, () => {} )
 server.listen(conf.port, () => { 
-  console.log(" sns.c4ei.net statrt port :" + conf.port +" !!!! ");
+  console.log(" one.c4ei.net statrt port :" + conf.port +" !!!! ");
 })
 /*************/
 

@@ -81,7 +81,7 @@ export default Vue.extend({
 
         enterGameRoom: function (gameRoom: WebSocketGameRoom, seatIndex: GamePlayerSeatIndex | -1): void {
             if (this.$stock.state.avatar_id === 0) {
-                this.$message.warning('请先설정아바타和昵称')
+                this.$message.warning('아바타를먼저 설정해 주세요')
                 return
             }
             if (gameRoom.status === 1) {

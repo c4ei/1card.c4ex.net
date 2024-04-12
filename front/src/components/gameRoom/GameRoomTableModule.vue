@@ -422,7 +422,7 @@ export default cardList.extend({
 			this.$emit("gameTextToPlayerSent", this.seatIndex)
 			if (newVal.sourceId === this.$stock.state.id) {
 				if (newVal.target === -1) {
-					this.gameTextFromPlayer.push("내말: " + newVal.text)
+					this.gameTextFromPlayer.push("나: " + newVal.text)
 				} else {
 				this.gameTextFromPlayer.push("당신이 맞아요 "+ this.gameInfo.gamePlayer[newVal.target].nickname + " 설명: " + newVal.text)}
 				playSound("quickChat/" + newVal.soundSrc)
@@ -450,7 +450,7 @@ export default cardList.extend({
 				newVal.text === ""
 			)return
 			this.$emit("typeChatMessageSent", this.seatIndex)
-			this.gameTextFromPlayer.push("내말: " + newVal.text)
+			this.gameTextFromPlayer.push("나: " + newVal.text)
 			this.$nextTick(function () {
 				if (this.gameTextFromPlayer.length > 0) {
 					this.isTooltipShow = true
