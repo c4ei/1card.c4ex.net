@@ -5,8 +5,8 @@
             @click="emitStartGame" :size="buttonSize" :disabled="isNotReady || isGamePlaying">게임을 시작하다</el-button>
         <el-button v-else :type="isNotReady && !isGamePlaying ? 'success' : 'info'" class="chat-room-aside-button"
             :icon="!isNotReady ? 'el-icon-circle-check' : 'el-icon-caret-right'" :style="{ 'font-size': largeFontSize }"
-            @click="emitReadyToStartGame" :size="buttonSize" :disabled="isGamePlaying">{{ !isNotReady ? '已' : ''
-            }}준비하다</el-button>
+            @click="emitReadyToStartGame" :size="buttonSize" :disabled="isGamePlaying">{{ !isNotReady ? '준비완료' : '준비하다'
+            }}</el-button>
         <el-button :type="isGamePlaying ? 'info' : 'danger'" class="chat-room-aside-button" icon="el-icon-d-arrow-left"
             :style="{ 'font-size': largeFontSize }" @click="emitCancelLeaveDialog" :size="buttonSize"
             :disabled="isGamePlaying">방을 나가다</el-button>
