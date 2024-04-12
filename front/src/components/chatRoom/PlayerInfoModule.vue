@@ -1,7 +1,7 @@
 <template>
 	<el-aside class="hide-scroll-bar" :width="subAsideWidth"
 		:style="{ backgroundImage: 'url(' + verticalBackground + ')' }">
-		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以변경아바타" placement="left">
+		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="클릭하면 아바타 변경" placement="left">
 		<div class="player-icon-box" @click="openEditAvatarDialog">
 			<el-image v-if="gameInfo === null || gameInfo.currentPlayer === -1" class="aside-icon"
 			:src="getAvatarUrl($store.state.avatar_id)"></el-image>
@@ -11,7 +11,7 @@
 			:currentGameCombo="gameInfo.currentCombo"></AnimatedAvatar>
 		</div>
 		</el-tooltip>
-		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以닉네임변경" placement="left">
+		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="닉네임변경하려면 클릭하세요" placement="left">
 		<div class="player-nickname-box" :style="{ 'font-size': fontSize }" @click="openEditNicknameDialog">
 			<span>{{ $store.state.nickname }}</span>
 		</div>
@@ -41,7 +41,7 @@
 		:close-on-click-modal="false" :modal="false">
 		<el-form :model="nicknameForm" ref="nicknameForm" @submit.native.prevent="submitNewNickname">
 			<el-form-item label="새로운 별명" prop="name" :rules="[{ required: true, validator: checkNickname, trigger: 'blur' }]">
-			<el-input v-model="nicknameForm.name" autocomplete="off" placeholder="输入새로운 별명" maxlength="10" show-word-limit>
+			<el-input v-model="nicknameForm.name" autocomplete="off" placeholder="새로운 별명 입력" maxlength="10" show-word-limit>
 				<i slot="prefix" class="el-input__icon el-icon-edit-outline"></i>
 			</el-input>
 			</el-form-item>
@@ -121,10 +121,10 @@ export default Vue.extend({
 			} as PlayerProfile,
 			checkNickname: (rule: InternalRuleItem, value: Value, callback: (arg0?: Error) => void) => {
 				if (value === '') {
-					callback(new Error('请输入昵称'));
+					callback(new Error('닉네임을 입력해주세요'));
 				}
 				else if (value === this.$stock.state.nickname) {
-					callback(new Error('변경前后昵称一致'));
+					callback(new Error(' 변경 전과 후의 닉네임은 동일합니다.'));
 				}
 				callback()
 			}
@@ -164,14 +164,14 @@ export default Vue.extend({
 
 		submitNewAvatar: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('게임中，请勿변경아바타')
+				this.$message.warning('게임중엔 아바타 변경 불가')
 				this.avatarDialogVisible = false
 				return
 			}
 			if (this.duplicateSubmitAvatarFlag) return;
 			this.duplicateSubmitAvatarFlag = true
 			if (this.temAvatarId === this.$stock.state.avatar_id) {
-				this.$message.error('변경前后아바타一致，请重新选择')
+				this.$message.error('기존과 동일합니다. 다시 선택해 주세요.')
 				this.duplicateSubmitAvatarFlag = false
 			}
 			else {
@@ -182,14 +182,14 @@ export default Vue.extend({
 							.then(() => {
 								this.ws?.send(JSON.stringify({ type: 'playerList', nickname: this.$stock.state.nickname, avatar_id: this.$stock.state.avatar_id, player_loc: this.$stock.state.player_loc, player_status: this.$stock.state.player_status }))
 							})
-						this.$message.success('成功변경아바타')
+						this.$message.success('아바타 변경성공')
 					}
 					else {
-						this.$message.error('변경失败，请稍后重试')
+						this.$message.error('변경하지 못했습니다. 나중에 다시 시도해 주세요')
 					}
 				})
 				.catch(() => {
-					this.$message.error('변경失败，请稍后重试')
+					this.$message.error('변경하지 못했습니다. 나중에 다시 시도해 주세요')
 				})
 				.finally(() => {
 					this.avatarDialogVisible = false
@@ -206,7 +206,7 @@ export default Vue.extend({
 
 		submitNewNickname: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('게임中，请勿닉네임변경')
+				this.$message.warning('게임중엔 닉네임 변경 불가')
 				this.nicknameDialogVisible = false
 				return
 			}
@@ -222,14 +222,14 @@ export default Vue.extend({
 						this.ws?.send(JSON.stringify({ type: 'playerList', nickname: this.$stock.state.nickname, avatar_id: this.$stock.state.avatar_id, player_loc: this.$stock.state.player_loc, player_status: this.$stock.state.player_status }))
 						this.nicknameForm.name = this.$stock.state.nickname
 						})
-						this.$message.success('成功닉네임변경')
+						this.$message.success('닉네임변경성공')
 					}
 					else {
-						this.$message.error('변경失败，请稍后重试')
+						this.$message.error('변경하지 못했습니다. 나중에 다시 시도해 주세요')
 					}
 					})
 					.catch(() => {
-						this.$message.error('변경失败，请稍后重试')
+						this.$message.error('변경하지 못했습니다. 나중에 다시 시도해 주세요')
 					})
 					.finally(() => {
 						this.nicknameDialogVisible = false
@@ -269,7 +269,7 @@ export default Vue.extend({
 
 		openEditAvatarDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('게임中，请勿변경아바타')
+				this.$message.error('게임중엔 아바타 변경 불가')
 				return
 			}
 			this.avatarDialogVisible = true
@@ -278,7 +278,7 @@ export default Vue.extend({
 
 		openEditNicknameDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('게임中，请勿닉네임변경')
+				this.$message.error('게임중엔 닉네임 변경 불가')
 				return
 			}
 			this.nicknameDialogVisible = true

@@ -183,7 +183,7 @@ module.exports = async function (data, wss, ws) {
             /** @type {string[]} */
             const messageList = ['게임开始']
             messageList.forEach(text => game.messages.push(text))
-            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
+            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
             const gameStr = JSON.stringify(game)
             const initializeGameStr = JSON.stringify({ type: 'game', action: 'initialize', data: gameStr })
             wss.clients.forEach(client => {
@@ -199,7 +199,7 @@ module.exports = async function (data, wss, ws) {
             game.remainCards = game.remainCards.length
             game.messages = []
             game.messages.push('重新连接...')
-            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
+            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
             ws.send(JSON.stringify({ type: 'game', action: 'get', data: JSON.stringify(game) }))
 
         }
@@ -509,7 +509,7 @@ async function sendGameInfo(gameKey, game, wss, action, messageList) {
         game.remainCards = game.remainCards.length
         game.messages = []
         messageList.forEach(text => game.messages.push(text))
-        game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 出牌...')
+        game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
         const gameStr = JSON.stringify(game)
         const gameInfoStr = JSON.stringify({ type: 'game', action: action, data: gameStr })
         wss.clients.forEach(client => {
@@ -910,7 +910,7 @@ async function calRecord(player, playerInstance, averageCard, losePlayer, winPla
 
 /**
  * @param {RedisCacheGame} game Redis中的게임信息。
- * @param {GamePlayerSeatIndex} currentPlayer 出牌플레이어的ID。
+ * @param {GamePlayerSeatIndex} currentPlayer 카드 놀이플레이어的ID。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @param {number} delay 计时器时间(ms)
  * @returns {NodeJS.Timeout}

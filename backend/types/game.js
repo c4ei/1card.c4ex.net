@@ -9,7 +9,7 @@
  * @type {object}
  * @property {number} id - 게임id
  * @property {boolean} clockwise - 게임进行方向：true为顺时针，false为逆时针。
- * @property {GamePlayerSeatIndex | -1} currentPlayer - 现在出牌플레이어的座位号：0~7，初始为-1。
+ * @property {GamePlayerSeatIndex | -1} currentPlayer - 现在카드 놀이플레이어的座位号：0~7，初始为-1。
  * @property {number[]} currentCard - 现在牌池中的牌，按花色升序排列。
  * @property {GamePlayerSeatIndex | -1} currentCardPlayer - 打出现在牌池中的牌的플레이어的座位号：0~7，初始为-1。
  * @property {number} jokerCard - 现在牌池中的反弹牌。

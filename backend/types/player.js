@@ -38,7 +38,7 @@
  * @property {number[]} remainCards - 플레이어手中余留牌的序号。
  * @property {number} maxCombo - 一次얻다最多的牌数。
  * @property {boolean} online - 플레이어是否托管。
- * @property {number} offLineTime - 플레이어断连次数(自己该出牌时没有出牌的次数)，达到一定次数则进入托管状态。
+ * @property {number} offLineTime - 플레이어断连次数(自己该카드 놀이时没有카드 놀이的次数)，达到一定次数则进入托管状态。
  * @property {number} offLinePlayCard - 플레이어托管时出的牌。
  * @property {number} wukong - 使用悟空数。
  * @property {number} bajie - 使用八戒数。

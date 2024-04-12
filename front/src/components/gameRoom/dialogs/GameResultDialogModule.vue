@@ -14,7 +14,7 @@
                             {{ gameResult.loserNickname }}</el-tag>
                         <el-tag :size="tagSize" type="danger" effect="light" :style="{ 'font-size': largeFontSize }"
                             style="margin-right: 2vw">수집된 카드 수: {{ gameResult.loserCards }}</el-tag>
-                        <el-tag :size="tagSize" type="warning" effect="dark" :style="{ 'font-size': largeFontSize }">最大连击플레이어:
+                        <el-tag :size="tagSize" type="warning" effect="dark" :style="{ 'font-size': largeFontSize }">최대 콤보플레이어:
                             {{ gameResult.maxComboPlayer }}</el-tag>
                         <el-tag :size="tagSize" type="warning" effect="light" :style="{ 'font-size': largeFontSize }"
                             style="margin-right: 2vw">连击数: {{ gameResult.maxCombo }}</el-tag>
@@ -35,8 +35,8 @@
                         <el-table-column align="center" sortable prop="seatIndex" label="座位号" min-width="60" v-slot="scope">
                             <span>{{ scope.row.seatIndex + 1 }}</span>
                         </el-table-column>
-                        <el-table-column align="center" sortable prop="cards" label="总받다牌" min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="maxCombo" label="最大连击"
+                        <el-table-column align="center" sortable prop="cards" label="총 받은 카드" min-width="60"></el-table-column>
+                        <el-table-column align="center" sortable prop="maxCombo" label="최대 콤보"
                             min-width="60"></el-table-column>
                         <el-table-column align="center" sortable prop="wukong" label="使用悟空"
                             min-width="60"></el-table-column>
@@ -55,9 +55,9 @@
                 <el-button type="primary" :size="buttonSize" round @click="changeEchartSelected('')"
                     style="margin-right: 1vw" :disabled="selectedLegend === ''">综合</el-button>
                 <el-button type="danger" :size="buttonSize" round @click="changeEchartSelected('all')"
-                    style="margin-right: 1vw" :disabled="selectedLegend === 'all'">总받다牌</el-button>
+                    style="margin-right: 1vw" :disabled="selectedLegend === 'all'">총 받은 카드</el-button>
                 <el-button type="warning" :size="buttonSize" round @click="changeEchartSelected('max')"
-                    style="margin-right: 1vw" :disabled="selectedLegend === 'max'">最大连击</el-button>
+                    style="margin-right: 1vw" :disabled="selectedLegend === 'max'">최대 콤보</el-button>
                 <el-button type="success" :size="buttonSize" round @click="changeEchartSelected('func')"
                     :disabled="selectedLegend === 'func'">功能牌</el-button>
                 <el-divider></el-divider>
@@ -173,22 +173,22 @@ export default Vue.extend({
             this.selectedLegend = type
             if (type === '') {
                 selectedShowItem = {
-                    '总받다牌': true, '最大连击': true, '使用悟空': true, '使用八戒': true, '使用沙僧': true, '使用唐僧': true, '使用反弹': true, '使用变身': true
+                    '총 받은 카드': true, '최대 콤보': true, '使用悟空': true, '使用八戒': true, '使用沙僧': true, '使用唐僧': true, '使用反弹': true, '使用变身': true
                 }
             }
             else if (type === 'all') {
                 selectedShowItem = {
-                    '总받다牌': true, '最大连击': false, '使用悟空': false, '使用八戒': false, '使用沙僧': false, '使用唐僧': false, '使用反弹': false, '使用变身': false
+                    '총 받은 카드': true, '최대 콤보': false, '使用悟空': false, '使用八戒': false, '使用沙僧': false, '使用唐僧': false, '使用反弹': false, '使用变身': false
                 }
             }
             else if (type === 'max') {
                 selectedShowItem = {
-                    '总받다牌': false, '最大连击': true, '使用悟空': false, '使用八戒': false, '使用沙僧': false, '使用唐僧': false, '使用反弹': false, '使用变身': false
+                    '총 받은 카드': false, '최대 콤보': true, '使用悟空': false, '使用八戒': false, '使用沙僧': false, '使用唐僧': false, '使用反弹': false, '使用变身': false
                 }
             }
             else if (type === 'func') {
                 selectedShowItem = {
-                    '总받다牌': false, '最大连击': false, '使用悟空': true, '使用八戒': true, '使用沙僧': true, '使用唐僧': true, '使用反弹': true, '使用变身': true
+                    '총 받은 카드': false, '최대 콤보': false, '使用悟空': true, '使用八戒': true, '使用沙僧': true, '使用唐僧': true, '使用反弹': true, '使用变身': true
                 }
             }
             this.myChart?.setOption({
@@ -219,7 +219,7 @@ export default Vue.extend({
                     },
                     color: ['#F56C6C', '#E6A23C', '#91cc75', '#5470c6', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
                     legend: {
-                        data: ['总받다牌', '最大连击', '使用悟空', '使用八戒', '使用沙僧', '使用唐僧', '使用反弹', '使用变身'],
+                        data: ['총 받은 카드', '최대 콤보', '使用悟空', '使用八戒', '使用沙僧', '使用唐僧', '使用反弹', '使用变身'],
                         x: 'left',
                     },
                     grid: {
@@ -240,7 +240,7 @@ export default Vue.extend({
                     },
                     series: [
                         {
-                            name: '总받다牌',
+                            name: '총 받은 카드',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.cards
@@ -248,7 +248,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '最大连击',
+                            name: '최대 콤보',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.maxCombo

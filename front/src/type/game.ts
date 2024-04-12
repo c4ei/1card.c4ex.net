@@ -11,7 +11,7 @@ import { Player } from '@/type/player'
  * @property {number[]} remainCards - 플레이어手中余留牌的序号。
  * @property {number} maxCombo - 一次얻다最多的牌数。
  * @property {boolean} online - 플레이어是否托管。
- * @property {number} offLineTime - 플레이어断连次数(自己该出牌时没有出牌的次数)，达到一定次数则进入托管状态。
+ * @property {number} offLineTime - 플레이어断连次数(自己该카드 놀이时没有카드 놀이的次数)，达到一定次数则进入托管状态。
  * @property {number} offLinePlayCard - 플레이어托管时出的牌。
  * @property {number} wukong - 使用悟空数。
  * @property {number} bajie - 使用八戒数。
@@ -49,7 +49,7 @@ export type GamePlayers = { [key in GamePlayerSeatIndex]: WebSocketPlayerInGame 
  * @type {object}
  * @property {number} id - 게임id
  * @property {boolean} clockwise - 게임进行方向：true为顺时针，false为逆时针。
- * @property {GamePlayerSeatIndex | -1} currentPlayer - 现在出牌플레이어的座位号：0~7，初始为-1。
+ * @property {GamePlayerSeatIndex | -1} currentPlayer - 现在카드 놀이플레이어的座位号：0~7，初始为-1。
  * @property {number[]} currentCard - 现在牌池中的牌，按花色升序排列。
  * @property {GamePlayerSeatIndex | -1} currentCardPlayer - 打出现在牌池中的牌的플레이어的座位号：0~7，初始为-1。
  * @property {number[]} jokerCard - 现在牌池中的反弹牌。

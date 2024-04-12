@@ -65,7 +65,7 @@
 					'.png')
 					"></el-image>
 				<p class="white-color-font" :style="{ 'font-size': fontSize }">
-				来自: {{ gameInfo.gamePlayer[gameInfo.currentCardPlayer].nickname }}
+				에서: {{ gameInfo.gamePlayer[gameInfo.currentCardPlayer].nickname }}
 				</p>
 			</div>
 			</template>
@@ -86,7 +86,7 @@
 				'.png')
 				"></el-image>
 				<p class="white-color-font" :style="{ 'font-size': fontSize }">
-				来自: {{ gameInfo.gamePlayer[gameInfo.jokerCardPlayer].nickname }}
+				에서: {{ gameInfo.gamePlayer[gameInfo.jokerCardPlayer].nickname }}
 				</p>
 			</div>
 			</template>
@@ -113,18 +113,18 @@
 					<el-tag v-show="(getGamePlayer.remainCards.length || 0) > 0"
 					class="game-room-table-horizontal-record-item" type="success" effect="dark" :size="tagSize"
 					:style="{ 'font-size': fontSize }">
-					{{ "手牌数： " + getGamePlayer.remainCards.length + " 장" }}
+					{{ "남은카드： " + getGamePlayer.remainCards.length + " 장" }}
 					</el-tag>
 				</transition>
 				<el-tag :class="{ 'increase-num': allCardsFlag }" class="game-room-table-horizontal-record-item" type="info"
 					effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
-					{{ "总받다牌： " }}
+					{{ "총 받은 카드： " }}
 					<CardsNum :value="getGamePlayer.cards" @increased="increasedHandler('all')"></CardsNum>
 					{{ " 장" }}
 				</el-tag>
 				<el-tag :class="{ 'increase-num': comboFlag }" class="game-room-table-horizontal-record-item" type="danger"
 					effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
-					{{ "最大连击： " }}
+					{{ "최대 콤보： " }}
 					<CardsNum :value="getGamePlayer.maxCombo" @increased="increasedHandler('combo')"></CardsNum>
 					{{ " 장" }}
 				</el-tag>
@@ -204,7 +204,7 @@
 					'.png')
 					"></el-image>
 				<p class="white-color-font" :style="{ 'font-size': fontSize }">
-				来自: {{ gameInfo.gamePlayer[gameInfo.currentCardPlayer].nickname }}
+				에서: {{ gameInfo.gamePlayer[gameInfo.currentCardPlayer].nickname }}
 				</p>
 			</div>
 			</template>
@@ -225,7 +225,7 @@
 				'.png')
 				"></el-image>
 				<p class="white-color-font" :style="{ 'font-size': fontSize }">
-				来自: {{ gameInfo.gamePlayer[gameInfo.jokerCardPlayer].nickname }}
+				에서: {{ gameInfo.gamePlayer[gameInfo.jokerCardPlayer].nickname }}
 				</p>
 			</div>
 			</template>
@@ -242,7 +242,7 @@
 			<div id="game-room-table-vertical-info-box-bottom">
 			<transition leave-active-class="scale-out-top">
 				<el-tag v-show="(getGamePlayer.remainCards.length || 0) > 0" class="game-room-table-horizontal-record-item"
-				type="success" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "手牌数： " +
+				type="success" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "남은카드： " +
 					getGamePlayer.remainCards.length + " 장" }}</el-tag>
 			</transition>
 			</div>
@@ -255,14 +255,14 @@
 			<template slot="reference">
 			<div id="game-room-table-vertical-info-box-bottom">
 				<el-tag :class="{ 'increase-num': allCardsFlag }" class="game-room-table-horizontal-record-item" type="info"
-				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "总받다牌： " }}
+				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "총 받은 카드： " }}
 				<CardsNum :value="getGamePlayer.cards" @increased="increasedHandler('all')"></CardsNum>
 				{{ " 장" }}
 				</el-tag>
 			</div>
 			<div id="game-room-table-vertical-info-box-bottom">
 				<el-tag :class="{ 'increase-num': comboFlag }" class="game-room-table-horizontal-record-item" type="danger"
-				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "最大连击： " }}
+				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "최대 콤보： " }}
 				<CardsNum :value="getGamePlayer.maxCombo" @increased="increasedHandler('combo')"></CardsNum>
 				{{ '장' }}
 				</el-tag>
@@ -424,7 +424,7 @@ export default cardList.extend({
 				if (newVal.target === -1) {
 					this.gameTextFromPlayer.push("내말: " + newVal.text)
 				} else {
-				this.gameTextFromPlayer.push("你对 "+ this.gameInfo.gamePlayer[newVal.target].nickname + " 说: " + newVal.text)}
+				this.gameTextFromPlayer.push("당신이 맞아요 "+ this.gameInfo.gamePlayer[newVal.target].nickname + " 설명: " + newVal.text)}
 				playSound("quickChat/" + newVal.soundSrc)
 				this.$nextTick(function () {
 					if (this.gameTextFromPlayer.length > 0) {

@@ -3,15 +3,15 @@ const { getRandom } = poker
 
 /** 
  * @todo 策略待优化
- * @summary 出牌策略处理，选出最佳的出牌组合。
+ * @summary 카드 놀이策略处理，选出最佳的카드 놀이组合。
  * @description 
- * 牌池中无牌时，按妖怪，徒弟，师傅&反弹的顺序选出出牌的组合。即有可打出的妖怪牌组合时优先打妖怪牌中的随机组合，没有则打徒弟，依次类推。且，
- *   1.当考虑妖怪牌的出牌策略时，플레이어手中的妖怪牌越多，越倾向于出多牌组合。
- *   2.当考虑非妖怪牌的出牌策略时，不打反弹牌或带变身牌的多牌,及尽量少打多牌。
+ * 牌池中无牌时，按妖怪，徒弟，师傅&反弹的주문选出카드 놀이的组合。即有可打出的妖怪牌组合时优先打妖怪牌中的随机组合，没有则打徒弟，依次类推。且，
+ *   1.当考虑妖怪牌的카드 놀이策略时，플레이어手中的妖怪牌越多，越倾向于出多牌组合。
+ *   2.当考虑非妖怪牌的카드 놀이策略时，不打反弹牌或带变身牌的多牌,及尽量少打多牌。
  * 牌池中为单牌，连击数低，且满足以下条件之一时，弃牌不出。
  *   1.플레이어手中不能打出的妖怪牌多
  *   2.플레이어只能打出徒弟牌管上现在牌池牌面，且플레이어手中妖怪牌多
- * 其余情况则按所有出牌组合中牌面最小，牌序数和最小的组合打出。
+ * 其余情况则按所有카드 놀이组合中牌面最小，牌序数和最小的组合打出。
  * @param {RedisCacheGame} game
  * @param {number[][]} playCards 各种能出的牌的组合。
  * @param {number[]} remainCards 플레이어现在手中的牌。
@@ -24,7 +24,7 @@ function strategy(game, playCards, remainCards) {
     if (currentCard.length === 0) {
         const excludeNums = [20, 30, 100]
         let i = 0
-        while (i < excludeNums.length) { // 妖怪，徒弟，师傅&反弹，的顺序检查是否有可打出的牌组合
+        while (i < excludeNums.length) { // 妖怪，徒弟，师傅&反弹，的주문检查是否有可打出的牌组合
             const excludedPlayCards = playCards.filter(playCard => poker.getIndexOfCardList(playCard[0]).num <= excludeNums[i])
             if (excludedPlayCards.length > 0) {
                 if (excludeNums[i] <= 20) { // 妖怪牌时，妖怪牌越多则打多牌机率越大
@@ -49,7 +49,7 @@ function strategy(game, playCards, remainCards) {
                     const multipleExcludedPlayCards = morphoseAndJokerExcludedPlayCards.filter(playCard => {
                         if (playCard.length === 1) { return true } // 出单장OK
                         const cardNumCount = getSpecifiedCardNumCount(remainCards, poker.getIndexOfCardList(playCard[0]).num) // 获取플레이어手中该牌面的장数
-                        const pureCount = cardNumCount - playCard.length // 플레이어手中该牌面的장数减去当前出牌组合要打出的장数
+                        const pureCount = cardNumCount - playCard.length // 플레이어手中该牌面的장数减去当前카드 놀이组合要打出的장数
                         return getRandom(0, pureCount) > 0 // 期望值希望플레이어至少保留1장该牌面的牌
                     })
                     if (multipleExcludedPlayCards.length > 0) {

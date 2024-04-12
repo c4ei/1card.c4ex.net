@@ -25,7 +25,7 @@
                 @click="shiftOnline">{{ getGamePlayer.online === false ? '취소' : '托管' }}</el-button>
             <el-button type="success" style="float:right; margin-right:2%" :size="buttonSize"
                 :style="{ 'font-size': fontSize, 'padding': paddingSize }" @click="playCard"
-                :disabled="timer === null || getGamePlayer.online === false">出牌</el-button>
+                :disabled="timer === null || getGamePlayer.online === false">카드 놀이</el-button>
             <el-button :type="metamorphoseMode ? 'info' : 'primary'" style="float:right; margin-right:2%" :size="buttonSize"
                 :style="{ 'font-size': fontSize, 'padding': paddingSize }" @click="shiftMetamorphoseMode"
                 :disabled="timer === null || getGamePlayer.online === false">{{ metamorphoseMode ? '취소' : '变身'
@@ -93,7 +93,7 @@ export default cardList.extend({
                         }
                         this.timer = window.setInterval(() => {
                             this.time = this.time - 1
-                        }, 150)//出牌时间변경这里，100是10秒，150是15秒，还要변경GameRoomPlayerItemModule里的动画时间
+                        }, 150)//카드 놀이时间변경这里，100是10秒，150是15秒，还要변경GameRoomPlayerItemModule里的动画时间
                     })
                 }
             }
@@ -236,10 +236,10 @@ export default cardList.extend({
             }
             if (this.timer === null) {
                 if (this.gameInfo.currentPlayer !== -1 && this.gameInfo.gamePlayer[this.gameInfo.currentPlayer].id === this.$stock.state.id) {
-                    this.$message.warning('出牌时间超时了')
+                    this.$message.warning('카드 놀이时间超时了')
                 }
                 else {
-                    this.$message.warning('还未轮到你出牌')
+                    this.$message.warning('还未轮到你카드 놀이')
                 }
                 playSound('click')
                 return
@@ -346,7 +346,7 @@ export default cardList.extend({
 
         sendPlayCard: function () {
             /** 
-             *  打出牌的牌序数的数组，序数为该牌在{@link cardList}中的index。 
+             *  打카드 놀이的牌序数的数组，序数为该牌在{@link cardList}中的index。 
              *  数组中所有牌的num应相等，按suit从小到大排序。
              */
             const playCardListValue: number[] = []

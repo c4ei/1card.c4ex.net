@@ -1,6 +1,6 @@
 <template>
     <div v-if="isHorizontal" class="game-room-table-horizontal-box-middle-item">
-        <p class="white-color-font" :style="{ 'font-size': fontSize }">出牌顺序</p>
+        <p class="white-color-font" :style="{ 'font-size': fontSize }">카드 놀이주문</p>
         <el-image v-if="gameInfo.clockwise" :src="require('@/assets/images/clockwise.png')" style="max-width:4vw"
             class="clockwise-rotate"></el-image>
         <el-image v-else :src="require('@/assets/images/anti-clockwise.png')" style="max-width:4vw"
@@ -8,7 +8,7 @@
         <div class="white-color-font" :style="{ 'font-size': fontSize }">{{ gameInfo.clockwise ? '顺时针' : '逆时针' }}</div>
     </div>
     <div v-else class="game-room-table-vertical-box-bottom-item">
-        <div class="white-color-font" :style="{ 'font-size': fontSize }">出牌顺序</div>
+        <div class="white-color-font" :style="{ 'font-size': fontSize }">카드 놀이주문</div>
         <el-image v-if="gameInfo.clockwise" :src="require('@/assets/images/clockwise.png')" style="max-width:4vw"
             class="clockwise-rotate"></el-image>
         <el-image v-else :src="require('@/assets/images/anti-clockwise.png')" style="max-width:4vw"

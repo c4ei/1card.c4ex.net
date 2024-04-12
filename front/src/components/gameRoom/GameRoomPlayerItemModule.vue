@@ -20,7 +20,7 @@
                             @click="$emit('addAiPlayer', seatIndex)">컴퓨터에 연결</el-button>
                     </template>
                     <template v-if="playerLocRoom.status === 1">
-                        <QuickChatSelector :labelMessage="'向该플레이어发言'" @emitSelectedTextToPlayer="sentSelectedTextToPlayer">
+                        <QuickChatSelector :labelMessage="'플레이어가 말합니다.'" @emitSelectedTextToPlayer="sentSelectedTextToPlayer">
                         </QuickChatSelector>
                     </template>
                 </div>
@@ -70,15 +70,15 @@
                             <transition leave-active-class="scale-out-top">
                                 <el-tag v-show="getGamePlayer.remainCards.length > 0" type="success" effect="dark"
                                     :size="tagSize" :style="{ 'font-size': fontSize }">
-                                    {{ '手牌数： ' + getGamePlayer.remainCards.length + ' 장' }}</el-tag>
+                                    {{ '남은카드： ' + getGamePlayer.remainCards.length + ' 장' }}</el-tag>
                             </transition>
                             <el-tag :class="{ 'increase-num': allCardsFlag }" type="info" effect="dark" :size="tagSize"
-                                :style="{ 'font-size': fontSize }">{{ '总받다牌： ' }}
+                                :style="{ 'font-size': fontSize }">{{ '총 받은 카드： ' }}
                                 <CardsNum :value="getGamePlayer.cards" @increased="increasedHandler('all')" />
                                 {{ ' 장' }}
                             </el-tag>
                             <el-tag :class="{ 'increase-num': comboFlag }" type="danger" effect="dark" :size="tagSize"
-                                :style="{ 'font-size': fontSize }">{{ '最大连击： ' }}
+                                :style="{ 'font-size': fontSize }">{{ '최대 콤보： ' }}
                                 <CardsNum :value="getGamePlayer.maxCombo" @increased="increasedHandler('combo')" />
                                 {{ ' 장' }}
                             </el-tag>
@@ -139,13 +139,13 @@ export default Vue.extend({
             if (this.gameInfo.gamePlayer[newVal.source] === undefined) return
             this.$emit('gameTextToPlayerSent', this.seatIndex)
             if (newVal.targetId === 0) {
-                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 说: ' + newVal.text)
+                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 설명: ' + newVal.text)
             }
             else if (newVal.targetId === this.$stock.state.id) {
-                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 对내말: ' + newVal.text)
+                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 오른쪽 내말: ' + newVal.text)
             }
             else {
-                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 对' + this.gameInfo.gamePlayer[newVal.target as GamePlayerSeatIndex].nickname + ' 说: ' + newVal.text)
+                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 오른쪽' + this.gameInfo.gamePlayer[newVal.target as GamePlayerSeatIndex].nickname + ' 설명: ' + newVal.text)
             }
             playSound('quickChat/' + newVal.soundSrc)
             this.$nextTick(function () {
@@ -165,7 +165,7 @@ export default Vue.extend({
             if (this.gameInfo !== null) return
             if (newVal === undefined || newVal.nickname === undefined || newVal === null || newVal.text === undefined || newVal.text === '') return
             this.$emit('typeChatMessageSent', this.seatIndex)
-            this.gameTextFromPlayer.push(newVal.nickname + ' 说: ' + newVal.text)
+            this.gameTextFromPlayer.push(newVal.nickname + ' 설명: ' + newVal.text)
             this.$nextTick(function () {
                 if (this.gameTextFromPlayer.length > 0) {
                     this.isTooltipShow = true
@@ -184,7 +184,7 @@ export default Vue.extend({
             if (newVal.currentPlayer === this.seatIndex) {
                 this.showColorChanging = false
                 const vm = this
-                //牌池有牌时不出牌，刷新플레이어背景框颜色动画的逻辑
+                //牌池有牌时不카드 놀이，刷新플레이어背景框颜色动画的逻辑
                 window.requestAnimationFrame(function () {
                     window.requestAnimationFrame(function () {
                         vm.showColorChanging = true

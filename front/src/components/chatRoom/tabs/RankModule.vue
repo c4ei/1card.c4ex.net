@@ -8,11 +8,11 @@
             <template v-if="rankInfo !== null">
                 <p>{{ showTopThreeLabel }}</p>
                 <RankItem v-for="item in rankInfo.rankList" :key="item.id" :rank="item.rank" :avatarId="item.avatarId"
-                    :nickname="item.nickname" :record="calLevel(item.record) + '级'" :fontSize="fontSize"></RankItem>
+                    :nickname="item.nickname" :record="calLevel(item.record) + '레벨'" :fontSize="fontSize"></RankItem>
                 <p>{{ showPlayerName }}</p>
                 <RankItem v-if="rankInfo.playerInfo !== null" :rank="rankInfo.playerInfo.rank"
                     :avatarId="playerProfile.avatar_id" :nickname="playerProfile.nickname"
-                    :record="calLevel(rankInfo.playerInfo.record) + '级'" :fontSize="fontSize"></RankItem>
+                    :record="calLevel(rankInfo.playerInfo.record) + '레벨'" :fontSize="fontSize"></RankItem>
             </template>
         </el-collapse-item>
 

@@ -3,26 +3,26 @@
         <el-image style="margin-left: 35%; width: 30%" :src="getAvatarUrl(playerProfile.avatar_id)"
             :fit="'fill'"></el-image>
         <p class="player-profile-line" v-if="playerProfile.id === $store.state.id">
-            <el-tooltip effect="light" :content="'距下次升级：' + currentExp + ' / ' + nextLevelExp" placement="top">
+            <el-tooltip effect="light" :content="'다음 업그레이드까지：' + currentExp + ' / ' + nextLevelExp" placement="top">
                 <el-progress :text-inside="true" :percentage="expPecent" :stroke-width="20" status="success"></el-progress>
             </el-tooltip>
         </p>
         <p class="player-profile-line">
             <span>레벨：</span>
-            <span class="player-profile-line-right">{{ level }}级</span>
+            <span class="player-profile-line-right">{{ level }}레벨</span>
         </p>
         <p class="player-profile-line">
             <span>게임수：</span>
             <span class="player-profile-line-right">{{ playerProfile.record.num_of_game }}국</span>
         </p>
         <p class="player-profile-line">
-            <el-tooltip effect="light" content="某국中수집된 카드 수最少" placement="right">
+            <el-tooltip effect="light" content="수집된 카드 수특정 중에서 최소" placement="right">
                 <span>우승：</span>
             </el-tooltip>
             <span class="player-profile-line-right">{{ playerProfile.record.least_game }}국</span>
         </p>
         <p class="player-profile-line">
-            <el-tooltip effect="light" content="某국中수집된 카드 수最多" placement="right">
+            <el-tooltip effect="light" content="수집된 카드 수특정 중에서 최다" placement="right">
                 <span>당기기：</span>
             </el-tooltip>
             <span class="player-profile-line-right">{{ playerProfile.record.most_game }}국</span>
@@ -50,7 +50,7 @@
                 playerProfile.record.least_cards }}장</span>
         </p>
         <p class="player-profile-line">
-            <el-tooltip effect="light" content="수집된 카드 수占该국플레이어平均수집된 카드 수的比例(小于100%)" placement="right">
+            <el-tooltip effect="light" content="수집된 카드 수 비율(100% 미만)" placement="right">
                 <span>최소 마감 비율：</span>
             </el-tooltip>
             <el-tooltip effect="light"
@@ -64,7 +64,7 @@
             <span class="player-profile-line-right">{{ playerProfile.record.most_cards }}장</span>
         </p>
         <p class="player-profile-line">
-            <el-tooltip effect="light" content="수집된 카드 수占该국플레이어平均수집된 카드 수的比例(至少100%)" placement="right">
+            <el-tooltip effect="light" content="수집된 카드 수 비율(최소 100%)" placement="right">
                 <span>최고단일카드 마감비율：</span>
             </el-tooltip>
             <el-tooltip effect="light"

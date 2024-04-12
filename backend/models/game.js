@@ -40,13 +40,13 @@ const Game = db.defineModel('game',
             type: db.dataTypes.INTEGER(2),
             defaultValue: 0
         },
-        /* 最大连击数 */
+        /* 최대 콤보数 */
         max_combo:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最大连击数플레이어 */
+        /* 최대 콤보数플레이어 */
         max_combo_player:
         {
             type: db.dataTypes.STRING(50),

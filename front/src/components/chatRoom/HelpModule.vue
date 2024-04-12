@@ -1,21 +1,21 @@
 <template>
     <el-tabs type="border-card" v-model="activeHelpModuleTabName">
-        <el-tab-pane label="게임规则" name="rule" lazy>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>게임简介</h1>
+        <el-tab-pane label="게임규칙" name="rule" lazy>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>게임소개</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌게임，进行该게임至少需要2名플레이어，可使用2~10덱扑克牌，扑克牌数可依플레이어人数酌情增减。</p>
-            <p :style="{ 'font-size': fontSize }">另外，西游记的게임规则各개地方不尽相同，以下게임说明仅代表作者本人观点。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>게임流程</h1>
+            <p :style="{ 'font-size': fontSize }">Journey to the West는 "Beast Fighting Chess"와 유사한 카드 게임입니다. 이 게임을 플레이하려면 최소 2명의 플레이어가 필요합니다. 2~10개의 배너 카드를 사용할 수 있습니다. 카드 수는 상황에 따라 늘리거나 줄일 수 있습니다. 인원수대로.</p>
+            <p :style="{ 'font-size': fontSize }">또한 서유기의 동작 규칙은 지역에 따라 다르며, 다음 설명은 작성자 자신의 의견일 뿐입니다.。</p>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>게임 프로세스</h1>
             <hr class="divider-line">
-            <h2 :style="{ 'font-size': fontSize }">开국：</h2>
-            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어开始出牌。</p>
-            <h2 :style="{ 'font-size': fontSize }">顺序：</h2>
-            <p :style="{ 'font-size': fontSize }">一般由开국出牌플레이어开始按逆时针顺序出牌，当有플레이어打出观音或如来时，反转出牌方向。</p>
-            <h2 :style="{ 'font-size': fontSize }">出牌：</h2>
-            <p :style="{ 'font-size': fontSize }">若台面上无牌，플레이어可打出同一牌点(如♠A和<span
-                    style="color: red">♥A</span>)的任意장牌；若台面上有上家打出的牌，则下家须根据大小顺序打出 <u>장数相同且牌型“大于”上家牌的牌</u>，依次类推。</p>
+            <h2 :style="{ 'font-size': fontSize }"> 开국：</h2>
+            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어开始카드 놀이。</p>
+            <h2 :style="{ 'font-size': fontSize }">주문：</h2>
+            <p :style="{ 'font-size': fontSize }">일반적으로 국카드 놀이플레이어 오프닝부터 시작하여 시계 반대 방향으로 주문카드 놀이를 진행하며, 플레이어가 플레이하는 관음이나 여래가 있을 때에는 카드 놀이 방향을 반대로 진행합니다.</p>
+            <h2 :style="{ 'font-size': fontSize }">카드 놀이：</h2>
+            <p :style="{ 'font-size': fontSize }">테이블에 카드가 없으면 플레이어는 동일한 카드 포인트(예: ♣a 및<span
+                    style="color: red">♥A</span>)어떤 장 카드든지; 테이블 위에 이전 플레이어가 사용한 카드가 있으면 다음 플레이어가 크고 작은 것에 따라 그것을 플레이해야 합니다 주문 <u> 장의 개수가 동일하고 카드 종류가 이전 카드보다 "큰" 카드</u>등등</p>
             <h2 :style="{ 'font-size': fontSize }">连击：</h2>
-            <p :style="{ 'font-size': fontSize }">打出的牌计入连击牌池，计+1。当出牌数大于1时还会有倍乘效果。</p>
+            <p :style="{ 'font-size': fontSize }">打出的牌计入连击牌池，计+1。当카드 놀이数大于1时还会有倍乘效果。</p>
             <p :style="{ 'font-size': fontSize }">如连续5人打出2장牌，则倍乘效果的连击数计为： 4(2+2*1), 6(2+2*2), 8(2+3*2), 10(2+4*2),
                 30(20+5*2)。
             </p>
@@ -23,45 +23,45 @@
                 57(39+6*3)。 </p>
             <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如连击数为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4장。</p>
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
-            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
+            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次카드 놀이的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
             <h2 :style="{ 'font-size': fontSize }">받다牌：</h2>
-            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃出牌并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新开始出牌。</p>
+            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃카드 놀이并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新开始카드 놀이。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
             <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束게임。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小顺序</h1>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小주문</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">西游记使用全덱扑克牌，牌点大小的比较类似于斗兽棋。</p>
+            <p :style="{ 'font-size': fontSize }"> Journey to the West는 모두 배너 카드를 사용하며 카드 포인트의 크기는 Beast Fighting Chess와 비슷합니다.</p>
             <p :style="{ 'font-size': fontSize }">其中</p>
-            <h2 :style="{ 'font-size': fontSize }">特殊牌：</h2>
+            <h2 :style="{ 'font-size': fontSize }">특수 카드：</h2>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/3A.png')"></el-avatar>
-            <span :style="{ 'font-size': fontSize }">牌点3，代表沙僧，大于所有妖怪。</span>
+            <span :style="{ 'font-size': fontSize }">3번 카드는 모든 몬스터보다 위대한 샤몽(Sha Monk)을 나타냅니다.</span>
             <br>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/8A.png')"></el-avatar>
-            <span :style="{ 'font-size': fontSize }">牌点8，代表八戒，大于所有妖怪和沙僧。</span>
+            <span :style="{ 'font-size': fontSize }">카드 포인트 8은 모든 괴물과 모래 승려보다 더 위대한 8계를 나타냅니다.</span>
             <br>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/5A.png')"></el-avatar>
-            <span :style="{ 'font-size': fontSize }">牌点5，代表悟空，大于所有妖怪、沙僧和八戒。</span>
+            <span :style="{ 'font-size': fontSize }">카드 포인트 5는 모든 괴물인 샤승과 바지에보다 더 큰 오공을 나타냅니다.</span>
             <br>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/10A.png')"></el-avatar>
-            <span :style="{ 'font-size': fontSize }">牌点10，代表师傅，大于三徒弟，小于所有妖怪。</span>
+            <span :style="{ 'font-size': fontSize }"> 카드 포인트 10은 마스터를 나타내며, 이는 견습생 3명보다 크고 모든 몬스터보다 작습니다.</span>
             <br>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/poker/red-joker.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/poker/black-joker.png')"></el-avatar>
-            <span :style="{ 'font-size': fontSize }">大小王，分别代表如来和观音，能应对所有牌点，打出后反转出牌方向，原上家打出的牌依然保留。</span>
+            <span :style="{ 'font-size': fontSize }">각각 여래와 관음을 대표하는 대왕과 소왕은 모든 카드 포인트를 처리할 수 있으며, 플레이한 후에는 카드 놀이 방향이 반전되어 상가가 사용한 원래 카드가 남습니다.</span>
             <p :style="{ 'font-size': fontSize }">注意：大小王视为同一牌点。</p>
             <br>
             <h2 :style="{ 'font-size': fontSize }">妖怪牌：</h2>
-            <p :style="{ 'font-size': fontSize }">除特殊牌外，其余牌点均为妖怪，</p>
-            <span :style="{ 'font-size': fontSize }">大小顺序为</span>
+            <p :style="{ 'font-size': fontSize }">除특수 카드外，其余牌点均为妖怪，</p>
+            <span :style="{ 'font-size': fontSize }">大小주문为</span>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
             <span :style="{ 'font-size': fontSize }">最小</span>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/1A.png')"></el-avatar>
             <span :style="{ 'font-size': fontSize }">最大。</span>
             <br>
             <br>
-            <h2 :style="{ 'font-size': fontSize }">花色顺序：</h2>
+            <h2 :style="{ 'font-size': fontSize }">花色주문：</h2>
             <p :style="{ 'font-size': fontSize }">同一牌点，花色按</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2C.png')"></el-avatar>
@@ -70,12 +70,12 @@
             <p :style="{ 'font-size': fontSize }">从小到大排序。</p>
             <br>
             <h2 :style="{ 'font-size': fontSize }">多牌比较：</h2>
-            <p :style="{ 'font-size': fontSize }">当上家牌数量大于1时，比较规则为 <u>每장牌均不小于上家牌，并且其中至少有一장“大于”上家牌。</u></p>
+            <p :style="{ 'font-size': fontSize }">当上家牌数量大于1时，比较규칙为 <u>每장牌均不小于上家牌，并且其中至少有一장“大于”上家牌。</u></p>
             <p :style="{ 'font-size': fontSize }">例如上家打出以下牌型：</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2C.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
             <br>
-            <p :style="{ 'font-size': fontSize }">则根据上述比较规则，下家须至少打出</p>
+            <p :style="{ 'font-size': fontSize }">则根据上述比较규칙，下家须至少打出</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
             <p :style="{ 'font-size': fontSize }">的牌型。</p>
@@ -83,15 +83,15 @@
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2A.png')"></el-avatar>
             <p :style="{ 'font-size': fontSize }">虽然其中一장♠2比<span style="color: red">♥2</span>大，但<span
-                    style="color: red">♦2</span>小于♣2，不满足比较规则，所以不能打出。</p>
+                    style="color: red">♦2</span>小于♣2，不满足比较규칙，所以不能打出。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-magic-stick"></i>变身牌</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">既然孙悟空有七十二变，那么西游记中自然不能缺少变身元素。</p>
-            <p :style="{ 'font-size': fontSize }">变身牌，顾名思义，可以改变自身牌面的牌。其规则和用法类似于部分地区斗地主中使用的“癞子牌”。</p>
+            <p :style="{ 'font-size': fontSize }">变身牌，顾名思义，可以改变自身牌面的牌。其규칙和用法类似于部分地区斗地主中使用的“癞子牌”。</p>
             <span :style="{ 'font-size': fontSize }">在게임中，带有蓝色边框的牌即是变身牌，如:</span>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/bianshen-example.png')"></el-avatar>
-            <h2 :style="{ 'font-size': fontSize }">变身规则：</h2>
+            <h2 :style="{ 'font-size': fontSize }">变身규칙：</h2>
             <p :style="{ 'font-size': fontSize }">1. 变身牌须搭配其他牌(原形牌)使用才有效，单独打出时等同于打出其自身。</p>
             <span :style="{ 'font-size': fontSize }">如单独打出:</span>
             <el-avatar shape="square" :size="avatarSize + 40"
@@ -116,7 +116,7 @@
             <p :style="{ 'font-size': fontSize }">1. 要使用变身牌，首先请选择要作为变身对象的原形牌，如上述<span style="color: red">♦3</span>。</p>
             <p :style="{ 'font-size': fontSize }">2. 然后点击 <el-tag type="primary" effect="dark">变身</el-tag> 按钮，选择变身牌，如上述♠2。
             </p>
-            <p :style="{ 'font-size': fontSize }">3. 选好变身牌后，最后点击出牌即可。</p>
+            <p :style="{ 'font-size': fontSize }">3. 选好变身牌后，最后点击카드 놀이即可。</p>
         </el-tab-pane>
 
         <el-tab-pane label="게임技巧" name="skill" lazy>
@@ -218,10 +218,10 @@
                 </el-collapse-item>
                 <el-collapse-item name="6">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内如何快速出牌？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内如何快速카드 놀이？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">在选择好要出的牌后，除了点击“出牌”按钮，还可以通过点击台面来出牌。</p>
+                        <p :style="{ 'font-size': fontSize }">在选择好要出的牌后，除了点击“카드 놀이”按钮，还可以通过点击台面来카드 놀이。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="7">
