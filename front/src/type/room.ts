@@ -4,7 +4,7 @@ import { GamePlayerSeatIndex } from '@/type/index'
  * @summary 在게임房间中聊天框显示的信息。
  * @type {object}
  * @property {number} id 信息id。
- * @property {string} name - 플레이어昵称。
+ * @property {string} name - 플레이어닉네임。
  * @property {'success' | 'info' | 'warning' | 'error'} type - 信息类型。
  * @property {string} text - 聊天信息。
  */
@@ -19,7 +19,7 @@ export interface ChatTextInfo {
  * @summary 플레이어在게임房间中发信息时会在头上显示的信息。
  * @type {object}
  * @property {number} id 信息id。
- * @property {string} nickname - 플레이어昵称。
+ * @property {string} nickname - 플레이어닉네임。
  * @property {string} text - 聊天信息。
  */
 export interface PlayerLocRomTypeChatMessageObject {
@@ -31,7 +31,7 @@ export interface PlayerLocRomTypeChatMessageObject {
 /** 
  * @summary 게임房间聊天的websocket请求信息。
  * @type {object} 
- * @property {string} nickname - 전송信息플레이어昵称。
+ * @property {string} nickname - 전송信息플레이어닉네임。
  * @property {string} text - 聊天信息。
  * @property {number} player_loc - 目标房间id。
  */
@@ -45,11 +45,11 @@ export interface WebSocketChat {
  * @summary 进入게임房间的信息。
  * @type {object} 
  * @property {number} id - 房间id。
- * @property {number} seatIndex - 房间座位号。
+ * @property {number} seatIndex - 房间좌석번호。
  */
 export interface EnterRoomDto {
     id: number,
-    seatIndex: GamePlayerSeatIndex | -1, // 不指定座位号时seatIndex为-1
+    seatIndex: GamePlayerSeatIndex | -1, // 不指定좌석번호时seatIndex为-1
 }
 
 /**
@@ -110,9 +110,9 @@ export interface WebSocketPlayerInRoom {
  * @type {object} 
  * @property {number} id - 目标房间id。
  * @property {'changeSeat'} action - 对目标房间操作的动作。id>0时不为空。
- * @property {number} targetSeatIndex - 更换座位请求플레이어的更换目标座位号。
+ * @property {number} targetSeatIndex - 更换座位请求플레이어的更换目标좌석번호。
  * @property {number} targetId - 更换座位请求目标플레이어的的플레이어id。
- * @property {number} sourceSeatIndex - 更换座位请求플레이어的现座位号。
+ * @property {number} sourceSeatIndex - 更换座位请求플레이어的现좌석번호。
  * @property {number} sourceId - 更换座位请求플레이어的的플레이어id。
  * @property {boolean} confirm - 更换座位是否需전송确认请求。
  */
@@ -132,7 +132,7 @@ export interface WebSocketChangeSeat {
  * @property {number} id - 目标房间id。
  * @property {'disagreeChangeSeat'} action - 对目标房间操作的动作。id>0时不为空。
  * @property {number} playerId - 被拒绝更换座位的플레이어id。disagree
- * @property {string} refusePlayerNickname - 拒绝更换座位的플레이어昵称。
+ * @property {string} refusePlayerNickname - 拒绝更换座位的플레이어닉네임。
  */
 export interface WebSocketDisagreeChangeSeat {
     id: number,

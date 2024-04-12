@@ -28,7 +28,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 플레이어数量 */
+        /* 플레이어수量 */
         player_num:
         {
             type: db.dataTypes.INTEGER(2),

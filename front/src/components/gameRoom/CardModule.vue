@@ -19,16 +19,16 @@
         <div id="card-module-bottom" v-if="getGamePlayer !== null">
             <el-button type="danger" style="float:left;margin-left:2%" :size="buttonSize"
                 :style="{ 'font-size': fontSize, 'padding': paddingSize }" @click="discard"
-                :disabled="timer === null || getGamePlayer.online === false || metamorphoseMode">不出</el-button>
+                :disabled="timer === null || getGamePlayer.online === false || metamorphoseMode">PASS</el-button>
             <el-button :type="getGamePlayer.online === false ? 'info' : 'warning'" style="float:left; margin-left:2%"
                 :size="buttonSize" :style="{ 'font-size': fontSize, 'padding': paddingSize }" :disabled="timer !== null"
-                @click="shiftOnline">{{ getGamePlayer.online === false ? '취소' : '托管' }}</el-button>
+                @click="shiftOnline">{{ getGamePlayer.online === false ? '취소' : '호스팅' }}</el-button>
             <el-button type="success" style="float:right; margin-right:2%" :size="buttonSize"
                 :style="{ 'font-size': fontSize, 'padding': paddingSize }" @click="playCard"
-                :disabled="timer === null || getGamePlayer.online === false">카드 놀이</el-button>
+                :disabled="timer === null || getGamePlayer.online === false">PLAY</el-button>
             <el-button :type="metamorphoseMode ? 'info' : 'primary'" style="float:right; margin-right:2%" :size="buttonSize"
                 :style="{ 'font-size': fontSize, 'padding': paddingSize }" @click="shiftMetamorphoseMode"
-                :disabled="timer === null || getGamePlayer.online === false">{{ metamorphoseMode ? '취소' : '变身'
+                :disabled="timer === null || getGamePlayer.online === false">{{ metamorphoseMode ? '취소' : '변환'
                 }}</el-button>
         </div>
     </el-main>
@@ -48,7 +48,7 @@ export default cardList.extend({
         return {
             /** 플레이어所选择牌在플레이어现有牌中的序数数组，值为0~4 */
             selectCard: [] as number[],
-            /** 플레이어所选择变身牌在플레이어现有牌中的序数数组，值为:0~4 */
+            /** 플레이어所选择변환牌在플레이어现有牌中的序数数组，值为:0~4 */
             selectMetamorphoseCard: [] as number[],
             timer: null as number | null,
             time: 100,
@@ -93,7 +93,7 @@ export default cardList.extend({
                         }
                         this.timer = window.setInterval(() => {
                             this.time = this.time - 1
-                        }, 150)//카드 놀이时间변경这里，100是10秒，150是15秒，还要변경GameRoomPlayerItemModule里的动画时间
+                        }, 150)//PLAY时间변경这里，100是10秒，150是15秒，还要변경GameRoomPlayerItemModule里的动画时间
                     })
                 }
             }
@@ -164,10 +164,10 @@ export default cardList.extend({
 
         addSelectCard: function (n: number, cardIndex: number) {
             playSound('click')
-            /* 变身模式 */
+            /* 변환模式 */
             if (this.metamorphoseMode) {
                 if (cardIndex < 100 || this.selectCard.includes(n)) {
-                    this.$message.warning('请选择变身牌')
+                    this.$message.warning('변환 브랜드를 선택해주세요')
                     return
                 }
                 /* 已选择的牌则취소选择 */
@@ -181,13 +181,13 @@ export default cardList.extend({
                     this.selectMetamorphoseCard.push(n)
                 }
                 else {
-                    /* 超过长度，弹出最后加入的变身牌 */
+                    /* 超过长度，弹出最后加入的변환牌 */
                     this.selectMetamorphoseCard.shift()
                     this.selectMetamorphoseCard.push(n)
                 }
                 return
             }
-            /* 非变身模式 */
+            /* 非변환模式 */
             if (this.selectCard.length === 0) {
                 this.selectCard.push(n)
             }
@@ -203,7 +203,7 @@ export default cardList.extend({
                     if (this.sortCardList !== null && this.getIndexOfCardList(this.sortCardList[this.selectCard[0]]).num === this.getIndexOfCardList(cardIndex).num) {
                         this.selectCard.push(n)
                     }
-                    /* 不是则清空数组，重新加入新的牌型 */
+                    /* 그렇지 않은 경우 배열을 지우고 새 카드 유형을 다시 추가하십시오. */
                     else {
                         while (this.selectCard.length > 0) {
                             this.selectCard.pop()
@@ -230,16 +230,16 @@ export default cardList.extend({
 
         playCardEmittedByRef: function () {
             if (this.getGamePlayer?.online === false) {
-                this.$message.warning('请先취소托管')
+                this.$message.warning('호스팅 취소 부탁드립니다')
                 playSound('click')
                 return
             }
             if (this.timer === null) {
                 if (this.gameInfo.currentPlayer !== -1 && this.gameInfo.gamePlayer[this.gameInfo.currentPlayer].id === this.$stock.state.id) {
-                    this.$message.warning('카드 놀이时间超时了')
+                    this.$message.warning('PLAY시간 만료')
                 }
                 else {
-                    this.$message.warning('还未轮到你카드 놀이')
+                    this.$message.warning('PLAY차례가 아님')
                 }
                 playSound('click')
                 return
@@ -250,19 +250,19 @@ export default cardList.extend({
         playCard: function () {
             playSound('click')
             if (this.selectCard.length === 0) {
-                this.$message.warning('请选择要打出的牌')
+                this.$message.warning('플레이하고 싶은 카드를 선택해주세요')
                 return
             }
             if (this.gameInfo.currentCard.length === 0) {
                 if (this.metamorphoseMode && this.selectMetamorphoseCard.length === 0) {
-                    this.$message.warning('请选择要打出的变身牌')
+                    this.$message.warning('플레이하고 싶은 변환 카드 선택')
                     return
                 }
                 this.sendPlayCard()
                 return
             }
             if (this.selectCard.length + this.selectMetamorphoseCard.length !== this.gameInfo.currentCard.length) {
-                this.$message.warning('须打出 ' + this.gameInfo.currentCard.length + ' 장牌')
+                this.$message.warning('반드시 입력 ' + this.gameInfo.currentCard.length + ' 장 카드')
                 return
             }
             if ((this.sortCardList !== null && this.getIndexOfCardList(this.sortCardList[this.selectCard[0]]).num === 100) || this.getIndexOfCardList(this.gameInfo.currentCard[0]).num === 100) {
@@ -304,7 +304,7 @@ export default cardList.extend({
                     this.sendPlayCard()
                 }
                 else {
-                    this.$message.warning('打出的牌须大于台面牌型')
+                    this.$message.warning('사용되는 카드는 테이블에 있는 카드보다 커야 합니다')
                 }
                 return
             }
@@ -316,7 +316,7 @@ export default cardList.extend({
                     this.sendPlayCard()
                 }
                 else {
-                    this.$message.warning('打出的牌须大于台面牌型')
+                    this.$message.warning('사용되는 카드는 테이블에 있는 카드보다 커야 합니다')
                 }
             }
             /* 有一方是师傅的情况下 */
@@ -327,7 +327,7 @@ export default cardList.extend({
                         this.sendPlayCard()
                     }
                     else {
-                        this.$message.warning('师傅不能打妖怪哦')
+                        this.$message.warning('요괴를 때리시면 안 돼요')
                     }
                     return
                 }
@@ -337,7 +337,7 @@ export default cardList.extend({
                         this.sendPlayCard()
                     }
                     else {
-                        this.$message.warning('徒弟不能打师傅哦')
+                        this.$message.warning('제자는 스승을 이길 수 없다')
                     }
                     return
                 }
@@ -346,7 +346,7 @@ export default cardList.extend({
 
         sendPlayCard: function () {
             /** 
-             *  打카드 놀이的牌序数的数组，序数为该牌在{@link cardList}中的index。 
+             *  打PLAY的牌序数的数组，序数为该牌在{@link cardList}中的index。 
              *  数组中所有牌的num应相等，按suit从小到大排序。
              */
             const playCardListValue: number[] = []
@@ -366,11 +366,11 @@ export default cardList.extend({
                     }
             })
             for (let i = 0; i < originLength; i++) {
-                if (playCardListValue[i] >= 100) {//对作为原形牌的变身牌进行处理，减100
+                if (playCardListValue[i] >= 100) {//对作为原形牌的변환牌进行处理，减100
                     playCardListValue[i] = playCardListValue[i] - 100
                 }
             }
-            for (let j = originLength; j < playCardListValue.length; j++) {//对变身牌进行处理，牌面变为与原形牌相同，再加回100以示为变身牌
+            for (let j = originLength; j < playCardListValue.length; j++) {//对변환牌进行处理，牌面变为与原形牌相同，再加回100以示为변환牌
                 playCardListValue[j] = originIndex + this.getIndexOfCardList(originIndex).suit - this.getIndexOfCardList(playCardListValue[j]).suit
                 if (playCardListValue[j] < 100) {
                     playCardListValue[j] = playCardListValue[j] + 100
@@ -394,7 +394,7 @@ export default cardList.extend({
         discard: function () {
             playSound('click')
             if (this.gameInfo.currentCard.length === 0) {
-                this.$message.warning('必须打出至少一장牌')
+                this.$message.warning('최소 1장의 장 카드를 플레이해야 합니다.')
                 return
             }
             this.selectCard = []
@@ -424,7 +424,7 @@ export default cardList.extend({
                 return
             }
             if (this.selectCard.length === 0) {
-                this.$message.warning('请先选择原形牌')
+                this.$message.warning('먼저 카드를 선택하세요.')
                 return
             }
             const unSelectedCardIndexList = this.sortCardList?.filter((val, index) => {
@@ -432,19 +432,19 @@ export default cardList.extend({
             })
             const hasMetamorphoseCard = unSelectedCardIndexList?.some(val => val >= 100)
             if (!hasMetamorphoseCard) {
-                this.$message.warning('没有可用的变身牌')
+                this.$message.warning('사용 가능한 변환 카드 없음')
                 return
             }
             if (this.sortCardList !== null && this.getIndexOfCardList(this.sortCardList[this.selectCard[0]]).num === 100) {
-                this.$message.warning('无法变身观音或如来')
+                this.$message.warning('관세음보살이나 여래를 변환할 수 없습니다.')
                 return
             }
             if (this.gameInfo.currentCard.length === 1) {
-                this.$message.warning('出1장牌时不能使用变身')
+                this.$message.warning('1장주고캔트모프사용')
                 return
             }
             if (this.gameInfo.currentCard.length > 1 && this.selectCard.length >= this.gameInfo.currentCard.length) {
-                this.$message.warning('选择的原形牌过多')
+                this.$message.warning('너무 많은 프로토타입 카드를 선택했습니다.')
                 return
             }
             this.metamorphoseMode = true

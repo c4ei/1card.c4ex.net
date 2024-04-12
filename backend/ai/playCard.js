@@ -53,11 +53,11 @@ function deDuplicatedCombination(allCombination) {
     const deDuplicatedCombinationsStrList = Array.from(new Set(combinationsStrList))
     deDuplicatedCombinationsStrList.forEach(combinationStr => { tempResult.push(combinationStr.split(",").map(str => parseInt(str))) })
 
-    // 因为变身牌出现在基本牌或附属牌中意义不同，所以无须去重，直接将有变身牌的组合纳入结果中
+    // 因为변환牌出现在基本牌或附属牌中意义不同，所以无须去重，直接将有변환牌的组合纳入结果中
     /** @type {number[][]} */
     const result = tempResult.filter(resItem => resItem.some(item => item >= 100))
     const orderedStrList = tempResult.filter(resItem => resItem.every(item => item < 100)).map(resItem => [...resItem].sort().toString())
-    // 此阶段去掉的是牌型上的重复组合。如[1,2,2]取两장的情况下，组合[1,2],[2,1]只取其一即可，但有变身牌的组合则无须去重。
+    // 此阶段去掉的是牌型上的重复组合。如[1,2,2]取两장的情况下，组合[1,2],[2,1]只取其一即可，但有변환牌的组合则无须去重。
     const deDuplicatedOrderedStrList = Array.from(new Set(orderedStrList))
     deDuplicatedOrderedStrList.forEach(orderedStr => { result.push(orderedStr.split(",").map(str => parseInt(str))) })
 
@@ -75,7 +75,7 @@ function playCardFilter(combination) {
     if (combination.some(card => poker.getIndexOfCardList(card).num === 100)) {
         return combination.every(card => poker.getIndexOfCardList(card).num === 100) // 所有牌为반송 카드的情况返回TRUE
     }
-    // 过滤出所有下标为1以上的牌的牌面等于基本牌的牌面或等于变身牌的牌型
+    // 过滤出所有下标为1以上的牌的牌面等于基本牌的牌面或等于변환牌的牌型
     return combination.every((card, index) => index === 0 || (poker.getIndexOfCardList(card).num === poker.getIndexOfCardList(combination[0]).num || card >= 100))
 }
 
@@ -126,7 +126,7 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
 
 /** 
  * @summary 获取플레이어手中牌能打出的所有排列组合(去重统一且可管上现在牌池中的牌型,现在牌池中无牌时则获取所有可能장数牌能打出的所有排列组合)。
- * @description 与getPlayCardsListBySpecifiedCount的区别是不指定카드 놀이数，而是根据게임국势来指定。
+ * @description 与getPlayCardsListBySpecifiedCount的区别是不指定PLAY数，而是根据게임국势来指定。
  * @param {number[]} currentCard 现在牌池中的牌(>=0)。
  * @param {number[]} remainCards 플레이어手中所有牌(>0)。
  * @returns {number[][]} 各种能出的牌的组合。
@@ -159,10 +159,10 @@ function getHigherPlayCardsList(currentCard, remainCards) {
                 return false
             }
             else if (cardNum > currentCardNum) { // 选取牌面大于牌池的牌组合
-                return cardNum < 30 || currentCardNum > 20 // 牌面双方均不是师傅 或 现在牌池中是徒弟且打카드 놀이面是师傅
+                return cardNum < 30 || currentCardNum > 20 // 牌面双方均不是师傅 或 现在牌池中是徒弟且打PLAY面是师傅
             }
         }
-        // 现在牌池中的牌为师傅，选取牌面是妖怪牌的牌组合
+        // 现在牌池中的牌为师傅，选取牌面是요괴牌的牌组合
         if (currentCardNum === 31) {
             if (cardNum < 20) {
                 return true
@@ -182,7 +182,7 @@ function getHigherPlayCardsList(currentCard, remainCards) {
 
 /** 
  * @param {RedisCacheGame} game
- * @returns {GameWebsocketRequestData} 카드 놀이的所有信息，action应为play。
+ * @returns {GameWebsocketRequestData} PLAY的所有信息，action应为play。
  */
 function aiPlay(game) {
 
@@ -204,16 +204,16 @@ function aiPlay(game) {
             }
             if (playCard[i] >= 100) {
                 if (i === 0) {
-                    playCard[i] = playCard[i] - 100 //对首장牌进行处理，若为大于等于100的变身牌则减100作为基础牌
+                    playCard[i] = playCard[i] - 100 //对首장牌进行处理，若为大于等于100的변환牌则减100作为基础牌
                     continue
                 }
                 if (poker.getIndexOfCardList(playCard[0]).num === poker.getIndexOfCardList(playCard[i]).num) {
                     if (Math.random() > 0.5) {
-                        playCard[i] = playCard[i] - 100 //若附属的变身牌本身就等于基础牌，则有1/2几率作为基础牌，1/2几率作为变身牌
+                        playCard[i] = playCard[i] - 100 //若附属的변환牌本身就等于基础牌，则有1/2几率作为基础牌，1/2几率作为변환牌
                         continue
                     }
                 }
-                //对附属的变身牌处理，牌面变为与原形牌相同，再加回100以示为变身牌
+                //对附属的변환牌处理，牌面变为与原形牌相同，再加回100以示为변환牌
                 playCard[i] = playCard[0] + poker.getIndexOfCardList(playCard[0]).suit - poker.getIndexOfCardList(playCard[i]).suit
                 if (playCard[i] < 100) {
                     playCard[i] = playCard[i] + 100

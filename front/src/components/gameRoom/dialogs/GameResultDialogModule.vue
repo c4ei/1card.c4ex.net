@@ -1,9 +1,9 @@
 <template>
-    <el-dialog title="게임战绩" :visible.sync="gameResultDialogVisible" :width="customDialogWidth" :modal-append-to-body=false
+    <el-dialog title="게임기록" :visible.sync="gameResultDialogVisible" :width="customDialogWidth" :modal-append-to-body=false
         center :modal="false" :before-close="closeGameResultDialog">
         <el-tabs v-if="gameResult !== null" type="border-card" v-model="activeGameResultModuleTabName"
             @tab-click="handleGameResultModuleTabClick">
-            <el-tab-pane label="表格数据" name="gameRecord">
+            <el-tab-pane label="표 형식 데이터" name="gameRecord">
                 <div style="width: 100%">
                     <div>
                         <el-tag :size="tagSize" type="success" effect="dark" :style="{ 'font-size': largeFontSize }">우승플레이어:
@@ -17,10 +17,10 @@
                         <el-tag :size="tagSize" type="warning" effect="dark" :style="{ 'font-size': largeFontSize }">최대 콤보플레이어:
                             {{ gameResult.maxComboPlayer }}</el-tag>
                         <el-tag :size="tagSize" type="warning" effect="light" :style="{ 'font-size': largeFontSize }"
-                            style="margin-right: 2vw">连击数: {{ gameResult.maxCombo }}</el-tag>
+                            style="margin-right: 2vw">콤보 수: {{ gameResult.maxCombo }}</el-tag>
                         <el-tag :size="tagSize" type="info" effect="dark" :style="{ 'font-size': largeFontSize }">사용된 카드 수:
                             {{ gameResult.cardsNum }}덱</el-tag>
-                        <el-tag :size="tagSize" type="info" effect="light" :style="{ 'font-size': largeFontSize }">플레이어数:
+                        <el-tag :size="tagSize" type="info" effect="light" :style="{ 'font-size': largeFontSize }">플레이어수:
                             {{ gameResult.playersNum }}</el-tag>
                     </div>
                     <el-divider></el-divider>
@@ -31,35 +31,35 @@
                             <el-avatar shape="square" :size="avatarSize"
                                 :src="getAvatarUrl(scope.row.avatar_id)"></el-avatar>
                         </el-table-column>
-                        <el-table-column align="center" fixed prop="nickname" label="昵称" min-width="80"></el-table-column>
-                        <el-table-column align="center" sortable prop="seatIndex" label="座位号" min-width="60" v-slot="scope">
+                        <el-table-column align="center" fixed prop="nickname" label="닉네임" min-width="80"></el-table-column>
+                        <el-table-column align="center" sortable prop="seatIndex" label="좌석번호" min-width="60" v-slot="scope">
                             <span>{{ scope.row.seatIndex + 1 }}</span>
                         </el-table-column>
                         <el-table-column align="center" sortable prop="cards" label="총 받은 카드" min-width="60"></el-table-column>
                         <el-table-column align="center" sortable prop="maxCombo" label="최대 콤보"
                             min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="wukong" label="使用悟空"
+                        <el-table-column align="center" sortable prop="wukong" label="오공을사용"
                             min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="bajie" label="使用八戒" min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="shaseng" label="使用沙僧"
+                        <el-table-column align="center" sortable prop="bajie" label="바지에 사용" min-width="60"></el-table-column>
+                        <el-table-column align="center" sortable prop="shaseng" label="드리프터 사용"
                             min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="tangseng" label="使用唐僧"
+                        <el-table-column align="center" sortable prop="tangseng" label="Tang Seng사용"
                             min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="joker" label="使用反弹" min-width="60"></el-table-column>
-                        <el-table-column align="center" sortable prop="bianshen" label="使用变身"
+                        <el-table-column align="center" sortable prop="joker" label="바운스사용" min-width="60"></el-table-column>
+                        <el-table-column align="center" sortable prop="bianshen" label="모프사용"
                             min-width="60"></el-table-column>
                     </el-table>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="图形数据" name="visualData">
+            <el-tab-pane label="그래픽 데이터" name="visualData">
                 <el-button type="primary" :size="buttonSize" round @click="changeEchartSelected('')"
-                    style="margin-right: 1vw" :disabled="selectedLegend === ''">综合</el-button>
+                    style="margin-right: 1vw" :disabled="selectedLegend === ''">종합</el-button>
                 <el-button type="danger" :size="buttonSize" round @click="changeEchartSelected('all')"
                     style="margin-right: 1vw" :disabled="selectedLegend === 'all'">총 받은 카드</el-button>
                 <el-button type="warning" :size="buttonSize" round @click="changeEchartSelected('max')"
                     style="margin-right: 1vw" :disabled="selectedLegend === 'max'">최대 콤보</el-button>
                 <el-button type="success" :size="buttonSize" round @click="changeEchartSelected('func')"
-                    :disabled="selectedLegend === 'func'">功能牌</el-button>
+                    :disabled="selectedLegend === 'func'">기능카드</el-button>
                 <el-divider></el-divider>
                 <div id="main" style="width: 80vw; height: 90vh;"></div>
             </el-tab-pane>
@@ -173,22 +173,22 @@ export default Vue.extend({
             this.selectedLegend = type
             if (type === '') {
                 selectedShowItem = {
-                    '총 받은 카드': true, '최대 콤보': true, '使用悟空': true, '使用八戒': true, '使用沙僧': true, '使用唐僧': true, '使用反弹': true, '使用变身': true
+                    '총 받은 카드': true, '최대 콤보': true, '오공을사용': true, '바지에 사용': true, '드리프터 사용': true, 'Tang Seng사용': true, '바운스사용': true, '모프사용': true
                 }
             }
             else if (type === 'all') {
                 selectedShowItem = {
-                    '총 받은 카드': true, '최대 콤보': false, '使用悟空': false, '使用八戒': false, '使用沙僧': false, '使用唐僧': false, '使用反弹': false, '使用变身': false
+                    '총 받은 카드': true, '최대 콤보': false, '오공을사용': false, '바지에 사용': false, '드리프터 사용': false, 'Tang Seng사용': false, '바운스사용': false, '모프사용': false
                 }
             }
             else if (type === 'max') {
                 selectedShowItem = {
-                    '총 받은 카드': false, '최대 콤보': true, '使用悟空': false, '使用八戒': false, '使用沙僧': false, '使用唐僧': false, '使用反弹': false, '使用变身': false
+                    '총 받은 카드': false, '최대 콤보': true, '오공을사용': false, '바지에 사용': false, '드리프터 사용': false, 'Tang Seng사용': false, '바운스사용': false, '모프사용': false
                 }
             }
             else if (type === 'func') {
                 selectedShowItem = {
-                    '총 받은 카드': false, '최대 콤보': false, '使用悟空': true, '使用八戒': true, '使用沙僧': true, '使用唐僧': true, '使用反弹': true, '使用变身': true
+                    '총 받은 카드': false, '최대 콤보': false, '오공을사용': true, '바지에 사용': true, '드리프터 사용': true, 'Tang Seng사용': true, '바운스사용': true, '모프사용': true
                 }
             }
             this.myChart?.setOption({
@@ -219,7 +219,7 @@ export default Vue.extend({
                     },
                     color: ['#F56C6C', '#E6A23C', '#91cc75', '#5470c6', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
                     legend: {
-                        data: ['총 받은 카드', '최대 콤보', '使用悟空', '使用八戒', '使用沙僧', '使用唐僧', '使用反弹', '使用变身'],
+                        data: ['총 받은 카드', '최대 콤보', '오공을사용', '바지에 사용', '드리프터 사용', 'Tang Seng사용', '바운스사용', '모프사용'],
                         x: 'left',
                     },
                     grid: {
@@ -256,7 +256,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '使用悟空',
+                            name: '오공을사용',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.wukong
@@ -264,7 +264,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '使用八戒',
+                            name: '바지에 사용',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.bajie
@@ -272,7 +272,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '使用沙僧',
+                            name: '드리프터 사용',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.shaseng
@@ -280,7 +280,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '使用唐僧',
+                            name: 'Tang Seng사용',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.tangseng
@@ -288,7 +288,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '使用反弹',
+                            name: '바운스사용',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.joker
@@ -296,7 +296,7 @@ export default Vue.extend({
                             label: seriesLabelStyle
                         },
                         {
-                            name: '使用变身',
+                            name: '모프사용',
                             type: 'bar',
                             data: this.gamePlayerList.map(function (obj) {
                                 return obj.bianshen

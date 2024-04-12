@@ -43,8 +43,11 @@ module.exports = async function (data, wss, ws) {
         if (data.action === 'initialize') {
             await asyncWatch(gameKey, gameRoomKey)
             const gameRes = await asyncGet(gameKey)
+            console.log("/backend/websocket/gameHandler.js - 46 : gameRes :" + gameRes);
             if (gameRes !== null) {
-                return
+                console.log("/backend/websocket/gameHandler.js - 48 : gameRes !== null :");
+                // await gameover(gameKey, game, wss);
+                // return;
             }
             const gameRoomRes = await asyncGet(gameRoomKey)
             const playerKeys = await asyncKeys(conf.redisCache.playerPrefix + '*')
@@ -62,6 +65,7 @@ module.exports = async function (data, wss, ws) {
                     pokers.push(j)
                 }
             }
+            console.log("/backend/websocket/gameHandler.js - 66 : pokers :" + JSON.stringify(pokers));
             poker.shuffle(pokers)
             if (gameRoom.metamorphoseNum > 0) {//변신 카드 삽입
                 let addMetamorphoseNum = 0
@@ -113,6 +117,7 @@ module.exports = async function (data, wss, ws) {
                 /** @type {string[]} */
                 messages: []
             }
+            console.log("/backend/websocket/gameHandler.js - 118 : pokers :" + JSON.stringify(game));
             for (let i = 0; i < playerListRes.length; i++) {
                 /** @type {RedisCachePlayerInGame} */
                 const player = JSON.parse(playerListRes[i])
@@ -131,7 +136,7 @@ module.exports = async function (data, wss, ws) {
                         let shouldDeal = false
                         /** @type {GamePlayerSeatIndex} */
                         const jSeatIndex = j
-                        /* 某플레이어在房间中，获取该플레이어昵称，설정信息，并改变其在플레이어列表中的状态 */
+                        /* 某플레이어在房间中，获取该플레이어닉네임，설정信息，并改变其在플레이어列表中的状态 */
                         if (gameRoom.playerList[iSeatIndex].id === gamePlayerList[jSeatIndex].id) {
                             game.gamePlayer[iSeatIndex].id = gamePlayerList[jSeatIndex].id
                             game.gamePlayer[iSeatIndex].nickname = gamePlayerList[jSeatIndex].nickname
@@ -166,6 +171,7 @@ module.exports = async function (data, wss, ws) {
             const timer = getPlayCardTimer(game, game.currentPlayer, wss, poker.waitTime)
             game.timer = timer[Symbol.toPrimitive]()
             gameRoom.status = 1
+            console.log("/backend/websocket/gameHandler.js - 172 : gameRoom.status :" + gameRoom.status);
             await asyncMultiExec([['mset', ...redisMSetStrList], ['set', gameRoomKey, JSON.stringify(gameRoom)], ['set', gameKey, JSON.stringify(game)]])()
             const newPlayerKeys = await asyncKeys(conf.redisCache.playerPrefix + '*')
             const newPlayerList = await asyncMget(newPlayerKeys)
@@ -179,19 +185,22 @@ module.exports = async function (data, wss, ws) {
                     client.send(newGameRoomListStr)
                 }
             })
+            console.log("/backend/websocket/gameHandler.js - 186 : newPlayerListStr :" + JSON.stringify(newPlayerListStr));
             game.remainCards = game.remainCards.length
             game.messages = []
             /** @type {string[]} */
-            const messageList = ['게임시작']
+            const messageList = ['게임시작'];
+            console.log("/backend/websocket/gameHandler.js - 191 : messageList :" + JSON.stringify(messageList));
             messageList.forEach(text => game.messages.push(text))
-            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
+            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' PLAY...')
             const gameStr = JSON.stringify(game)
             const initializeGameStr = JSON.stringify({ type: 'game', action: 'initialize', data: gameStr })
             wss.clients.forEach(client => {
                 if (client.readyState === WebSocket.OPEN && game.gamePlayerId.includes(client.userId)) {
                     client.send(initializeGameStr)
                 }
-            })
+            });
+            console.log("/backend/websocket/gameHandler.js - 201 : initializeGameStr :" + JSON.stringify(initializeGameStr));
         }
         else if (data.action === 'get') {
             const gameRes = await asyncGet(gameKey)
@@ -200,7 +209,7 @@ module.exports = async function (data, wss, ws) {
             game.remainCards = game.remainCards.length
             game.messages = []
             game.messages.push('다시 연결하다...')
-            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
+            game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' PLAY...')
             ws.send(JSON.stringify({ type: 'game', action: 'get', data: JSON.stringify(game) }))
 
         }
@@ -222,7 +231,7 @@ module.exports = async function (data, wss, ws) {
                     game.gamePlayer[game.currentPlayer].cards -= timesComboFromPlayer
                     game.timesCard = game.timesCard + timesAddCard
                     game.currentCombo = game.currentCombo + timesAddCard
-                    data.playCard.forEach(n => {//记录变身牌，前端会把原形牌变为小于100，变身牌变为大于等于100，所以在此可以通过100来判断
+                    data.playCard.forEach(n => {//记录변환牌，前端会把原形牌变为小于100，변환牌变为大于等于100，所以在此可以通过100来判断
                         if (n >= 100) {
                             /** @type {GamePlayerSeatIndex} */
                             const dataSeatIndex = data.seatIndex
@@ -347,10 +356,10 @@ module.exports = async function (data, wss, ws) {
             // game.version = game.version + 1  설정 호스팅은 데이터 버전을 업데이트하지 않습니다.
             await asyncSet(gameKey, JSON.stringify(game))
             if (player.online) {
-                ws.send(JSON.stringify({ type: 'message', subType: 'success', player_loc: data.id, text: '已취소托管' }))
+                ws.send(JSON.stringify({ type: 'message', subType: 'success', player_loc: data.id, text: '已취소호스팅' }))
             }
             else {
-                ws.send(JSON.stringify({ type: 'message', subType: 'warning', player_loc: data.id, text: '已托管' }))
+                ws.send(JSON.stringify({ type: 'message', subType: 'warning', player_loc: data.id, text: '已호스팅' }))
             }
             const shiftOnlineStr = JSON.stringify({ type: 'game', action: 'shiftOnline', seatIndex: data.seatIndex, online: player.online })
             wss.clients.forEach(client => {
@@ -398,10 +407,10 @@ async function intervalCheckCard(wss, thisTimer, id) {
             })
         }
         game.gamePlayer[game.currentPlayer].offLineTime = game.gamePlayer[game.currentPlayer].offLineTime + 1 //플레이어超时次数
-        game.gamePlayer[game.currentPlayer].offLinePlayCard = game.gamePlayer[game.currentPlayer].offLinePlayCard + 1 //플레이어托管打出的牌数
+        game.gamePlayer[game.currentPlayer].offLinePlayCard = game.gamePlayer[game.currentPlayer].offLinePlayCard + 1 //플레이어호스팅打出的牌数
         if (game.gamePlayer[game.currentPlayer].offLineTime > 1 && game.gamePlayer[game.currentPlayer].online) {
-            game.gamePlayer[game.currentPlayer].online = false //托管
-            const messageStr = JSON.stringify({ type: 'message', subType: 'warning', player_loc: id, text: '无操作响应，进入托管状态' })
+            game.gamePlayer[game.currentPlayer].online = false //호스팅
+            const messageStr = JSON.stringify({ type: 'message', subType: 'warning', player_loc: id, text: '无操作响应，进入호스팅状态' })
             wss.clients.forEach(client => {
                 if (client.readyState === WebSocket.OPEN && game.gamePlayer[game.currentPlayer].id === client.userId) {
                     client.send(messageStr)
@@ -510,7 +519,7 @@ async function sendGameInfo(gameKey, game, wss, action, messageList) {
         game.remainCards = game.remainCards.length
         game.messages = []
         messageList.forEach(text => game.messages.push(text))
-        game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
+        game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' PLAY...')
         const gameStr = JSON.stringify(game)
         const gameInfoStr = JSON.stringify({ type: 'game', action: action, data: gameStr })
         wss.clients.forEach(client => {
@@ -584,7 +593,7 @@ async function gameover(gameKey, game, wss) {
         maxCombo = cardsSortList[cardsSortList.length - 1].maxCombo
         await asyncSet(gameKey, JSON.stringify(game))
         game.remainCards = 0
-        game.messages = ['게임结束，正在结算...']
+        game.messages = ['게임이 종료되었으며 결제가 진행 중입니다...']
         const gameStr = JSON.stringify(game)
         const updateGameInfoStr = JSON.stringify({ type: 'game', action: 'update', data: gameStr })
         setTimeout(function () {
@@ -849,7 +858,7 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
  * @param {number} averageCard 平均수집된 카드 수。
  * @param {number} losePlayer 당기기플레이어id。
  * @param {number} winPlayer 우승플레이어id。
- * @param {number} playerNum 플레이어数。
+ * @param {number} playerNum 플레이어수。
  * @returns {Promise<number>} 经验值。
  */
 async function calRecord(player, playerInstance, averageCard, losePlayer, winPlayer, playerNum) {
@@ -920,7 +929,7 @@ function getPlayCardTimer(game, currentPlayer, wss, delay) {
     const currentPlayerId = game.gamePlayer[currentPlayer].id
     const playCardTimerKey = conf.redisCache.aiChatPrefix + game.id + ':' + conf.redisCache.playCardTimerKeyStr
     if (currentPlayerId > 0) {
-        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, game.gamePlayer[currentPlayer].online ? delay : 99999]])() // 此处不必等回调，所以没有加await, 플레이어在线时才催促，托管时无须催促
+        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, game.gamePlayer[currentPlayer].online ? delay : 99999]])() // 此处不必等回调，所以没有加await, 플레이어在线时才催促，호스팅时无须催促
         return setTimeout(async function () { await intervalCheckCard(wss, this, game.id) }, delay)
     }
     else if (currentPlayerId < 0) {

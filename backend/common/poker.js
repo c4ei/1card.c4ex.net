@@ -6,61 +6,61 @@
  * @type {Pokers}
  */
 const localCardList = [
-    // 牌序数为行数-10, 如红桃妖怪2为第11行，则序数为11-10=1
-    { num: 2, suit: 4, src: '2A', name: '妖怪2' },
-    { num: 2, suit: 3, src: '2B', name: '妖怪2' },
-    { num: 2, suit: 2, src: '2C', name: '妖怪2' },
-    { num: 2, suit: 1, src: '2D', name: '妖怪2' },
-    { num: 4, suit: 4, src: '4A', name: '妖怪4' },
-    { num: 4, suit: 3, src: '4B', name: '妖怪4' },
-    { num: 4, suit: 2, src: '4C', name: '妖怪4' },
-    { num: 4, suit: 1, src: '4D', name: '妖怪4' },
-    { num: 6, suit: 4, src: '6A', name: '妖怪6' },
-    { num: 6, suit: 3, src: '6B', name: '妖怪6' },
-    { num: 6, suit: 2, src: '6C', name: '妖怪6' },
-    { num: 6, suit: 1, src: '6D', name: '妖怪6' },
-    { num: 7, suit: 4, src: '7A', name: '妖怪7' },
-    { num: 7, suit: 3, src: '7B', name: '妖怪7' },
-    { num: 7, suit: 2, src: '7C', name: '妖怪7' },
-    { num: 7, suit: 1, src: '7D', name: '妖怪7' },
-    { num: 9, suit: 4, src: '9A', name: '妖怪9' },
-    { num: 9, suit: 3, src: '9B', name: '妖怪9' },
-    { num: 9, suit: 2, src: '9C', name: '妖怪9' },
-    { num: 9, suit: 1, src: '9D', name: '妖怪9' },
-    { num: 11, suit: 4, src: '11A', name: '妖怪J' },
-    { num: 11, suit: 3, src: '11B', name: '妖怪J' },
-    { num: 11, suit: 2, src: '11C', name: '妖怪J' },
-    { num: 11, suit: 1, src: '11D', name: '妖怪J' },
-    { num: 12, suit: 4, src: '12A', name: '妖怪Q' },
-    { num: 12, suit: 3, src: '12B', name: '妖怪Q' },
-    { num: 12, suit: 2, src: '12C', name: '妖怪Q' },
-    { num: 12, suit: 1, src: '12D', name: '妖怪Q' },
-    { num: 13, suit: 4, src: '13A', name: '妖怪K' },
-    { num: 13, suit: 3, src: '13B', name: '妖怪K' },
-    { num: 13, suit: 2, src: '13C', name: '妖怪K' },
-    { num: 13, suit: 1, src: '13D', name: '妖怪K' },
-    { num: 14, suit: 4, src: '1A', name: '妖怪A' },
-    { num: 14, suit: 3, src: '1B', name: '妖怪A' },
-    { num: 14, suit: 2, src: '1C', name: '妖怪A' },
-    { num: 14, suit: 1, src: '1D', name: '妖怪A' },
-    { num: 21, suit: 4, src: '3A', name: '沙僧' },
-    { num: 21, suit: 3, src: '3B', name: '沙僧' },
-    { num: 21, suit: 2, src: '3C', name: '沙僧' },
-    { num: 21, suit: 1, src: '3D', name: '沙僧' },
-    { num: 22, suit: 4, src: '8A', name: '八戒' },
-    { num: 22, suit: 3, src: '8B', name: '八戒' },
-    { num: 22, suit: 2, src: '8C', name: '八戒' },
-    { num: 22, suit: 1, src: '8D', name: '八戒' },
-    { num: 23, suit: 4, src: '5A', name: '悟空' },
-    { num: 23, suit: 3, src: '5B', name: '悟空' },
-    { num: 23, suit: 2, src: '5C', name: '悟空' },
-    { num: 23, suit: 1, src: '5D', name: '悟空' },
-    { num: 31, suit: 4, src: '10A', name: '唐僧' },
-    { num: 31, suit: 3, src: '10B', name: '唐僧' },
-    { num: 31, suit: 2, src: '10C', name: '唐僧' },
-    { num: 31, suit: 1, src: '10D', name: '唐僧' },
-    { num: 100, suit: 1, src: 'black-joker', name: '反弹' },
-    { num: 100, suit: 2, src: 'red-joker', name: '反弹' },
+    // 牌序数为行数-10, 如红桃요괴2为第11行，则序数为11-10=1
+    { num: 2, suit: 4, src: '2A', name: '요괴2' },
+    { num: 2, suit: 3, src: '2B', name: '요괴2' },
+    { num: 2, suit: 2, src: '2C', name: '요괴2' },
+    { num: 2, suit: 1, src: '2D', name: '요괴2' },
+    { num: 4, suit: 4, src: '4A', name: '요괴4' },
+    { num: 4, suit: 3, src: '4B', name: '요괴4' },
+    { num: 4, suit: 2, src: '4C', name: '요괴4' },
+    { num: 4, suit: 1, src: '4D', name: '요괴4' },
+    { num: 6, suit: 4, src: '6A', name: '요괴6' },
+    { num: 6, suit: 3, src: '6B', name: '요괴6' },
+    { num: 6, suit: 2, src: '6C', name: '요괴6' },
+    { num: 6, suit: 1, src: '6D', name: '요괴6' },
+    { num: 7, suit: 4, src: '7A', name: '요괴7' },
+    { num: 7, suit: 3, src: '7B', name: '요괴7' },
+    { num: 7, suit: 2, src: '7C', name: '요괴7' },
+    { num: 7, suit: 1, src: '7D', name: '요괴7' },
+    { num: 9, suit: 4, src: '9A', name: '요괴9' },
+    { num: 9, suit: 3, src: '9B', name: '요괴9' },
+    { num: 9, suit: 2, src: '9C', name: '요괴9' },
+    { num: 9, suit: 1, src: '9D', name: '요괴9' },
+    { num: 11, suit: 4, src: '11A', name: '요괴J' },
+    { num: 11, suit: 3, src: '11B', name: '요괴J' },
+    { num: 11, suit: 2, src: '11C', name: '요괴J' },
+    { num: 11, suit: 1, src: '11D', name: '요괴J' },
+    { num: 12, suit: 4, src: '12A', name: '요괴Q' },
+    { num: 12, suit: 3, src: '12B', name: '요괴Q' },
+    { num: 12, suit: 2, src: '12C', name: '요괴Q' },
+    { num: 12, suit: 1, src: '12D', name: '요괴Q' },
+    { num: 13, suit: 4, src: '13A', name: '요괴K' },
+    { num: 13, suit: 3, src: '13B', name: '요괴K' },
+    { num: 13, suit: 2, src: '13C', name: '요괴K' },
+    { num: 13, suit: 1, src: '13D', name: '요괴K' },
+    { num: 14, suit: 4, src: '1A', name: '요괴A' },
+    { num: 14, suit: 3, src: '1B', name: '요괴A' },
+    { num: 14, suit: 2, src: '1C', name: '요괴A' },
+    { num: 14, suit: 1, src: '1D', name: '요괴A' },
+    { num: 21, suit: 4, src: '3A', name: '샤셍' },
+    { num: 21, suit: 3, src: '3B', name: '샤셍' },
+    { num: 21, suit: 2, src: '3C', name: '샤셍' },
+    { num: 21, suit: 1, src: '3D', name: '샤셍' },
+    { num: 22, suit: 4, src: '8A', name: '바지에' },
+    { num: 22, suit: 3, src: '8B', name: '바지에' },
+    { num: 22, suit: 2, src: '8C', name: '바지에' },
+    { num: 22, suit: 1, src: '8D', name: '바지에' },
+    { num: 23, suit: 4, src: '5A', name: '오공' },
+    { num: 23, suit: 3, src: '5B', name: '오공' },
+    { num: 23, suit: 2, src: '5C', name: '오공' },
+    { num: 23, suit: 1, src: '5D', name: '오공' },
+    { num: 31, suit: 4, src: '10A', name: '당나라승려' },
+    { num: 31, suit: 3, src: '10B', name: '당나라승려' },
+    { num: 31, suit: 2, src: '10C', name: '당나라승려' },
+    { num: 31, suit: 1, src: '10D', name: '당나라승려' },
+    { num: 100, suit: 1, src: 'black-joker', name: '리바운드' },
+    { num: 100, suit: 2, src: 'red-joker', name: '리바운드' },
 ]
 
 module.exports = {
@@ -70,7 +70,7 @@ module.exports = {
     /** 
      * @description 获取扑克牌的信息
      * @param {number} index 序号
-     * @returns {Poker} 除去可能存在的变身牌+100后的牌信息
+     * @returns {Poker} 除去可能存在的변환牌+100后的牌信息
      */
     getIndexOfCardList: function (index) {
         if (index < 100) {
@@ -119,12 +119,12 @@ module.exports = {
         return randomWithinRange
     },
 
-    /** 每一轮카드 놀이기다리다的时间 */
+    /** 每一轮PLAY기다리다的时间 */
     waitTime: 20000,
-    /** 플레이어托管时기다리다的时间 */
+    /** 플레이어호스팅时기다리다的时间 */
     offLineWaitTime: 1000,
-    /** 컴퓨터플레이어카드 놀이时기다리다的基础时间 */
+    /** 컴퓨터플레이어PLAY时기다리다的基础时间 */
     aiPlayBasicWaitTime: 1500,
-    /** 컴퓨터플레이어카드 놀이时기다리다的附加时间的随机值 */
+    /** 컴퓨터플레이어PLAY时기다리다的附加时间的随机值 */
     aiPlayerRandomWaitTime: 1000,
 }

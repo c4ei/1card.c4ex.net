@@ -1,4 +1,4 @@
-/** 플레이어座位号 */
+/** 플레이어좌석번호 */
 export type GamePlayerSeatIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 /**

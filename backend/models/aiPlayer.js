@@ -29,37 +29,37 @@ const AiPlayer = db.defineModel('aiPlayer',
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 悟空 */
+        /* 오공 */
         wukong:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 八戒 */
+        /* 바지에 */
         bajie:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 沙僧 */
+        /* 샤셍 */
         shaseng:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 唐僧 */
+        /* 당나라승려 */
         tangseng:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 反弹 리바운드 */
+        /* 리바운드 리바운드 */
         joker:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 变身 변환 */
+        /* 변환 변환 */
         bianshen:
         {
             type: db.dataTypes.INTEGER(4),

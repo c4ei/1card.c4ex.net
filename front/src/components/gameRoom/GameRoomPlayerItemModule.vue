@@ -184,7 +184,7 @@ export default Vue.extend({
             if (newVal.currentPlayer === this.seatIndex) {
                 this.showColorChanging = false
                 const vm = this
-                //牌池有牌时不카드 놀이，刷新플레이어背景框颜色动画的逻辑
+                //牌池有牌时不PLAY，刷新플레이어背景框颜色动画的逻辑
                 window.requestAnimationFrame(function () {
                     window.requestAnimationFrame(function () {
                         vm.showColorChanging = true

@@ -12,7 +12,7 @@
  * @type {object}
  * @property {number} id - 플레이어id
  * @property {string} username -  플레이어用户名
- * @property {string} nickname - 昵称
+ * @property {string} nickname - 닉네임
  * @property {number} player_loc - 플레이어所在房间id
  * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @property {number} avatar_id - 플레이어아바타id
@@ -32,17 +32,17 @@
  * @typedef RedisCachePlayerInGame Redis中的在게임中的플레이어信息。对应key:game
  * @type {object}
  * @property {number} id - 플레이어id。
- * @property {string} nickname - 昵称。
+ * @property {string} nickname - 닉네임。
  * @property {string} avatar_id - 플레이어아바타id。
  * @property {number} cards - 수집된 카드 수。
  * @property {number[]} remainCards - 플레이어手中余留牌的序号。
  * @property {number} maxCombo - 一次얻다最多的牌数。
- * @property {boolean} online - 플레이어是否托管。
- * @property {number} offLineTime - 플레이어断连次数(自己该카드 놀이时没有카드 놀이的次数)，达到一定次数则进入托管状态。
- * @property {number} offLinePlayCard - 플레이어托管时出的牌。
- * @property {number} wukong - 使用悟空数。
- * @property {number} bajie - 使用八戒数。
- * @property {number} shaseng - 使用沙僧数。
+ * @property {boolean} online - 플레이어是否호스팅。
+ * @property {number} offLineTime - 플레이어断连次数(自己该PLAY时没有PLAY的次数)，达到一定次数则进入호스팅状态。
+ * @property {number} offLinePlayCard - 플레이어호스팅时出的牌。
+ * @property {number} wukong - 오공을사용数。
+ * @property {number} bajie - 바지에 사용数。
+ * @property {number} shaseng - 드리프터 사용数。
  * @property {number} tangseng - 使用师傅数。
  * @property {number} joker - 使用如来、观音牌数。
  * @property {number} bianshen - 使用변신 카드 수。
@@ -58,7 +58,7 @@
  * @property {number} id - 账号id。主key。
  * @property {string} username -  用户名
  * @property {string} password -  비밀번호
- * @property {string} nickname - 昵称
+ * @property {string} nickname - 닉네임
  * @property {number} avatar_id - 플레이어아바타id
  * @typedef {ModelAccount & SequelizeCommon} SequelizedModelAccount
  */
@@ -67,14 +67,14 @@
  * @typedef ModelPlayer 数据库中的게임中플레이어信息。对应table:players。
  * @type {object}
  * @property {number} id - 主key，插入数据时不需要。
- * @property {string} nickname - 昵称。
+ * @property {string} nickname - 닉네임。
  * @property {string} avatar_id - 플레이어아바타id。
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
  * @property {number} cards - 수집된 카드 수。
  * @property {number} max_combo - 一次얻다最多的牌数。
- * @property {number} wukong - 使用悟空数。
- * @property {number} bajie - 使用八戒数。
- * @property {number} shaseng - 使用沙僧数。
+ * @property {number} wukong - 오공을사용数。
+ * @property {number} bajie - 바지에 사용数。
+ * @property {number} shaseng - 드리프터 사용数。
  * @property {number} tangseng - 使用师傅数。
  * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
@@ -91,9 +91,9 @@
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
  * @property {number} cards - 수집된 카드 수。
  * @property {number} max_combo - 一次얻다最多的牌数。
- * @property {number} wukong - 使用悟空数。
- * @property {number} bajie - 使用八戒数。
- * @property {number} shaseng - 使用沙僧数。
+ * @property {number} wukong - 오공을사용数。
+ * @property {number} bajie - 바지에 사용数。
+ * @property {number} shaseng - 드리프터 사용数。
  * @property {number} tangseng - 使用师傅数。
  * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
@@ -105,7 +105,7 @@
 /** 
  * @typedef PlayerListWebsocketRequestData 플레이어列表的websocket请求信息。
  * @type {object} 
- * @property {string} nickname - 전송信息플레이어昵称。
+ * @property {string} nickname - 전송信息플레이어닉네임。
  * @property {number} player_loc - 플레이어所在房间id
  * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @property {number} avatar_id - 플레이어아바타id

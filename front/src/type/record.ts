@@ -41,7 +41,7 @@ export interface PlayerRecord extends DbCommon {
  * @type {object}
  * @property {number} id - 플레이어战绩id。
  * @property {string} avatar_id - 플레이어아바타id。
- * @property {string} nickname - 昵称。
+ * @property {string} nickname - 닉네임。
  */
 export interface PlayerProfile {
     id: number,

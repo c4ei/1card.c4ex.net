@@ -8,24 +8,24 @@
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>게임 프로세스</h1>
             <hr class="divider-line">
             <h2 :style="{ 'font-size': fontSize }"> 开국：</h2>
-            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어시작카드 놀이。</p>
+            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어시작PLAY。</p>
             <h2 :style="{ 'font-size': fontSize }">주문：</h2>
-            <p :style="{ 'font-size': fontSize }">일반적으로 국카드 놀이플레이어 오프닝부터 시작하여 시계 반대 방향으로 주문카드 놀이를 진행하며, 플레이어가 플레이하는 관음이나 여래가 있을 때에는 카드 놀이 방향을 반대로 진행합니다.</p>
-            <h2 :style="{ 'font-size': fontSize }">카드 놀이：</h2>
+            <p :style="{ 'font-size': fontSize }">일반적으로 국PLAY플레이어 오프닝부터 시작하여 시계 반대 방향으로 주문PLAY를 진행하며, 플레이어가 플레이하는 관음이나 여래가 있을 때에는 PLAY 방향을 반대로 진행합니다.</p>
+            <h2 :style="{ 'font-size': fontSize }">PLAY：</h2>
             <p :style="{ 'font-size': fontSize }">테이블에 카드가 없으면 플레이어는 동일한 카드 포인트(예: ♣a 및<span
                     style="color: red">♥A</span>)어떤 장 카드든지; 테이블 위에 이전 플레이어가 사용한 카드가 있으면 다음 플레이어가 크고 작은 것에 따라 그것을 플레이해야 합니다 주문 <u> 장의 개수가 동일하고 카드 종류가 이전 카드보다 "큰" 카드</u>등등</p>
             <h2 :style="{ 'font-size': fontSize }">连击：</h2>
-            <p :style="{ 'font-size': fontSize }">打出的牌计入连击牌池，计+1。当카드 놀이数大于1时还会有倍乘效果。</p>
-            <p :style="{ 'font-size': fontSize }">如连续5人打出2장牌，则倍乘效果的连击数计为： 4(2+2*1), 6(2+2*2), 8(2+3*2), 10(2+4*2),
+            <p :style="{ 'font-size': fontSize }">打出的牌计入连击牌池，计+1。当PLAY数大于1时还会有倍乘效果。</p>
+            <p :style="{ 'font-size': fontSize }">如连续5人打出2장牌，则倍乘效果的콤보 수计为： 4(2+2*1), 6(2+2*2), 8(2+3*2), 10(2+4*2),
                 30(20+5*2)。
             </p>
-            <p :style="{ 'font-size': fontSize }">如连续5人打出3장牌，则倍乘效果的连击数计为： 6(3+3*1), 9(3+3*2), 12(3+3*3), 15(3+4*3),
+            <p :style="{ 'font-size': fontSize }">如连续5人打出3장牌，则倍乘效果的콤보 수计为： 6(3+3*1), 9(3+3*2), 12(3+3*3), 15(3+4*3),
                 57(39+6*3)。 </p>
-            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如连击数为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4장。</p>
+            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如콤보 수为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4장。</p>
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
-            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次카드 놀이的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
+            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次PLAY的콤보 수+1，并把플레이어的수집된 카드 수扣除1。</p>
             <h2 :style="{ 'font-size': fontSize }">받다牌：</h2>
-            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃카드 놀이并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新시작카드 놀이。</p>
+            <p :style="{ 'font-size': fontSize }">当플레이어打PASS“大于”牌时，则放弃PLAY并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新시작PLAY。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
             <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束게임。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小주문</h1>
@@ -49,11 +49,11 @@
                 :src="require('@/assets/images/poker/red-joker.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/poker/black-joker.png')"></el-avatar>
-            <span :style="{ 'font-size': fontSize }">각각 여래와 관음을 대표하는 대왕과 소왕은 모든 카드 포인트를 처리할 수 있으며, 플레이한 후에는 카드 놀이 방향이 반전되어 상가가 사용한 원래 카드가 남습니다.</span>
+            <span :style="{ 'font-size': fontSize }">각각 여래와 관음을 대표하는 대왕과 소왕은 모든 카드 포인트를 처리할 수 있으며, 플레이한 후에는 PLAY 방향이 반전되어 상가가 사용한 원래 카드가 남습니다.</span>
             <p :style="{ 'font-size': fontSize }">注意：大小王视为同一牌点。</p>
             <br>
-            <h2 :style="{ 'font-size': fontSize }">妖怪牌：</h2>
-            <p :style="{ 'font-size': fontSize }">除특수 카드外，其余牌点均为妖怪，</p>
+            <h2 :style="{ 'font-size': fontSize }">요괴牌：</h2>
+            <p :style="{ 'font-size': fontSize }">除특수 카드外，其余牌点均为요괴，</p>
             <span :style="{ 'font-size': fontSize }">大小주문为</span>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
             <span :style="{ 'font-size': fontSize }">最小</span>
@@ -84,15 +84,15 @@
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2A.png')"></el-avatar>
             <p :style="{ 'font-size': fontSize }">虽然其中一장♠2比<span style="color: red">♥2</span>大，但<span
                     style="color: red">♦2</span>小于♣2，不满足比较규칙，所以不能打出。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-magic-stick"></i>变身牌</h1>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-magic-stick"></i>변환牌</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">既然孙悟空有七十二变，那么西游记中自然不能缺少变身元素。</p>
-            <p :style="{ 'font-size': fontSize }">变身牌，顾名思义，可以改变自身牌面的牌。其규칙和用法类似于部分地区斗地主中使用的“癞子牌”。</p>
-            <span :style="{ 'font-size': fontSize }">在게임中，带有蓝色边框的牌即是变身牌，如:</span>
+            <p :style="{ 'font-size': fontSize }">既然孙오공有七十二变，那么西游记中自然不能缺少변환元素。</p>
+            <p :style="{ 'font-size': fontSize }">변환牌，顾名思义，可以改变自身牌面的牌。其규칙和用法类似于部分地区斗地主中使用的“癞子牌”。</p>
+            <span :style="{ 'font-size': fontSize }">在게임中，带有蓝色边框的牌即是변환牌，如:</span>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/bianshen-example.png')"></el-avatar>
-            <h2 :style="{ 'font-size': fontSize }">变身규칙：</h2>
-            <p :style="{ 'font-size': fontSize }">1. 变身牌须搭配其他牌(原形牌)使用才有效，单独打出时等同于打出其自身。</p>
+            <h2 :style="{ 'font-size': fontSize }">변환규칙：</h2>
+            <p :style="{ 'font-size': fontSize }">1. 변환牌须搭配其他牌(原形牌)使用才有效，单独打出时等同于打出其自身。</p>
             <span :style="{ 'font-size': fontSize }">如单独打出:</span>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/bianshen-example.png')"></el-avatar>
@@ -110,13 +110,13 @@
             <el-avatar shape="square" style="margin-left: 0.5%" :size="avatarSize + 40"
                 :src="require('@/assets/images/poker/3A.png')"></el-avatar>
             <p :style="{ 'font-size': fontSize }">上述例子中，<span style="color: red">♦3</span>称为“原形牌”。</p>
-            <p :style="{ 'font-size': fontSize }">2. 变身牌变身后，牌点变为原形牌的牌点，花色保持自身的花色。</p>
-            <p :style="{ 'font-size': fontSize }">3. 变身牌不能变身观音或如来(即반송 카드)。</p>
+            <p :style="{ 'font-size': fontSize }">2. 변환牌변환后，牌点变为原形牌的牌点，花色保持自身的花色。</p>
+            <p :style="{ 'font-size': fontSize }">3. 변환牌不能변환观音或如来(即반송 카드)。</p>
             <h2 :style="{ 'font-size': fontSize }">使用方法：</h2>
-            <p :style="{ 'font-size': fontSize }">1. 要使用变身牌，首先请选择要作为变身对象的原形牌，如上述<span style="color: red">♦3</span>。</p>
-            <p :style="{ 'font-size': fontSize }">2. 然后点击 <el-tag type="primary" effect="dark">变身</el-tag> 按钮，选择变身牌，如上述♠2。
+            <p :style="{ 'font-size': fontSize }">1. 要모프사용牌，首先请选择要作为변환对象的原形牌，如上述<span style="color: red">♦3</span>。</p>
+            <p :style="{ 'font-size': fontSize }">2. 然后点击 <el-tag type="primary" effect="dark">변환</el-tag> 按钮，选择변환牌，如上述♠2。
             </p>
-            <p :style="{ 'font-size': fontSize }">3. 选好变身牌后，最后点击카드 놀이即可。</p>
+            <p :style="{ 'font-size': fontSize }">3. 选好변환牌后，最后点击PLAY即可。</p>
         </el-tab-pane>
 
         <el-tab-pane label="게임技巧" name="skill" lazy>
@@ -124,7 +124,7 @@
                     class="el-icon-warning-outline"></i>西游记게임本身并没有什么太多技巧，플레이어받다牌多少，运气占很大部分，以下技巧仅供参考。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>保持牌型</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">尽量保证自己手上有各种牌型：妖怪、徒弟、师傅，缺一不可。观音和如来则不到万不得已尽量不用，留作杀手锏。</p>
+            <p :style="{ 'font-size': fontSize }">尽量保证自己手上有各种牌型：요괴、徒弟、师傅，缺一不可。观音和如来则不到万不得已尽量不用，留作杀手锏。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>小牌先出</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">大多数时候，先把小牌打出去都是正确的选择，当然也有特殊情况，具体可参考下方“控制국势”。</p>
@@ -149,7 +149,7 @@
             <p :style="{ 'font-size': fontSize }">此时上家입력됨一개♠2，</p>
             <p :style="{ 'font-size': fontSize }">
                 虽然大多数时候我们都从小牌出起，但考虑到국势的发展，如果我们接着打出♣4，等再次轮到我们时，上家牌极有可能是徒弟牌，而此时我们手上徒弟师傅牌不足，无法应付可能到来的情况。</p>
-            <p :style="{ 'font-size': fontSize }">所以一개较为大胆的做法是：打出K或者A。这样大概率等再次轮到我们时，上家牌会是师傅或者一개点数较小的妖怪。</p>
+            <p :style="{ 'font-size': fontSize }">所以一개较为大胆的做法是：打出K或者A。这样大概率等再次轮到我们时，上家牌会是师傅或者一개点数较小的요괴。</p>
             <p :style="{ 'font-size': fontSize }">当然，以上只是举例，实际情况可能更加复杂，须根据自己的手牌情况和场上국势来判断。</p>
             <p :style="{ 'font-size': fontSize }">如开头所说，牌국的走势大多数时候是不可控的，况且还有观音如来这些逆天因素的存在，以上方法并不总是有效。</p>
         </el-tab-pane>
@@ -209,19 +209,19 @@
                 </el-collapse-item>
                 <el-collapse-item name="5">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内托管失败？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内호스팅失败？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">由于本网页的게임数据并没有설정锁机制，所以当网络延迟较大时，提交托管可能会失败，属正常行为。</p>
+                        <p :style="{ 'font-size': fontSize }">由于本网页的게임数据并没有설정锁机制，所以当网络延迟较大时，提交호스팅可能会失败，属正常行为。</p>
                         <p :style="{ 'font-size': fontSize }">建议您在玩게임时保持通畅的网咯。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="6">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内如何快速카드 놀이？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内如何快速PLAY？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">在选择好要出的牌后，除了点击“카드 놀이”按钮，还可以通过点击台面来카드 놀이。</p>
+                        <p :style="{ 'font-size': fontSize }">在选择好要出的牌后，除了点击“PLAY”按钮，还可以通过点击台面来PLAY。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="7">

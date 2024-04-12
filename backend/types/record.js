@@ -29,7 +29,7 @@
 /**
  * @typedef RedisCacheRankPlayer Redis中的플레이어信息。对应key:rank-topPlayersList。
  * @type {object}
- * @property {string} nickname - 昵称
+ * @property {string} nickname - 닉네임
  * @property {number} avatar_id - 플레이어아바타id
  */
 
@@ -59,7 +59,7 @@
  * @property {number} id - 플레이어id。
  * @property {number} record - 分数。
  * @property {number} rank - 排名。 
- * @property {string} nickname - 昵称。
+ * @property {string} nickname - 닉네임。
  * @property {number} avatarId - 플레이어아바타id。
  */
 

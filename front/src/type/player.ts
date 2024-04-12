@@ -6,7 +6,7 @@ import { PlayerStatus } from '@/type/index'
  * @type {object}
  * @property {number} id - 账号id。主key。
  * @property {string} username -  用户名
- * @property {string} nickname - 昵称
+ * @property {string} nickname - 닉네임
  * @property {number} avatar_id - 플레이어아바타id
  */
 export interface Account {
@@ -21,7 +21,7 @@ export interface Account {
  * @type {object}
  * @property {number} id - 플레이어id
  * @property {string} username -  플레이어用户名
- * @property {string} nickname - 昵称
+ * @property {string} nickname - 닉네임
  * @property {number} player_loc - 플레이어所在房间id
  * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @property {number} avatar_id - 플레이어아바타id
@@ -40,14 +40,14 @@ export interface WebSocketPlayer {
  * @summary 数据库中的게임中플레이어信息。对应table:players。
  * @type {object}
  * @property {number} id - 게임中플레이어id。主key。
- * @property {string} nickname - 昵称。
+ * @property {string} nickname - 닉네임。
  * @property {string} avatar_id - 플레이어아바타id。
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
  * @property {number} cards - 수집된 카드 수。
  * @property {number} max_combo - 一次얻다最多的牌数。
- * @property {number} wukong - 使用悟空数。
- * @property {number} bajie - 使用八戒数。
- * @property {number} shaseng - 使用沙僧数。
+ * @property {number} wukong - 오공을사용数。
+ * @property {number} bajie - 바지에 사용数。
+ * @property {number} shaseng - 드리프터 사용数。
  * @property {number} tangseng - 使用师傅数。
  * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。

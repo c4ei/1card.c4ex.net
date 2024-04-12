@@ -42,22 +42,22 @@
  * @property {number?} lastLoser - 上국당기기的플레이어id。방 만들기时不为空。
  * @property {number?} lastWinner - 上국우승的플레이어id。방 만들기时不为空。
  * @property {RoomPlayers?} playerList - 플레이어信息列表，下标0~7。방 만들기时不为空。
- * @property {GamePlayerSeatIndex?} seatIndex - 目标座位号，下标0~7。为-1时则不指定位置。enter,방을 나가다时不为空。
+ * @property {GamePlayerSeatIndex?} seatIndex - 目标좌석번호，下标0~7。为-1时则不指定位置。enter,방을 나가다时不为空。
  * @property {'enter'|'ready'|'edit'|'changeSeat'|'disagreeChangeSeat'} action - 对目标房间操作的动作。id>0时不为空。
- * @property {number?} targetSeatIndex - 更换座位请求플레이어的更换目标座位号。changeSeat时不为空。
+ * @property {number?} targetSeatIndex - 更换座位请求플레이어的更换目标좌석번호。changeSeat时不为空。
  * @property {number?} targetId - 更换座位请求目标플레이어的的플레이어id。changeSeat时不为空。
- * @property {number?} sourceSeatIndex - 更换座位请求플레이어的现座位号。changeSeat时不为空。
+ * @property {number?} sourceSeatIndex - 更换座位请求플레이어的现좌석번호。changeSeat时不为空。
  * @property {number?} sourceId - 更换座位请求플레이어的的플레이어id。changeSeat时不为空。
  * @property {boolean?} confirm - 更换座位是否需전송确认请求。changeSeat时不为空。
  * @property {number?} playerId - 被拒绝更换座位的플레이어id。disagreeChangeSeat时不为空。
- * @property {string?} refusePlayerNickname - 拒绝更换座位的플레이어昵称。disagreeChangeSeat时不为空。
- * @property {string?} nickname - 방을 나가다的플레이어昵称。방을 나가다时不为空。
+ * @property {string?} refusePlayerNickname - 拒绝更换座位的플레이어닉네임。disagreeChangeSeat时不为空。
+ * @property {string?} nickname - 방을 나가다的플레이어닉네임。방을 나가다时不为空。
  */
 
 /** 
  * @typedef RoomChatWebsocketRequestData 게임房间聊天的websocket请求信息。
  * @type {object} 
- * @property {string} nickname - 전송信息플레이어昵称。
+ * @property {string} nickname - 전송信息플레이어닉네임。
  * @property {string} text - 聊天信息。
  * @property {number} player_loc - 目标房间id。
  */

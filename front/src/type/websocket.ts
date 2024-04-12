@@ -92,7 +92,7 @@ interface InitializeGameResponseJsonData extends WebSocketResponseRawData {
  * @type {object} 
  * @property {'game'} type - 操作类型。
  * @property {'shiftOnline'} action - 对目标게임操作的动作。
- * @property {GamePlayerSeatIndex} seatIndex - 플레이어的座位号。
+ * @property {GamePlayerSeatIndex} seatIndex - 플레이어的좌석번호。
  * @property {boolean} online - 플레이어是否在线。
  */
 interface ShiftOnlineGameResponseJsonData extends WebSocketResponseRawData {
@@ -116,9 +116,9 @@ interface TextToPlayerGameResponseJsonData extends WebSocketResponseRawData {
 
 /** 
  * @type {object} 
- * @property {GamePlayerSeatIndex|-1} target - 전송게임内信息플레이어的目标플레이어座位号，-1时向所有플레이어전송。textToPlayer时不为空。
+ * @property {GamePlayerSeatIndex|-1} target - 전송게임内信息플레이어的目标플레이어좌석번호，-1时向所有플레이어전송。textToPlayer时不为空。
  * @property {number} targetId - 전송게임内信息目标플레이어的的플레이어id，0时向所有플레이어전송。textToPlayer时不为空。
- * @property {GamePlayerSeatIndex} source - 전송게임内信息플레이어的座位号。textToPlayer时不为空。
+ * @property {GamePlayerSeatIndex} source - 전송게임内信息플레이어的좌석번호。textToPlayer时不为空。
  * @property {number} sourceId - 전송게임内信息플레이어的的플레이어id。textToPlayer时不为空。
  * @property {string} soundSrc - 전송게임内信息对应的语音文件路径。textToPlayer时不为空。
  * @property {string} text - 전송게임内信息对应的信息。textToPlayer时不为空。
