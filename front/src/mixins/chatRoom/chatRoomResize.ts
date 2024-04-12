@@ -101,7 +101,7 @@ export const chatRoomResize = Vue.extend({
                 this.playerInfoDialogWidth = '50%'
                 this.gameRoomItemWidth = 55
             }
-            /* 电脑 */
+            /* 컴퓨터 */
             else {
                 this.asideWidth = '300px'
                 this.footHeight = '220px'

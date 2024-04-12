@@ -25,7 +25,7 @@
  * @property {number} cards -  총 수집된 카드 수
  * @property {number} win - 우승게임수
  * @property {number} loss - 당기기게임수
- * @property {boolean} ready - 是否已准备
+ * @property {boolean} ready - 是否已준비하다
  */
 
 /**
@@ -87,7 +87,7 @@
  * @typedef ModelAiPlayer 数据库中的게임中플레이어信息。对应table:aiplayers。
  * @type {object}
  * @property {number} id - 主key，插入数据时不需要。
- * @property {string} ai_player_id - 电脑플레이어id，负数。
+ * @property {string} ai_player_id - 컴퓨터플레이어id，负数。
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
  * @property {number} cards - 수집된 카드 수。
  * @property {number} max_combo - 一次얻다最多的牌数。

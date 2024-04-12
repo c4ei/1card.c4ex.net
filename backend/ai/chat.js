@@ -17,7 +17,7 @@ const gameHandler = require('../websocket/gameHandler')
  */
 
 /** 
- * @summary 电脑플레이어聊天的处理。
+ * @summary 컴퓨터플레이어聊天的处理。
  * @param {number} id 게임房间id/게임id。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @returns {Promise<void>}
@@ -40,12 +40,12 @@ async function chatIntervalHandler(id, wss) {
                 aiPlayerIds.push(gameRoom.playerList[iSeatIndex].id)
             }
         }
-        if (aiPlayerIds.length === 0) { // 无电脑플레이어存在则结束处理
+        if (aiPlayerIds.length === 0) { // 无컴퓨터플레이어存在则结束处理
             return
         }
         aiPlayerIds.forEach(async aiPlayerId => {
             if (await aiPlayerChatCooldown(id, aiPlayerId) === false) return
-            const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:电脑플레이어id
+            const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:컴퓨터플레이어id
             const aiPlayerIndex = -1 * (aiPlayerId + 1)
             const aiPlayerChatContent = aiPlayerChatContents[aiPlayerIndex]
             /** @type {string[]} */
@@ -81,20 +81,20 @@ async function chatIntervalHandler(id, wss) {
             aiPlayerIdSeatIndexList.push({ aiPlayerId: game.gamePlayer[iSeatIndex].id, seatIndex: iSeatIndex })
         }
     }
-    if (aiPlayerIdSeatIndexList.length === 0) { // 无电脑플레이어存在则结束处理
+    if (aiPlayerIdSeatIndexList.length === 0) { // 无컴퓨터플레이어存在则结束处理
         return
     }
     const playCardTimerkey = conf.redisCache.aiChatPrefix + id + ':' + conf.redisCache.playCardTimerKeyStr
     const playCardTimerPExpire = await asyncPttl(playCardTimerkey)
     if (playCardTimerPExpire > 0 && playCardTimerPExpire < (poker.waitTime * 0.6)) {
-        const pushTimes = parseInt(await asyncGet(playCardTimerkey) || 0) // 催促次数，不超过电脑플레이어的健谈程度
+        const pushTimes = parseInt(await asyncGet(playCardTimerkey) || 0) // 催促次数，不超过컴퓨터플레이어的健谈程度
         aiPlayerIdSeatIndexList.forEach(async ({ aiPlayerId, seatIndex }) => {
             if (await aiPlayerChatCooldown(id, aiPlayerId) === false || game.currentPlayer === seatIndex) return
-            const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:电脑플레이어id
+            const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:컴퓨터플레이어id
             const aiPlayerIndex = -1 * (aiPlayerId + 1)
             const aiPlayerChatContent = aiPlayerChatContents[aiPlayerIndex]
             const playCardTimerExpire = playCardTimerPExpire / 1000
-            if (getRandom(0, playCardTimerExpire) <= aiPlayerChatContent.talkative && pushTimes < aiPlayerChatContent.talkative) { // 所剩时间越少，电脑플레이어越倾向于催促
+            if (getRandom(0, playCardTimerExpire) <= aiPlayerChatContent.talkative && pushTimes < aiPlayerChatContent.talkative) { // 所剩时间越少，컴퓨터플레이어越倾向于催促
                 textToPlayerInGame(game, aiPlayerChatContent, aiPlayerGameMessages[1], seatIndex, game.currentPlayer, aiPlayerChatKey, wss)
                 await asyncSet(playCardTimerkey, pushTimes + 1)
             }
@@ -103,10 +103,10 @@ async function chatIntervalHandler(id, wss) {
     if (game.remainCards.length === 0) {
         aiPlayerIdSeatIndexList.forEach(async ({ aiPlayerId, seatIndex }) => {
             if (await aiPlayerChatCooldown(id, aiPlayerId) === false) return
-            const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:电脑플레이어id
+            const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:컴퓨터플레이어id
             const aiPlayerIndex = -1 * (aiPlayerId + 1)
             const aiPlayerChatContent = aiPlayerChatContents[aiPlayerIndex]
-            if (game.gamePlayer[seatIndex].remainCards.length <= aiPlayerChatContent.talkative && getRandom(0, 50) <= aiPlayerChatContent.talkative) { // 电脑플레이어牌越少越倾向于再来一국
+            if (game.gamePlayer[seatIndex].remainCards.length <= aiPlayerChatContent.talkative && getRandom(0, 50) <= aiPlayerChatContent.talkative) { // 컴퓨터플레이어牌越少越倾向于再来一국
                 textToPlayerInGame(game, aiPlayerChatContent, aiPlayerGameMessages[3], seatIndex, -1, aiPlayerChatKey, wss)
             }
         })
@@ -117,11 +117,11 @@ async function chatIntervalHandler(id, wss) {
 /** 
  * @summary 在게임中전송聊天语音信息。
  * @param {RedisCacheGame} game 게임。
- * @param {AiPlayerChatContent} aiPlayerChatContent 电脑플레이어聊天属性。
- * @param {AiPlayerGameMessage} aiPlayerGameMessage 电脑플레이어聊天信息。
- * @param {GamePlayerSeatIndex} sourceSeatIndex 发出信息电脑플레이어座位。
+ * @param {AiPlayerChatContent} aiPlayerChatContent 컴퓨터플레이어聊天属性。
+ * @param {AiPlayerGameMessage} aiPlayerGameMessage 컴퓨터플레이어聊天信息。
+ * @param {GamePlayerSeatIndex} sourceSeatIndex 发出信息컴퓨터플레이어座位。
  * @param {GamePlayerSeatIndex | -1} [targetSeatIndex = -1] 接받다信息플레이어座位，默认-1。
- * @param {string} aiPlayerChatKey 储存在redis中的电脑플레이어key。
+ * @param {string} aiPlayerChatKey 储存在redis中的컴퓨터플레이어key。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @returns {Promise<void>}
  */
@@ -148,21 +148,21 @@ async function textToPlayerInGame(game, aiPlayerChatContent, aiPlayerGameMessage
 
 
 /** 
- * @summary 얻다电脑플레이어是否可聊天的boolean。
+ * @summary 얻다컴퓨터플레이어是否可聊天的boolean。
  * @param {number} id 게임房间id/게임id。
- * @param {number} aiPlayerId 电脑플레이어id。
+ * @param {number} aiPlayerId 컴퓨터플레이어id。
  * @returns {Promise<boolean>}
  */
 async function aiPlayerChatCooldown(id, aiPlayerId) {
     if (id === 0 || aiPlayerId >= 0) return false
-    const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:电脑플레이어id
+    const aiPlayerChatKey = conf.redisCache.aiChatPrefix + id + ':' + aiPlayerId // 发言前缀:房间id:컴퓨터플레이어id
     const isAiPlayerHasChat = await asyncExists(aiPlayerChatKey)
-    if (isAiPlayerHasChat > 0) { // 该电脑플레이어尚有发言在缓存中，则不继续发言
+    if (isAiPlayerHasChat > 0) { // 该컴퓨터플레이어尚有发言在缓存中，则不继续发言
         return false
     }
     const aiPlayerIndex = -1 * (aiPlayerId + 1)
     const aiPlayerChatContent = aiPlayerChatContents[aiPlayerIndex]
-    if (Math.random() * 50 > aiPlayerChatContent.talkative) { // 若电脑플레이어的健谈程度小于随机值则结束处理
+    if (Math.random() * 50 > aiPlayerChatContent.talkative) { // 若컴퓨터플레이어的健谈程度小于随机值则结束处理
         return false
     }
     return true
@@ -209,9 +209,9 @@ const loserChatContent = [
 
 /** 
  * @typedef {object} AiPlayerChatContent
- * @property {number} id 电脑플레이어的id
+ * @property {number} id 컴퓨터플레이어的id
  * @property {1|2|3|4|5} talkative 健谈程度,值越高则说话越频繁。
- * @property {string[]} content 电脑플레이어的聊天用语
+ * @property {string[]} content 컴퓨터플레이어的聊天用语
 */
 
 /** 
@@ -257,7 +257,7 @@ const aiPlayerChatContents = [
 
 /** 
  * @typedef {object} AiPlayerGameMessage
- * @property {number} id 电脑플레이어的id
+ * @property {number} id 컴퓨터플레이어的id
  * @property {string} music 播放的音频文件名。
  * @property {string} text 播放的音频对应的文本内容。
 */

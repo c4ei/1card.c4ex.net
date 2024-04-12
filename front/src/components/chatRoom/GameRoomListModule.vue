@@ -53,7 +53,7 @@ export default Vue.extend({
 
     methods: {
         getPlayer: function (n: number): WebSocketPlayer | { nickname: '공석', avatar_id: 0 } {
-            if (n < 0) { // id小于0为电脑플레이어
+            if (n < 0) { // id小于0为컴퓨터플레이어
                 return aiPlayerMetaData[-1 * (n + 1)]
             }
             for (let i = 0; i < this.playerList.length; i++) {

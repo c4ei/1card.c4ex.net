@@ -200,7 +200,7 @@ export default Vue.extend({
     computed: {
         getPlayerNameTagType: function () {
             if (this.player.id === 0) return 'info'
-            /* 게임未开始 */
+            /* 게임未시작 */
             if (this.playerLocRoom.status === 0) {
                 if (this.player.id === this.playerLocRoom.owner) {
                     return 'warning'
@@ -233,7 +233,7 @@ export default Vue.extend({
 
     methods: {
         getPlayer: function (): WebSocketPlayer | { nickname: string, avatar_id: number } {
-            if (this.player.id < 0) { // id小于0为电脑플레이어
+            if (this.player.id < 0) { // id小于0为컴퓨터플레이어
                 return aiPlayerMetaData[-1 * (this.player.id + 1)]
             }
             for (let i = 0; i < this.playerList.length; i++) {

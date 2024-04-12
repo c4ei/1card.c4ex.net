@@ -12,8 +12,8 @@
  * @property {GamePlayerSeatIndex | -1} currentPlayer - 现在카드 놀이플레이어的座位号：0~7，初始为-1。
  * @property {number[]} currentCard - 现在牌池中的牌，按花色升序排列。
  * @property {GamePlayerSeatIndex | -1} currentCardPlayer - 打出现在牌池中的牌的플레이어的座位号：0~7，初始为-1。
- * @property {number} jokerCard - 现在牌池中的反弹牌。
- * @property {GamePlayerSeatIndex | -1} jokerCardPlayer - 打出现在牌池中的反弹牌的플레이어的座位号：0~7，初始为-1。
+ * @property {number} jokerCard - 现在牌池中的반송 카드。
+ * @property {GamePlayerSeatIndex | -1} jokerCardPlayer - 打出现在牌池中的반송 카드的플레이어的座位号：0~7，初始为-1。
  * @property {number} cardNum - 使用牌덱数。
  * @property {number} metamorphoseNum - 每덱牌中변신 카드 수量。
  * @property {number} currentCombo - 现在的连击数。
@@ -58,7 +58,7 @@
  */
 
 /**
- * @typedef {Poker[]} Pokers 扑克牌的配置,0~53序号。100+序号为变身牌，反弹牌没有变身牌。
+ * @typedef {Poker[]} Pokers 扑克牌的配置,0~53序号。100+序号为变身牌，반송 카드没有变身牌。
  */
 
 /** 

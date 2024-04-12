@@ -263,7 +263,7 @@ module.exports = async function (data, wss, ws) {
                     }
                 })
             }
-            /* 准备 */
+            /* 준비하다 */
             else if (data.action === 'ready') {
                 const roomRes = await asyncGet(roomId)
                 if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }
@@ -341,11 +341,11 @@ module.exports = async function (data, wss, ws) {
                 if (room.playerList[targetSeatIndex].id !== data.targetId || room.playerList[sourceSeatIndex].id !== data.sourceId) {
                     return
                 }
-                /* 目标位置没有플레이어或是电脑플레이어则直接换 */
+                /* 目标位置没有플레이어或是컴퓨터플레이어则直接换 */
                 if (room.playerList[targetSeatIndex].id <= 0) {
                     const temporaryPlayer = room.playerList[targetSeatIndex]
                     room.playerList[targetSeatIndex] = room.playerList[sourceSeatIndex]
-                    if (temporaryPlayer.id < 0) { // 目标位置是电脑플레이어则将其설정到자리이동置请求的플레이어座位上
+                    if (temporaryPlayer.id < 0) { // 目标位置是컴퓨터플레이어则将其설정到자리이동置请求的플레이어座位上
                         room.playerList[sourceSeatIndex] = temporaryPlayer
                     }
                     else {

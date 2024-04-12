@@ -73,7 +73,7 @@ function deDuplicatedCombination(allCombination) {
  */
 function playCardFilter(combination) {
     if (combination.some(card => poker.getIndexOfCardList(card).num === 100)) {
-        return combination.every(card => poker.getIndexOfCardList(card).num === 100) // 所有牌为反弹牌的情况返回TRUE
+        return combination.every(card => poker.getIndexOfCardList(card).num === 100) // 所有牌为반송 카드的情况返回TRUE
     }
     // 过滤出所有下标为1以上的牌的牌面等于基本牌的牌面或等于变身牌的牌型
     return combination.every((card, index) => index === 0 || (poker.getIndexOfCardList(card).num === poker.getIndexOfCardList(combination[0]).num || card >= 100))
@@ -151,7 +151,7 @@ function getHigherPlayCardsList(currentCard, remainCards) {
 
     result = tempResult.filter(tempResItem => {
         const { num: cardNum } = poker.getIndexOfCardList(tempResItem[0])
-        if (cardNum === 100) { // 反弹牌的话纳入结果
+        if (cardNum === 100) { // 반송 카드的话纳入结果
             return true
         }
         if (currentCardNum < 30) { // 现在牌池中的牌为师傅以外的情况
@@ -199,7 +199,7 @@ function aiPlay(game) {
                     break
                 }
             }
-            if (poker.getIndexOfCardList(playCard[i]).num === 100) { // 反弹牌的话不作处理
+            if (poker.getIndexOfCardList(playCard[i]).num === 100) { // 반송 카드的话不作处理
                 continue
             }
             if (playCard[i] >= 100) {

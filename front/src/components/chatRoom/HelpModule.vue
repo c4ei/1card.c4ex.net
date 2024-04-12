@@ -8,7 +8,7 @@
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>게임 프로세스</h1>
             <hr class="divider-line">
             <h2 :style="{ 'font-size': fontSize }"> 开국：</h2>
-            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어开始카드 놀이。</p>
+            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어시작카드 놀이。</p>
             <h2 :style="{ 'font-size': fontSize }">주문：</h2>
             <p :style="{ 'font-size': fontSize }">일반적으로 국카드 놀이플레이어 오프닝부터 시작하여 시계 반대 방향으로 주문카드 놀이를 진행하며, 플레이어가 플레이하는 관음이나 여래가 있을 때에는 카드 놀이 방향을 반대로 진행합니다.</p>
             <h2 :style="{ 'font-size': fontSize }">카드 놀이：</h2>
@@ -25,7 +25,7 @@
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
             <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次카드 놀이的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
             <h2 :style="{ 'font-size': fontSize }">받다牌：</h2>
-            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃카드 놀이并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新开始카드 놀이。</p>
+            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃카드 놀이并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新시작카드 놀이。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
             <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束게임。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小주문</h1>
@@ -111,7 +111,7 @@
                 :src="require('@/assets/images/poker/3A.png')"></el-avatar>
             <p :style="{ 'font-size': fontSize }">上述例子中，<span style="color: red">♦3</span>称为“原形牌”。</p>
             <p :style="{ 'font-size': fontSize }">2. 变身牌变身后，牌点变为原形牌的牌点，花色保持自身的花色。</p>
-            <p :style="{ 'font-size': fontSize }">3. 变身牌不能变身观音或如来(即反弹牌)。</p>
+            <p :style="{ 'font-size': fontSize }">3. 变身牌不能变身观音或如来(即반송 카드)。</p>
             <h2 :style="{ 'font-size': fontSize }">使用方法：</h2>
             <p :style="{ 'font-size': fontSize }">1. 要使用变身牌，首先请选择要作为变身对象的原形牌，如上述<span style="color: red">♦3</span>。</p>
             <p :style="{ 'font-size': fontSize }">2. 然后点击 <el-tag type="primary" effect="dark">变身</el-tag> 按钮，选择变身牌，如上述♠2。
@@ -146,7 +146,7 @@
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/13B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/1D.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/8B.png')"></el-avatar>
-            <p :style="{ 'font-size': fontSize }">此时上家打出了一개♠2，</p>
+            <p :style="{ 'font-size': fontSize }">此时上家입력됨一개♠2，</p>
             <p :style="{ 'font-size': fontSize }">
                 虽然大多数时候我们都从小牌出起，但考虑到국势的发展，如果我们接着打出♣4，等再次轮到我们时，上家牌极有可能是徒弟牌，而此时我们手上徒弟师傅牌不足，无法应付可能到来的情况。</p>
             <p :style="{ 'font-size': fontSize }">所以一개较为大胆的做法是：打出K或者A。这样大概率等再次轮到我们时，上家牌会是师傅或者一개点数较小的妖怪。</p>
@@ -230,7 +230,7 @@
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">本网页效仿了各种棋牌게임的防作弊机制，即게임进行中时不能通过打字与其他플레이어交流。</p>
-                        <p :style="{ 'font-size': fontSize }">但我们仍为您准备了一些SPEED的语句，可以通过点击플레이어或自己的计分板来选择要说的话。</p>
+                        <p :style="{ 'font-size': fontSize }">但我们仍为您준비하다了一些SPEED的语句，可以通过点击플레이어或自己的计分板来选择要说的话。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="8">

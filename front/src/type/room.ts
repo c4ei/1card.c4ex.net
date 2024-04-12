@@ -63,7 +63,7 @@ export type RoomPlayers = { [key in GamePlayerSeatIndex]: WebSocketPlayerInRoom 
  * @type {object}
  * @property {number} id - 房间id
  * @property {string} name -  방이름 
- * @property {0|1} status - 房间状态 0:기다리다开始, 1:게임中
+ * @property {0|1} status - 房间状态 0:기다리다시작, 1:게임中
  * @property {boolean} needPassword - 是否需要비밀번호
  * @property {string} password - 비밀번호
  * @property {number} cardNum - 使用牌的덱数
@@ -71,7 +71,7 @@ export type RoomPlayers = { [key in GamePlayerSeatIndex]: WebSocketPlayerInRoom 
  * @property {number} owner - 房主的플레이어id
  * @property {number} lastLoser - 上국당기기的플레이어id
  * @property {number} lastWinner - 上국우승的플레이어id
- * @property {number?} chatInterval - 控制电脑플레이어聊天的定时器, 방 만들기请求时并不需要传递该属性，所以该属性没有写在类型中。
+ * @property {number?} chatInterval - 控制컴퓨터플레이어聊天的定时器, 방 만들기请求时并不需要传递该属性，所以该属性没有写在类型中。
  * @property {RoomPlayers} playerList - 플레이어信息列表，下标0~7
  */
 export interface WebSocketGameRoom {
@@ -95,7 +95,7 @@ export interface WebSocketGameRoom {
  * @property {number} cards -  총 수집된 카드 수
  * @property {number} win - 우승게임수
  * @property {number} loss - 당기기게임수
- * @property {boolean} ready - 是否已准备
+ * @property {boolean} ready - 是否已준비하다
  */
 export interface WebSocketPlayerInRoom {
     id: number,

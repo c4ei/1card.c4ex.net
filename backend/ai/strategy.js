@@ -7,7 +7,7 @@ const { getRandom } = poker
  * @description 
  * 牌池中无牌时，按妖怪，徒弟，师傅&反弹的주문选出카드 놀이的组合。即有可打出的妖怪牌组合时优先打妖怪牌中的随机组合，没有则打徒弟，依次类推。且，
  *   1.当考虑妖怪牌的카드 놀이策略时，플레이어手中的妖怪牌越多，越倾向于出多牌组合。
- *   2.当考虑非妖怪牌的카드 놀이策略时，不打反弹牌或带变身牌的多牌,及尽量少打多牌。
+ *   2.当考虑非妖怪牌的카드 놀이策略时，不打반송 카드或带变身牌的多牌,及尽量少打多牌。
  * 牌池中为单牌，连击数低，且满足以下条件之一时，弃牌不出。
  *   1.플레이어手中不能打出的妖怪牌多
  *   2.플레이어只能打出徒弟牌管上现在牌池牌面，且플레이어手中妖怪牌多
@@ -44,7 +44,7 @@ function strategy(game, playCards, remainCards) {
                         }
                     }
                 }
-                else { // 徒弟或师傅牌时，则不打反弹牌或带变身牌的多牌,及尽量少打多牌
+                else { // 徒弟或师傅牌时，则不打반송 카드或带变身牌的多牌,及尽量少打多牌
                     const morphoseAndJokerExcludedPlayCards = excludedPlayCards.filter(playCard => playCard.length === 1 ? poker.getIndexOfCardList(playCard[0]).num !== 100 : playCard.every(card => card < 100))
                     const multipleExcludedPlayCards = morphoseAndJokerExcludedPlayCards.filter(playCard => {
                         if (playCard.length === 1) { return true } // 出单장OK

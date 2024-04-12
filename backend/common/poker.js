@@ -123,8 +123,8 @@ module.exports = {
     waitTime: 20000,
     /** 플레이어托管时기다리다的时间 */
     offLineWaitTime: 1000,
-    /** 电脑플레이어카드 놀이时기다리다的基础时间 */
+    /** 컴퓨터플레이어카드 놀이时기다리다的基础时间 */
     aiPlayBasicWaitTime: 1500,
-    /** 电脑플레이어카드 놀이时기다리다的附加时间的随机值 */
+    /** 컴퓨터플레이어카드 놀이时기다리다的附加时间的随机值 */
     aiPlayerRandomWaitTime: 1000,
 }

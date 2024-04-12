@@ -103,7 +103,7 @@ export default Vue.extend({
                             6: { id: 0, cards: 0, win: 0, loss: 0, ready: false },
                             7: { id: 0, cards: 0, win: 0, loss: 0, ready: false },
                     }
-                    if (this.gameRoomValidateForm.aiNum > 0) { // 추가电脑플레이어
+                    if (this.gameRoomValidateForm.aiNum > 0) { // 추가컴퓨터플레이어
                         const aiPlayerLength = aiPlayerMetaData.length
                         const randomPickNums: number[] = []
                         for (let n = 0; n < aiPlayerLength; n++) {

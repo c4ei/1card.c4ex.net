@@ -266,7 +266,7 @@ export default cardList.extend({
                 return
             }
             if ((this.sortCardList !== null && this.getIndexOfCardList(this.sortCardList[this.selectCard[0]]).num === 100) || this.getIndexOfCardList(this.gameInfo.currentCard[0]).num === 100) {
-                //打出的牌是反弹牌，或现有牌池是反弹牌，则无须比较
+                //打出的牌是반송 카드，或现有牌池是반송 카드，则无须比较
                 this.sendPlayCard()
                 return
             }

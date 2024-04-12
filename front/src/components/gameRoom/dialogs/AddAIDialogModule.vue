@@ -26,7 +26,7 @@ export default aiPlayer.extend({
     data() {
         return {
 			/** 
-			 * 暂时选择的电脑플레이어在{@link cardList} 中的序号
+			 * 暂时选择的컴퓨터플레이어在{@link cardList} 中的序号
 			 */
 			temAIPlayerIndex: -1,
         }

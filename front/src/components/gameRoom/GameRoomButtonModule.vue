@@ -6,7 +6,7 @@
         <el-button v-else :type="isNotReady && !isGamePlaying ? 'success' : 'info'" class="chat-room-aside-button"
             :icon="!isNotReady ? 'el-icon-circle-check' : 'el-icon-caret-right'" :style="{ 'font-size': largeFontSize }"
             @click="emitReadyToStartGame" :size="buttonSize" :disabled="isGamePlaying">{{ !isNotReady ? '已' : ''
-            }}准备</el-button>
+            }}준비하다</el-button>
         <el-button :type="isGamePlaying ? 'info' : 'danger'" class="chat-room-aside-button" icon="el-icon-d-arrow-left"
             :style="{ 'font-size': largeFontSize }" @click="emitCancelLeaveDialog" :size="buttonSize"
             :disabled="isGamePlaying">방을 나가다</el-button>
@@ -22,7 +22,7 @@
         <el-button v-else :type="isNotReady && !isGamePlaying ? 'success' : 'info'" class="chat-room-header-button"
             :icon="!isNotReady ? 'el-icon-circle-check' : 'el-icon-caret-right'"
             :style="{ 'font-size': largeFontSize, 'padding': '0px 0px' }" @click="emitReadyToStartGame" :size="buttonSize"
-            round :disabled="isGamePlaying">{{ !isNotReady ? '已' : '' }}准备</el-button>
+            round :disabled="isGamePlaying">{{ !isNotReady ? '이미' : '' }}준비하다</el-button>
     </div>
 </template>
 
@@ -77,7 +77,7 @@ export default Vue.extend({
                 if (playerNum < 2) {
                     return true
                 }
-                /* 除房主之外的人都已准备好 */
+                /* 除房主之外的人都已준비하다好 */
                 for (let i = 0; i < Object.keys(this.playerLocRoom.playerList).length; i++) {
                     if (this.playerLocRoom.playerList[i as GamePlayerSeatIndex].id === 0) {
                         continue

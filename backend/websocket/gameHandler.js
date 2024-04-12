@@ -40,6 +40,7 @@ module.exports = async function (data, wss, ws) {
         const gameRoomKey = conf.redisCache.gameRoomPrefix + data.id
         const gameKey = conf.redisCache.gamePrefix + data.id
         if (data.action === 'initialize') {
+            console.log("/backend/websocket/gameHandler.js - 43 : " + initialize +" / gameRoomKey : " + gameRoomKey+" / gameKey : " + gameKey);
             await asyncWatch(gameKey, gameRoomKey)
             const gameRes = await asyncGet(gameKey)
             if (gameRes !== null) {
@@ -49,20 +50,20 @@ module.exports = async function (data, wss, ws) {
             const playerKeys = await asyncKeys(conf.redisCache.playerPrefix + '*')
             const playerListRes = await asyncMget(playerKeys)
             /** @type {RedisCacheRoomInfo} */
-            const gameRoom = JSON.parse(gameRoomRes) //게임房间
+            const gameRoom = JSON.parse(gameRoomRes) //게임방식
             /** @type {string[]} */
-            const redisMSetStrList = [] //mSet批量改变플레이어게임状态的redis语句
+            const redisMSetStrList = [] //mSet 은 플레이어게임의 상태를 일괄적으로 변경하기 위해 redis 문을 설정합니다
             /** @type {RedisCachePlayerInGame[]} */
-            const gamePlayerList = []  //player:列表
+            const gamePlayerList = []  //player:목록
             /** @type {number[]} */
-            const pokers = [] //扑克牌数字列表
+            const pokers = [] //포커 번호 목록
             for (let i = 0; i < gameRoom.cardNum; i++) {
                 for (let j = 0; j < 54; j++) {
                     pokers.push(j)
                 }
             }
             poker.shuffle(pokers)
-            if (gameRoom.metamorphoseNum > 0) {//插入变身牌
+            if (gameRoom.metamorphoseNum > 0) {//변신 카드 삽입
                 let addMetamorphoseNum = 0
                 for (let i = 0; i < pokers.length && addMetamorphoseNum < gameRoom.metamorphoseNum * gameRoom.cardNum; i++) {
                     if (pokers[i] === 52 || pokers[i] === 53) {
@@ -79,7 +80,7 @@ module.exports = async function (data, wss, ws) {
                 id: data.id,
                 clockwise: false,
                 /** @type {GamePlayerSeatIndex} */
-                currentPlayer: -1, //座位号
+                currentPlayer: -1, //좌석 번호
                 /** @type {number[]} */
                 currentCard: [],
                 /** @type {GamePlayerSeatIndex} */
@@ -126,7 +127,7 @@ module.exports = async function (data, wss, ws) {
                         game.currentPlayer = iSeatIndex
                     }
                     for (let j = 0; j < gamePlayerList.length; j++) {
-                        /** 是否该给改플레이어发牌 */
+                        /**  플레이어를 변경하려면 카드를 발급해야 할까요? */
                         let shouldDeal = false
                         /** @type {GamePlayerSeatIndex} */
                         const jSeatIndex = j
@@ -141,7 +142,7 @@ module.exports = async function (data, wss, ws) {
                             redisMSetStrList.push(JSON.stringify(gamePlayerList[jSeatIndex]))
                             shouldDeal = true
                         }
-                        else if (gameRoom.playerList[iSeatIndex].id < 0) { // 电脑플레이어
+                        else if (gameRoom.playerList[iSeatIndex].id < 0) { // 컴퓨터 플레이어
                             const aiPlayer = aiPlayerMetaData[-1 * (gameRoom.playerList[iSeatIndex].id + 1)]
                             game.gamePlayer[iSeatIndex].id = aiPlayer.id
                             game.gamePlayer[iSeatIndex].nickname = aiPlayer.nickname
@@ -181,7 +182,7 @@ module.exports = async function (data, wss, ws) {
             game.remainCards = game.remainCards.length
             game.messages = []
             /** @type {string[]} */
-            const messageList = ['게임开始']
+            const messageList = ['게임시작']
             messageList.forEach(text => game.messages.push(text))
             game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
             const gameStr = JSON.stringify(game)
@@ -198,7 +199,7 @@ module.exports = async function (data, wss, ws) {
             const game = JSON.parse(gameRes)
             game.remainCards = game.remainCards.length
             game.messages = []
-            game.messages.push('重新连接...')
+            game.messages.push('다시 연결하다...')
             game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' 카드 놀이...')
             ws.send(JSON.stringify({ type: 'game', action: 'get', data: JSON.stringify(game) }))
 
@@ -208,7 +209,7 @@ module.exports = async function (data, wss, ws) {
             /** @type {RedisCacheGame} */
             const game = JSON.parse(gameRes)
             if (game.currentPlayer === data.seatIndex) {
-                const playCardText = game.gamePlayer[game.currentPlayer].nickname + ' 打出了' + poker.getIndexOfCardList(data.playCard[0]).name
+                const playCardText = game.gamePlayer[game.currentPlayer].nickname + ' 입력됨' + poker.getIndexOfCardList(data.playCard[0]).name
                 let numOfBianshen = 0
                 game.gamePlayer[game.currentPlayer].online = true
                 game.gamePlayer[game.currentPlayer].offLineTime = 0
@@ -237,7 +238,7 @@ module.exports = async function (data, wss, ws) {
                     game.jokerCard = []
                     game.jokerCardPlayer = -1
                 }
-                if (poker.getIndexOfCardList(data.playCard[0]).num === 100) {//反弹牌
+                if (poker.getIndexOfCardList(data.playCard[0]).num === 100) { //반송 카드
                     game.gamePlayer[data.seatIndex].joker = game.gamePlayer[data.seatIndex].joker + data.playCard.length
                     game.clockwise = !game.clockwise
                     if (game.currentCard.length === 0) {
@@ -266,11 +267,11 @@ module.exports = async function (data, wss, ws) {
                         game.gamePlayer[data.seatIndex].tangseng = game.gamePlayer[data.seatIndex].tangseng + data.playCard.length - numOfBianshen
                     }
                 }
-                if (game.remainCards.length <= 0 && game.gamePlayer[game.currentPlayer].cards >= 1) { // 无牌补时，连击数+1
+                if (game.remainCards.length <= 0 && game.gamePlayer[game.currentPlayer].cards >= 1) { // 카드 추가 시간 없음, 콤보 카운트 +1
                     game.currentCombo += 1
                     game.gamePlayer[game.currentPlayer].cards -= 1
                 }
-                while (game.gamePlayer[data.seatIndex].remainCards.length < 5 && game.remainCards.length > 0) {//补牌
+                while (game.gamePlayer[data.seatIndex].remainCards.length < 5 && game.remainCards.length > 0) { // 补牌 (야당)
                     game.gamePlayer[data.seatIndex].remainCards.push(game.remainCards.pop())
                 }
                 let hasPlayerPlayCard = false
@@ -316,7 +317,7 @@ module.exports = async function (data, wss, ws) {
                 if (game.currentCombo > game.gamePlayer[game.currentPlayer].maxCombo) {
                     game.gamePlayer[game.currentPlayer].maxCombo = game.currentCombo
                 }
-                const playCardText = game.gamePlayer[game.currentPlayer].nickname + ' 받다下 ' + game.currentCombo + ' 장牌'
+                const playCardText = game.gamePlayer[game.currentPlayer].nickname + ' 받다下 ' + game.currentCombo + ' 장 카드'
                 game.jokerCard = []
                 game.jokerCardPlayer = -1
                 game.gamePlayer[game.currentPlayer].cards = game.gamePlayer[game.currentPlayer].cards + game.currentCombo
@@ -343,7 +344,7 @@ module.exports = async function (data, wss, ws) {
             const player = game.gamePlayer[data.seatIndex]
             player.online = !player.online
             player.offLineTime = 0
-            // game.version = game.version + 1  설정托管不更新数据版本
+            // game.version = game.version + 1  설정 호스팅은 데이터 버전을 업데이트하지 않습니다.
             await asyncSet(gameKey, JSON.stringify(game))
             if (player.online) {
                 ws.send(JSON.stringify({ type: 'message', subType: 'success', player_loc: data.id, text: '已취소托管' }))
@@ -420,8 +421,8 @@ async function intervalCheckCard(wss, thisTimer, id) {
             game.currentCombo = 1
             let playCard = game.gamePlayer[game.currentPlayer].remainCards.shift()
             playCard = playCard < 100 ? playCard : playCard - 100
-            const playCardText = game.gamePlayer[game.currentPlayer].nickname + ' 打出了' + poker.getIndexOfCardList(playCard).name
-            if (poker.getIndexOfCardList(playCard).num === 100) {//反弹牌
+            const playCardText = game.gamePlayer[game.currentPlayer].nickname + ' 입력됨' + poker.getIndexOfCardList(playCard).name
+            if (poker.getIndexOfCardList(playCard).num === 100) {//반송 카드
                 game.gamePlayer[game.currentPlayer].joker = game.gamePlayer[game.currentPlayer].joker + 1
                 game.clockwise = !game.clockwise
             }
@@ -710,7 +711,7 @@ async function saveGameData(game, wss, losePlayer, winPlayer, minCards, maxCards
             const seatKey = i
             /** @type {RedisCachePlayerInGame} */
             const player = game.gamePlayer[seatKey]
-            if (player.id < 0) { // 电脑플레이어不需增加经验
+            if (player.id < 0) { // 컴퓨터플레이어不需增加经验
                 insertAiPlayersInfo.push({
                     ai_player_id: player.id,
                     cards: player.cards,
@@ -923,7 +924,7 @@ function getPlayCardTimer(game, currentPlayer, wss, delay) {
         return setTimeout(async function () { await intervalCheckCard(wss, this, game.id) }, delay)
     }
     else if (currentPlayerId < 0) {
-        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, 99999]])() // 电脑플레이어不必催促所以仅设定一개较长时间
+        asyncMultiExec([['set', playCardTimerKey, 0], ['pexpire', playCardTimerKey, 99999]])() // 컴퓨터플레이어不必催促所以仅设定一개较长时间
         return setTimeout(function () {
             const playCardWebSocketRequestData = aiPlay(game)
             /** 

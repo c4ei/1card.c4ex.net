@@ -79,7 +79,7 @@ export type WebSocketGameResponseJsonData = InitializeGameResponseJsonData | Shi
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'initialize'} action - 对目标게임操作的动作。
+ * @property {'initialize'} action - 타겟 게임에 동작하는 액션
  * @property {string} data - 返回的字符串可Json parse转换为WebSocketGame。
  */
 interface InitializeGameResponseJsonData extends WebSocketResponseRawData {

@@ -15,7 +15,7 @@
  * @type {object}
  * @property {number} id - 房间id
  * @property {string} name -  방이름 
- * @property {0|1} status - 房间状态 0:기다리다开始, 1:게임中
+ * @property {0|1} status - 房间状态 0:기다리다시작, 1:게임中
  * @property {boolean} needPassword - 是否需要비밀번호
  * @property {string} password - 비밀번호
  * @property {number} cardNum - 使用牌的덱数
@@ -23,7 +23,7 @@
  * @property {number} owner - 房主的플레이어id
  * @property {number} lastLoser - 上국당기기的플레이어id
  * @property {number} lastWinner - 上국우승的플레이어id
- * @property {number} chatInterval - 控制电脑플레이어聊天的定时器
+ * @property {number} chatInterval - 控制컴퓨터플레이어聊天的定时器
  * @property {RoomPlayers} playerList - 플레이어信息列表，下标0~7
  */
 
@@ -32,10 +32,10 @@
  * @type {object} 
  * @property {number} id - 目标房间id 0为获取所有房间，NaN为만들다新房间，小于0为离开目标房间，大于0是对目标房间的操作。
  * @property {string?} name -  방이름。방 만들기,edit时不为空。
- * @property {(0|1)?} status - 房间状态 0:기다리다开始, 1:게임中。방 만들기时不为空。
+ * @property {(0|1)?} status - 房间状态 0:기다리다시작, 1:게임中。방 만들기时不为空。
  * @property {boolean?} needPassword - 是否需要비밀번호。방 만들기,edit时不为空。
  * @property {string?} password - 비밀번호。방 만들기，须비밀번호enter，edit时不为空。
- * @property {number?} aiPlayerId - 电脑플레이어id。enter时一般플레이어为0，컴퓨터에 연결플레이어为负数。
+ * @property {number?} aiPlayerId - 컴퓨터플레이어id。enter时一般플레이어为0，컴퓨터에 연결플레이어为负数。
  * @property {number?} cardNum - 使用牌的덱数。방 만들기,edit时不为空。
  * @property {number?} metamorphoseNum - 每덱牌변신 카드 수量。방 만들기,edit时不为空。
  * @property {number?} owner - 房主的플레이어id。방 만들기时不为空。

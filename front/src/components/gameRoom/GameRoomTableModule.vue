@@ -376,7 +376,7 @@ export default cardList.extend({
 				playSound("card-shuffle")
 				return
 			}
-			//有反弹牌则优先发出反弹牌的音效
+			//有반송 카드则优先发出반송 카드的音效
 			if (this.gameInfo.jokerCard.length > 0) {
 				if (this.getIndexOfCardList(this.gameInfo.jokerCard[0]).suit === 1) {
 					playSound("playCard/guanyin")
