@@ -24,7 +24,7 @@
             <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如콤보 수为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4장。</p>
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
             <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次PLAY的콤보 수+1，并把플레이어的수집된 카드 수扣除1。</p>
-            <h2 :style="{ 'font-size': fontSize }">받다牌：</h2>
+            <h2 :style="{ 'font-size': fontSize }">카드받다：</h2>
             <p :style="{ 'font-size': fontSize }">当플레이어打PASS“大于”牌时，则放弃PLAY并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新시작PLAY。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
             <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束게임。</p>
@@ -113,7 +113,7 @@
             <p :style="{ 'font-size': fontSize }">2. 변환牌변환后，牌点变为原形牌的牌点，花色保持自身的花色。</p>
             <p :style="{ 'font-size': fontSize }">3. 변환牌不能변환观音或如来(即반송 카드)。</p>
             <h2 :style="{ 'font-size': fontSize }">使用方法：</h2>
-            <p :style="{ 'font-size': fontSize }">1. 要모프사용牌，首先请选择要作为변환对象的原形牌，如上述<span style="color: red">♦3</span>。</p>
+            <p :style="{ 'font-size': fontSize }">1. 要모프사용牌，首先선택要作为변환对象的原形牌，如上述<span style="color: red">♦3</span>。</p>
             <p :style="{ 'font-size': fontSize }">2. 然后点击 <el-tag type="primary" effect="dark">변환</el-tag> 按钮，选择변환牌，如上述♠2。
             </p>
             <p :style="{ 'font-size': fontSize }">3. 选好변환牌后，最后点击PLAY即可。</p>
@@ -121,14 +121,14 @@
 
         <el-tab-pane label="게임技巧" name="skill" lazy>
             <p :style="{ 'font-size': fontSize }"><i
-                    class="el-icon-warning-outline"></i>西游记게임本身并没有什么太多技巧，플레이어받다牌多少，运气占很大部分，以下技巧仅供参考。</p>
+                    class="el-icon-warning-outline"></i>西游记게임本身并没有什么太多技巧，플레이어카드받다多少，运气占很大部分，以下技巧仅供参考。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>保持牌型</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">尽量保证自己手上有各种牌型：요괴、徒弟、师傅，缺一不可。观音和如来则不到万不得已尽量不用，留作杀手锏。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>小牌先出</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">大多数时候，先把小牌打出去都是正确的选择，当然也有特殊情况，具体可参考下方“控制국势”。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>战略性받다牌</h1>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>전략적인 카드를 받다</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">当连击牌池中的牌数不多，且手上的牌如以下所示时</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
@@ -136,7 +136,7 @@
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/11A.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/3D.png')"></el-avatar>
-            <p :style="{ 'font-size': fontSize }">虽然받다牌并不是我们想要的，但从长远的战略眼光来看，可以忍痛받다下牌，然后把3개2一次性打出以调整自己的手牌组合。</p>
+            <p :style="{ 'font-size': fontSize }">虽然카드받다并不是我们想要的，但从长远的战略眼光来看，可以忍痛받다下牌，然后把3개2一次性打出以调整自己的手牌组合。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>控制국势</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">大部分情况下，牌국的走势是不受我们控制的，但我们仍然可以在一定范围内左右它。</p>
@@ -190,7 +190,7 @@
                 <el-collapse-item name="3">
                     <template slot="title">
                         <i class="el-icon-question"></i><span
-                            :style="{ 'font-size': fontSize }">Q：설정了배경 음악和게임音效开启但仍然没有声音？</span>
+                            :style="{ 'font-size': fontSize }">Q：설정了배경 음악和음향 효과开启但仍然没有声音？</span>
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">由于ios等移动端的限制，进入本网页时并不会自动播放音乐，而是需要点击屏幕一下以激活音乐播放器，才能成功播放音乐。</p>
@@ -235,16 +235,16 @@
                 </el-collapse-item>
                 <el-collapse-item name="8">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：SPEED中的方言是？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：SPEED中的방언是？</span>
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">作者家乡的桂林话及一些自创的术语。其中</p>
-                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫플레이어받다牌的“받다”一개意思，但表达语气更强烈。</p>
-                        <p :style="{ 'font-size': fontSize }">所所所：所，通日语师匠的匠「しょう」(syo)，意为“求师傅”。</p>
-                        <p :style="{ 'font-size': fontSize }">卷卷卷：桂林话的“转”，意味“求转向”。</p>
-                        <p :style="{ 'font-size': fontSize }">我霉了：霉，桂林话，一般指物理状态的软烂，此处大意为“我人没了”、“我烂掉了”、“我당기기了”。</p>
-                        <p :style="{ 'font-size': fontSize }">瘾：桂林话，大意为“过瘾”、“痛快”。</p>
-                        <p :style="{ 'font-size': fontSize }">我好方啊：方，桂林话，意思同“慌”。</p>
+                        <p :style="{ 'font-size': fontSize }">씻다：通日语「しね」(shi ne)，与叫플레이어카드받다的“받다”一개意思，但表达语气更强烈。</p>
+                        <p :style="{ 'font-size': fontSize }">위치：所，通日语师匠的匠「しょう」(syo)，意为“스승을 구하라”。</p>
+                        <p :style="{ 'font-size': fontSize }">롤롤롤：桂林话的“转”，意味“차례를 묻는다”。</p>
+                        <p :style="{ 'font-size': fontSize }">나는 나쁘다：霉，桂林话，一般指物理状态的软烂，此处大意为“나는 사라졌다”、“我烂掉了”、“我당기기了”。</p>
+                        <p :style="{ 'font-size': fontSize }">탐닉：桂林话，大意为“过탐닉”、“痛快”。</p>
+                        <p :style="{ 'font-size': fontSize }">나는 너무 친절하다：方，桂林话，意思同“慌”。</p>
                     </div>
                 </el-collapse-item>
             </el-collapse>

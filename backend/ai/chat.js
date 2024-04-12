@@ -271,7 +271,7 @@ const aiPlayerGameMessages = [
     { id: 3, music: "3", text: "행복한 협력" },
     { id: 4, music: "4", text: "떠나지 마세요. 우리는 새벽까지 싸울 것입니다." },
     { id: 5, music: "5", text: "작은 작은 작은" },
-    { id: 6, music: "6", text: "大大大大" },
+    { id: 6, music: "6", text: "대대대大" },
     { id: 7, music: "7", text: "마스터 찾기" },
     { id: 8, music: "8", text: "행복하세요" },
     { id: 9, music: "9", text: "조향 요청" },

@@ -26,17 +26,17 @@ module.exports =
         // if (req._parsedUrl.path.indexOf('/rest/v1/login') !== -1 || req._parsedUrl.path.indexOf('/rest/v1/register') !== -1) {
         if (req._parsedUrl.path.indexOf('/v1/login') !== -1 || req._parsedUrl.path.indexOf('/v1/register') !== -1) {
             next();
-            console.log("요청한 경로가 로그인 또는 등록인 경우 통과");
+            // console.log("요청한 경로가 로그인 또는 등록인 경우 통과");
         }
         else {
             //요청이 다른 경로에 대한 것이고 요청에 session.username이 포함된 경우 전달합니다.
             if (req.session.username) {
                 next();
-                console.log("요청이 다른 경로에 대한 것이고 요청에 session.username이 포함된 경우 전달합니다. : "+req.session.username);
+                // console.log("요청이 다른 경로에 대한 것이고 요청에 session.username이 포함된 경우 전달합니다. : "+req.session.username);
             }
             //그렇지 않으면 세션 만료 오류가 보고됩니다.
             else {
-                console.log("그렇지 않으면 세션 만료 오류가 보고됩니다. errors.SESSION_TIMEOUT ");
+                // console.log("그렇지 않으면 세션 만료 오류가 보고됩니다. errors.SESSION_TIMEOUT ");
                 res.status(200).json(errors.SESSION_TIMEOUT);
             }
         }

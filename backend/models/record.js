@@ -35,25 +35,25 @@ const Record = db.defineModel('record',
             type: db.dataTypes.INTEGER(11),
             defaultValue: 0
         },
-        /* 最多받다牌比时的수집된 카드 수 */
+        /* 最多카드받다比时的수집된 카드 수 */
         max_card:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最多받다牌比时该국플레이어平均수집된 카드 수 */
+        /* 最多카드받다比时该국플레이어平均수집된 카드 수 */
         max_card_amount:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最少받다牌比时的수집된 카드 수 */
+        /* 最少카드받다比时的수집된 카드 수 */
         min_card:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最少받다牌比时该국플레이어平均수집된 카드 수 */
+        /* 最少카드받다比时该국플레이어平均수집된 카드 수 */
         min_card_amount:
         {
             type: db.dataTypes.INTEGER(4),

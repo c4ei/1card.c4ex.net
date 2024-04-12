@@ -23,7 +23,7 @@ const AiPlayer = db.defineModel('aiPlayer',
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最大받다牌  최대 마감 카드 */
+        /* 最大카드받다  최대 마감 카드 */
         max_combo:
         {
             type: db.dataTypes.INTEGER(4),

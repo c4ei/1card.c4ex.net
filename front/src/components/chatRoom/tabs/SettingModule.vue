@@ -14,7 +14,7 @@
         </div>
         <div class="setting_item">
             <div>
-                <span :style="{ 'font-size': fontSize }">게임音效</span>
+                <span :style="{ 'font-size': fontSize }">음향 효과</span>
                 <el-switch style="float: right" v-model="soundEffect" active-color="#13ce66"
                     inactive-color="#ff4949"></el-switch>
             </div>
@@ -35,7 +35,7 @@
             <div>
                 <span :style="{ 'font-size': fontSize }" style="line-height: 40px">SPEED</span>
                 <el-select :multiple-limit="10" value-key="id" v-model="quickChat" multiple collapse-tags
-                    style="float: right" placeholder="请选择">
+                    style="float: right" placeholder="선택">
                     <el-option-group v-for="group in messageGroups" :key="group.label" :label="group.label">
                         <el-option v-for="item in group.options" :key="item.id" :label="item.text"
                             :value="item"></el-option>
@@ -63,50 +63,50 @@ export default Vue.extend({
         return {
             messageGroups: [
                 {
-                    label: '调侃',
+                    label: '조소',
                     options:
                         [
-                            { id: 1, music: "1", text: "你的牌打得太好了" },
-                            { id: 2, music: "2", text: "我等得花儿都谢了" },
-                            { id: 3, music: "3", text: "合作愉快" },
-                            { id: 4, music: "4", text: "都别走，大战到天亮" }
+                            { id: 1, music: "1", text: "당신은 카드를 너무 잘 썼어요" },
+                            { id: 2, music: "2", text: "꽃이 시들 때까지 기다렸어요" },
+                            { id: 3, music: "3", text: "행복한 협력" },
+                            { id: 4, music: "4", text: "떠나지 마, 우리는 새벽까지 싸울 거야" }
                         ]
                 },
                 {
-                    label: '求助',
+                    label: '도움',
                     options:
                         [
-                            { id: 5, music: "5", text: "小小小" },
-                            { id: 6, music: "6", text: "大大大" },
-                            { id: 7, music: "7", text: "求师傅" },
-                            { id: 8, music: "8", text: "求拉满" },
-                            { id: 9, music: "9", text: "求转向" }
+                            { id: 5, music: "5", text: "조금조금조금" },
+                            { id: 6, music: "6", text: "대대대" },
+                            { id: 7, music: "7", text: "스승을 구하라" },
+                            { id: 8, music: "8", text: "레이맨을 구하라" },
+                            { id: 9, music: "9", text: "차례를 묻는다" }
                         ]
                 },
                 {
-                    label: '받다牌',
+                    label: '카드받다',
                     options:
                         [
                             { id: 10, music: "10", text: "받다" },
-                            { id: 11, music: "11", text: "我太难了" },
-                            { id: 12, music: "12", text: "我人没了" },
-                            { id: 13, music: "13", text: "战略性받다牌" }
+                            { id: 11, music: "11", text: "난 너무 힘들어" },
+                            { id: 12, music: "12", text: "나는 사라졌다" },
+                            { id: 13, music: "13", text: "전략적인 카드를 받다" }
                         ]
                 },
                 {
-                    label: '方言',
+                    label: '방언',
                     options:
                         [
-                            { id: 14, music: "14", text: "洗" },
-                            { id: 15, music: "15", text: "所所所" },
-                            { id: 16, music: "16", text: "卷卷卷" },
-                            { id: 17, music: "17", text: "小小小(桂)" },
-                            { id: 18, music: "18", text: "大大大(桂)" },
-                            { id: 19, music: "19", text: "我霉了" },
-                            { id: 20, music: "20", text: "牛掰" },
-                            { id: 21, music: "21", text: "瘾" },
-                            { id: 22, music: "22", text: "我好方啊" },
-                            { id: 23, music: "23", text: "来啊" },
+                            { id: 14, music: "14", text: "씻다" },
+                            { id: 15, music: "15", text: "위치" },
+                            { id: 16, music: "16", text: "롤롤롤" },
+                            { id: 17, music: "17", text: "조금조금조금(구이)" },
+                            { id: 18, music: "18", text: "대대대(구이)" },
+                            { id: 19, music: "19", text: "나는 나쁘다" },
+                            { id: 20, music: "20", text: "엉터리" },
+                            { id: 21, music: "21", text: "탐닉" },
+                            { id: 22, music: "22", text: "나는 너무 친절하다" },
+                            { id: 23, music: "23", text: "오다" },
                         ]
                 }
             ]

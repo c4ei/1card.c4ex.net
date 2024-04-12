@@ -28,7 +28,7 @@ const Player = db.defineModel('player',
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最大받다牌 */
+        /* 最大카드받다 */
         max_combo:
         {
             type: db.dataTypes.INTEGER(4),

@@ -10,7 +10,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.STRING(20),
             defaultValue: ''
         },
-        /* 最少받다牌 */
+        /* 最少카드받다 */
         min_cards:
         {
             type: db.dataTypes.INTEGER(4),
@@ -22,7 +22,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.STRING(20),
             defaultValue: ''
         },
-        /* 最多받다牌 */
+        /* 最多카드받다 */
         max_cards:
         {
             type: db.dataTypes.INTEGER(4),

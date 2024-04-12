@@ -26,13 +26,13 @@ if (localSettingStr === null) {
 		textToPlayer:
 			[
 				{ id: 10, music: "10", text: "받다" },
-				{ id: 5, music: "5", text: "小小小" },
-				{ id: 7, music: "7", text: "求师傅" },
-				{ id: 8, music: "8", text: "求拉满" },
-				{ id: 9, music: "9", text: "求转向" },
-				{ id: 1, music: "1", text: "你的牌打得太好了" },
-				{ id: 2, music: "2", text: "我等得花儿都谢了" },
-				{ id: 3, music: "3", text: "合作愉快" },
+				{ id: 5, music: "5", text: "조금조금조금" },
+				{ id: 7, music: "7", text: "스승을 구하라" },
+				{ id: 8, music: "8", text: "레이맨을 구하라" },
+				{ id: 9, music: "9", text: "차례를 묻는다" },
+				{ id: 1, music: "1", text: "당신은 카드를 너무 잘 썼어요" },
+				{ id: 2, music: "2", text: "꽃이 시들 때까지 기다렸어요" },
+				{ id: 3, music: "3", text: "행복한 협력" },
 			],
 		announceId: 0,
     }

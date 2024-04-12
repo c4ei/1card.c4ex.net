@@ -227,7 +227,7 @@ module.exports = async function (data, wss, ws) {
                 if (data.playCard.length > 1) {//多牌连击
                     game.timesCombo = game.timesCombo + 1
                     const timesComboFromPlayer = Math.min(game.timesCombo * data.playCard.length, game.gamePlayer[game.currentPlayer].cards)
-                    const timesAddCard = data.playCard.length + timesComboFromPlayer //连击所附加的牌出自플레이어的받다牌
+                    const timesAddCard = data.playCard.length + timesComboFromPlayer //连击所附加的牌出自플레이어的카드받다
                     game.gamePlayer[game.currentPlayer].cards -= timesComboFromPlayer
                     game.timesCard = game.timesCard + timesAddCard
                     game.currentCombo = game.currentCombo + timesAddCard
