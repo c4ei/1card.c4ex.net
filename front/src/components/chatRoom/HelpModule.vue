@@ -1,33 +1,33 @@
 <template>
     <el-tabs type="border-card" v-model="activeHelpModuleTabName">
-        <el-tab-pane label="游戏规则" name="rule" lazy>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>游戏简介</h1>
+        <el-tab-pane label="게임规则" name="rule" lazy>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>게임简介</h1>
             <hr class="divider-line">
-            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌游戏，进行该游戏至少需要2名플레이어，可使用2~10덱扑克牌，扑克牌数可依플레이어人数酌情增减。</p>
-            <p :style="{ 'font-size': fontSize }">另外，西游记的游戏规则各개地方不尽相同，以下游戏说明仅代表作者本人观点。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>游戏流程</h1>
+            <p :style="{ 'font-size': fontSize }">西游记是一种类似于“斗兽棋”的扑克牌게임，进行该게임至少需要2名플레이어，可使用2~10덱扑克牌，扑克牌数可依플레이어人数酌情增减。</p>
+            <p :style="{ 'font-size': fontSize }">另外，西游记的게임规则各개地方不尽相同，以下게임说明仅代表作者本人观点。</p>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>게임流程</h1>
             <hr class="divider-line">
             <h2 :style="{ 'font-size': fontSize }">开국：</h2>
-            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5张牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어开始出牌。</p>
+            <p :style="{ 'font-size': fontSize }">开국每名플레이어起5장牌作为手牌，然后由随机一名(或上국수집된 카드 수最多的)플레이어开始出牌。</p>
             <h2 :style="{ 'font-size': fontSize }">顺序：</h2>
             <p :style="{ 'font-size': fontSize }">一般由开국出牌플레이어开始按逆时针顺序出牌，当有플레이어打出观音或如来时，反转出牌方向。</p>
             <h2 :style="{ 'font-size': fontSize }">出牌：</h2>
             <p :style="{ 'font-size': fontSize }">若台面上无牌，플레이어可打出同一牌点(如♠A和<span
-                    style="color: red">♥A</span>)的任意张牌；若台面上有上家打出的牌，则下家须根据大小顺序打出 <u>张数相同且牌型“大于”上家牌的牌</u>，依次类推。</p>
+                    style="color: red">♥A</span>)的任意장牌；若台面上有上家打出的牌，则下家须根据大小顺序打出 <u>장数相同且牌型“大于”上家牌的牌</u>，依次类推。</p>
             <h2 :style="{ 'font-size': fontSize }">连击：</h2>
             <p :style="{ 'font-size': fontSize }">打出的牌计入连击牌池，计+1。当出牌数大于1时还会有倍乘效果。</p>
-            <p :style="{ 'font-size': fontSize }">如连续5人打出2张牌，则倍乘效果的连击数计为： 4(2+2*1), 6(2+2*2), 8(2+3*2), 10(2+4*2),
+            <p :style="{ 'font-size': fontSize }">如连续5人打出2장牌，则倍乘效果的连击数计为： 4(2+2*1), 6(2+2*2), 8(2+3*2), 10(2+4*2),
                 30(20+5*2)。
             </p>
-            <p :style="{ 'font-size': fontSize }">如连续5人打出3张牌，则倍乘效果的连击数计为： 6(3+3*1), 9(3+3*2), 12(3+3*3), 15(3+4*3),
+            <p :style="{ 'font-size': fontSize }">如连续5人打出3장牌，则倍乘效果的连击数计为： 6(3+3*1), 9(3+3*2), 12(3+3*3), 15(3+4*3),
                 57(39+6*3)。 </p>
-            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如连击数为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4张。</p>
+            <p :style="{ 'font-size': fontSize }">倍乘的部分会从플레이어的수집된 카드 수中扣除。如连击数为6(2+2*2)时，从플레이어수집된 카드 수中扣除2*2=4장。</p>
             <h2 :style="{ 'font-size': fontSize }">补牌：</h2>
-            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5张。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
-            <h2 :style="{ 'font-size': fontSize }">收牌：</h2>
-            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃出牌并收下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新开始出牌。</p>
+            <p :style="{ 'font-size': fontSize }">每次플레이어出完牌后，若剩余牌堆里还有牌，则将手牌补到5장。若剩余牌堆里已无牌，则每次出牌的连击数+1，并把플레이어的수집된 카드 수扣除1。</p>
+            <h2 :style="{ 'font-size': fontSize }">받다牌：</h2>
+            <p :style="{ 'font-size': fontSize }">当플레이어打不出“大于”牌时，则放弃出牌并받다下所有连击牌池中的牌，计入自己的수집된 카드 수，然后重新开始出牌。</p>
             <h2 :style="{ 'font-size': fontSize }">结算：</h2>
-            <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束游戏。</p>
+            <p :style="{ 'font-size': fontSize }">当所有플레이어的手牌出完后，结算所有플레이어的수집된 카드 수，结束게임。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-finished"></i>大小顺序</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">西游记使用全덱扑克牌，牌点大小的比较类似于斗兽棋。</p>
@@ -70,7 +70,7 @@
             <p :style="{ 'font-size': fontSize }">从小到大排序。</p>
             <br>
             <h2 :style="{ 'font-size': fontSize }">多牌比较：</h2>
-            <p :style="{ 'font-size': fontSize }">当上家牌数量大于1时，比较规则为 <u>每张牌均不小于上家牌，并且其中至少有一张“大于”上家牌。</u></p>
+            <p :style="{ 'font-size': fontSize }">当上家牌数量大于1时，比较规则为 <u>每장牌均不小于上家牌，并且其中至少有一장“大于”上家牌。</u></p>
             <p :style="{ 'font-size': fontSize }">例如上家打出以下牌型：</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2C.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
@@ -82,13 +82,13 @@
             <p :style="{ 'font-size': fontSize }">而下家如果想打下面这种牌型</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2A.png')"></el-avatar>
-            <p :style="{ 'font-size': fontSize }">虽然其中一张♠2比<span style="color: red">♥2</span>大，但<span
+            <p :style="{ 'font-size': fontSize }">虽然其中一장♠2比<span style="color: red">♥2</span>大，但<span
                     style="color: red">♦2</span>小于♣2，不满足比较规则，所以不能打出。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-magic-stick"></i>变身牌</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">既然孙悟空有七十二变，那么西游记中自然不能缺少变身元素。</p>
             <p :style="{ 'font-size': fontSize }">变身牌，顾名思义，可以改变自身牌面的牌。其规则和用法类似于部分地区斗地主中使用的“癞子牌”。</p>
-            <span :style="{ 'font-size': fontSize }">在游戏中，带有蓝色边框的牌即是变身牌，如:</span>
+            <span :style="{ 'font-size': fontSize }">在게임中，带有蓝色边框的牌即是变身牌，如:</span>
             <el-avatar shape="square" :size="avatarSize + 40"
                 :src="require('@/assets/images/bianshen-example.png')"></el-avatar>
             <h2 :style="{ 'font-size': fontSize }">变身规则：</h2>
@@ -119,16 +119,16 @@
             <p :style="{ 'font-size': fontSize }">3. 选好变身牌后，最后点击出牌即可。</p>
         </el-tab-pane>
 
-        <el-tab-pane label="游戏技巧" name="skill" lazy>
+        <el-tab-pane label="게임技巧" name="skill" lazy>
             <p :style="{ 'font-size': fontSize }"><i
-                    class="el-icon-warning-outline"></i>西游记游戏本身并没有什么太多技巧，플레이어收牌多少，运气占很大部分，以下技巧仅供参考。</p>
+                    class="el-icon-warning-outline"></i>西游记게임本身并没有什么太多技巧，플레이어받다牌多少，运气占很大部分，以下技巧仅供参考。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>保持牌型</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">尽量保证自己手上有各种牌型：妖怪、徒弟、师傅，缺一不可。观音和如来则不到万不得已尽量不用，留作杀手锏。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>小牌先出</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">大多数时候，先把小牌打出去都是正确的选择，当然也有特殊情况，具体可参考下方“控制국势”。</p>
-            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>战略性收牌</h1>
+            <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>战略性받다牌</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">当连击牌池中的牌数不多，且手上的牌如以下所示时</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2D.png')"></el-avatar>
@@ -136,11 +136,11 @@
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/2B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/11A.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/3D.png')"></el-avatar>
-            <p :style="{ 'font-size': fontSize }">虽然收牌并不是我们想要的，但从长远的战略眼光来看，可以忍痛收下牌，然后把3개2一次性打出以调整自己的手牌组合。</p>
+            <p :style="{ 'font-size': fontSize }">虽然받다牌并不是我们想要的，但从长远的战略眼光来看，可以忍痛받다下牌，然后把3개2一次性打出以调整自己的手牌组合。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-star-on"></i>控制국势</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">大部分情况下，牌국的走势是不受我们控制的，但我们仍然可以在一定范围内左右它。</p>
-            <p :style="{ 'font-size': fontSize }">比如一场5人국游戏，我们手上有以下牌型</p>
+            <p :style="{ 'font-size': fontSize }">比如一场5人국게임，我们手上有以下牌型</p>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/4C.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/6B.png')"></el-avatar>
             <el-avatar shape="square" :size="avatarSize + 40" :src="require('@/assets/images/poker/13B.png')"></el-avatar>
@@ -184,13 +184,13 @@
                         <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：로그인网页时不想播放音乐？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">点击로그인页面右上角的播放键即可关闭音乐的自动播放。</p>
+                        <p :style="{ 'font-size': fontSize }">点击로그인页面右上角的播放键即可닫기音乐的自动播放。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="3">
                     <template slot="title">
                         <i class="el-icon-question"></i><span
-                            :style="{ 'font-size': fontSize }">Q：设置了背景音乐和游戏音效开启但仍然没有声音？</span>
+                            :style="{ 'font-size': fontSize }">Q：설정了배경 음악和게임音效开启但仍然没有声音？</span>
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">由于ios等移动端的限制，进入本网页时并不会自动播放音乐，而是需要点击屏幕一下以激活音乐播放器，才能成功播放音乐。</p>
@@ -199,26 +199,26 @@
                 </el-collapse-item>
                 <el-collapse-item name="4">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：无法通过游戏内设置调整音量？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：无法通过게임内설정调整音量？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">如果您是ios用户，由于ios禁止通过网页调整系统音量，所以ios用户的设置面板上没有调整音量的选项。</p>
+                        <p :style="{ 'font-size': fontSize }">如果您是ios用户，由于ios禁止通过网页调整系统音量，所以ios用户的설정面板上没有调整音量的选项。</p>
                         <p :style="{ 'font-size': fontSize }">
                             如果您不是ios用户，那么可以认为您使用的移动端也采取了与上述ios相同的策略，请将您的移动端机型전송给作者以使我们作出针对该机型的调整，谢谢。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="5">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：游戏内托管失败？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内托管失败？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">由于本网页的游戏数据并没有设置锁机制，所以当网络延迟较大时，提交托管可能会失败，属正常行为。</p>
-                        <p :style="{ 'font-size': fontSize }">建议您在玩游戏时保持通畅的网咯。</p>
+                        <p :style="{ 'font-size': fontSize }">由于本网页的게임数据并没有설정锁机制，所以当网络延迟较大时，提交托管可能会失败，属正常行为。</p>
+                        <p :style="{ 'font-size': fontSize }">建议您在玩게임时保持通畅的网咯。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="6">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：游戏内如何快速出牌？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임内如何快速出牌？</span>
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">在选择好要出的牌后，除了点击“出牌”按钮，还可以通过点击台面来出牌。</p>
@@ -226,20 +226,20 @@
                 </el-collapse-item>
                 <el-collapse-item name="7">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：游戏进行时如何与플레이어交流？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：게임进行时如何与플레이어交流？</span>
                     </template>
                     <div>
-                        <p :style="{ 'font-size': fontSize }">本网页效仿了各种棋牌游戏的防作弊机制，即游戏进行中时不能通过打字与其他플레이어交流。</p>
-                        <p :style="{ 'font-size': fontSize }">但我们仍为您准备了一些快速发言的语句，可以通过点击플레이어或自己的计分板来选择要说的话。</p>
+                        <p :style="{ 'font-size': fontSize }">本网页效仿了各种棋牌게임的防作弊机制，即게임进行中时不能通过打字与其他플레이어交流。</p>
+                        <p :style="{ 'font-size': fontSize }">但我们仍为您准备了一些SPEED的语句，可以通过点击플레이어或自己的计分板来选择要说的话。</p>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="8">
                     <template slot="title">
-                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：快速发言中的方言是？</span>
+                        <i class="el-icon-question"></i><span :style="{ 'font-size': fontSize }">Q：SPEED中的方言是？</span>
                     </template>
                     <div>
                         <p :style="{ 'font-size': fontSize }">作者家乡的桂林话及一些自创的术语。其中</p>
-                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫플레이어收牌的“收”一개意思，但表达语气更强烈。</p>
+                        <p :style="{ 'font-size': fontSize }">洗：通日语「しね」(shi ne)，与叫플레이어받다牌的“받다”一개意思，但表达语气更强烈。</p>
                         <p :style="{ 'font-size': fontSize }">所所所：所，通日语师匠的匠「しょう」(syo)，意为“求师傅”。</p>
                         <p :style="{ 'font-size': fontSize }">卷卷卷：桂林话的“转”，意味“求转向”。</p>
                         <p :style="{ 'font-size': fontSize }">我霉了：霉，桂林话，一般指物理状态的软烂，此处大意为“我人没了”、“我烂掉了”、“我당기기了”。</p>

@@ -10,12 +10,12 @@
                     <el-avatar shape="square" :fit="'cover'" :src="getAvatarUrl(gameResult.avatar_id)"></el-avatar>
                 </div>
                 <div class="game-result-sub-item">
-                    <div><span :style="{ 'font-size': fontSize }">总收牌: {{ gameResult.cards }}张</span></div>
+                    <div><span :style="{ 'font-size': fontSize }">总받다牌: {{ gameResult.cards }}장</span></div>
                     <el-avatar shape="square" :fit="'cover'"
                         :src="require('@/assets/images/poker/game-result-ammount.png')"></el-avatar>
                 </div>
                 <div class="game-result-sub-item">
-                    <div><span :style="{ 'font-size': fontSize }">最大连击: {{ gameResult.max_combo }}张</span></div>
+                    <div><span :style="{ 'font-size': fontSize }">最大连击: {{ gameResult.max_combo }}장</span></div>
                     <el-avatar shape="square" :fit="'cover'"
                         :src="require('@/assets/images/poker/game-result-max-combo.png')"></el-avatar>
                 </div>

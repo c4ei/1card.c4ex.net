@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/Echarts-5.0-red)](https://echarts.apache.org/zh/index.html)
 
 
-西游记是一款网页联机式的纸牌类游戏，该项目是西游记的前端部分。后端部分请参考 [https://github.com/c4ei.net/server-of-poker](https://github.com/c4ei.net/server-of-poker)。
+西游记是一款网页联机式的纸牌类게임，该项目是西游记的前端部分。后端部分请参考 [https://github.com/c4ei.net/server-of-poker](https://github.com/c4ei.net/server-of-poker)。
 
 ## 开发环境
 在开发环境下运行该项目请先安装[node.js](https://nodejs.org/en/)(建议版本>v14.15)。

@@ -25,7 +25,7 @@ module.exports = async function (data, wss, ws) {
             }
         }
         else {
-            /* 1，设置플레이어最新信息，覆盖掉旧信息 */
+            /* 1，설정플레이어最新信息，覆盖掉旧信息 */
             const res = await asyncGetset(conf.redisCache.playerPrefix + ws.userId,
                 JSON.stringify({
                     id: ws.userId,

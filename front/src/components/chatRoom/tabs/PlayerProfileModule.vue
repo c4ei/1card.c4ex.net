@@ -8,16 +8,16 @@
             </el-tooltip>
         </p>
         <p class="player-profile-line">
-            <span>等级：</span>
+            <span>레벨：</span>
             <span class="player-profile-line-right">{{ level }}级</span>
         </p>
         <p class="player-profile-line">
-            <span>국数：</span>
+            <span>게임수：</span>
             <span class="player-profile-line-right">{{ playerProfile.record.num_of_game }}국</span>
         </p>
         <p class="player-profile-line">
             <el-tooltip effect="light" content="某국中수집된 카드 수最少" placement="right">
-                <span>吃鸡：</span>
+                <span>우승：</span>
             </el-tooltip>
             <span class="player-profile-line-right">{{ playerProfile.record.least_game }}국</span>
         </p>
@@ -28,30 +28,30 @@
             <span class="player-profile-line-right">{{ playerProfile.record.most_game }}국</span>
         </p>
         <p class="player-profile-line">
-            <span>总수집된 카드 수：</span>
-            <span class="player-profile-line-right">{{ playerProfile.record.experienced_cards }}张</span>
+            <span>총 수집된 카드 수：</span>
+            <span class="player-profile-line-right">{{ playerProfile.record.experienced_cards }}장</span>
         </p>
         <p class="player-profile-line">
-            <span>场均수집된 카드 수：</span>
+            <span>평균 수집된 카드 수：</span>
             <el-tooltip effect="light"
                 :content="playerProfile.record.experienced_cards + ' / ' + playerProfile.record.num_of_game"
                 placement="left">
                 <span class="player-profile-line-right">{{ playerProfile.record.num_of_game === 0 ? 0 :
-                    (playerProfile.record.experienced_cards / playerProfile.record.num_of_game).toFixed(1) }}张</span>
+                    (playerProfile.record.experienced_cards / playerProfile.record.num_of_game).toFixed(1) }}장</span>
             </el-tooltip>
         </p>
         <p class="player-profile-line">
-            <span>最大连击수집된 카드 수：</span>
-            <span class="player-profile-line-right">{{ playerProfile.record.max_combo }}张</span>
+            <span>최대 콤보 카드 수：</span>
+            <span class="player-profile-line-right">{{ playerProfile.record.max_combo }}장</span>
         </p>
         <p class="player-profile-line">
-            <span>单국最少수집된 카드 수：</span>
+            <span>최소 수집된 카드 수：</span>
             <span class="player-profile-line-right">{{ playerProfile.record.least_cards === -1 ? 0 :
-                playerProfile.record.least_cards }}张</span>
+                playerProfile.record.least_cards }}장</span>
         </p>
         <p class="player-profile-line">
             <el-tooltip effect="light" content="수집된 카드 수占该국플레이어平均수집된 카드 수的比例(小于100%)" placement="right">
-                <span>单국最低收牌比：</span>
+                <span>최소 마감 비율：</span>
             </el-tooltip>
             <el-tooltip effect="light"
                 :content="playerProfile.record.min_card + ' / ' + playerProfile.record.min_card_amount" placement="left">
@@ -60,12 +60,12 @@
             </el-tooltip>
         </p>
         <p class="player-profile-line">
-            <span>单국最多수집된 카드 수：</span>
-            <span class="player-profile-line-right">{{ playerProfile.record.most_cards }}张</span>
+            <span>최다 주문 수집된 카드 수：</span>
+            <span class="player-profile-line-right">{{ playerProfile.record.most_cards }}장</span>
         </p>
         <p class="player-profile-line">
             <el-tooltip effect="light" content="수집된 카드 수占该국플레이어平均수집된 카드 수的比例(至少100%)" placement="right">
-                <span>单국最高收牌比：</span>
+                <span>최고단일카드 마감비율：</span>
             </el-tooltip>
             <el-tooltip effect="light"
                 :content="playerProfile.record.max_card + ' / ' + playerProfile.record.max_card_amount" placement="left">

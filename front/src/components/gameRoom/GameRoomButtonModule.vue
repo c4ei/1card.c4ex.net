@@ -64,7 +64,7 @@ export default Vue.extend({
             /* 房主的情况下 */
             if (this.playerLocRoom.owner === this.$stock.state.id) {
                 let isAllReady = true
-                /* 至少两人才能开游戏 */
+                /* 至少两人才能开게임 */
                 let playerNum = 0
                 for (let i = 0; i < Object.keys(this.playerLocRoom.playerList).length; i++) {
                     if (this.playerLocRoom.playerList[i as GamePlayerSeatIndex].id === 0) {

@@ -262,7 +262,7 @@ export default cardList.extend({
                 return
             }
             if (this.selectCard.length + this.selectMetamorphoseCard.length !== this.gameInfo.currentCard.length) {
-                this.$message.warning('须打出 ' + this.gameInfo.currentCard.length + ' 张牌')
+                this.$message.warning('须打出 ' + this.gameInfo.currentCard.length + ' 장牌')
                 return
             }
             if ((this.sortCardList !== null && this.getIndexOfCardList(this.sortCardList[this.selectCard[0]]).num === 100) || this.getIndexOfCardList(this.gameInfo.currentCard[0]).num === 100) {
@@ -394,7 +394,7 @@ export default cardList.extend({
         discard: function () {
             playSound('click')
             if (this.gameInfo.currentCard.length === 0) {
-                this.$message.warning('必须打出至少一张牌')
+                this.$message.warning('必须打出至少一장牌')
                 return
             }
             this.selectCard = []
@@ -440,7 +440,7 @@ export default cardList.extend({
                 return
             }
             if (this.gameInfo.currentCard.length === 1) {
-                this.$message.warning('出1张牌时不能使用变身')
+                this.$message.warning('出1장牌时不能使用变身')
                 return
             }
             if (this.gameInfo.currentCard.length > 1 && this.selectCard.length >= this.gameInfo.currentCard.length) {

@@ -11,7 +11,7 @@
 			:currentGameCombo="gameInfo.currentCombo"></AnimatedAvatar>
 		</div>
 		</el-tooltip>
-		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以변경昵称" placement="left">
+		<el-tooltip :disabled="$store.state.isMobile" effect="light" content="点击以닉네임변경" placement="left">
 		<div class="player-nickname-box" :style="{ 'font-size': fontSize }" @click="openEditNicknameDialog">
 			<span>{{ $store.state.nickname }}</span>
 		</div>
@@ -37,11 +37,11 @@
 		</span>
 		</el-dialog>
 
-		<el-dialog title="변경昵称" :visible.sync="nicknameDialogVisible" center :width="dialogWidth"
+		<el-dialog title="닉네임변경" :visible.sync="nicknameDialogVisible" center :width="dialogWidth"
 		:close-on-click-modal="false" :modal="false">
 		<el-form :model="nicknameForm" ref="nicknameForm" @submit.native.prevent="submitNewNickname">
-			<el-form-item label="新昵称" prop="name" :rules="[{ required: true, validator: checkNickname, trigger: 'blur' }]">
-			<el-input v-model="nicknameForm.name" autocomplete="off" placeholder="输入新昵称" maxlength="10" show-word-limit>
+			<el-form-item label="새로운 별명" prop="name" :rules="[{ required: true, validator: checkNickname, trigger: 'blur' }]">
+			<el-input v-model="nicknameForm.name" autocomplete="off" placeholder="输入새로운 별명" maxlength="10" show-word-limit>
 				<i slot="prefix" class="el-input__icon el-icon-edit-outline"></i>
 			</el-input>
 			</el-form-item>
@@ -57,7 +57,7 @@
 			@sendGameResultToPlayerInfo="function (value) { $emit('sendGameResultToChatRoom', value) }"></PlayerInfoTabModule>
 		<span slot="footer" class="dialog-footer">
 			<el-button type="danger" @click="viewModuleDialogVisible = false" :style="{ 'font-size': fontSize }"
-			:size="buttonSize">关闭</el-button>
+			:size="buttonSize">닫기</el-button>
 		</span>
 		</el-dialog>
 
@@ -65,7 +65,7 @@
 		<HelpModule :isShowing="helpModuleDialogVisible" :fontSize="fontSize" :avatarSize="avatarSize"></HelpModule>
 		<span slot="footer" class="dialog-footer">
 			<el-button type="danger" @click="helpModuleDialogVisible = false" :style="{ 'font-size': fontSize }"
-			:size="buttonSize">关闭</el-button>
+			:size="buttonSize">닫기</el-button>
 		</span>
 		</el-dialog>
 	</el-aside>
@@ -164,7 +164,7 @@ export default Vue.extend({
 
 		submitNewAvatar: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('游戏中，请勿변경아바타')
+				this.$message.warning('게임中，请勿변경아바타')
 				this.avatarDialogVisible = false
 				return
 			}
@@ -206,7 +206,7 @@ export default Vue.extend({
 
 		submitNewNickname: function () {
 			if (this.playerLocRoom && this.playerLocRoom.status === 1) {
-				this.$message.warning('游戏中，请勿변경昵称')
+				this.$message.warning('게임中，请勿닉네임변경')
 				this.nicknameDialogVisible = false
 				return
 			}
@@ -222,7 +222,7 @@ export default Vue.extend({
 						this.ws?.send(JSON.stringify({ type: 'playerList', nickname: this.$stock.state.nickname, avatar_id: this.$stock.state.avatar_id, player_loc: this.$stock.state.player_loc, player_status: this.$stock.state.player_status }))
 						this.nicknameForm.name = this.$stock.state.nickname
 						})
-						this.$message.success('成功변경昵称')
+						this.$message.success('成功닉네임변경')
 					}
 					else {
 						this.$message.error('변경失败，请稍后重试')
@@ -269,7 +269,7 @@ export default Vue.extend({
 
 		openEditAvatarDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('游戏中，请勿변경아바타')
+				this.$message.error('게임中，请勿변경아바타')
 				return
 			}
 			this.avatarDialogVisible = true
@@ -278,7 +278,7 @@ export default Vue.extend({
 
 		openEditNicknameDialog: function () {
 			if (this.playerLocRoom !== null && this.playerLocRoom.status === 1) {
-				this.$message.error('游戏中，请勿변경昵称')
+				this.$message.error('게임中，请勿닉네임변경')
 				return
 			}
 			this.nicknameDialogVisible = true

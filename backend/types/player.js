@@ -3,7 +3,7 @@
  */
 
 /** 
- * @typedef {PlayerStatus} 플레이어状态. 0:게으른，1: 游戏房间기다리다中, 2: 游戏中
+ * @typedef {PlayerStatus} 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @type {0 | 1 | 2}
 */
 
@@ -14,7 +14,7 @@
  * @property {string} username -  플레이어用户名
  * @property {string} nickname - 昵称
  * @property {number} player_loc - 플레이어所在房间id
- * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 游戏房间기다리다中, 2: 游戏中
+ * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @property {number} avatar_id - 플레이어아바타id
  */
 
@@ -22,14 +22,14 @@
  * @typedef RedisCachePlayerInRoom Redis中的在房间中的플레이어信息。对应key:room
  * @type {object}
  * @property {number} id - 플레이어id
- * @property {number} cards -  总수집된 카드 수
- * @property {number} win - 吃鸡국数
- * @property {number} loss - 당기기국数
+ * @property {number} cards -  총 수집된 카드 수
+ * @property {number} win - 우승게임수
+ * @property {number} loss - 당기기게임수
  * @property {boolean} ready - 是否已准备
  */
 
 /**
- * @typedef RedisCachePlayerInGame Redis中的在游戏中的플레이어信息。对应key:game
+ * @typedef RedisCachePlayerInGame Redis中的在게임中的플레이어信息。对应key:game
  * @type {object}
  * @property {number} id - 플레이어id。
  * @property {string} nickname - 昵称。
@@ -64,7 +64,7 @@
  */
 
 /**
- * @typedef ModelPlayer 数据库中的游戏中플레이어信息。对应table:players。
+ * @typedef ModelPlayer 数据库中的게임中플레이어信息。对应table:players。
  * @type {object}
  * @property {number} id - 主key，插入数据时不需要。
  * @property {string} nickname - 昵称。
@@ -79,12 +79,12 @@
  * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
  * @property {number} accountId - 플레이어账号id。外键，对应table:accounts。
- * @property {number} gameId - 游戏id。外键，对应table:games。
+ * @property {number} gameId - 게임id。外键，对应table:games。
  * @typedef {ModelPlayer & SequelizeCommon} SequelizedModelPlayer
  */
 
 /**
- * @typedef ModelAiPlayer 数据库中的游戏中플레이어信息。对应table:aiplayers。
+ * @typedef ModelAiPlayer 数据库中的게임中플레이어信息。对应table:aiplayers。
  * @type {object}
  * @property {number} id - 主key，插入数据时不需要。
  * @property {string} ai_player_id - 电脑플레이어id，负数。
@@ -98,7 +98,7 @@
  * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
  * @property {number} accountId - 플레이어账号id。外键，对应table:accounts。
- * @property {number} gameId - 游戏id。外键，对应table:games。
+ * @property {number} gameId - 게임id。外键，对应table:games。
  * @typedef {ModelAiPlayer & SequelizeCommon} SequelizedModelAiPlayer
  */
 
@@ -107,7 +107,7 @@
  * @type {object} 
  * @property {string} nickname - 전송信息플레이어昵称。
  * @property {number} player_loc - 플레이어所在房间id
- * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 游戏房间기다리다中, 2: 游戏中
+ * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @property {number} avatar_id - 플레이어아바타id
  * @property {string?} action - 请求类型。若不为空，则其余属性应为空。
  */

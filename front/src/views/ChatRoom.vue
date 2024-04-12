@@ -30,7 +30,7 @@
 				<el-button slot="reference" class="chat-room-header-button-player-list"
 				:type="playerListVisible ? 'info' : 'primary'" icon="el-icon-user-solid"
 				:style="{ 'font-size': largeFontSize, 'padding': '0px 0px' }" :size="buttonSize" round
-				@click="playerListVisible = !playerListVisible">{{ playerListVisible ? '收起' : '플레이어列表' }}</el-button>
+				@click="playerListVisible = !playerListVisible">{{ playerListVisible ? '받다起' : '플레이어列表' }}</el-button>
 			</el-popover>
 			<ChatRoomButtonModule v-if="$store.state.player_loc === 0" :whichPattern="'horizontal'" :buttonSize="buttonSize"
 				:largeFontSize="largeFontSize"

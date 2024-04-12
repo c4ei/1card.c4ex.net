@@ -12,12 +12,12 @@
                     <template v-if="playerLocRoom.status === 0 && (player.id < 0 || player.ready === false) ">
                         <el-button style="margin-left: 10%; margin-right: 10%" type="primary" size="mini"
                             @click="changeSeat"
-                            :disabled="playerLocRoom.playerList[localPlayerSeatIndex].ready === true">换位</el-button>
+                            :disabled="playerLocRoom.playerList[localPlayerSeatIndex].ready === true">자리이동</el-button>
                         <el-button v-if="playerLocRoom.owner === $store.state.id" type="danger" size="mini"
-                            @click="kickPlayerOff">踢出</el-button>
+                            @click="kickPlayerOff">내보내기</el-button>
                         <el-button style="margin-left: 25%; margin-top: 5%" 
                             v-if="playerLocRoom.owner === $store.state.id && player.id === 0" type="success" size="mini"
-                            @click="$emit('addAiPlayer', seatIndex)">加入电脑</el-button>
+                            @click="$emit('addAiPlayer', seatIndex)">컴퓨터에 연결</el-button>
                     </template>
                     <template v-if="playerLocRoom.status === 1">
                         <QuickChatSelector :labelMessage="'向该플레이어发言'" @emitSelectedTextToPlayer="sentSelectedTextToPlayer">
@@ -41,10 +41,10 @@
                             v-if="getPlayer().avatar_id !== 0">
                             <el-tag type="info" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
                                 {{ '수집된 카드 수： ' }}
-                                <CardsNum :value="player.cards" /> {{ ' 张' }}
+                                <CardsNum :value="player.cards" /> {{ ' 장' }}
                             </el-tag>
                             <el-tag type="success" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
-                                {{ '吃鸡： ' }}
+                                {{ '우승： ' }}
                                 <CardsNum :value="player.win" /> {{ ' 국' }}
                             </el-tag>
                             <el-tag type="danger" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
@@ -70,17 +70,17 @@
                             <transition leave-active-class="scale-out-top">
                                 <el-tag v-show="getGamePlayer.remainCards.length > 0" type="success" effect="dark"
                                     :size="tagSize" :style="{ 'font-size': fontSize }">
-                                    {{ '手牌数： ' + getGamePlayer.remainCards.length + ' 张' }}</el-tag>
+                                    {{ '手牌数： ' + getGamePlayer.remainCards.length + ' 장' }}</el-tag>
                             </transition>
                             <el-tag :class="{ 'increase-num': allCardsFlag }" type="info" effect="dark" :size="tagSize"
-                                :style="{ 'font-size': fontSize }">{{ '总收牌： ' }}
+                                :style="{ 'font-size': fontSize }">{{ '总받다牌： ' }}
                                 <CardsNum :value="getGamePlayer.cards" @increased="increasedHandler('all')" />
-                                {{ ' 张' }}
+                                {{ ' 장' }}
                             </el-tag>
                             <el-tag :class="{ 'increase-num': comboFlag }" type="danger" effect="dark" :size="tagSize"
                                 :style="{ 'font-size': fontSize }">{{ '最大连击： ' }}
                                 <CardsNum :value="getGamePlayer.maxCombo" @increased="increasedHandler('combo')" />
-                                {{ ' 张' }}
+                                {{ ' 장' }}
                             </el-tag>
                         </div>
                     </template>
@@ -200,7 +200,7 @@ export default Vue.extend({
     computed: {
         getPlayerNameTagType: function () {
             if (this.player.id === 0) return 'info'
-            /* 游戏未开始 */
+            /* 게임未开始 */
             if (this.playerLocRoom.status === 0) {
                 if (this.player.id === this.playerLocRoom.owner) {
                     return 'warning'

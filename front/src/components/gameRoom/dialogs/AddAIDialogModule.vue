@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="加入电脑" :visible.sync="addAiPlayerDialogModuleVisible" center :width="dialogWidth" :modal="false">
+    <el-dialog title="컴퓨터에 연결" :visible.sync="addAiPlayerDialogModuleVisible" center :width="dialogWidth" :modal="false">
 		<el-divider></el-divider>
 		<div class="icon-select-box">
 			<div class="icon-block" :class="{ 'icon-is-selected': temAIPlayerIndex === index, 'ai-cannot-select': isAiAlreadyExist(index) }" v-for="(aiPlayer, index) in aiPlayerList" :key="index"
@@ -11,7 +11,7 @@
 		</div>
 		<span slot="footer">
 			<el-button @click="closeAddAiPlayerDialog" style="margin-right:10%">취소</el-button>
-			<el-button type="primary" @click="submitNewAIPlayer" :disabled="temAIPlayerIndex === -1">添加</el-button>
+			<el-button type="primary" @click="submitNewAIPlayer" :disabled="temAIPlayerIndex === -1">추가</el-button>
 		</span>
     </el-dialog>
 </template>

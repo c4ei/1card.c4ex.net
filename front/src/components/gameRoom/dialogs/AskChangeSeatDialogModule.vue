@@ -1,5 +1,5 @@
 <template>
-    <el-dialog :title="getPlayerNickname() + '想要与你交换位置'" :visible.sync="askChangeSeatDialogVisible" :width="dialogWidth"
+    <el-dialog :title="getPlayerNickname() + '想要与你交자리이동置'" :visible.sync="askChangeSeatDialogVisible" :width="dialogWidth"
         center :before-close="closeAskChangeSeatDialog" :show-close="false">
         <span slot="footer">
             <el-button :size="buttonSize" type="danger" @click="disagreeChangeSeat" style="margin-right:10%">拒绝</el-button>

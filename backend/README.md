@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/ws-7.4-orange)](https://github.com/websockets/ws)
 
 
-西游记是一款网页联机式的纸牌类游戏，该项目是西游记的后端部分。前端部分请参考 [https://github.com/c4ei.net/one_c4ei_net](https://github.com/c4ei.net/one_c4ei_net)。
+西游记是一款网页联机式的纸牌类게임，该项目是西游记的后端部分。前端部分请参考 [https://github.com/c4ei.net/one_c4ei_net](https://github.com/c4ei.net/one_c4ei_net)。
 
 该指南假设你已完成前端项目的启动。
 
@@ -26,7 +26,7 @@
 
 
 ### 安装Redis
-该项目使用Redis缓存用户session，游戏数据，排行榜等数据。
+该项目使用Redis缓存用户session，게임数据，ranking等数据。
 
 该项目使用的版本是`Redis 5.0.10`, [下载地址](https://redis.io/download/)
 

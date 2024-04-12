@@ -11,9 +11,9 @@ import { PlayerStatus } from '@/type/index'
  * @property {number} avatar_id - 플레이어아바타id
  * @property {string} nickname - 昵称
  * @property {boolean} isMobile - 是否是移动端
- * @property {number} player_loc - //0为游戏大厅，其余为游戏房间号
- * @property {PlayerStatus} player_status - //0: 게으른，1: 房间中기다리다，2: 游戏中
- * @property {SystemSetting} setting - 系统设置
+ * @property {number} player_loc - //0为게임大厅，其余为게임房间号
+ * @property {PlayerStatus} player_status - //0: 게으른，1: 房间中기다리다，2: 게임中
+ * @property {SystemSetting} setting - 系统설정
  */
 type State = {
     id: number,

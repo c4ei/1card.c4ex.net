@@ -1,7 +1,7 @@
 import { GamePlayerSeatIndex } from '@/type/index'
 
 /** 
- * @summary 在游戏房间中聊天框显示的信息。
+ * @summary 在게임房间中聊天框显示的信息。
  * @type {object}
  * @property {number} id 信息id。
  * @property {string} name - 플레이어昵称。
@@ -16,7 +16,7 @@ export interface ChatTextInfo {
 }
 
 /** 
- * @summary 플레이어在游戏房间中发信息时会在头上显示的信息。
+ * @summary 플레이어在게임房间中发信息时会在头上显示的信息。
  * @type {object}
  * @property {number} id 信息id。
  * @property {string} nickname - 플레이어昵称。
@@ -29,7 +29,7 @@ export interface PlayerLocRomTypeChatMessageObject {
 }
 
 /** 
- * @summary 游戏房间聊天的websocket请求信息。
+ * @summary 게임房间聊天的websocket请求信息。
  * @type {object} 
  * @property {string} nickname - 전송信息플레이어昵称。
  * @property {string} text - 聊天信息。
@@ -42,7 +42,7 @@ export interface WebSocketChat {
 }
 
 /** 
- * @summary 进入游戏房间的信息。
+ * @summary 进入게임房间的信息。
  * @type {object} 
  * @property {number} id - 房间id。
  * @property {number} seatIndex - 房间座位号。
@@ -63,14 +63,14 @@ export type RoomPlayers = { [key in GamePlayerSeatIndex]: WebSocketPlayerInRoom 
  * @type {object}
  * @property {number} id - 房间id
  * @property {string} name -  방이름 
- * @property {0|1} status - 房间状态 0:기다리다开始, 1:游戏中
+ * @property {0|1} status - 房间状态 0:기다리다开始, 1:게임中
  * @property {boolean} needPassword - 是否需要비밀번호
  * @property {string} password - 비밀번호
  * @property {number} cardNum - 使用牌的덱数
  * @property {number} metamorphoseNum - 每덱牌변신 카드 수量
  * @property {number} owner - 房主的플레이어id
  * @property {number} lastLoser - 上국당기기的플레이어id
- * @property {number} lastWinner - 上국吃鸡的플레이어id
+ * @property {number} lastWinner - 上국우승的플레이어id
  * @property {number?} chatInterval - 控制电脑플레이어聊天的定时器, 방 만들기请求时并不需要传递该属性，所以该属性没有写在类型中。
  * @property {RoomPlayers} playerList - 플레이어信息列表，下标0~7
  */
@@ -92,9 +92,9 @@ export interface WebSocketGameRoom {
  * @summary WebSocket传来的在房间中的플레이어信息。对应key:room
  * @type {object}
  * @property {number} id - 플레이어id
- * @property {number} cards -  总수집된 카드 수
- * @property {number} win - 吃鸡국数
- * @property {number} loss - 당기기국数
+ * @property {number} cards -  총 수집된 카드 수
+ * @property {number} win - 우승게임수
+ * @property {number} loss - 당기기게임수
  * @property {boolean} ready - 是否已准备
  */
 export interface WebSocketPlayerInRoom {

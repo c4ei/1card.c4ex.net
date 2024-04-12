@@ -24,8 +24,8 @@
 /**
  * @typedef ModifyRequestBody modify的body信息
  * @type {object}
- * @property {string?} nickname -  新设置的昵称。
- * @property {string?} avatar_id - 新设置的아바타id。
+ * @property {string?} nickname -  新설정的昵称。
+ * @property {string?} avatar_id - 新설정的아바타id。
  */
 
 /**

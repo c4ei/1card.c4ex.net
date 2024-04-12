@@ -25,7 +25,7 @@ if (localSettingStr === null) {
 		bianshenBorder: true,
 		textToPlayer:
 			[
-				{ id: 10, music: "10", text: "收" },
+				{ id: 10, music: "10", text: "받다" },
 				{ id: 5, music: "5", text: "小小小" },
 				{ id: 7, music: "7", text: "求师傅" },
 				{ id: 8, music: "8", text: "求拉满" },
@@ -40,7 +40,7 @@ if (localSettingStr === null) {
 }
 else {
 	localSetting = JSON.parse(localSettingStr)
-	//同步本地设置，如果有缺省项目的话则补充设置
+	//同步本地설정，如果有缺省项目的话则补充설정
 	if (localSetting.announceId === undefined) {
 		localSetting.announceId = 0
 		needSetLocal = true
@@ -61,7 +61,7 @@ export default new Vuex.Store({
 		avatar_id: 0,
 		nickname: '',
 		isMobile: isMobile,
-		player_loc: 0,  //0为游戏大厅，其余为游戏房间号
+		player_loc: 0,  //0为게임大厅，其余为게임房间号
 		player_status: 0, //0게으른1기다리다2忙碌
 		setting: localSetting,
 	},

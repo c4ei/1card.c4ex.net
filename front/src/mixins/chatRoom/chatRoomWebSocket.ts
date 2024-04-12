@@ -44,7 +44,7 @@ export const chatRoomWebSocket = Vue.extend({
     },
 
     computed: {
-        /* 判断是否离开了游戏大厅 */
+        /* 判断是否离开了게임大厅 */
         isLeave: function (): boolean {
             return this.$route.path.indexOf('chatroom') === -1
         },
@@ -149,15 +149,15 @@ export const chatRoomWebSocket = Vue.extend({
                     /* 플레이어在某개房间 */
                     if (playerLocRoom !== null) {
                         self.playerLocRoom = playerLocRoom
-                        /* 如果플레이어现在位置和上面获取到的不一样则通过playerList设置为一样，并相应设置플레이어状态 */
+                        /* 如果플레이어现在位置和上面获取到的不一样则通过playerList설정为一样，并相应설정플레이어状态 */
                         if (self.$stock.state.player_loc !== playerLoc) {
                             self.ws?.send(JSON.stringify({ type: 'playerList', nickname: self.$stock.state.nickname, avatar_id: self.$stock.state.avatar_id, player_loc: playerLoc, player_status: playerLoc === 0 ? 0 : (playerLocRoom.status === 0 ? 1 : 2) }))
                         }
-                        /* 如果플레이어所在房间正在游戏中且本地没有该游戏信息 */
+                        /* 如果플레이어所在房间正在게임中且本地没有该게임信息 */
                         if (playerLocRoom.status === 1 && self.gameInfo === null) {
                             self.ws?.send(JSON.stringify({ type: 'game', action: 'get', id: playerLocRoom.id }))
                         }
-                        /* 如果플레이어所在房间游戏已结束且本地还存有游戏 */
+                        /* 如果플레이어所在房间게임已结束且本地还存有게임 */
                         if (playerLocRoom.status === 0 && self.gameInfo !== null) {
                             self.gameInfo = null
                         }
@@ -206,7 +206,7 @@ export const chatRoomWebSocket = Vue.extend({
                     }
                     else { // 此处 action = 'get'或'update', 'update'时对应请求动作 'play' 或 'discard'
                         const gameData: WebSocketGame = JSON.parse(jsonData.data)
-                        /* 获取到的游戏数据版本高于本地的才接收 */
+                        /* 获取到的게임数据版本高于本地的才接받다 */
                         if (gameData.version > (self.gameInfo?.version || 0)) {
                             self.gameInfo = gameData
                         }
@@ -267,7 +267,7 @@ export const chatRoomWebSocket = Vue.extend({
             const self = this
             if (this.lockReconnect) return;
             this.lockReconnect = true;
-            this.reconnectTimeoutId = setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多 => 연결되지 않은 경우 계속해서 다시 연결되므로 요청이 너무 많아지지 않도록 지연 시간을 설정하세요.
+            this.reconnectTimeoutId = setTimeout(function () {     //没连接上会一直重连，설정延迟避免请求过多 => 연결되지 않은 경우 계속해서 다시 연결되므로 요청이 너무 많아지지 않도록 지연 시간을 설정하세요.
                 if (self.isLeave === false) {
                     if (self.reconnectTimes < self.maxReconnectTImes) {//离开页面后则不再刷新心跳
                         self.reconnectTimes = self.reconnectTimes + 1

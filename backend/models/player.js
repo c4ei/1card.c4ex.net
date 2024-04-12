@@ -22,13 +22,13 @@ const Player = db.defineModel('player',
             type: db.dataTypes.INTEGER(1),
             defaultValue: 0
         },
-        /* 总수집된 카드 수 */
+        /* 총 수집된 카드 수 */
         cards:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最大收牌 */
+        /* 最大받다牌 */
         max_combo:
         {
             type: db.dataTypes.INTEGER(4),

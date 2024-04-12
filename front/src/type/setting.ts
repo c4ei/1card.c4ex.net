@@ -1,10 +1,10 @@
 /** 
  * @property {playSound} 是否播放音效
  * @property {playBgm} 是否播放音乐
- * @property {bgmVolume} 音效音量
- * @property {soundVolume} 音乐音量
+ * @property {bgmVolume} 볼륨
+ * @property {soundVolume} 음악 볼륨
  * @property {youTurnVoice} 是否播放出牌提示音
- * @property {bianshenBorder} 是否显示变身牌边框
+ * @property {bianshenBorder} 是否显示변신 카드 테두리
  * @property {textToPlayer} 播放语音履历
  * @property {announceId} 已广播的通知id
  */

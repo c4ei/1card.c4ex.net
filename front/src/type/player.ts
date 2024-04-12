@@ -23,7 +23,7 @@ export interface Account {
  * @property {string} username -  플레이어用户名
  * @property {string} nickname - 昵称
  * @property {number} player_loc - 플레이어所在房间id
- * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 游戏房间기다리다中, 2: 游戏中
+ * @property {PlayerStatus} player_status - 플레이어状态. 0:게으른，1: 게임房间기다리다中, 2: 게임中
  * @property {number} avatar_id - 플레이어아바타id
  */
 export interface WebSocketPlayer {
@@ -37,9 +37,9 @@ export interface WebSocketPlayer {
 
 
 /**
- * @summary 数据库中的游戏中플레이어信息。对应table:players。
+ * @summary 数据库中的게임中플레이어信息。对应table:players。
  * @type {object}
- * @property {number} id - 游戏中플레이어id。主key。
+ * @property {number} id - 게임中플레이어id。主key。
  * @property {string} nickname - 昵称。
  * @property {string} avatar_id - 플레이어아바타id。
  * @property {GamePlayerSeatIndex} seat_index - 座位id，下标0-7。
@@ -52,7 +52,7 @@ export interface WebSocketPlayer {
  * @property {number} bianshen - 使用변신 카드 수。
  * @property {number} joker - 使用如来、观音牌数。
  * @property {number} accountId - 플레이어账号id。外键，对应table:accounts。
- * @property {number} gameId - 游戏id。外键，对应table:games。
+ * @property {number} gameId - 게임id。外键，对应table:games。
  */
 export interface Player extends DbCommon {
     id: number,

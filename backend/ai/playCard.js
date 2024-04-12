@@ -49,7 +49,7 @@ function deDuplicatedCombination(allCombination) {
     const tempResult = []
 
     const combinationsStrList = allCombination.map(combination => combination.toString())
-    // 此阶段去掉的是플레이어手中有相同牌时造成的重复组合。如[1,2,2]取两张的情况下，组合[1,2],[2,1],[2,2]均会出现两次。
+    // 此阶段去掉的是플레이어手中有相同牌时造成的重复组合。如[1,2,2]取两장的情况下，组合[1,2],[2,1],[2,2]均会出现两次。
     const deDuplicatedCombinationsStrList = Array.from(new Set(combinationsStrList))
     deDuplicatedCombinationsStrList.forEach(combinationStr => { tempResult.push(combinationStr.split(",").map(str => parseInt(str))) })
 
@@ -57,7 +57,7 @@ function deDuplicatedCombination(allCombination) {
     /** @type {number[][]} */
     const result = tempResult.filter(resItem => resItem.some(item => item >= 100))
     const orderedStrList = tempResult.filter(resItem => resItem.every(item => item < 100)).map(resItem => [...resItem].sort().toString())
-    // 此阶段去掉的是牌型上的重复组合。如[1,2,2]取两张的情况下，组合[1,2],[2,1]只取其一即可，但有变身牌的组合则无须去重。
+    // 此阶段去掉的是牌型上的重复组合。如[1,2,2]取两장的情况下，组合[1,2],[2,1]只取其一即可，但有变身牌的组合则无须去重。
     const deDuplicatedOrderedStrList = Array.from(new Set(orderedStrList))
     deDuplicatedOrderedStrList.forEach(orderedStr => { result.push(orderedStr.split(",").map(str => parseInt(str))) })
 
@@ -80,12 +80,12 @@ function playCardFilter(combination) {
 }
 
 /** 
- * @summary 获取指定张数时플레이어手中牌能打出的所有排列组合(仅去重和统一牌型，但不考虑牌型是否可管上现在牌池中的牌型)。
- * @description 只要定下了第一张基本牌，后面的牌均为附属牌，
- * 所以对于手中5张牌来说，取下标0,1,2,3,4分别作为基本牌，剩下的4张则作为附属牌来进行组合即可。
- * 所以若现有牌池为2张，플레이어手中牌为5张，则所有可打出的组合数为5*C4/2 = 30
+ * @summary 获取指定장数时플레이어手中牌能打出的所有排列组合(仅去重和统一牌型，但不考虑牌型是否可管上现在牌池中的牌型)。
+ * @description 只要定下了第一장基本牌，后面的牌均为附属牌，
+ * 所以对于手中5장牌来说，取下标0,1,2,3,4分别作为基本牌，剩下的4장则作为附属牌来进行组合即可。
+ * 所以若现有牌池为2장，플레이어手中牌为5장，则所有可打出的组合数为5*C4/2 = 30
  * @param {number[]} allCards 플레이어手中所有牌
- * @param {number} [count = 1] 需要打出的指定张数(小于等于플레이어플레이어手中所有牌张数，默认为1)
+ * @param {number} [count = 1] 需要打出的指定장数(小于等于플레이어플레이어手中所有牌장数，默认为1)
  * @returns {number[][]} 所有可打出的牌组合的结果(仅去重和统一牌型，但不考虑牌型是否可管上现在牌池中的牌型)
  */
 function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
@@ -97,7 +97,7 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
     }
 
     if (count === 1) {
-        // 只打出1张的话，无须排列组合，直接遍历去重后的allCards数组即可。
+        // 只打出1장的话，无须排列组合，直接遍历去重后的allCards数组即可。
         const tempList = Array.from(new Set(allCards))
         while (tempList.length > 0) {
             result.push([tempList.shift()])
@@ -106,7 +106,7 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
     }
 
     allCards.forEach((card, index) => {
-        const allCardsExceptCurrentCard = allCards.filter((card, idx) => idx !== index) // 去除1张基本牌，剩下的牌作为附属牌
+        const allCardsExceptCurrentCard = allCards.filter((card, idx) => idx !== index) // 去除1장基本牌，剩下的牌作为附属牌
         const permutationOrCombinationResult = permutationOrCombination(allCardsExceptCurrentCard, count - 1, false) // 剩下的附属牌进行组合
         permutationOrCombinationResult.forEach(resItem => {
             resItem.unshift(card) // 将基本牌补回组合中
@@ -125,8 +125,8 @@ function getPlayCardsListBySpecifiedCount(allCards, count = 1) {
 
 
 /** 
- * @summary 获取플레이어手中牌能打出的所有排列组合(去重统一且可管上现在牌池中的牌型,现在牌池中无牌时则获取所有可能张数牌能打出的所有排列组合)。
- * @description 与getPlayCardsListBySpecifiedCount的区别是不指定出牌数，而是根据游戏국势来指定。
+ * @summary 获取플레이어手中牌能打出的所有排列组合(去重统一且可管上现在牌池中的牌型,现在牌池中无牌时则获取所有可能장数牌能打出的所有排列组合)。
+ * @description 与getPlayCardsListBySpecifiedCount的区别是不指定出牌数，而是根据게임국势来指定。
  * @param {number[]} currentCard 现在牌池中的牌(>=0)。
  * @param {number[]} remainCards 플레이어手中所有牌(>0)。
  * @returns {number[][]} 各种能出的牌的组合。
@@ -142,7 +142,7 @@ function getHigherPlayCardsList(currentCard, remainCards) {
         return result
     }
 
-    if (currentCard.length > remainCards.length) { // 现在牌池中的牌张数大于플레이어手中所有牌的张数。
+    if (currentCard.length > remainCards.length) { // 现在牌池中的牌장数大于플레이어手中所有牌的장数。
         return result
     }
 
@@ -204,7 +204,7 @@ function aiPlay(game) {
             }
             if (playCard[i] >= 100) {
                 if (i === 0) {
-                    playCard[i] = playCard[i] - 100 //对首张牌进行处理，若为大于等于100的变身牌则减100作为基础牌
+                    playCard[i] = playCard[i] - 100 //对首장牌进行处理，若为大于等于100的变身牌则减100作为基础牌
                     continue
                 }
                 if (poker.getIndexOfCardList(playCard[0]).num === poker.getIndexOfCardList(playCard[i]).num) {

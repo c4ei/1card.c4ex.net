@@ -32,7 +32,7 @@ module.exports = {
             let getRankResult = await getRank(redisKey, order, query.id) //判断缓存存在并取得排序结果: 0增序，1减序
             if (!getRankResult.result) {
                 /** @type {SequelizedModelRecord[]} */
-                const records = await Record.findAll({ where: { num_of_game: { [Op.gte]: 5 } } }) // 寻找游戏场数大于5的플레이어
+                const records = await Record.findAll({ where: { num_of_game: { [Op.gte]: 5 } } }) // 寻找게임场数大于5的플레이어
                 if (records.length < 1) {//样本数量不足时
                     return { code: 200, message: '', type: query.type, result: { rankList: [], playerInfo: null } }
                 }
@@ -71,7 +71,7 @@ module.exports = {
                     zaddList.push(record.accountId)
                 })
                 /** @type {RedisWrapperResult} */
-                getRankResult = await setRank(redisKey, zaddList, query.id, order)//添加缓存并取得排序结果
+                getRankResult = await setRank(redisKey, zaddList, query.id, order)//추가缓存并取得排序结果
             }
             const topThreeList = getRankResult.topThreeList
             /** @type {ResponseRank} */
@@ -132,7 +132,7 @@ async function getRank(redisKey, order, id) {
                 if (rankRes === null) {
                     return { result: true, topThreeList: topThreeList, resList: null, resRank: -1 }
                 }
-                /* 얻다该排行榜指定플레이어排名的信息并返回结果，即对应参数中的res~res */
+                /* 얻다该ranking指定플레이어排名的信息并返回结果，即对应参数中的res~res */
                 const resList = await asyncZrange(redisKey, rankRes, rankRes, "WITHSCORES")
                 return { result: true, topThreeList: topThreeList, resList: resList, resRank: rankRes }
             }

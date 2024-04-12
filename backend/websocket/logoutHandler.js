@@ -14,7 +14,7 @@ const logger = require('../common/log')
 /**
  * @summary 登出处理器。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
- * @param {(ClientRequest & WebSocketInfo)} data 游戏房间的前端请求信息。
+ * @param {(ClientRequest & WebSocketInfo)} data 게임房间的前端请求信息。
  * @returns {Promise<void>}
  */
 module.exports = async function (wss, data) {

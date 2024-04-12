@@ -23,7 +23,7 @@
             </PlayerInfoTabModule>
             <span slot="footer" class="dialog-footer">
                 <el-button type="danger" @click="playerInfoDialogVisible = false" :style="{ 'font-size': fontSize }"
-                    :size="buttonSize">关闭</el-button>
+                    :size="buttonSize">닫기</el-button>
             </span>
         </el-dialog>
     </div>

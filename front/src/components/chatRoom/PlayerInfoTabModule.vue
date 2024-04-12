@@ -1,20 +1,20 @@
 <template>
     <el-tabs v-if="playerProfile !== null" type="border-card" v-model="activeViewModuleTabName"
         @tab-click="handleViewModuleTabClick">
-        <el-tab-pane label="개人战绩" name="record">
+        <el-tab-pane label="업적" name="record">
             <PlayerProfileModule :playerProfile="playerProfile"></PlayerProfileModule>
         </el-tab-pane>
-        <el-tab-pane label="过去对국" name="game">
+        <el-tab-pane label="히스토리" name="game">
             <GameResultsListModule :gameResultsList="gameResultsList" :gameResultsPageNum="gameResultsPageNum"
                 :fontSize="fontSize" :isHorizontal="isHorizontal" :currentPage="gameResultListCurrentPage"
                 @pageChanged="getGameRecordsList"
                 @sendGameResultToPlayerInfoTab="function (value) { $emit('sendGameResultToPlayerInfo', value) }">
             </GameResultsListModule>
         </el-tab-pane>
-        <el-tab-pane label="排行榜" name="rank">
+        <el-tab-pane label="ranking" name="rank">
             <RankModule :playerProfile="playerProfile" :fontSize="fontSize" :isShowing="isShowing"></RankModule>
         </el-tab-pane>
-        <el-tab-pane label="设置" name="setting" v-if="playerProfile.id === $store.state.id">
+        <el-tab-pane label="설정" name="setting" v-if="playerProfile.id === $store.state.id">
             <SettingModule :fontSize="fontSize"></SettingModule>
         </el-tab-pane>
         <el-tab-pane v-if="false" label="成就" name="achievement" disabled>暂未开放</el-tab-pane>

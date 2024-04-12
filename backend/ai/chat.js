@@ -18,13 +18,13 @@ const gameHandler = require('../websocket/gameHandler')
 
 /** 
  * @summary 电脑플레이어聊天的处理。
- * @param {number} id 游戏房间id/游戏id。
+ * @param {number} id 게임房间id/게임id。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @returns {Promise<void>}
  */
 async function chatIntervalHandler(id, wss) {
     const gameRes = await asyncGet(conf.redisCache.gamePrefix + id)
-    if (gameRes === null) { // 游戏不存在，则处理在房间中的聊天
+    if (gameRes === null) { // 게임不存在，则处理在房间中的聊天
         const gameRoomRes = await asyncGet(conf.redisCache.gameRoomPrefix + id)
         if (gameRoomRes === null) {
             return
@@ -69,7 +69,7 @@ async function chatIntervalHandler(id, wss) {
         })
         return
     }
-    // 游戏存在，则处理游戏中聊天
+    // 게임存在，则处理게임中聊天
     /** @type {RedisCacheGame} */
     const game = JSON.parse(gameRes)
     /** @type {[ {aiPlayerId: number, seatIndex: GamePlayerSeatIndex} ]} */
@@ -115,12 +115,12 @@ async function chatIntervalHandler(id, wss) {
 
 
 /** 
- * @summary 在游戏中전송聊天语音信息。
- * @param {RedisCacheGame} game 游戏。
+ * @summary 在게임中전송聊天语音信息。
+ * @param {RedisCacheGame} game 게임。
  * @param {AiPlayerChatContent} aiPlayerChatContent 电脑플레이어聊天属性。
  * @param {AiPlayerGameMessage} aiPlayerGameMessage 电脑플레이어聊天信息。
  * @param {GamePlayerSeatIndex} sourceSeatIndex 发出信息电脑플레이어座位。
- * @param {GamePlayerSeatIndex | -1} [targetSeatIndex = -1] 接收信息플레이어座位，默认-1。
+ * @param {GamePlayerSeatIndex | -1} [targetSeatIndex = -1] 接받다信息플레이어座位，默认-1。
  * @param {string} aiPlayerChatKey 储存在redis中的电脑플레이어key。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @returns {Promise<void>}
@@ -149,7 +149,7 @@ async function textToPlayerInGame(game, aiPlayerChatContent, aiPlayerGameMessage
 
 /** 
  * @summary 얻다电脑플레이어是否可聊天的boolean。
- * @param {number} id 游戏房间id/游戏id。
+ * @param {number} id 게임房间id/게임id。
  * @param {number} aiPlayerId 电脑플레이어id。
  * @returns {Promise<boolean>}
  */
@@ -169,42 +169,42 @@ async function aiPlayerChatCooldown(id, aiPlayerId) {
 }
 
 const commonChatContent = [
-    '今天天气不错。',
-    '今天也是美好的一天。',
-    '有时间多来玩玩。',
-    '下次也一起玩吧。',
-    '准备好去西天取经了吗？',
-    '来一국愉快的游戏吧！',
-    '我准备好了，你呢？',
-    '放松心情，享受游戏的乐趣。',
-    '准备好被我打败了吗？',
+    '오늘 날씨가 좋네요.',
+    '오늘도 좋은 하루입니다.',
+    '시간 나실 때 오셔서 더 많이 놀아보세요.',
+    '다음에 같이 놀자.',
+    '경전을 배우기 위해 서부로 갈 준비가 되셨나요? ',
+    '재미있게 게임하자! ',
+    '난 준비됐어, 너는 어때? ',
+    '편안하게 게임을 즐기세요. ',
+    '나에게 패배할 준비가 되셨나요? ',
 ]
 
 const winnerChatContent = [
-    '大吉大利，今晚吃鸡。',
-    '下一국再来挑战我吧！',
-    '下一국祝你们好运！',
-    '各位不要灰心，再接再厉。',
-    '每一步都重要，谨慎选择。',
-    '想要战胜我？还早得很呢！',
-    '欢迎来挑战我，我可不会手下留情。',
-    '胜利的滋味真是美妙，希望你也能尝到。',
-    '我赢了，你们输了，人生就是这么美妙！',
-    '这就是我的实力。',
-    '今天手气不错。',
-    '今天幸运女神站在了我这边。',
-    '和你玩得很愉快。',
+    '잘자 오늘 밤엔 치킨 먹자。',
+    '다음에 또 도전하러 오세요!',
+    '다음번에는 행운을 빌어요!',
+    '낙심하지 말고 계속해서 좋은 일을 하시기 바랍니다.',
+    '모든 단계가 중요하므로 신중하게 선택하세요.',
+    '나를 이기고 싶나요? 아직은 이르다!',
+    '나에게 도전해 보세요. 나는 자비를 베풀지 않을 것입니다.',
+    '승리는 정말 멋진 맛이고 당신도 그것을 맛볼 수 있기를 바랍니다.',
+    '나는 이기고 너는 진다. 인생은 정말 멋지다!',
+    '이것이 나의 힘이다.',
+    '오늘은 운이 좋은 것 같아요.',
+    '오늘은 행운의 여신이 내 편입니다.',
+    '당신과 함께 플레이해서 즐거웠습니다.',
 ]
 
 const loserChatContent = [
-    '但愿下把运气能好点。',
-    '下一국一定要赢回来。',
-    '下一국祝我好运吧！',
-    '胜败乃兵家常事。',
-    '输赢都是游戏的一部分，享受过程才是最重要的。',
-    '今天真背。',
-    '今天幸运女神不在我这边啊。',
-    '现在只是开始，等着看我反击。',
+    '다음에는 더 좋은 일이 있었으면 좋겠습니다. ',
+    '다음에는 꼭 이겨야 한다. ',
+    '다음에도 잘 부탁해! ',
+    '승패가 표준적인 문제입니다. ',
+    '승패도 모두 게임의 일부이며, 그 과정을 즐기는 것이 가장 중요합니다. ',
+    '오늘 정말 힘들다. ',
+    '오늘 행운의 여신은 내 편이 아니다. ',
+    '이제 시작하고 내가 반격하는 것을 기다리는 것이 문제입니다. ',
 ]
 
 /** 
@@ -218,41 +218,41 @@ const loserChatContent = [
  * @type {AiPlayerChatContent[]}
  */
 const aiPlayerChatContents = [
-    { id: -1, talkative: 3, content: ['俺老牛力大无穷。', '别把老牛给惹恼了。'], },
-    { id: -2, talkative: 3, content: ['大师兄，师傅被妖怪抓走了！', '二师兄，师傅被妖怪抓走了！'], },
-    { id: -3, talkative: 1, content: ['我其实是一条龙。', '行李很沉。'], },
-    { id: -4, talkative: 3, content: ['大师兄，师傅被妖怪抓走了！', '此恨绵绵无绝期...'], },
-    { id: -5, talkative: 4, content: ['看马匹真无聊。', '一会去偷两개蟠桃吃。'], },
-    { id: -6, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },
-    { id: -7, talkative: 3, content: ['我能看透一切。', '万物皆逃不过我的法眼。'], },
-    { id: -8, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },
-    { id: -9, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },
-    { id: -10, talkative: 3, content: ['俺老孙来也。', '俺老孙去也。'], },
-    { id: -11, talkative: 2, content: ['放下屠刀，立地成佛。', '阿弥陀佛。', '善哉善哉。'], },
-    { id: -12, talkative: 4, content: ['我才是真的美猴王。', '我才是真的孙悟空。'], },
-    { id: -13, talkative: 3, content: ['我挑着担。', '我牵着马。'], },
-    { id: -14, talkative: 3, content: ['有情人终成眷属。', '但愿人长久，千里共婵娟。'], },
-    { id: -15, talkative: 3, content: ['吾乃东海龙王。', '我才是雨神。'], },
-    { id: -16, talkative: 2, content: ['泼猴，你又闯祸了。', '悟空，休耍嘴贫。'], },
-    { id: -17, talkative: 5, content: ['看我七十二变。', '猴儿们，操练起来。'], },
-    { id: -18, talkative: 2, content: ['你能逃出我的五指山吗。', '阿弥陀佛。', '善哉善哉。'], },
-    { id: -19, talkative: 3, content: ['嫦娥真美呀。', '问世间情为何物...'], },
-    { id: -20, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },
-    { id: -21, talkative: 2, content: ['护持国土。', '慈悲为怀。'], },
-    { id: -22, talkative: 3, content: ['想吃唐僧肉。', '吾乃万兽之王。'], },
-    { id: -23, talkative: 3, content: ['此树是我栽，此地归我管。', '要想从此过，留下买路财。'], },
-    { id: -24, talkative: 3, content: ['道生一，一生二，二生三，三生万物。', '太极生两仪，两仪生四象。'], },
-    { id: -25, talkative: 3, content: ['吾乃玉皇大帝。', '来人。给我捉拿妖猴!', '快去请如来佛祖...'], },
-    { id: -26, talkative: 4, content: ['我命由我不由天。', '是他是他就是他...'], },
-    { id: -27, talkative: 3, content: ['我要娶老婆。', '我怎么变这鬼样子了...'], },
-    { id: -28, talkative: 3, content: ['来人，取我宝塔。', '吾乃托塔天王。'], },
-    { id: -29, talkative: 4, content: ['呔！妖怪，哪里跑！', '吃俺老孙一棒。'], },
-    { id: -30, talkative: 2, content: ['阿弥陀佛。', '善哉善哉。'], },
-    { id: -31, talkative: 3, content: ['那头牛又跑去狐狸精那了。', '我四十米的蒲扇已经架不住了。'], },
-    { id: -32, talkative: 3, content: ['我是牛魔王。', '哞...'], },
-    { id: -33, talkative: 3, content: ['我的意中人会架着七彩祥云来接我。', '我猜中了开头，却猜不中结尾。'], },
-    { id: -34, talkative: 3, content: ['我虽然看不见，但我可不瞎哦。'], },
-    { id: -35, talkative: 3, content: ['问世间情为何物...', '我希望期限是一万年...'], },
+    { id: -1, talkative: 3, content: ['나의 늙은 소는 매우 강력합니다. ', '늙은 소를 화나게 하지 마세요. '], },
+    { id: -2, talkative: 3, content: ['선생님, 주인님이 괴물에게 잡혔어요! ', '둘째 형, 주인님이 괴물에게 사로잡혔어요! '], },
+    { id: -3, talkative: 1, content: ['나는 사실 용입니다. ', '짐이 너무 무거워요. '], },
+    { id: -4, talkative: 3, content: ['선생님, 주인님이 괴물에게 잡혔어요! ', '이 증오는 영원히 지속됩니다...'], },
+    { id: -5, talkative: 4, content: ['말을 보는 건 너무 지루해요. ', '평평한 복숭아 두 개를 훔쳐서 먹을 거예요. '], },
+    { id: -6, talkative: 2, content: ['아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -7, talkative: 3, content: ['나는 모든 것을 꿰뚫어 볼 수 있습니다. ', '내 분별력을 벗어날 수 있는 것은 아무것도 없다. '], },
+    { id: -8, talkative: 2, content: ['아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -9, talkative: 2, content: ['아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -10, talkative: 3, content: ['내 손자가 여기 있습니다. ', '내 늙은 손자가 떠난다. '], },
+    { id: -11, talkative: 2, content: ['도살칼을 내려놓고 즉시 부처가 되라. ', '아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -12, talkative: 4, content: ['나는 진짜 원숭이 왕이다. ', '내가 진짜 손오공이다. '], },
+    { id: -13, talkative: 3, content: ['나는 짐을 지고 있습니다. ', '나는 말을 잡고 있다. '], },
+    { id: -14, talkative: 3, content: ['연인은 결국 결혼을 하게 됩니다. ', '눙, 달, 초승달. '], },
+    { id: -15, talkative: 3, content: ['나는 동중국해의 용왕이다. ', '나는 비의 신이다. '], },
+    { id: -16, talkative: 2, content: ['원숭이님, 또 문제가 생겼습니다. ', '오공아, 불쌍한 척 하지 마. '], },
+    { id: -17, talkative: 5, content: ['내 72가지 변화를 보세요. ', '원숭이들아, 연습 시작해. '], },
+    { id: -18, talkative: 2, content: ['내 우즈산에서 탈출할 수 있나요? ', '아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -19, talkative: 3, content: ['창어는 너무 아름답습니다. ', '사랑의 도래...'], },
+    { id: -20, talkative: 2, content: ['아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -21, talkative: 2, content: ['나라를 지켜라. ', '긍휼히 여겨라. '], },
+    { id: -22, talkative: 3, content: ['당승고기를 먹고 싶어요. ', '나는 백수의 왕이다. '], },
+    { id: -23, talkative: 3, content: ['내가 이 나무를 심었고, 이곳은 내 통제하에 있습니다. ', '지금부터 살고 싶으면 돈을 두고 사세요. '], },
+    { id: -24, talkative: 3, content: ['도는 하나를 낳고 둘을 낳고 둘은 셋을 낳고 셋은 만물을 낳느니라. ', '태극권은 두 개의 악기를 생성하고, 두 개의 악기는 네 개의 이미지를 생성합니다. '], },
+    { id: -25, talkative: 3, content: ['나는 옥황상제입니다. ', '누군가 온다. 나를 위해 괴물 원숭이를 잡아라!', '가서 여래 부처님을 초대하라...'], },
+    { id: -26, talkative: 4, content: ['내 운명은 신이 아니라 나에 의해 결정됩니다. ', '그 사람이야, 그 사람이야...'], },
+    { id: -27, talkative: 3, content: ['아내를 구하고 싶어요. ', '내가 왜 이렇게 됐지...'], },
+    { id: -28, talkative: 3, content: ['여기, 내 탑을 가져가세요. ', '나는 탑의 왕이다. '], },
+    { id: -29, talkative: 4, content: ['안녕하세요! 괴물아, 어디로 달리고 있는 거야? ', '나의 늙은 손자에게서 막대기를 빼앗아라. '], },
+    { id: -30, talkative: 2, content: ['아미타불. ', '좋아, 좋아, 좋아. '], },
+    { id: -31, talkative: 3, content: ['소가 다시 암여우에게 갔다. ', '내 40미터짜리 부들잎 부채가 더 이상 버틸 수가 없어요. '], },
+    { id: -32, talkative: 3, content: ['나는 황소마왕이다. ', '음...'], },
+    { id: -33, talkative: 3, content: ['내 연인이 다채로운 상서로운 구름 아래서 나를 데리러 올 것입니다. ', '시작은 맞췄는데 끝은 몰랐다. '], },
+    { id: -34, talkative: 3, content: ['볼 수는 없지만 시각 장애인은 아닙니다. '], },
+    { id: -35, talkative: 3, content: ['이 세상에 사랑이 무엇인지 묻는다...', '만년이면 좋겠다...'], },
 ]
 
 /** 
@@ -266,19 +266,19 @@ const aiPlayerChatContents = [
  * @type {AiPlayerGameMessage[]} 配置参考前端'src\components\chatRoom\tabs\SettingModule.vue' messageGroups
  */
 const aiPlayerGameMessages = [
-    { id: 1, music: "1", text: "你的牌打得太好了" },
-    { id: 2, music: "2", text: "我等得花儿都谢了" },
-    { id: 3, music: "3", text: "合作愉快" },
-    { id: 4, music: "4", text: "都别走，大战到天亮" },
-    { id: 5, music: "5", text: "小小小" },
-    { id: 6, music: "6", text: "大大大" },
-    { id: 7, music: "7", text: "求师傅" },
-    { id: 8, music: "8", text: "求拉满" },
-    { id: 9, music: "9", text: "求转向" },
-    { id: 10, music: "10", text: "收" },
-    { id: 11, music: "11", text: "我太难了" },
-    { id: 12, music: "12", text: "我人没了" },
-    { id: 13, music: "13", text: "战略性收牌" }
+    { id: 1, music: "1", text: "카드를 아주 잘 사용하셨습니다." },
+    { id: 2, music: "2", text: "꽃이 시들 때까지 기다렸습니다." },
+    { id: 3, music: "3", text: "행복한 협력" },
+    { id: 4, music: "4", text: "떠나지 마세요. 우리는 새벽까지 싸울 것입니다." },
+    { id: 5, music: "5", text: "작은 작은 작은" },
+    { id: 6, music: "6", text: "大大大大" },
+    { id: 7, music: "7", text: "마스터 찾기" },
+    { id: 8, music: "8", text: "행복하세요" },
+    { id: 9, music: "9", text: "조향 요청" },
+    { ID: 10, music: "10", text: "수락" },
+    { id: 11, music: "11", text: "너무 힘들어요" },
+    { id: 12, music: "12", text: "나는 사라졌습니다" },
+    { id: 13, music: "13", text: "전략적 종결" }
 ]
 
 module.exports = {

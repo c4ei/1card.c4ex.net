@@ -11,7 +11,7 @@
 		" type="info" center :closable="false"></el-alert>
 		</div>
 		<el-tooltip v-for="n in playerLocRoom.cardNum" :key="n" effect="light"
-			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '덱'" placement="right-start">
+			:content="'게임사용된 카드 수： ' + playerLocRoom.cardNum + '덱'" placement="right-start">
 			<el-image class="game-room-table-horizontal-poker-pool" :style="{
 			'margin-left': n === 1 ? 50 - 5 * playerLocRoom.cardNum + '' + '%' : '0%',
 			}" :src="require('@/assets/images/poker/poker-pool.png')"></el-image>
@@ -25,10 +25,10 @@
 			<div id="game-room-table-horizontal-bottom"
 			:style="{ 'margin-top': playerLocRoom.needPassword ? '14vh' : '20vh' }">
 			<el-tag class="game-room-table-horizontal-record-item" type="info" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "수집된 카드 수： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 张" }}
+				:style="{ 'font-size': fontSize }">{{ "수집된 카드 수： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 장" }}
 			</el-tag>
 			<el-tag class="game-room-table-horizontal-record-item" type="success" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "吃鸡： " }} <CardsNum :value="player.win"></CardsNum> {{ " 국" }}
+				:style="{ 'font-size': fontSize }">{{ "우승： " }} <CardsNum :value="player.win"></CardsNum> {{ " 국" }}
 			</el-tag>
 			<el-tag class="game-room-table-horizontal-record-item" type="danger" effect="dark" :size="tagSize"
 				:style="{ 'font-size': fontSize }">{{ "당기기： " }} <CardsNum :value="player.loss"></CardsNum> {{ " 국" }}
@@ -113,20 +113,20 @@
 					<el-tag v-show="(getGamePlayer.remainCards.length || 0) > 0"
 					class="game-room-table-horizontal-record-item" type="success" effect="dark" :size="tagSize"
 					:style="{ 'font-size': fontSize }">
-					{{ "手牌数： " + getGamePlayer.remainCards.length + " 张" }}
+					{{ "手牌数： " + getGamePlayer.remainCards.length + " 장" }}
 					</el-tag>
 				</transition>
 				<el-tag :class="{ 'increase-num': allCardsFlag }" class="game-room-table-horizontal-record-item" type="info"
 					effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
-					{{ "总收牌： " }}
+					{{ "总받다牌： " }}
 					<CardsNum :value="getGamePlayer.cards" @increased="increasedHandler('all')"></CardsNum>
-					{{ " 张" }}
+					{{ " 장" }}
 				</el-tag>
 				<el-tag :class="{ 'increase-num': comboFlag }" class="game-room-table-horizontal-record-item" type="danger"
 					effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">
 					{{ "最大连击： " }}
 					<CardsNum :value="getGamePlayer.maxCombo" @increased="increasedHandler('combo')"></CardsNum>
-					{{ " 张" }}
+					{{ " 장" }}
 				</el-tag>
 				</div>
 			</template>
@@ -152,7 +152,7 @@
 		</div>
 		<div id="game-room-table-vertical-room-info-middle">
 			<el-tooltip v-for="n in playerLocRoom.cardNum" :key="n" effect="light"
-			:content="'游戏사용된 카드 수： ' + playerLocRoom.cardNum + '덱'" placement="right-start">
+			:content="'게임사용된 카드 수： ' + playerLocRoom.cardNum + '덱'" placement="right-start">
 			<el-image :fit="'contain'" class="game-room-table-horizontal-poker-pool" :style="{
 				'margin-left': n === 1 ? 50 - 5 * playerLocRoom.cardNum + '' + '%' : '0%',
 			}" :src="require('@/assets/images/poker/poker-pool.png')"></el-image>
@@ -164,11 +164,11 @@
 				<p v-for="item in gameTextFromPlayer" :key="item">{{ item }}</p>
 			</div>
 			<el-tag class="game-room-table-horizontal-record-item" type="info" effect="dark" :size="tagSize"
-				:style="{ 'font-size': fontSize }">{{ "수집된 카드 수： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 张" }}
+				:style="{ 'font-size': fontSize }">{{ "수집된 카드 수： " }} <CardsNum :value="player.cards"></CardsNum> {{ " 장" }}
 			</el-tag>
 			</el-tooltip>
 			<el-tag class="game-room-table-horizontal-record-item" type="success" effect="dark" :size="tagSize"
-			:style="{ 'font-size': fontSize }">{{ "吃鸡： " }} <CardsNum :value="player.win"></CardsNum> {{ " 국" }}
+			:style="{ 'font-size': fontSize }">{{ "우승： " }} <CardsNum :value="player.win"></CardsNum> {{ " 국" }}
 			</el-tag>
 			<el-tag class="game-room-table-horizontal-record-item" type="danger" effect="dark" :size="tagSize"
 			:style="{ 'font-size': fontSize }">{{ "당기기： " }} <CardsNum :value="player.loss"></CardsNum> {{ " 국" }}
@@ -243,7 +243,7 @@
 			<transition leave-active-class="scale-out-top">
 				<el-tag v-show="(getGamePlayer.remainCards.length || 0) > 0" class="game-room-table-horizontal-record-item"
 				type="success" effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "手牌数： " +
-					getGamePlayer.remainCards.length + " 张" }}</el-tag>
+					getGamePlayer.remainCards.length + " 장" }}</el-tag>
 			</transition>
 			</div>
 		</el-tooltip>
@@ -255,16 +255,16 @@
 			<template slot="reference">
 			<div id="game-room-table-vertical-info-box-bottom">
 				<el-tag :class="{ 'increase-num': allCardsFlag }" class="game-room-table-horizontal-record-item" type="info"
-				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "总收牌： " }}
+				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "总받다牌： " }}
 				<CardsNum :value="getGamePlayer.cards" @increased="increasedHandler('all')"></CardsNum>
-				{{ " 张" }}
+				{{ " 장" }}
 				</el-tag>
 			</div>
 			<div id="game-room-table-vertical-info-box-bottom">
 				<el-tag :class="{ 'increase-num': comboFlag }" class="game-room-table-horizontal-record-item" type="danger"
 				effect="dark" :size="tagSize" :style="{ 'font-size': fontSize }">{{ "最大连击： " }}
 				<CardsNum :value="getGamePlayer.maxCombo" @increased="increasedHandler('combo')"></CardsNum>
-				{{ '张' }}
+				{{ '장' }}
 				</el-tag>
 			</div>
 			</template>

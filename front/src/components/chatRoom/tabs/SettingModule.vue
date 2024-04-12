@@ -2,38 +2,38 @@
     <div>
         <div class="setting_item">
             <div>
-                <span :style="{ 'font-size': fontSize }">背景音乐</span>
+                <span :style="{ 'font-size': fontSize }">배경 음악</span>
                 <el-switch style="float: right" v-model="backgroundMusic" active-color="#13ce66"
                     inactive-color="#ff4949"></el-switch>
             </div>
         </div>
         <div class="setting_item" v-if="!isIphoneOrIpad">
-            <span :style="{ 'font-size': fontSize }" style="line-height: 40px">音乐音量</span>
+            <span :style="{ 'font-size': fontSize }" style="line-height: 40px">음악 볼륨</span>
             <el-slider style="width: 70%; float: right;" v-model="bgmVolume" :disabled="!backgroundMusic"
                 :show-tooltip="false"></el-slider>
         </div>
         <div class="setting_item">
             <div>
-                <span :style="{ 'font-size': fontSize }">游戏音效</span>
+                <span :style="{ 'font-size': fontSize }">게임音效</span>
                 <el-switch style="float: right" v-model="soundEffect" active-color="#13ce66"
                     inactive-color="#ff4949"></el-switch>
             </div>
         </div>
         <div class="setting_item" v-if="!isIphoneOrIpad">
-            <span :style="{ 'font-size': fontSize }" style="line-height: 40px">音效音量</span>
+            <span :style="{ 'font-size': fontSize }" style="line-height: 40px">볼륨</span>
             <el-slider style="width: 70%; float: right;" v-model="soundVolume" :disabled="!soundEffect"
                 :show-tooltip="false"></el-slider>
         </div>
         <div class="setting_item">
             <div>
-                <span :style="{ 'font-size': fontSize }">出牌提示声</span>
+                <span :style="{ 'font-size': fontSize }">안내음</span>
                 <el-switch style="float: right" v-model="youTurnVoice" active-color="#13ce66" inactive-color="#ff4949"
                     :disabled="!soundEffect"></el-switch>
             </div>
         </div>
         <div class="setting_item">
             <div>
-                <span :style="{ 'font-size': fontSize }" style="line-height: 40px">快速发言</span>
+                <span :style="{ 'font-size': fontSize }" style="line-height: 40px">SPEED</span>
                 <el-select :multiple-limit="10" value-key="id" v-model="quickChat" multiple collapse-tags
                     style="float: right" placeholder="请选择">
                     <el-option-group v-for="group in messageGroups" :key="group.label" :label="group.label">
@@ -45,7 +45,7 @@
         </div>
         <div class="setting_item">
             <div>
-                <span :style="{ 'font-size': fontSize }">变身牌边框</span>
+                <span :style="{ 'font-size': fontSize }">변신 카드 테두리</span>
                 <el-switch style="float: right" v-model="bianshenSwitch" active-color="#13ce66"
                     inactive-color="#ff4949"></el-switch>
             </div>
@@ -84,13 +84,13 @@ export default Vue.extend({
                         ]
                 },
                 {
-                    label: '收牌',
+                    label: '받다牌',
                     options:
                         [
-                            { id: 10, music: "10", text: "收" },
+                            { id: 10, music: "10", text: "받다" },
                             { id: 11, music: "11", text: "我太难了" },
                             { id: 12, music: "12", text: "我人没了" },
-                            { id: 13, music: "13", text: "战略性收牌" }
+                            { id: 13, music: "13", text: "战略性받다牌" }
                         ]
                 },
                 {

@@ -1,4 +1,4 @@
-/* 游戏模型 */
+/* 게임模型 */
 
 const db = require('../database/mysql')
 
@@ -10,7 +10,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.STRING(20),
             defaultValue: ''
         },
-        /* 最少收牌 */
+        /* 最少받다牌 */
         min_cards:
         {
             type: db.dataTypes.INTEGER(4),
@@ -22,7 +22,7 @@ const Game = db.defineModel('game',
             type: db.dataTypes.STRING(20),
             defaultValue: ''
         },
-        /* 最多收牌 */
+        /* 最多받다牌 */
         max_cards:
         {
             type: db.dataTypes.INTEGER(4),

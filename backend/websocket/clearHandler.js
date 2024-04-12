@@ -68,7 +68,7 @@ async function clearHandler(wss) {
             gameRoomList.forEach(async item => {
                 /** @type {RedisCacheRoomInfo} */
                 const gameRoom = JSON.parse(item)
-                if (gameRoom.status === 1) { return } //房间正在游戏中，不清理
+                if (gameRoom.status === 1) { return } //房间正在게임中，不清理
                 let stillHasPlayer = false
                 /* 对房间每개位置进行检查 */
                 for (let i = 0; i < Object.keys(gameRoom.playerList).length; i++) {
@@ -133,7 +133,7 @@ async function clearHandler(wss) {
                 })
             })
         }, conf.ws.checkPeriod)
-        //将计时器绑定到wss上，wss关闭时删除计时器
+        //将计时器绑定到wss上，wss닫기时删除计时器
         wss.clearHandlerTimerId = clearHandlerTimer[Symbol.toPrimitive]()
     } catch (e) {
         logger.error(e)
@@ -142,8 +142,8 @@ async function clearHandler(wss) {
 }
 
 /**
- * @summary 清除游戏房间并删除绑定游戏房间的定时器
- * @param {string} gameRoomKey 游戏房间ID。
+ * @summary 清除게임房间并删除绑定게임房间的定时器
+ * @param {string} gameRoomKey 게임房间ID。
  * @returns {Promise<void>}
  */
 async function clearGameRoom(gameRoomKey) {

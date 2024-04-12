@@ -79,7 +79,7 @@ export type WebSocketGameResponseJsonData = InitializeGameResponseJsonData | Shi
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'initialize'} action - 对目标游戏操作的动作。
+ * @property {'initialize'} action - 对目标게임操作的动作。
  * @property {string} data - 返回的字符串可Json parse转换为WebSocketGame。
  */
 interface InitializeGameResponseJsonData extends WebSocketResponseRawData {
@@ -91,7 +91,7 @@ interface InitializeGameResponseJsonData extends WebSocketResponseRawData {
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'shiftOnline'} action - 对目标游戏操作的动作。
+ * @property {'shiftOnline'} action - 对目标게임操作的动作。
  * @property {GamePlayerSeatIndex} seatIndex - 플레이어的座位号。
  * @property {boolean} online - 플레이어是否在线。
  */
@@ -105,7 +105,7 @@ interface ShiftOnlineGameResponseJsonData extends WebSocketResponseRawData {
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'textToPlayer'} action - 对目标游戏操作的动作。
+ * @property {'textToPlayer'} action - 对目标게임操作的动作。
  * @property {TextToPlayerGameData} data - 返回的数据。
  */
 interface TextToPlayerGameResponseJsonData extends WebSocketResponseRawData {
@@ -116,12 +116,12 @@ interface TextToPlayerGameResponseJsonData extends WebSocketResponseRawData {
 
 /** 
  * @type {object} 
- * @property {GamePlayerSeatIndex|-1} target - 전송游戏内信息플레이어的目标플레이어座位号，-1时向所有플레이어전송。textToPlayer时不为空。
- * @property {number} targetId - 전송游戏内信息目标플레이어的的플레이어id，0时向所有플레이어전송。textToPlayer时不为空。
- * @property {GamePlayerSeatIndex} source - 전송游戏内信息플레이어的座位号。textToPlayer时不为空。
- * @property {number} sourceId - 전송游戏内信息플레이어的的플레이어id。textToPlayer时不为空。
- * @property {string} soundSrc - 전송游戏内信息对应的语音文件路径。textToPlayer时不为空。
- * @property {string} text - 전송游戏内信息对应的信息。textToPlayer时不为空。
+ * @property {GamePlayerSeatIndex|-1} target - 전송게임内信息플레이어的目标플레이어座位号，-1时向所有플레이어전송。textToPlayer时不为空。
+ * @property {number} targetId - 전송게임内信息目标플레이어的的플레이어id，0时向所有플레이어전송。textToPlayer时不为空。
+ * @property {GamePlayerSeatIndex} source - 전송게임内信息플레이어的座位号。textToPlayer时不为空。
+ * @property {number} sourceId - 전송게임内信息플레이어的的플레이어id。textToPlayer时不为空。
+ * @property {string} soundSrc - 전송게임内信息对应的语音文件路径。textToPlayer时不为空。
+ * @property {string} text - 전송게임内信息对应的信息。textToPlayer时不为空。
  */
 export interface TextToPlayerGameData {
     target: GamePlayerSeatIndex | -1,
@@ -135,7 +135,7 @@ export interface TextToPlayerGameData {
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'delete'} action - 对目标游戏操作的动作。
+ * @property {'delete'} action - 对目标게임操作的动作。
  */
 interface DeleteGameResponseJsonData extends WebSocketResponseRawData {
     type: 'game',
@@ -145,7 +145,7 @@ interface DeleteGameResponseJsonData extends WebSocketResponseRawData {
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'result'} action - 对目标游戏操作的动作。
+ * @property {'result'} action - 对目标게임操作的动作。
  * @property {string} data - 返回的字符串可Json parse转换为WGameResult。
  */
 interface ResultGameResponseJsonData extends WebSocketResponseRawData {
@@ -157,7 +157,7 @@ interface ResultGameResponseJsonData extends WebSocketResponseRawData {
 /** 
  * @type {object} 
  * @property {'game'} type - 操作类型。
- * @property {'update' | 'get'} action - 对目标游戏操作的动作。
+ * @property {'update' | 'get'} action - 对目标게임操作的动作。
  * @property {string} data - 返回的字符串可Json parse转换为WebSocketGame。
  */
 interface GetGameResponseJsonData extends WebSocketResponseRawData {

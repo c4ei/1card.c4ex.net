@@ -17,7 +17,7 @@ const { chatIntervalHandler } = require('../ai/chat.js')
  */
 
 /**
- * @param {RoomWebsocketRequestData} data 游戏房间的前端请求信息。
+ * @param {RoomWebsocketRequestData} data 게임房间的前端请求信息。
  * @param {WebSocketServerInfo} wss WebSocketServer信息，包含所有플레이어的WebSocket连接。
  * @param {WebSocketInfo} ws 单一플레이어的WebSocket连接(附带플레이어信息)。
  * @returns {Promise<void>}
@@ -25,7 +25,7 @@ const { chatIntervalHandler } = require('../ai/chat.js')
 module.exports = async function (data, wss, ws) {
     try {
         const gameRoomKey = conf.redisCache.gameRoomPrefix + '*'
-        /* id是0则直接获取现在的游戏房间列表 */
+        /* id是0则直接获取现在的게임房间列表 */
         if (data.id === 0) {
             const gameRoomKeys = await asyncKeys(gameRoomKey)
             if (gameRoomKeys.length === 0) {
@@ -296,7 +296,7 @@ module.exports = async function (data, wss, ws) {
                     }
                 })
             }
-            /* 변경房间设置 */
+            /* 변경房间설정 */
             else if (data.action === 'edit') {
                 const roomRes = await asyncGet(roomId)
                 if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }
@@ -326,7 +326,7 @@ module.exports = async function (data, wss, ws) {
                     }
                 })
             }
-            /* 换位置 */
+            /* 자리이동置 */
             else if (data.action === 'changeSeat') {
                 const roomRes = await asyncGet(roomId)
                 if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }
@@ -345,7 +345,7 @@ module.exports = async function (data, wss, ws) {
                 if (room.playerList[targetSeatIndex].id <= 0) {
                     const temporaryPlayer = room.playerList[targetSeatIndex]
                     room.playerList[targetSeatIndex] = room.playerList[sourceSeatIndex]
-                    if (temporaryPlayer.id < 0) { // 目标位置是电脑플레이어则将其设置到换位置请求的플레이어座位上
+                    if (temporaryPlayer.id < 0) { // 目标位置是电脑플레이어则将其설정到자리이동置请求的플레이어座位上
                         room.playerList[sourceSeatIndex] = temporaryPlayer
                     }
                     else {
@@ -405,7 +405,7 @@ module.exports = async function (data, wss, ws) {
                     }
                 }
             }
-            /* 拒绝换位 */
+            /* 拒绝자리이동 */
             else if (data.action === 'disagreeChangeSeat') {
                 const roomRes = await asyncGet(roomId)
                 if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }

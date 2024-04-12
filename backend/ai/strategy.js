@@ -33,7 +33,7 @@ function strategy(game, playCards, remainCards) {
                         /** @type {number[][]} */
                         let multiplePlayCards = []
                         for (let j = 1; j < cardStatus.yaoguaiNum; j++) {
-                            multiplePlayCards = multiplePlayCards.concat(excludedPlayCards.filter(playCard => playCard.length > j)) // 选取多牌的组合，张数越多的组合所占比重越大
+                            multiplePlayCards = multiplePlayCards.concat(excludedPlayCards.filter(playCard => playCard.length > j)) // 选取多牌的组合，장数越多的组合所占比重越大
                         }
                         if (multiplePlayCards.length > 0) {
                             const excludedNotYaoguaiPlayCards = multiplePlayCards.filter(playCard => playCard.every(card => card < 136)) // 剔除掉用非妖怪牌变身来组成多牌的组合
@@ -47,10 +47,10 @@ function strategy(game, playCards, remainCards) {
                 else { // 徒弟或师傅牌时，则不打反弹牌或带变身牌的多牌,及尽量少打多牌
                     const morphoseAndJokerExcludedPlayCards = excludedPlayCards.filter(playCard => playCard.length === 1 ? poker.getIndexOfCardList(playCard[0]).num !== 100 : playCard.every(card => card < 100))
                     const multipleExcludedPlayCards = morphoseAndJokerExcludedPlayCards.filter(playCard => {
-                        if (playCard.length === 1) { return true } // 出单张OK
-                        const cardNumCount = getSpecifiedCardNumCount(remainCards, poker.getIndexOfCardList(playCard[0]).num) // 获取플레이어手中该牌面的张数
-                        const pureCount = cardNumCount - playCard.length // 플레이어手中该牌面的张数减去当前出牌组合要打出的张数
-                        return getRandom(0, pureCount) > 0 // 期望值希望플레이어至少保留1张该牌面的牌
+                        if (playCard.length === 1) { return true } // 出单장OK
+                        const cardNumCount = getSpecifiedCardNumCount(remainCards, poker.getIndexOfCardList(playCard[0]).num) // 获取플레이어手中该牌面的장数
+                        const pureCount = cardNumCount - playCard.length // 플레이어手中该牌面的장数减去当前出牌组合要打出的장数
+                        return getRandom(0, pureCount) > 0 // 期望值希望플레이어至少保留1장该牌面的牌
                     })
                     if (multipleExcludedPlayCards.length > 0) {
                         return multipleExcludedPlayCards[Math.floor(Math.random() * multipleExcludedPlayCards.length)]

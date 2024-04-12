@@ -9,7 +9,7 @@
         </transition>
         <div class="white-color-font"
             :style="{ 'font-size': fontSize, 'color': gameInfo.remainCards > 0 && gameInfo.remainCards < 10 ? 'red' : 'white' }">
-            {{ gameInfo.remainCards > 0 ? gameInfo.remainCards + ' 张' : '已发完' }}</div>
+            {{ gameInfo.remainCards > 0 ? gameInfo.remainCards + ' 장' : '已发完' }}</div>
     </div>
     <div v-else class="game-room-table-vertical-box-bottom-item">
         <transition leave-active-class="scale-out-top">
@@ -21,7 +21,7 @@
         </transition>
         <div class="white-color-font"
             :style="{ 'font-size': fontSize, 'color': gameInfo.remainCards > 0 && gameInfo.remainCards < 10 ? 'red' : 'white' }">
-            {{ gameInfo.remainCards > 0 ? gameInfo.remainCards + ' 张' : '已发完' }}</div>
+            {{ gameInfo.remainCards > 0 ? gameInfo.remainCards + ' 장' : '已发完' }}</div>
     </div>
 </template>
 

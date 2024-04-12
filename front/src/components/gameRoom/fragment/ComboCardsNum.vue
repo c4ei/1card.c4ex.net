@@ -4,7 +4,7 @@
         <el-image :src="require('@/assets/images/poker/drop-cards.png')"
             :class="{ 'vibrate': vibrateFlag, 'bounce': bounceFlag, 'pulsate': pulsateFlag, 'shake': shakeFlag, 'earthquake': earthquakeFlag, 'relief': reliefFlag }"></el-image>
         <div class="white-color-font" :style="{ 'font-size': fontSize }">
-            <CardsNum :value="gameInfo.currentCombo"></CardsNum>张
+            <CardsNum :value="gameInfo.currentCombo"></CardsNum>장
         </div>
     </div>
     <div v-else class="game-room-table-vertical-box-bottom-item">
@@ -12,7 +12,7 @@
         <el-image :src="require('@/assets/images/poker/drop-cards.png')" style="max-width:8vw"
             :class="{ 'vibrate': vibrateFlag, 'bounce': bounceFlag, 'pulsate': pulsateFlag, 'shake': shakeFlag, 'earthquake': earthquakeFlag, 'relief': reliefFlag }"></el-image>
         <div class="white-color-font" :style="{ 'font-size': fontSize }">
-            <CardsNum :value="gameInfo.currentCombo"></CardsNum>张
+            <CardsNum :value="gameInfo.currentCombo"></CardsNum>장
         </div>
     </div>
 </template>

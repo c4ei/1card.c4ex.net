@@ -17,13 +17,13 @@ const AiPlayer = db.defineModel('aiPlayer',
             type: db.dataTypes.INTEGER(1),
             defaultValue: 0
         },
-        /* 总수집된 카드 수 수집된 총 카드 수 */
+        /* 총 수집된 카드 수 수집된 총 카드 수 */
         cards:
         {
             type: db.dataTypes.INTEGER(4),
             defaultValue: 0
         },
-        /* 最大收牌  최대 마감 카드 */
+        /* 最大받다牌  최대 마감 카드 */
         max_combo:
         {
             type: db.dataTypes.INTEGER(4),

@@ -6,7 +6,7 @@
                 :style="{ 'background-color': gameRoom.status === 0 ? (isRoomFull(gameRoom.playerList) ? '#E6A23C' : '#67c23a') : '#F56C6C' }"
                 @click="enterGameRoom(gameRoom, -1)">
                 <span class="room-list-text" :style="{ 'font-size': largeFontSize }">{{ (gameRoom.name) + ' （' +
-                    (gameRoom.status === 0 ? (isRoomFull(gameRoom.playerList) ? '已满员' : '可进入') : '游戏中') + '）' }}
+                    (gameRoom.status === 0 ? (isRoomFull(gameRoom.playerList) ? '已满员' : '可进入') : '게임中') + '）' }}
                     <el-tooltip effect="light" content="进入该房间需要비밀번호" placement="right" v-if="gameRoom.needPassword">
                         <i class="el-icon-lock"></i>
                     </el-tooltip>
@@ -81,11 +81,11 @@ export default Vue.extend({
 
         enterGameRoom: function (gameRoom: WebSocketGameRoom, seatIndex: GamePlayerSeatIndex | -1): void {
             if (this.$stock.state.avatar_id === 0) {
-                this.$message.warning('请先设置아바타和昵称')
+                this.$message.warning('请先설정아바타和昵称')
                 return
             }
             if (gameRoom.status === 1) {
-                this.$message.warning('正在游戏中，无法加入')
+                this.$message.warning('正在게임中，无法加入')
                 return
             }
             if (this.isRoomFull(gameRoom.playerList)) {
