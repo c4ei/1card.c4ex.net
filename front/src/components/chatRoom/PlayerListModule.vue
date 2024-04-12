@@ -108,7 +108,7 @@ export default Vue.extend({
 
         getStatus: function (player_status: PlayerStatus) {
             if (player_status === 2) {
-                return '忙碌'
+                return '바쁘다'
             }
             else if (player_status === 1) {
                 return '기다리다'

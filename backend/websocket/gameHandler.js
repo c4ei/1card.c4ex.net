@@ -39,15 +39,15 @@ module.exports = async function (data, wss, ws) {
     try {
         const gameRoomKey = conf.redisCache.gameRoomPrefix + data.id
         const gameKey = conf.redisCache.gamePrefix + data.id
-        console.log("/backend/websocket/gameHandler.js - 42 : data.action :" + data.action +" / gameRoomKey : " + gameRoomKey+" / gameKey : " + gameKey);
+        // console.log("/backend/websocket/gameHandler.js - 42 : data.action :" + data.action +" / gameRoomKey : " + gameRoomKey+" / gameKey : " + gameKey);
         if (data.action === 'initialize') {
             await asyncWatch(gameKey, gameRoomKey)
             const gameRes = await asyncGet(gameKey)
-            console.log("/backend/websocket/gameHandler.js - 46 : gameRes :" + gameRes);
+            // console.log("/backend/websocket/gameHandler.js - 46 : gameRes :" + gameRes);
             if (gameRes !== null) {
-                console.log("/backend/websocket/gameHandler.js - 48 : gameRes !== null :");
+                console.log("/backend/websocket/gameHandler.js - 48 : gameRes !== null : 게임이 진행 중인 방");
                 // await gameover(gameKey, game, wss);
-                // return;
+                return;
             }
             const gameRoomRes = await asyncGet(gameRoomKey)
             const playerKeys = await asyncKeys(conf.redisCache.playerPrefix + '*')
@@ -65,7 +65,7 @@ module.exports = async function (data, wss, ws) {
                     pokers.push(j)
                 }
             }
-            console.log("/backend/websocket/gameHandler.js - 66 : pokers :" + JSON.stringify(pokers));
+            // console.log("/backend/websocket/gameHandler.js - 66 : pokers :" + JSON.stringify(pokers));
             poker.shuffle(pokers)
             if (gameRoom.metamorphoseNum > 0) {//변신 카드 삽입
                 let addMetamorphoseNum = 0
@@ -117,7 +117,7 @@ module.exports = async function (data, wss, ws) {
                 /** @type {string[]} */
                 messages: []
             }
-            console.log("/backend/websocket/gameHandler.js - 118 : pokers :" + JSON.stringify(game));
+            // console.log("/backend/websocket/gameHandler.js - 118 : pokers :" + JSON.stringify(game));
             for (let i = 0; i < playerListRes.length; i++) {
                 /** @type {RedisCachePlayerInGame} */
                 const player = JSON.parse(playerListRes[i])
@@ -171,7 +171,7 @@ module.exports = async function (data, wss, ws) {
             const timer = getPlayCardTimer(game, game.currentPlayer, wss, poker.waitTime)
             game.timer = timer[Symbol.toPrimitive]()
             gameRoom.status = 1
-            console.log("/backend/websocket/gameHandler.js - 172 : gameRoom.status :" + gameRoom.status);
+            // console.log("/backend/websocket/gameHandler.js - 172 : gameRoom.status :" + gameRoom.status);
             await asyncMultiExec([['mset', ...redisMSetStrList], ['set', gameRoomKey, JSON.stringify(gameRoom)], ['set', gameKey, JSON.stringify(game)]])()
             const newPlayerKeys = await asyncKeys(conf.redisCache.playerPrefix + '*')
             const newPlayerList = await asyncMget(newPlayerKeys)
@@ -185,12 +185,12 @@ module.exports = async function (data, wss, ws) {
                     client.send(newGameRoomListStr)
                 }
             })
-            console.log("/backend/websocket/gameHandler.js - 186 : newPlayerListStr :" + JSON.stringify(newPlayerListStr));
+            // console.log("/backend/websocket/gameHandler.js - 186 : newPlayerListStr :" + JSON.stringify(newPlayerListStr));
             game.remainCards = game.remainCards.length
             game.messages = []
             /** @type {string[]} */
             const messageList = ['게임시작'];
-            console.log("/backend/websocket/gameHandler.js - 191 : messageList :" + JSON.stringify(messageList));
+            // console.log("/backend/websocket/gameHandler.js - 191 : messageList :" + JSON.stringify(messageList));
             messageList.forEach(text => game.messages.push(text))
             game.messages.push('기다리다 ' + game.gamePlayer[game.currentPlayer].nickname + ' PLAY...')
             const gameStr = JSON.stringify(game)
@@ -200,7 +200,7 @@ module.exports = async function (data, wss, ws) {
                     client.send(initializeGameStr)
                 }
             });
-            console.log("/backend/websocket/gameHandler.js - 201 : initializeGameStr :" + JSON.stringify(initializeGameStr));
+            // console.log("/backend/websocket/gameHandler.js - 201 : initializeGameStr :" + JSON.stringify(initializeGameStr));
         }
         else if (data.action === 'get') {
             const gameRes = await asyncGet(gameKey)

@@ -1,6 +1,6 @@
 <template>
     <div v-if="isHorizontal" class="game-room-table-horizontal-box-middle-item">
-        <p class="white-color-font" :style="{ 'font-size': fontSize }">连击牌数</p>
+        <p class="white-color-font" :style="{ 'font-size': fontSize }">콤보 카드 수</p>
         <el-image :src="require('@/assets/images/poker/drop-cards.png')"
             :class="{ 'vibrate': vibrateFlag, 'bounce': bounceFlag, 'pulsate': pulsateFlag, 'shake': shakeFlag, 'earthquake': earthquakeFlag, 'relief': reliefFlag }"></el-image>
         <div class="white-color-font" :style="{ 'font-size': fontSize }">
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div v-else class="game-room-table-vertical-box-bottom-item">
-        <div class="white-color-font" :style="{ 'font-size': fontSize }">连击牌数</div>
+        <div class="white-color-font" :style="{ 'font-size': fontSize }">콤보 카드 수</div>
         <el-image :src="require('@/assets/images/poker/drop-cards.png')" style="max-width:8vw"
             :class="{ 'vibrate': vibrateFlag, 'bounce': bounceFlag, 'pulsate': pulsateFlag, 'shake': shakeFlag, 'earthquake': earthquakeFlag, 'relief': reliefFlag }"></el-image>
         <div class="white-color-font" :style="{ 'font-size': fontSize }">
