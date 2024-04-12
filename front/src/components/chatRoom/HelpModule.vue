@@ -4,7 +4,7 @@
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-warning-outline"></i>게임소개</h1>
             <hr class="divider-line">
             <p :style="{ 'font-size': fontSize }">Journey to the West는 "Beast Fighting Chess"와 유사한 카드 게임입니다. 이 게임을 플레이하려면 최소 2명의 플레이어가 필요합니다. 2~10개의 배너 카드를 사용할 수 있습니다. 카드 수는 상황에 따라 늘리거나 줄일 수 있습니다. 인원수대로.</p>
-            <p :style="{ 'font-size': fontSize }">또한 서유기의 동작 규칙은 지역에 따라 다르며, 다음 설명은 작성자 자신의 의견일 뿐입니다.。</p>
+            <p :style="{ 'font-size': fontSize }">또한 서유기의 동작 규칙은 지역에 따라 다르며, 다음 say은 작성자 자신의 의견일 뿐입니다.。</p>
             <h1 :style="{ 'font-size': fontSize }"><i class="el-icon-stopwatch"></i>게임 프로세스</h1>
             <hr class="divider-line">
             <h2 :style="{ 'font-size': fontSize }"> 开국：</h2>

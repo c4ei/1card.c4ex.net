@@ -139,13 +139,13 @@ export default Vue.extend({
             if (this.gameInfo.gamePlayer[newVal.source] === undefined) return
             this.$emit('gameTextToPlayerSent', this.seatIndex)
             if (newVal.targetId === 0) {
-                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 설명: ' + newVal.text)
+                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' say: ' + newVal.text)
             }
             else if (newVal.targetId === this.$stock.state.id) {
                 this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 오른쪽 내말: ' + newVal.text)
             }
             else {
-                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 오른쪽' + this.gameInfo.gamePlayer[newVal.target as GamePlayerSeatIndex].nickname + ' 설명: ' + newVal.text)
+                this.gameTextFromPlayer.push(this.gameInfo.gamePlayer[newVal.source].nickname + ' 오른쪽' + this.gameInfo.gamePlayer[newVal.target as GamePlayerSeatIndex].nickname + ' say: ' + newVal.text)
             }
             playSound('quickChat/' + newVal.soundSrc)
             this.$nextTick(function () {
@@ -165,7 +165,7 @@ export default Vue.extend({
             if (this.gameInfo !== null) return
             if (newVal === undefined || newVal.nickname === undefined || newVal === null || newVal.text === undefined || newVal.text === '') return
             this.$emit('typeChatMessageSent', this.seatIndex)
-            this.gameTextFromPlayer.push(newVal.nickname + ' 설명: ' + newVal.text)
+            this.gameTextFromPlayer.push(newVal.nickname + ' say: ' + newVal.text)
             this.$nextTick(function () {
                 if (this.gameTextFromPlayer.length > 0) {
                     this.isTooltipShow = true

@@ -424,7 +424,7 @@ export default cardList.extend({
 				if (newVal.target === -1) {
 					this.gameTextFromPlayer.push("나: " + newVal.text)
 				} else {
-				this.gameTextFromPlayer.push("당신이 맞아요 "+ this.gameInfo.gamePlayer[newVal.target].nickname + " 설명: " + newVal.text)}
+				this.gameTextFromPlayer.push("당신이 맞아요 "+ this.gameInfo.gamePlayer[newVal.target].nickname + " say: " + newVal.text)}
 				playSound("quickChat/" + newVal.soundSrc)
 				this.$nextTick(function () {
 					if (this.gameTextFromPlayer.length > 0) {
