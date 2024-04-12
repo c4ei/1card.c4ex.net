@@ -105,7 +105,7 @@ module.exports = async function (data, wss, ws) {
         }
         else if (data.id < 0) {
             const roomId = conf.redisCache.gameRoomPrefix + (-1 * data.id)
-            /* 小于0，某플레이어离开了房间 */
+            /* 小于0，某플레이어나감 */
             const roomRes = await asyncGet(roomId)
             if (roomRes === null) { return logger.error('gameRoom:' + roomId + errors.CACHE_DOES_NOT_EXIST) }
             /** @type {GamePlayerSeatIndex} */
@@ -135,8 +135,8 @@ module.exports = async function (data, wss, ws) {
                 if (room.owner === deleteId) {
                     room.owner = remainId
                     const playerRes = await asyncGet(conf.redisCache.playerPrefix + remainId)
-                    const becomeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '你 成为了房主' })
-                    const changeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '플레이어 ' + JSON.parse(playerRes).nickname + ' 成为了房主' })
+                    const becomeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '이제 당신이 방장 입니다' })
+                    const changeOwnerStr = JSON.stringify({ type: 'system', player_loc: (-1 * data.id), text: '이제 플레이어 ' + JSON.parse(playerRes).nickname + ' 가 방장 입니다' })
                     wss.clients.forEach(client => {
                         if (client.readyState === WebSocket.OPEN && client !== ws) {
                             if (client.userId === remainId) {

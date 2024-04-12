@@ -104,6 +104,17 @@ app.post('/v1/login',
             })
     });
 
+app.delete('/v1/logout',
+    /** 
+     * @param {ClientRequest} req
+     * @param {ClientResponse} res
+     */
+    function (req, res) {
+        loginService.logout(req).then(() => {
+            res.status(200).json({ code: 200, message: '' })
+        })
+    })
+
 const registerService = require('./services/registerService')
 app.post('/v1/register',
 /** 

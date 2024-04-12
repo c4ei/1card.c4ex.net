@@ -37,7 +37,7 @@ module.exports = async function (data, wss, ws) {
                 }))
             /* 2，检查该key是否存在，不存在则是新上线，否则是刷新信息 */
             if (res === null) {
-                const onlineStr = JSON.stringify({ type: 'system', player_loc: 0, text: '플레이어 ' + data.nickname + ' 上线了' })
+                const onlineStr = JSON.stringify({ type: 'system', player_loc: 0, text: '플레이어 ' + data.nickname + ' 온라인' })
                 wss.clients.forEach(client => {
                     if (client.readyState === WebSocket.OPEN && client.username !== ws.username) {
                         client.send(onlineStr)
@@ -50,7 +50,7 @@ module.exports = async function (data, wss, ws) {
                 const oldPlayer = JSON.parse(res)
                 if (data.player_loc !== oldPlayer.player_loc) {
                     if (data.player_loc > 0) {
-                        const enterRoomStr = JSON.stringify({ type: 'system', player_loc: data.player_loc, text: '플레이어 ' + data.nickname + ' 进入了房间' })
+                        const enterRoomStr = JSON.stringify({ type: 'system', player_loc: data.player_loc, text: '플레이어 ' + data.nickname + ' 입장' })
                         wss.clients.forEach(client => {
                             if (client.readyState === WebSocket.OPEN && client.userId !== ws.userId) {
                                 client.send(enterRoomStr)
@@ -58,7 +58,7 @@ module.exports = async function (data, wss, ws) {
                         })
                     }
                     else {
-                        const exitRoomStr = JSON.stringify({ type: 'system', player_loc: oldPlayer.player_loc, text: '플레이어 ' + data.nickname + ' 离开了房间' })
+                        const exitRoomStr = JSON.stringify({ type: 'system', player_loc: oldPlayer.player_loc, text: '플레이어 ' + data.nickname + ' 나감' })
                         wss.clients.forEach(client => {
                             if (client.readyState === WebSocket.OPEN && client.userId !== ws.userId) {
                                 client.send(exitRoomStr)

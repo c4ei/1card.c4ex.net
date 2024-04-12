@@ -39,8 +39,8 @@ module.exports = async function (data, wss, ws) {
     try {
         const gameRoomKey = conf.redisCache.gameRoomPrefix + data.id
         const gameKey = conf.redisCache.gamePrefix + data.id
+        console.log("/backend/websocket/gameHandler.js - 42 : data.action :" + data.action +" / gameRoomKey : " + gameRoomKey+" / gameKey : " + gameKey);
         if (data.action === 'initialize') {
-            console.log("/backend/websocket/gameHandler.js - 43 : " + initialize +" / gameRoomKey : " + gameRoomKey+" / gameKey : " + gameKey);
             await asyncWatch(gameKey, gameRoomKey)
             const gameRes = await asyncGet(gameKey)
             if (gameRes !== null) {

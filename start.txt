@@ -10,3 +10,12 @@ cp -r /home/dev/www/game/one.c4ei.net/front/dist /home/dev/www/game/one.c4ei.net
 
 cd /home/dev/www/game/one.c4ei.net/backend
 yarn start
+
+
+
+----------------------------
+[2024-04-12T16:16:04.164] [ERROR] poker - ReferenceError: initialize is not defined
+    at module.exports (/home/dev/www/game/one.c4ei.net/backend/websocket/gameHandler.js:43:71)
+    at WebSocket.incoming (/home/dev/www/game/one.c4ei.net/backend/websocket/index.js:55:21)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    
